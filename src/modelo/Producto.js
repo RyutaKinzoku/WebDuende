@@ -8,6 +8,10 @@ export default class Producto {
         this.existencias = existencias;
     }
 
+    set id(idProducto){
+        return this.id = idProducto;
+    }
+
     get id(){
         return this.id;
     }

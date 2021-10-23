@@ -5,6 +5,10 @@ export default class Categoria{
         this.subcategorias = subcategorias;
     }
 
+    set id(idCategoria){
+        this.id = idCategoria;
+    }
+
     get id (){
         return this.id;
     }

@@ -7,6 +7,10 @@ export default class OrdenCompra {
         this.productos = productos;
     }
 
+    set id(idOrden){
+        this.id = idOrden;
+    }
+
     get id(){
         return this.id;
     }

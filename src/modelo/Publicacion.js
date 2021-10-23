@@ -9,6 +9,10 @@ export default class Publicacion{
         this.subcategoria = subcategoria;
     }
 
+    set id(idPublicacion){
+        this.id = idPublicacion;
+    }
+
     get id(){
         return this.id;
     }

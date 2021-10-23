@@ -4,7 +4,11 @@ export default class Subcategoria{
         this.nombre = nombre;
     }
 
-    get id (){
+    set id(idSubcategoria){
+        this.id = idSubcategoria;
+    }
+
+    get id(){
         return this.id;
     }
 
