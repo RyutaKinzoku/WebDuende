@@ -1,10 +1,11 @@
 import React, {Component} from "react"
 import { render } from "react-dom"
+import FabricaCompromisos from "./modelo/FabricaCompromisos/FabricaCompromisos";
 
 class App extends Component{
     render(){
         return(
-            <h1>Hola soy React</h1>
+            <h1>{new FabricaCompromisos().fabricarCompromiso("Entrega")}</h1>
         )
     }
 }
