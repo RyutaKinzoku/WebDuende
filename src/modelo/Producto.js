@@ -1,10 +1,11 @@
 export default class Producto {
-    constructor(id, nombre, descripcion, precio, imagen){
+    constructor(id, nombre, descripcion, precio, imagen, existencias){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.imagen = imagen;
+        this.existencias = existencias;
     }
 
     get id(){
