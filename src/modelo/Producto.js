@@ -1,9 +1,14 @@
 class Producto {
     constructor(nombre, descripcion, precio, imagen){
+        // this.id = revisar en BD
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.imagen = imagen;
+    }
+
+    get id(){
+        return this.id;
     }
 
     get nombre(){
