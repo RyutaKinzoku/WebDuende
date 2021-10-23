@@ -1,7 +1,10 @@
 import FabricaCompromisos from "../Modelo/FabricaCompromisos/FabricaCompromisos";
 import Compromisos from "../Modelo/FabricaCompromisos/Compromisos";
 import GestorCompromisos from "../DAO/GestorCompromisos";
-import GestorBD from "../DAO/GestorBD";
+import GestorBD from "../DAO/GestorBD";/*
+import Cita from "../Modelo/FabricaCompromisos/Cita";
+import Curso from "../Modelo/FabricaCompromisos/Curso";
+import Entrega from "../Modelo/FabricaCompromisos/Entrega";*/
 
 export default class ManejoAgenda{
     constructor(){
@@ -17,21 +20,43 @@ export default class ManejoAgenda{
     }
 
     agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
-        let id = this.gestorCompromisos.getNext();
-        let curso = new Curso(fechaHoraInicio, fechaHoraFin, titulo, id, lugar);
+        let idCompromiso = this.gestorCompromisos.getNext();
+        let curso = FabricaCompromisos.fabricarCompromiso("Curso", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, titulo);
         this.gestorCompromisos.agregarCurso(curso);
     }
 
     modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){
-        let curso = new Curso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar);
+        let curso = FabricaCompromisos.fabricarCompromiso("Curso", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, titulo);
         this.gestorCompromisos.modificarCurso(curso);
     }
     
-    agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion){}
+    agregarCita(fechaHoraInicio, fechaHoraFin, correoUsuario, lugar, idPublicacion){
+        let idCompromiso = this.gestorCompromisos.getNext();
+        let usuario = this.gestorUsuarios.obtener(correoUsuario);
+        let publicacion = this.gestorPublicaciones.obtener(idPublicacion);
+        let cita = FabricaCompromisos.fabricarCompromiso("Cita", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, publicacion, usuario);
+        this.gestorCompromisos.agregarCita(cita);
+    }
 
-    modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, publicacion){}
+    modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, correoUsuario, lugar, idPublicacion){
+        let usuario = this.gestorUsuarios.obtener(correoUsuario);
+        let publicacion = this.gestorPublicaciones.obtener(idPublicacion);
+        let cita = FabricaCompromisos.fabricarCompromiso("Cita", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, publicacion, usuario);
+        this.gestorCompromisos.modificarCita(cita);
+    }
 
-    agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden){}
+    agregarEntrega(fechaHoraInicio, fechaHoraFin, correoUsuario, lugar, idOrdenCompra){
+        let idCompromiso = this.gestorCompromisos.getNext();
+        let usuario = this.gestorUsuarios.obtener(correoUsuario);
+        let orden = this.gestorOrdenes.obtener(idOrdenCompra);
+        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, orden, usuario);
+        this.gestorCompromisos.agregarEntrega(entrega);
+    }
 
-    modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, orden){}
+    modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, correoUsuario, lugar, idOrdenCompra){
+        let usuario = this.gestorUsuarios.obtener(correoUsuario);
+        let orden = this.gestorOrdenes.obtener(idOrdenCompra);
+        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, orden, usuario);
+        this.gestorCompromisos.modificarEntrega(entrega);
+    }
 }

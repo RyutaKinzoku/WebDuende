@@ -1,19 +1,21 @@
-/*import Compromiso from "./Compromiso";
+import Compromiso from "./Compromiso";
 import Curso from "./Curso";
 import ServicioIndividual from "./ServicioIndividual";
 import Cita from "./Cita";
-import Entrega from "./Entrega";*/
+import Entrega from "./Entrega";
+
+import Cita from "./Cita";
 
 export default class FabricaCompromisos {
-    fabricarCompromiso(estructura){
+    static fabricarCompromiso(estructura, fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, atributoDiferencial, usuario = null){
         if(estructura === "Curso"){
-            return "Compromiso Curso";
+            return new Curso(fechaHoraInicio, fechaHoraFin, atributoDiferencial, idCompromiso, lugar);
         }else if(estructura === "Cita"){
-            return "Compromiso Cita";
+            return new Cita(fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, usuario, atributoDiferencial);
         }else if(estructura === "Entrega"){
-            return "Compromiso Entrega";
+            return new Entrega(fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, usuario, atributoDiferencial);
         }else{
-            return "Compromiso no existente";
+            throw new Error("Compromiso no existente");
         }
     }
 }
