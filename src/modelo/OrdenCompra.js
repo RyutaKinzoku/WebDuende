@@ -1,6 +1,6 @@
-class OrdenCompra {
-    constructor(comprobante, direccion, comprador, productos){
-        // this.id = revisar en BD
+export default class OrdenCompra {
+    constructor(id, comprobante, direccion, comprador, productos){
+        this.id = id;
         this.comprobante = comprobante;
         this.direccion = direccion;
         this.comprador = comprador;

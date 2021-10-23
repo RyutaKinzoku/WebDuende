@@ -1,6 +1,6 @@
-class Producto {
-    constructor(nombre, descripcion, precio, imagen){
-        // this.id = revisar en BD
+export default class Producto {
+    constructor(id, nombre, descripcion, precio, imagen){
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
