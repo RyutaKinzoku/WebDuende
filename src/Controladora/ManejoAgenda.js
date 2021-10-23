@@ -1,19 +1,31 @@
 import FabricaCompromisos from "../Modelo/FabricaCompromisos/FabricaCompromisos";
 import Compromisos from "../Modelo/FabricaCompromisos/Compromisos";
-import GestorCompromisos from "../"
+import GestorCompromisos from "../DAO/GestorCompromisos";
+import GestorBD from "../DAO/GestorBD";
 
 export default class ManejoAgenda{
     constructor(){
         this.gestorCompromisos = new GestorCompromisos();
     }
 
-    obtenerCompromisos(){}
+    obtenerCompromisos(){
+        return this.gestorCompromisos.obtenerLista();
+    }
 
-    eliminarCompromiso(idCompromiso){}
+    eliminarCompromiso(idCompromiso){
+        this.gestorCompromisos.eliminar(idCompromiso);
+    }
 
-    agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){}
+    agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
+        let id = this.gestorCompromisos.getNext();
+        let curso = new Curso(fechaHoraInicio, fechaHoraFin, titulo, id, lugar);
+        this.gestorCompromisos.agregarCurso(curso);
+    }
 
-    modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){}
+    modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){
+        let curso = new Curso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar);
+        this.gestorCompromisos.modificarCurso(curso);
+    }
     
     agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion){}
 
@@ -21,5 +33,5 @@ export default class ManejoAgenda{
 
     agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden){}
 
-    
+    modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, orden){}
 }

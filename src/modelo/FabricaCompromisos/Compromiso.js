@@ -1,7 +1,7 @@
 export default class Compromiso {
     constructor() {
         if (this.constructor == Compromiso) {
-            throw new Error("Clase abstracta compromiso no puede ser instanciada");
+            throw new Error("Clase abstracta Compromiso no puede ser instanciada");
         }
     }
 
