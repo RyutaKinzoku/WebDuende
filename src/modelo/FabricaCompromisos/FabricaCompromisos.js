@@ -7,13 +7,14 @@ import Entrega from "./Entrega";
 import Cita from "./Cita";
 
 export default class FabricaCompromisos {
-    static fabricarCompromiso(estructura, fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, atributoDiferencial, usuario = null){
-        if(estructura === "Curso"){
-            return new Curso(fechaHoraInicio, fechaHoraFin, atributoDiferencial, idCompromiso, lugar);
+    static fabricarCompromiso(estructura){
+        let datos = estructura.split(';');
+        if(estructura === datos[0]){
+            return new Curso(datos[1], datos[2], datos[3], datos[4], datos[5]);
         }else if(estructura === "Cita"){
-            return new Cita(fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, usuario, atributoDiferencial);
+            return new Cita(datos[1], datos[2], datos[3], datos[4], datos[5], datos[6]);
         }else if(estructura === "Entrega"){
-            return new Entrega(fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, usuario, atributoDiferencial);
+            return new Entrega(datos[1], datos[2], datos[3], datos[4], datos[5], datos[6]);
         }else{
             throw new Error("Compromiso no existente");
         }
