@@ -1,3 +1,4 @@
+/*import { TipoUsuario } from './TipoUsuario';*/
 export default class Usuario {
     constructor(correo, nombre, primerApellido, segundoApellido, telefono, cedula, contraseña, rol){
         this.correo = correo;
