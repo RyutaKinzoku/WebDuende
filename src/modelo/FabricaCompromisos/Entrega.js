@@ -1,0 +1,20 @@
+import ServicioIndividual from "./ServicioIndividual";
+
+export default class Entrega extends ServicioIndividual {
+    constructor(fechaHoraInicio, fechaHoraFin, id, lugar, usuario, orden) {
+        super.fechaHoraInicio = fechaHoraInicio;
+        super.fechaHoraFin = fechaHoraFin;
+        super.id = id;
+        super.lugar = lugar;
+        super.usuario = usuario;
+        this.orden = orden;
+    }
+
+    get orden(){
+        return this.publordenicacion;
+    }
+
+    set orden(orden){
+        this.orden = orden;
+    }
+}

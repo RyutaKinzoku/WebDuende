@@ -21,12 +21,12 @@ export default class Compromiso {
         this.fechaHoraFin = fechaHoraFin;
     }
 
-    get idCompromiso(){
-        return this.idCompromiso;
+    get id(){
+        return this.id;
     }
 
-    set idCompromiso(idCompromiso){
-        this.idCompromiso = idCompromiso;
+    set id(id){
+        this.id = id;
     }
 
     get lugar(){
