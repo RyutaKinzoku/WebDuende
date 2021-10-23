@@ -1,9 +1,10 @@
 class OrdenCompra {
-    constructor(comprobante, direccion, comprador){
+    constructor(comprobante, direccion, comprador, productos){
         // this.id = revisar en BD
         this.comprobante = comprobante;
         this.direccion = direccion;
         this.comprador = comprador;
+        this.productos = productos;
     }
 
     get id(){
@@ -32,5 +33,13 @@ class OrdenCompra {
 
     set comprador(comprador){
         this.comprador = comprador;
+    }
+
+    get productos(){
+        return this.productos;
+    }
+
+    set productos(productos){
+        this.productos = productos;
     }
 }
