@@ -4,8 +4,6 @@ import ServicioIndividual from "./ServicioIndividual";
 import Cita from "./Cita";
 import Entrega from "./Entrega";
 
-import Cita from "./Cita";
-
 export default class FabricaCompromisos {
     static fabricarCompromiso(estructura){
         let datos = estructura.split(';');
