@@ -34,7 +34,7 @@ export default class ManejoCompras{
     }
 
     comprar(correo, comprobante, direccion){
-        var productos = obtenerCarrito(correo).productos;
+        var productos = obtenerCarrito(correo).productos; //Map<idProducto: int, cantidad: int>
         crearOrden(productos, correo, comprobante, direccion);
         eliminarCarrito(correo);
     }

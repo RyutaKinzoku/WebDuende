@@ -1,13 +1,13 @@
 /*import { TipoUsuario } from './TipoUsuario';*/
 export default class Usuario {
-    constructor(correo, nombre, primerApellido, segundoApellido, telefono, cedula, contraseña, rol){
+    constructor(correo, nombre, primerApellido, segundoApellido, telefono, cedula, contrasena, rol){
         this.correo = correo;
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.telefono = telefono;
         this.cedula = cedula;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.rol = rol;
     }
 
@@ -59,12 +59,12 @@ export default class Usuario {
         this.cedula = cedula;
     }
 
-    get contraseña(){
-        return this.contraseña;
+    get contrasena(){
+        return this.contrasena;
     }
     
-    set contraseña(contraseña){
-        this.contraseña = contraseña;
+    set contrasena(contrasena){
+        this.contrasena = contrasena;
     }
 
     get rol(){
