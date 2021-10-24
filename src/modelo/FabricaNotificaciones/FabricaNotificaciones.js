@@ -1,15 +1,16 @@
-/*import Notificacion from "./Notificacion";
+import Notificacion from "./Notificacion";
 import NotificacionCita from "./NotificacionCita";
-import NotificacionCompra from "./NotificacionCompra";*/
+import NotificacionCompra from "./NotificacionCompra";
 
 export default class FabricaNotificaciones {
-    FabricaNotificacion(estructura){
-        if(estructura === "NotificacionCita"){
-            return "Notificacion Cita";
-        }else if(estructura === "NotificacionCompra"){
-            return "Notificacion Compra";
+    static fabricarNotificacion(estructura){
+        let datos = estructura.split(';');
+        if(datos[0] === "NotificacionCita"){
+            return new NotificacionCita(datos[1],datos[2],datos[3],datos[4]);
+        }else if(datos[0] === "NotificacionCompra"){
+            return new NotificacionCompra(datos[1],datos[2]);
         }else{
-            return "Notificacion no existente";
+            return new Error("Notificacion no existente");
         }
     }
 }

@@ -2,6 +2,8 @@ import FabricaNotificaciones from "../Modelo/FabricaNotificaciones/FabricaNotifi
 import Notificaciones from "../Modelo/FabricaNotificaciones/Notificaciones";
 import GestorNotificaciones from "../DAO/GestorNotificaciones";
 import GestorBD from "../DAO/GestorBD";
+import NotificacionCita from "../Modelo/FabricaCompromisos/NotificacionCita";
+import NotificacionCompra from "../Modelo/FabricaCompromisos/NotificacionCompra";
 
 export default class ManejoNotificaciones{
     constructor(){
@@ -14,13 +16,13 @@ export default class ManejoNotificaciones{
 
     agregarNotificacion(idPublicacion, correo, mensaje){
         let idNotificacion = this.gestorNotificaciones.getNext();
-        let notificacionCita = new NotificacionCita(idNotificacion, mensaje, idPublicacion, correo);
+        let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+idNotificacion+";"+idPublicacion+";"+correo+";"+mensaje);
         this.gestorNotificaciones.agregarNotificacion(notificacionCita);
     }
 
     agregarNotificacion(idOrden){
         let idNotificacion = this.gestorNotificaciones.getNext();
-        let notificacionCompra = new NotificacionCompra(idNotificacion, idOrden);
+        let notificacionCompra =  FabricaNotificaciones.fabricarNotificacion("NotificacionCompra;"+idNotificacion+";"+idOrden);
         this.gestorNotificaciones.agregarNotificacion(notificacionCompra);
     }
     
