@@ -32,13 +32,16 @@ export default class ManejoAgenda{
     
     agregarCita(fechaHoraInicio, fechaHoraFin, correoUsuario, lugar, idPublicacion){
         let idCompromiso = this.gestorCompromisos.getNext();
-        this.gestorCompromisos.agregarCita(fechaHoraInicio, fechaHoraFin, correoUsuario, lugar, idPublicacion, );
+        let usuario = this.gestorUsuarios.obtener(correoUsuario);
+        let publicacion = this.gestorPublicaciones.obtener(idPublicacion);
+        let cita = FabricaCompromisos.fabricarCompromiso("Cita;"+fechaHoraInicio+";"+fechaHoraFin+";"+idCompromiso+";"+lugar+";"+usuario+";"+publicacion);
+        this.gestorCompromisos.agregarCita(cita);
     }
 
     modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, correoUsuario, lugar, idPublicacion){
         let usuario = this.gestorUsuarios.obtener(correoUsuario);
         let publicacion = this.gestorPublicaciones.obtener(idPublicacion);
-        let cita = FabricaCompromisos.fabricarCompromiso("Cita", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, publicacion, usuario);
+        let cita = FabricaCompromisos.fabricarCompromiso("Cita;"+fechaHoraInicio+";"+fechaHoraFin+";"+idCompromiso+";"+lugar+";"+usuario+";"+publicacion);
         this.gestorCompromisos.modificarCita(cita);
     }
 
@@ -46,14 +49,14 @@ export default class ManejoAgenda{
         let idCompromiso = this.gestorCompromisos.getNext();
         let usuario = this.gestorUsuarios.obtener(correoUsuario);
         let orden = this.gestorOrdenes.obtener(idOrdenCompra);
-        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, orden, usuario);
+        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega;"+fechaHoraInicio+";"+fechaHoraFin+";"+idCompromiso+";"+lugar+";"+usuario+";"+orden);
         this.gestorCompromisos.agregarEntrega(entrega);
     }
 
     modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, correoUsuario, lugar, idOrdenCompra){
         let usuario = this.gestorUsuarios.obtener(correoUsuario);
         let orden = this.gestorOrdenes.obtener(idOrdenCompra);
-        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, orden, usuario);
+        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega;"+fechaHoraInicio+";"+fechaHoraFin+";"+idCompromiso+";"+lugar+";"+usuario+";"+orden);
         this.gestorCompromisos.modificarEntrega(entrega);
     }
 }
