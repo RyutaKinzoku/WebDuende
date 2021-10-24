@@ -1,6 +1,7 @@
 export default class Subcategoria{
-    constructor (id, nombre){
+    constructor (id, nombre, idCategoria){
         this.id = id;
+        this.idCategoria = idCategoria;
         this.nombre = nombre;
     }
 
@@ -10,6 +11,14 @@ export default class Subcategoria{
 
     get id(){
         return this.id;
+    }
+
+    set idCategoria(idCategoria){
+        this.idCategoria = idCategoria;
+    }
+
+    get idCategoria(){
+        return this.idCategoria;
     }
 
     get nombre(){
