@@ -10,23 +10,23 @@ export default class ManejoNotificaciones{
         this.gestorNotificaciones = new GestorNotificaciones();
     }
 
-    obtenerNotificaciones(){
-        return this.gestorNotificaciones.obtenerNotificaciones();
+    obtener(){
+        return this.gestorNotificaciones.obtener();
     }
 
-    agregarNotificacion(idPublicacion, correo, mensaje){
+    agregarNotificacionCita(idPublicacion, correo, mensaje){
         let idNotificacion = this.gestorNotificaciones.getNext();
         let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+idNotificacion+";"+idPublicacion+";"+correo+";"+mensaje);
-        this.gestorNotificaciones.agregarNotificacion(notificacionCita);
+        this.gestorNotificaciones.agregarNotificacionCita(notificacionCita);
     }
 
-    agregarNotificacion(idOrden){
+    agregarNotificacionCompra(idOrden){
         let idNotificacion = this.gestorNotificaciones.getNext();
         let notificacionCompra =  FabricaNotificaciones.fabricarNotificacion("NotificacionCompra;"+idNotificacion+";"+idOrden);
-        this.gestorNotificaciones.agregarNotificacion(notificacionCompra);
+        this.gestorNotificaciones.agregarNotificacionCompra(notificacionCompra);
     }
     
-    eliminarNotificacion(idNotificacion){
-        this.gestorNotificaciones.eliminarNotificacion(idNotificacion);
+    eliminar(idNotificacion){
+        this.gestorNotificaciones.eliminar(idNotificacion);
     }
 }
