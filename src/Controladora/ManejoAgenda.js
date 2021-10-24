@@ -21,21 +21,18 @@ export default class ManejoAgenda{
 
     agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
         let idCompromiso = this.gestorCompromisos.getNext();
-        let curso = FabricaCompromisos.fabricarCompromiso("Curso", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, titulo);
+        let curso = FabricaCompromisos.fabricarCompromiso("Curso;"+fechaHoraInicio+";"+fechaHoraFin+";"+titulo+";"+idCompromiso+";"+lugar);
         this.gestorCompromisos.agregarCurso(curso);
     }
 
     modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){
-        let curso = FabricaCompromisos.fabricarCompromiso("Curso", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, titulo);
+        let curso = FabricaCompromisos.fabricarCompromiso("Curso;"+fechaHoraInicio+";"+fechaHoraFin+";"+titulo+";"+idCompromiso+";"+lugar);
         this.gestorCompromisos.modificarCurso(curso);
     }
     
     agregarCita(fechaHoraInicio, fechaHoraFin, correoUsuario, lugar, idPublicacion){
         let idCompromiso = this.gestorCompromisos.getNext();
-        let usuario = this.gestorUsuarios.obtener(correoUsuario);
-        let publicacion = this.gestorPublicaciones.obtener(idPublicacion);
-        let cita = FabricaCompromisos.fabricarCompromiso("Cita", fechaHoraInicio, fechaHoraFin, idCompromiso, lugar, publicacion, usuario);
-        this.gestorCompromisos.agregarCita(cita);
+        this.gestorCompromisos.agregarCita(fechaHoraInicio, fechaHoraFin, correoUsuario, lugar, idPublicacion, );
     }
 
     modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, correoUsuario, lugar, idPublicacion){

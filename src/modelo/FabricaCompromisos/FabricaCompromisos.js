@@ -9,11 +9,11 @@ import Cita from "./Cita";
 export default class FabricaCompromisos {
     static fabricarCompromiso(estructura){
         let datos = estructura.split(';');
-        if(estructura === datos[0]){
+        if(datos[0] == "Curso"){
             return new Curso(datos[1], datos[2], datos[3], datos[4], datos[5]);
-        }else if(estructura === "Cita"){
+        }else if(datos[0] == "Cita"){
             return new Cita(datos[1], datos[2], datos[3], datos[4], datos[5], datos[6]);
-        }else if(estructura === "Entrega"){
+        }else if(datos[0] == "Entrega"){
             return new Entrega(datos[1], datos[2], datos[3], datos[4], datos[5], datos[6]);
         }else{
             throw new Error("Compromiso no existente");
