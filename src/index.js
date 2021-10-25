@@ -1,16 +1,11 @@
-import React, {Component} from "react"
-import { render } from "react-dom"
-import FabricaCompromisos from "./modelo/FabricaCompromisos/FabricaCompromisos";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Router from './Routes'
 
-class App extends Component{
-    render(){
-        return(
-            <h1>{new FabricaCompromisos().fabricarCompromiso("Entrega")}</h1>
-        )
-    }
-}
-
-render(
-    <App />,
-    document.getElementById('app')
-)
+ReactDOM.render(
+  <React.StrictMode>
+      <Router />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
