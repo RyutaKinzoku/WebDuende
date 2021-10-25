@@ -1,0 +1,15 @@
+#navBar{
+    background: #C4C4C4;
+}
+
+.botonNav{
+    background: #FFFFFF;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#loginTitle{
+    color: #FFFFFF;
+}

@@ -24,23 +24,22 @@ export default class IniciarSesion extends Component{
     render(){
         return(
             <div>
-                {console.log(this.state) }
-                <h2>
-                    <div id="fondo">
-                    <h4>Por favor, ingrese los siguientes datos:</h4>
-                    </div>
-                </h2>
+                
                 <div className="center container w-25 p-8 py-2 my-3  mt-5">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-
+                        <h2>
+                            <div id="fondo">
+                                <p>Por favor, ingrese los siguientes datos: </p>
+                            </div>
+                        </h2>
                         <div>
                             <Form.Group onChange= {this.handleChange}>
                                 <br/>
                                 <h5>Correo:</h5>
-                                <Form.Control type="text" placeholder="User name" name = 'username' />
+                                <Form.Control type="text" name = 'correo' />
                                 <br/>
                                 <h5>Contraseña:</h5>
-                                <Form.Control type="password" placeholder="Password" name = 'password' />
+                                <Form.Control type="password" name = 'contrasena' />
                                 <br/>
                             </Form.Group>
 
