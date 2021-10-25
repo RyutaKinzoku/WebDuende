@@ -1,12 +1,12 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import Login from './Vista/login';
+import IniciarSesion from './Vista/IniciarSesion';
 
 function Routes(){
     return(
         <BrowserRouter>
             <Switch>
-                <Route exact path="/iniciar_sesion" component ={IniciarSesion}/>
+                <Route exact path="/" component ={IniciarSesion}/>
             </Switch>
         </BrowserRouter>
     );
