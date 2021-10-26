@@ -3,6 +3,7 @@ import {Button, Nav, Navbar, Container, Form } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
+import Controladora from "../Controladora/Controladora"
 
 const cookies = new Cookies();
 
@@ -20,7 +21,25 @@ export default class IniciarSesion extends Component{
         })
     }
 
-    enviar  = async (e) => {}
+    enviar  = async (e) => {
+        let controladora = new Controladora();
+        let usuario = controladora.iniciarSesion(this.state.correo, this.state.contrasena);
+        if(usuario !== null){
+            cookies.set('correo',            usuario.correo,            {path: "/"});
+            cookies.set('nombre',            usuario.nombre,            {path: "/"});
+            cookies.set('primerApellido',    usuario.primerApellido,    {path: "/"});
+            cookies.set('segundoApellido',   usuario.segundoApellido,   {path: "/"});
+            cookies.set('telefono',          usuario.telefono,          {path: "/"});
+            cookies.set('cedula',            usuario.cedula,            {path: "/"});
+            cookies.set('rol',               usuario.rol,               {path: "/"});
+            swal("Usuario encontrado","" ,"success").then((value) => {
+                window.location.href="/galeria";
+            })
+            console.log(cookies.get('primerApellido'))
+        }else{
+            swal("Usuario incorrecto","" ,"warning");
+        }
+    }
 
     render(){
         return(
@@ -61,7 +80,7 @@ export default class IniciarSesion extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" onClick={this.enviar}>
                                 Iniciar Sesión
                             </Button>
                         </div>

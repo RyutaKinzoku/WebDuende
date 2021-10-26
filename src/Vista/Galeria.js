@@ -3,8 +3,6 @@ import {Button, Nav, Navbar, Container, Form, NavDropdown} from "react-bootstrap
 import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const cookies = new Cookies();
 
@@ -42,18 +40,22 @@ export default class Galeria extends Component{
                                 <Nav.Link className="botonNav" href="#createPublication">Crear Publicación</Nav.Link>
                             </Nav>
                             <Nav>
-                                <Nav.Link className="botonNav" href="#login">Iniciar Sesión</Nav.Link>
+                                <Nav.Link className="botonNav" href="/">Iniciar Sesión</Nav.Link>
                                 <Nav.Link className="botonNav" href="#sign-in">Registrarse</Nav.Link>
+                            </Nav>
+                            <Nav>
+                                <Form.Control className="botonNav" type="text" name = 'correo' />
+                            </Nav>
+                            <Nav>
+                                <Nav.Link className="botonNav" href="#login">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                                </Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <Autocomplete
-                    options={["Maquillaje Básico", "Caracterización", "Maquillaje para Bodas"]}
-                    style={{ width: 250 }}
-                    renderInput={(params) =>
-                    <TextField {...params} label="Combo box" variant="outlined" />}
-                />
                 <div className="center container w-50 p-8 py-2 my-3  mt-5">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>

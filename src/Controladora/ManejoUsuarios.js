@@ -1,4 +1,4 @@
-import Usuario from "../modelo/Usuario";
+import Usuario from "../Modelo/Usuario";
 import GestorUsuarios from "../DAO/GestorUsuarios";
 import GestorBD from "../DAO/GestorBD";
 
@@ -8,7 +8,12 @@ export default class ManejoUsuarios {
     }
     
     iniciarSesion(correo, contrasena){
-        return this.gestorUsuarios.iniciarSesion(correo, contrasena);
+        let usuario = this.gestorUsuarios.obtener(correo);
+        if(usuario !== null && usuario.contrasena === contrasena){
+            return usuario;
+        }else{
+            return null;
+        }
     }
 
     registrarse(datosUsuario){
