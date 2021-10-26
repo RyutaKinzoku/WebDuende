@@ -34,4 +34,9 @@ router.post("/obtenerProductosCarrito", (req,res) => {
     db.keys(correo+'');
 })
 
+router.post("/eliminarCarrito", (req, res) =>{
+    correo = req.body.correo;
+    db.del(correo+'');
+})
+
 export default router;
