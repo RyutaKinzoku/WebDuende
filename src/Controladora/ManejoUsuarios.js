@@ -1,4 +1,4 @@
-import Usuario from "../Modelo/Usuario";
+import Usuario from "../modelo/Usuario";
 import GestorUsuarios from "../DAO/GestorUsuarios";
 import GestorBD from "../DAO/GestorBD";
 

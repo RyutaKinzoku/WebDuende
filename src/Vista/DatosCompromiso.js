@@ -7,10 +7,13 @@ import Dropdown from '@restart/ui/esm/Dropdown';
 
 const cookies = new Cookies();
 
-export default class CrearCompromiso extends Component{
+export default class DatosCompromiso extends Component{
 
     state = {
-        titulo:'',
+        provincia:'',
+        canton:'',
+        distrito:'',
+        direccion:'',
     }
 
     handleChange = e => {
@@ -42,10 +45,19 @@ export default class CrearCompromiso extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>
                             <Form.Group onChange= {this.handleChange}>
-                                <h6>Por favor, ingrese el título del curso: </h6>
+                                <h6>Por favor, ingrese los siguientes datos: </h6>
                                 <br/>
-                                <h6>Titulo:</h6>
-                                <Form.Control type="text" name='titulo' />
+                                <h6>Provincia:</h6>
+                                <Form.Control type="text" name='provincia' />
+                                <br/>
+                                <h6>Cantón:</h6>
+                                <Form.Control type="text" name='canton' />
+                                <br/>
+                                <h6>Distrito:</h6>
+                                <Form.Control type="text" name='distrito' />
+                                <br/>
+                                <h6>Dirección:</h6>
+                                <Form.Control type="text" name='direccion' />
                                 <br/>
                             </Form.Group>
 

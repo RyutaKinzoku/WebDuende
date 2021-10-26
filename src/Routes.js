@@ -6,7 +6,11 @@ import Registrarse from './Vista/Registrarse'
 import Galeria from './Vista/Galeria';
 import CrearProducto from './Vista/CrearProducto';
 import CrearPublicacion from './Vista/CrearPublicacion';
-import CrearCompromiso from './Vista/CrearCompromiso';
+import TituloCompromiso from './Vista/TituloCompromiso';
+import UsuarioCompromiso from './Vista/UsuarioCompromiso';
+import DatosCompromiso from './Vista/DatosCompromiso';
+import CrearCategoria from './Vista/CrearCategoria';
+import CrearSubcategoria from './Vista/CrearSubcategoria';
 
 function Routes(){
     return(
@@ -18,7 +22,11 @@ function Routes(){
                 <Route exact path="/galeria" component ={Galeria}/>
                 <Route exact path="/CrearPublicacion" component ={CrearPublicacion}/>
                 <Route exact path="/CrearProducto" component ={CrearProducto}/>
-                <Route exact path="/CrearCompromiso" component ={CrearCompromiso}/>
+                <Route exact path="/TituloCompromiso" component ={TituloCompromiso}/>
+                <Route exact path="/UsuarioCompromiso" component ={UsuarioCompromiso}/>
+                <Route exact path="/DatosCompromiso" component ={DatosCompromiso}/>
+                <Route exact path="/CrearCategoria" component ={CrearCategoria}/>
+                <Route exact path="/CrearSubcategoria" component ={CrearSubcategoria}/>
             </Switch>
         </BrowserRouter>
     );
