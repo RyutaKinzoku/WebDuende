@@ -3,17 +3,18 @@ import {Button, Nav, Navbar, Container, Form } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
+import Dropdown from '@restart/ui/esm/Dropdown';
 
 const cookies = new Cookies();
 
-export default class Comprar extends Component{
+export default class CrearPublicacion extends Component{
 
     state = {
-        provincia:'',
-        canton:'',
-        distrito:'',
-        direccion:'',
-        comprobante:'',
+        imagen:'',
+        descripcion:'',
+        tags:'',
+        categoria:'',
+        subcategoria:'',
     }
 
     handleChange = e => {
@@ -30,7 +31,7 @@ export default class Comprar extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="loginTitle" href="#loginTitle">Comprar</Navbar.Brand>
+                        <Navbar.Brand id="loginTitle" href="#loginTitle">Crear Publicacion</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
@@ -47,27 +48,25 @@ export default class Comprar extends Component{
                             <Form.Group onChange= {this.handleChange}>
                                 <h6>Por favor, ingrese los siguientes datos: </h6>
                                 <br/>
-                                <h6>Provincia:</h6>
-                                <Form.Control type="text" name = 'provincia' />
+                                <h6>Imagen:</h6>
+                                <Form.Control type="file" name='imagen' />
                                 <br/>
-                                <h6>Canton:</h6>
-                                <Form.Control type="text" name = 'canton' />
+                                <h6>Descripcion:</h6>
+                                <Form.Control type="text" name = 'descripcion' />
                                 <br/>
-                                <h6>Distrito:</h6>
-                                <Form.Control type="text" name = 'distrito' />
+                                <h6>Tags:</h6>
+                                <Form.Control type="text" name = 'tags' />
                                 <br/>
-                                <h6>Dirección:</h6>
-                                <Form.Control type="text" name = 'direccion' />
+                                <h6>Categoría:</h6>
                                 <br/>
-                                <h6>Comprobante:</h6>
-                                <Form.Control type="file" name='comprobante' />
+                                <h6>Subcategoría:</h6>
                                 <br/>
                             </Form.Group>
 
                         </div>
                         <div className="d-grid gap-2">
                             <Button size="md" variant="secondary" type="submit">
-                                Comprar
+                                Publicar
                             </Button>
                             <Button size="md" variant="secondary" type="submit">
                                 Cancelar
