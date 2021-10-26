@@ -10,10 +10,10 @@ export default class Curso extends Compromiso {
     }
 
     get titulo(){
-        return this.titulo;
+        return this._titulo;
     }
 
     set titulo(titulo){
-        this.titulo = titulo;
+        this._titulo = titulo;
     }
 }

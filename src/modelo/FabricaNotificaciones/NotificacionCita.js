@@ -9,26 +9,26 @@ export default class NotificacionCita extends Notificacion {
     }
 
     get mensaje(){
-        return this.mensaje;
+        return this._mensaje;
     }
 
     set mensaje(mensaje){
-        this.mensaje = mensaje;
+        this._mensaje = mensaje;
     }
 
     get idPublicacion(){
-        return this.idPublicacion;
+        return this._idPublicacion;
     }
 
     set idPublicacion(idPublicacion){
-        this.idPublicacion = idPublicacion;
+        this._idPublicacion = idPublicacion;
     }
 
     get correoUsuario(){
-        return this.correoUsuario;
+        return this._correoUsuario;
     }
 
     set correoUsuario(correoUsuario){
-        this.correoUsuario = correoUsuario;
+        this._correoUsuario = correoUsuario;
     }
 }

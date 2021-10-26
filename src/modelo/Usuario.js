@@ -11,66 +11,66 @@ export default class Usuario {
     }
 
     get correo(){
-        return this.correo;
+        return this._correo;
     }
     
     set correo(correo){
-        this.correo = correo;
+        this._correo = correo;
     }
 
     get nombre(){
-        return this.nombre;
+        return this._nombre;
     }
 
     set nombre(nombre){
-        this.nombre = nombre;
+        this._nombre = nombre;
     }
     
     get primerApellido(){
-        return this.primerApellido;
+        return this._primerApellido;
     }
 
     set primerApellido(primerApellido){
-        this.primerApellido = primerApellido;
+        this._primerApellido = primerApellido;
     }
     
     get segundoApellido(){
-        return this.segundoApellido;
+        return this._segundoApellido;
     }
 
     set segundoApellido(segundoApellido){
-        this.segundoApellido = segundoApellido;
+        this._segundoApellido = segundoApellido;
     }
     
     get telefono(){
-        return this.telefono;
+        return this._telefono;
     }
     
     set telefono(telefono){
-        this.telefono = telefono;
+        this._telefono = telefono;
     }
 
     get cedula(){
-        return this.cedula;
+        return this._cedula;
     }
     
     set cedula(cedula){
-        this.cedula = cedula;
+        this._cedula = cedula;
     }
 
     get contrasena(){
-        return this.contrasena;
+        return this._contrasena;
     }
     
     set contrasena(contrasena){
-        this.contrasena = contrasena;
+        this._contrasena = contrasena;
     }
 
     get rol(){
-        return this.rol;
+        return this._rol;
     }
     
     set rol(rol){
-        this.rol = rol;
+        this._rol = rol;
     }
 }

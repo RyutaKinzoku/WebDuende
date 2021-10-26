@@ -11,10 +11,10 @@ export default class Cita extends ServicioIndividual {
     }
 
     get publicacion(){
-        return this.publicacion;
+        return this._publicacion;
     }
 
     set publicacion(publicacion){
-        this.publicacion = publicacion;
+        this._publicacion = publicacion;
     }
 }

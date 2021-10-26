@@ -11,10 +11,10 @@ export default class Entrega extends ServicioIndividual {
     }
 
     get orden(){
-        return this.publordenicacion;
+        return this._publordenicacion;
     }
 
     set orden(orden){
-        this.orden = orden;
+        this._orden = orden;
     }
 }

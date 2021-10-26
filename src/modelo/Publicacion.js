@@ -10,50 +10,50 @@ export default class Publicacion{
     }
 
     set id(idPublicacion){
-        this.id = idPublicacion;
+        this._id = idPublicacion;
     }
 
     get id(){
-        return this.id;
+        return this._id;
     }
 
     get imagen(){
-        return this.imagen;
+        return this._imagen;
     }
 
     set imagen(imagen){
-        this.imagen = imagen;
+        this._imagen = imagen;
     }
 
     get descripcion(){
-        return this.descripcion;
+        return this._descripcion;
     }
 
     set descripcion(descripcion){
-        this.descripcion = descripcion;
+        this._descripcion = descripcion;
     }
 
     get tags(){
-        return this.tags;
+        return this._tags;
     }
 
     set tags(tags){
-        this.tags = tags;
+        this._tags = tags;
     }
 
     get categoria(){
-        return this.categoria;
+        return this._categoria;
     }
 
     set categoria(categoria){
-        this.categoria = categoria;
+        this._categoria = categoria;
     }
 
     get subcategoria(){
-        return this.subcategoria;
+        return this._subcategoria;
     }
 
     set subcategoria(subcategoria){
-        this.subcategoria = subcategoria;
+        this._subcategoria = subcategoria;
     }
 }
