@@ -82,7 +82,7 @@ export default class IniciarSesion extends Component{
                         </div>
                         <div className="d-grid gap-2">
                             <Button size="md" variant="secondary" type="submit">
-                                Iniciar Sesión
+                                Registrarse
                             </Button>
                         </div>
                     </Form.Group>
