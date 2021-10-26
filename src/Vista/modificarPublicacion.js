@@ -4,6 +4,9 @@ import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
 import Dropdown from '@restart/ui/esm/Dropdown';
+import Image from 'react-bootstrap/Image'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const cookies = new Cookies();
 
@@ -31,7 +34,7 @@ export default class modificarPublicacion extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="loginTitle" href="#loginTitle">modificarPublicacion</Navbar.Brand>
+                        <Navbar.Brand id="loginTitle" href="#loginTitle">Modificar Publicacion</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
@@ -42,37 +45,45 @@ export default class modificarPublicacion extends Component{
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <div className="center container w-50 p-8 py-2 my-3  mt-5">
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <div>
-                            <Form.Group onChange= {this.handleChange}>
-                            <h6>Por favor, modifique los datos deseados: </h6>
-                                <br/>
-                                <h6>Imagen:</h6>
-                                <Form.Control type="file" name='imagen' />
-                                <br/>
-                                <h6>Descripcion:</h6>
-                                <Form.Control type="text" name = 'descripcion' />
-                                <br/>
-                                <h6>Tags:</h6>
-                                <Form.Control type="text" name = 'tags' />
-                                <br/>
-                                <h6>Categoría:</h6>
-                                <br/>
-                                <h6>Subcategoría:</h6>
-                                <br/>
+                <div className="center container w-55 p-8 py-2 my-3  mt-5">
+                    <Row>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <div>
+                                    <Form.Group onChange= {this.handleChange}>
+                                    <h6>Por favor, modifique los datos deseados: </h6>
+                                        <br/>
+                                        <h6>Imagen:</h6>
+                                        <Form.Control type="file" name='imagen' />
+                                        <br/>
+                                        <h6>Descripcion:</h6>
+                                        <Form.Control type="text" name = 'descripcion' />
+                                        <br/>
+                                        <h6>Tags:</h6>
+                                        <Form.Control type="text" name = 'tags' />
+                                        <br/>
+                                        <h6>Categoría:</h6>
+                                        <br/>
+                                        <h6>Subcategoría:</h6>
+                                        <br/>
+                                    </Form.Group>
+                                </div>
+                                <div className="d-grid gap-2">
+                                    <Button size="md" variant="secondary" type="submit">
+                                        Modificar
+                                    </Button>
+                                    <Button size="md" variant="secondary" type="submit">
+                                        Cancelar
+                                    </Button>
+                                </div>
                             </Form.Group>
-
-                        </div>
-                        <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
-                                modificar
-                            </Button>
-                            <Button size="md" variant="secondary" type="submit">
-                                Cancelar
-                            </Button>
-                        </div>
-                    </Form.Group>
+                        </Col>
+                        <Col>
+                            <div className="center container w-55 p-8 py-2 my-3  mt-5">
+                                <Image src="holder.js/171x180" rounded />
+                            </div>
+                        </Col>
+                    </Row>    
                 </div >
             </div>
         )
