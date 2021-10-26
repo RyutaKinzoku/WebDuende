@@ -3,6 +3,9 @@ import {Button, Nav, Navbar, Container, Form, NavDropdown} from "react-bootstrap
 import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
+import Card from 'react-bootstrap/Card'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const cookies = new Cookies();
 
@@ -56,25 +59,37 @@ export default class Galeria extends Component{
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <div className="center container w-50 p-8 py-2 my-3  mt-5">
+                <div>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>
+                            <br/>
                             <Form.Group onChange= {this.handleChange}>
-                                <h6>Por favor, ingrese los siguientes datos: </h6>
-                                <br/>
-                                <h6>Correo:</h6>
-                                <Form.Control type="text" name = 'correo' />
-                                <br/>
-                                <h6>Contraseña:</h6>
-                                <Form.Control type="password" name = 'contrasena' />
-                                <br/>
+                                <Row xs={1} md={3} className="g-4">
+                                    {Array.from({ length: 10 }).map((_, idx) => (
+                                        <Col>
+                                            <Card>
+                                                <Card.Img variant="top" src="holder.js/100px160" />
+                                                <Card.Body>
+                                                <Card.Title>Card title</Card.Title>
+                                                <Card.Text>
+                                                    Tags:
+                                                </Card.Text>
+                                                <Button size="md" variant="secondary" type="submit">
+                                                    Comentar
+                                                </Button>{' '}
+                                                <Button size="md" variant="secondary"  type="submit">
+                                                    Modificar
+                                                </Button>{' '}
+                                                <Button size="md" variant="secondary" type="submit">
+                                                    Borrar
+                                                </Button>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
+                                    ))}
+                                </Row>
                             </Form.Group>
 
-                        </div>
-                        <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
-                                Iniciar Sesión
-                            </Button>
                         </div>
                     </Form.Group>
                 </div >
