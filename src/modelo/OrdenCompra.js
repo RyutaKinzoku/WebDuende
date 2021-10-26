@@ -8,42 +8,42 @@ export default class OrdenCompra {
     }
 
     set id(idOrden){
-        this.id = idOrden;
+        this._id = idOrden;
     }
 
     get id(){
-        return this.id;
+        return this._id;
     }
 
     get comprobante(){
-        return this.comprobante;
+        return this._comprobante;
     }
 
     set comprobante(comprobante){
-        this.comprobante = comprobante;
+        this._comprobante = comprobante;
     }
 
     get direccion(){
-        return this.direccion;
+        return this._direccion;
     }
 
     set direccion(direccion){
-        this.direccion = direccion;
+        this._direccion = direccion;
     }
 
     get comprador(){
-        return this.comprador;
+        return this._comprador;
     }
 
     set comprador(comprador){
-        this.comprador = comprador;
+        this._comprador = comprador;
     }
 
     get productos(){
-        return this.productos;
+        return this._productos;
     }
 
     set productos(productos){
-        this.productos = productos;
+        this._productos = productos;
     }
 }

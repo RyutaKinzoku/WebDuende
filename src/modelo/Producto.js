@@ -9,42 +9,42 @@ export default class Producto {
     }
 
     set id(idProducto){
-        return this.id = idProducto;
+        this._id = idProducto;
     }
 
     get id(){
-        return this.id;
+        return this._id;
     }
 
     get nombre(){
-        return this.nombre;
+        return this._nombre;
     }
 
     set nombre(nombre){
-        this.nombre = nombre;
+        this._nombre = nombre;
     }
 
     get descripcion(){
-        return this.descripcion;
+        return this._descripcion;
     }
 
     set descripcion(descripcion){
-        this.descripcion = descripcion;
+        this._descripcion = descripcion;
     }
 
     get precio(){
-        return this.precio;
+        return this._precio;
     }
 
     set precio(precio){
-        this.precio = precio;
+        this._precio = precio;
     }
 
     get imagen(){
-        return this.imagen;
+        return this._imagen;
     }
 
     set imagen(imagen){
-        this.imagen = imagen;
+        this._imagen = imagen;
     }
 }

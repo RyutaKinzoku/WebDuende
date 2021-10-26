@@ -5,22 +5,22 @@ export default class Carrito{
     }
 
     set comprador(comprador){
-        this.comprador = comprador;
+        this._comprador = comprador;
     }
 
     get comprador(){
-        return this.comprador;
+        return this._comprador;
     }
 
     set comprador(comprador){
-        this.comprador = comprador;
+        this._comprador = comprador;
     }
 
     get productos(){
-        return this.productos;
+        return this._productos;
     }
 
     set productos(productos){
-        this.productos = productos;
+        this._productos = productos;
     }
 }

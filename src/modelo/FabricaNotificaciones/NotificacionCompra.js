@@ -7,10 +7,10 @@ export default class NotificacionCita extends Notificacion {
     }
 
     get idOrdenCompra(){
-        return this.idOrdenCompra;
+        return this._idOrdenCompra;
     }
 
     set idOrdenCompra(idOrdenCompra){
-        this.idOrdenCompra = idOrdenCompra;
+        this._idOrdenCompra = idOrdenCompra;
     }
 }

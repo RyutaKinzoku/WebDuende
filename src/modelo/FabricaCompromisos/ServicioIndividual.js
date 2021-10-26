@@ -8,10 +8,10 @@ export default class ServicioIndividual extends Compromiso {
     }
 
     get usuario(){
-        return this.usuario;
+        return this._usuario;
     }
 
     set usuario(usuario){
-        this.usuario = usuario;
+        this._usuario = usuario;
     }
 }

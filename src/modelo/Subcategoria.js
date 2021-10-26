@@ -6,26 +6,26 @@ export default class Subcategoria{
     }
 
     set id(idSubcategoria){
-        this.id = idSubcategoria;
+        this._id = idSubcategoria;
     }
 
     get id(){
-        return this.id;
+        return this._id;
     }
 
     set idCategoria(idCategoria){
-        this.idCategoria = idCategoria;
+        this._idCategoria = idCategoria;
     }
 
     get idCategoria(){
-        return this.idCategoria;
+        return this._idCategoria;
     }
 
     get nombre(){
-        return this.nombre;
+        return this._nombre;
     }
 
     set nombre (nombre){
-        this.nombre = nombre
+        this._nombre = nombre
     }
 }

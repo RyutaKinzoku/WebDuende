@@ -6,10 +6,10 @@ export default class Notificacion {
     }
 
     get id(){
-        return this.id;
+        return this._id;
     }
 
     set id(id){
-        this.id = id;
+        this._id = id;
     }
 }
