@@ -11,6 +11,8 @@ import UsuarioCompromiso from './Vista/UsuarioCompromiso';
 import DatosCompromiso from './Vista/DatosCompromiso';
 import CrearCategoria from './Vista/CrearCategoria';
 import CrearSubcategoria from './Vista/CrearSubcategoria';
+import ModificarPublicacion from './Vista/modificarPublicacion';
+import ModificarProducto from './Vista/modificarProducto';
 
 function Routes(){
     return(
@@ -27,6 +29,8 @@ function Routes(){
                 <Route exact path="/DatosCompromiso" component ={DatosCompromiso}/>
                 <Route exact path="/CrearCategoria" component ={CrearCategoria}/>
                 <Route exact path="/CrearSubcategoria" component ={CrearSubcategoria}/>
+                <Route exact path="/modificarPublicacion" component ={ModificarPublicacion}/>
+                <Route exact path="/modificarProducto" component ={ModificarProducto}/>
             </Switch>
         </BrowserRouter>
     );
