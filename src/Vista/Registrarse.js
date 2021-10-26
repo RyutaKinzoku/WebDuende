@@ -6,7 +6,7 @@ import NavStyle from "./css/NavStyle.css";
 
 const cookies = new Cookies();
 
-export default class IniciarSesion extends Component{
+export default class Registrarse extends Component{
 
     state = {
         correo: '',
