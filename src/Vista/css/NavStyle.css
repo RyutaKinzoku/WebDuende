@@ -10,10 +10,23 @@
     text-align: center;
 }
 
+.botonNav2{
+    background: #C4C4C4;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-top: 5px;
+    text-align: center;
+    color: black;
+}
+
 #navBarBottom{
     background-color: red;
 }
 
 #navTitle{
     color: #FFFFFF;
+}
+
+#navTitle2{
+    color: black;
 }

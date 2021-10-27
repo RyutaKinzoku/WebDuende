@@ -88,13 +88,11 @@ export default class Carrito extends Component{
                         </Form.Group>
                     </Form.Group>
                 </div>
-                <Navbar fixed="bottom" id="#navBarBottom" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="bottom" id="#navBarBottom" collapseOnSelect bg="" variant="light" expand="lg">
                     <Container>
                     </Container>
-                    <Nav className="me-auto">
-                        <Navbar.Brand id="navTitle" href="">Total:</Navbar.Brand>
-                        <Nav.Link className="botonNav" href="">Comprar</Nav.Link>
-                    </Nav>
+                        <Navbar.Brand id="navTitle2" href="">Total:</Navbar.Brand>
+                        <Nav.Link className="botonNav2" href="">Comprar</Nav.Link>
                 </Navbar>
             </div>
         )

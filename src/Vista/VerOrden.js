@@ -37,9 +37,8 @@ export default class VerOrden extends Component{
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <div>
+                <div className="center container w-70 p-8 py-2 my-3  mt-5">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <br/>
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">
                                 {Array.from({ length: 4 }).map((_, idx) => (
@@ -67,12 +66,10 @@ export default class VerOrden extends Component{
                         </Form.Group>
                     </Form.Group>
                 </div>
-                <Navbar fixed="bottom" id="#navBarBottom" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="bottom" id="#navBarBottom" collapseOnSelect bg="" variant="light" expand="lg">
                     <Container>
                     </Container>
-                    <Nav className="me-auto">
-                        <Nav.Link className="botonNav" href="/DatosCompromiso">Crear Entrega</Nav.Link>
-                    </Nav>
+                    <Nav.Link className="botonNav2" href="/DatosCompromiso">Crear Entrega</Nav.Link>
                 </Navbar>
             </div>
         )
