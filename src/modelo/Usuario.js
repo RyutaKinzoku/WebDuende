@@ -74,5 +74,3 @@ export default class Usuario {
         this._rol = rol;
     }
 }
-
-module.exports = Usuario;
