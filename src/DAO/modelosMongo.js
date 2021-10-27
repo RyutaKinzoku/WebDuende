@@ -6,7 +6,7 @@ const esquemaProducto = new Schema({
     descripcion: {type: String},
     precio: {type: Number},
     imagen: {type: String},
-    cantidad: {type: Boolean}
+    cantidad: {type: Number}
 })
 
 const esquemaOrden = new Schema({

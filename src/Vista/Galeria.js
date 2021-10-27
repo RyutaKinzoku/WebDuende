@@ -11,6 +11,11 @@ const cookies = new Cookies();
 
 export default class Galeria extends Component{
 
+    state = {
+        correo: '',
+        contrasena: '',
+    }
+
     handleChange = e => {
         this.setState({
             ...this.state,
