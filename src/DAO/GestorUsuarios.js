@@ -1,5 +1,5 @@
 import GestorDB from "./GestorBD";
-import Usuario from "../Modelo/Usuario";
+import Usuario from "../modelo/Usuario";
 import axios from "axios";
 
 export default class GestorUsuarios{
