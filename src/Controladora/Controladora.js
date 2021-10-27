@@ -4,7 +4,7 @@ export default class ManejoAgenda{
         this.manejoUsuarios = new ManejoUsuarios();
     }
 
-    iniciarSesion(correo, contrasena){
+    async iniciarSesion(correo, contrasena){
         return this.manejoUsuarios.iniciarSesion(correo, contrasena);
     }
 }

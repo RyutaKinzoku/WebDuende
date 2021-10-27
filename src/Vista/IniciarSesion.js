@@ -21,9 +21,10 @@ export default class IniciarSesion extends Component{
         })
     }
 
-    enviar  = async (e) => {
+    enviar = async (e) => {
         let controladora = new Controladora();
-        let usuario = controladora.iniciarSesion(this.state.correo, this.state.contrasena);
+        let usuario = await controladora.iniciarSesion(this.state.correo, this.state.contrasena);
+        console.log(usuario);
         if(usuario !== null){
             cookies.set('correo',            usuario.correo,            {path: "/"});
             cookies.set('nombre',            usuario.nombre,            {path: "/"});
@@ -34,8 +35,7 @@ export default class IniciarSesion extends Component{
             cookies.set('rol',               usuario.rol,               {path: "/"});
             swal("Usuario encontrado","" ,"success").then((value) => {
                 window.location.href="/galeria";
-            })
-            console.log(cookies.get('primerApellido'))
+            });
         }else{
             swal("Usuario incorrecto","" ,"warning");
         }
