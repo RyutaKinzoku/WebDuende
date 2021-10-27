@@ -19,6 +19,8 @@ import Tienda from './Vista/Tienda';
 import Carrito from './Vista/Carrito';
 import Ordenes from './Vista/Ordenes';
 import VerOrden from './Vista/VerOrden';
+import VerCategorias from './Vista/VerCategorias';
+import VerSubcategorias from './Vista/VerSubcategorias'
 function Routes(){
     return(
         <BrowserRouter>
@@ -42,6 +44,8 @@ function Routes(){
                 <Route exact path="/Carrito" component ={Carrito}/>
                 <Route exact path="/Ordenes" component ={Ordenes}/>
                 <Route exact path="/VerOrden" component ={VerOrden}/>
+                <Route exact path="/VerCategorias" component = {VerCategorias}/>
+                <Route exact path="/VerSubcategorias" component = {VerSubcategorias}/>
             </Switch>
         </BrowserRouter>
     );

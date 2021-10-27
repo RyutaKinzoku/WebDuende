@@ -6,10 +6,12 @@ import NavStyle from "./css/NavStyle.css";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Dropdown from '@restart/ui/esm/Dropdown';
+import { DropdownButton } from 'react-bootstrap';
 
 const cookies = new Cookies();
 
-export default class Ordenes extends Component{
+export default class VerCategorias extends Component{
 
 
     handleChange = e => {
@@ -26,7 +28,7 @@ export default class Ordenes extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="navTitle" href="">Ordenes</Navbar.Brand>
+                        <Navbar.Brand id="navTitle" href="">Categorías</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
@@ -37,7 +39,7 @@ export default class Ordenes extends Component{
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-                <div className="center container w-70 p-8 py-2 my-3  mt-5"> 
+                <div className="center container w-50 p-8 py-2 my-3  mt-5">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">
@@ -47,26 +49,17 @@ export default class Ordenes extends Component{
                                     <Card.Body>
                                         <Row>
                                         <Col>
-                                        <Card.Title>Usuario:</Card.Title>
-                                        <Card.Text>
-                                            Usuario
-                                        </Card.Text>
+                                        <Card.Title>Nombre</Card.Title>
                                         </Col>
                                         <Col>
-                                        <Card.Title>Dirección:</Card.Title>
-                                        <Card.Text>
-                                            Dirección
-                                        </Card.Text>
                                         </Col>
                                         <Col>
-                                        <Card.Title>ID:</Card.Title>
-                                        <Card.Text>
-                                            ID
-                                        </Card.Text>
                                         </Col>
                                         <Col>
-                                        <Button size="md" variant="secondary" type="submit" href="/VerOrden">
-                                            Ver
+                                        <Button size="md" variant="secondary" type="submit" href="/VerSubcategorias">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                        </svg>
                                         </Button>
                                         </Col>
                                         </Row>
@@ -77,6 +70,18 @@ export default class Ordenes extends Component{
                         </Form.Group>
                     </Form.Group>
                 </div>
+                <Navbar fixed="bottom" id="#navBarBottom" collapseOnSelect bg="" variant="light" expand="lg">
+                    <Container>
+                    </Container>
+                        <Row>
+                            <Col>
+                                <Nav.Link className="botonNav2" href="/Galeria">Volver</Nav.Link>{' '}
+                            </Col>
+                            <Col>
+                                <Nav.Link className="botonNav2" href="/CrearCategoria">CrearCategoría</Nav.Link>{' '}
+                            </Col>
+                        </Row>
+                </Navbar>
             </div>
         )
     }
