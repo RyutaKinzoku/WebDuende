@@ -18,6 +18,7 @@ import Agenda from './Vista/Agenda';
 import Tienda from './Vista/Tienda';
 import Carrito from './Vista/Carrito';
 import Ordenes from './Vista/Ordenes';
+import VerOrden from './Vista/VerOrden';
 function Routes(){
     return(
         <BrowserRouter>
@@ -40,6 +41,7 @@ function Routes(){
                 <Route exact path="/Tienda" component ={Tienda}/>
                 <Route exact path="/Carrito" component ={Carrito}/>
                 <Route exact path="/Ordenes" component ={Ordenes}/>
+                <Route exact path="/VerOrden" component ={VerOrden}/>
             </Switch>
         </BrowserRouter>
     );

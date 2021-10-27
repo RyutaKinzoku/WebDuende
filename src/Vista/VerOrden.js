@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col'
 
 const cookies = new Cookies();
 
-export default class Ordenes extends Component{
+export default class VerOrden extends Component{
 
 
     handleChange = e => {
@@ -26,7 +26,7 @@ export default class Ordenes extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="navTitle" href="">Ordenes</Navbar.Brand>
+                        <Navbar.Brand id="navTitle" href="">Orden</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
@@ -42,35 +42,24 @@ export default class Ordenes extends Component{
                         <br/>
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">
-                                {Array.from({ length: 10 }).map((_, idx) => (
+                                {Array.from({ length: 4 }).map((_, idx) => (
                                     <Card>
                                     <Card.Img variant="top" src="holder.js/100px160" />
                                     <Card.Body>
-                                        <Row>
-                                        <Col>
-                                        <Card.Title>Usuario:</Card.Title>
-                                        <Card.Text>
-                                            Usuario
-                                        </Card.Text>
-                                        </Col>
-                                        <Col>
-                                        <Card.Title>Dirección:</Card.Title>
-                                        <Card.Text>
-                                            Dirección
-                                        </Card.Text>
-                                        </Col>
-                                        <Col>
-                                        <Card.Title>ID:</Card.Title>
-                                        <Card.Text>
-                                            ID
-                                        </Card.Text>
-                                        </Col>
-                                        <Col>
-                                        <Button size="md" variant="secondary" type="submit" href="/VerOrden">
-                                            Ver
-                                        </Button>
-                                        </Col>
-                                        </Row>
+                                            <Row>
+                                            <Col>
+                                            <Card.Title>Producto:</Card.Title>
+                                            <Card.Text>
+                                                Producto
+                                            </Card.Text>
+                                            </Col>
+                                            <Col>
+                                            <Card.Title>Cantidad:</Card.Title>
+                                            <Card.Text>
+                                                Cantidad
+                                            </Card.Text>
+                                            </Col>
+                                            </Row>
                                     </Card.Body>
                                     </Card>
                                 ))}
@@ -78,6 +67,13 @@ export default class Ordenes extends Component{
                         </Form.Group>
                     </Form.Group>
                 </div>
+                <Navbar fixed="bottom" id="#navBarBottom" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                    <Container>
+                    </Container>
+                    <Nav className="me-auto">
+                        <Nav.Link className="botonNav" href="/DatosCompromiso">Crear Entrega</Nav.Link>
+                    </Nav>
+                </Navbar>
             </div>
         )
     }
