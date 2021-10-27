@@ -6,18 +6,20 @@ export default class GestorUsuarios{
     modificar(usuario){}
     eliminar(correo){}
     async obtener(correo){
+        var u = null;
         await axios.get('http://localhost:3001/api/login',{params: {correo: correo} })
         .then(response=>{
             if(response.data.length>0){
-                let usuario=response.data[0];
-                return new Usuario(usuario.correo, usuario.nombre, usuario.primerApellido, usuario.segundoApellido, usuario.telefono, usuario.cedula, usuario.contrasena, usuario.rol);
-            }else{
-                return null;
+                let usuario = response.data[0];
+                u = new Usuario(usuario.correo, usuario.nombre, usuario.primerApellido, usuario.segundoApellido, usuario.telefono, usuario.cedula, usuario.contrasena, usuario.rol);
+                return u
             }
+            return u;
         })
         .catch(error =>{
             console.log(error);
         })
+        return u;
     }
     agregar(usuario){}
     obtenerLista(){}

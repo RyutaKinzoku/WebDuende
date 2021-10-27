@@ -8,7 +8,7 @@ export default class ManejoUsuarios {
     }
     
     async iniciarSesion(correo, contrasena){
-        let usuario = this.gestorUsuarios.obtener(correo);
+        let usuario = await this.gestorUsuarios.obtener(correo);
         if(usuario !== null){
             if (usuario.contrasena === contrasena){
                 return usuario;

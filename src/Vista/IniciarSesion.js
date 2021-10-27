@@ -24,7 +24,6 @@ export default class IniciarSesion extends Component{
     enviar = async (e) => {
         let controladora = new Controladora();
         let usuario = await controladora.iniciarSesion(this.state.correo, this.state.contrasena);
-        console.log(usuario);
         if(usuario !== null){
             cookies.set('correo',            usuario.correo,            {path: "/"});
             cookies.set('nombre',            usuario.nombre,            {path: "/"});
