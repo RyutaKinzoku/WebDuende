@@ -15,6 +15,7 @@ import ModificarPublicacion from './Vista/modificarPublicacion';
 import ModificarProducto from './Vista/modificarProducto';
 import Compromisos from './Vista/Compromisos'
 import Agenda from './Vista/Agenda';
+import Carrito from './Vista/Carrito';
 
 function Routes(){
     return(
@@ -35,6 +36,7 @@ function Routes(){
                 <Route exact path="/modificarProducto" component ={ModificarProducto}/>
                 <Route exact path="/Compromisos" component ={Compromisos}/>
                 <Route exact path="/Agenda" component ={Agenda}/>
+                <Route exact path="/Carrito" component ={Carrito}/>
             </Switch>
         </BrowserRouter>
     );
