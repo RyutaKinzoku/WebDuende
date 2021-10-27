@@ -16,7 +16,7 @@ import ModificarProducto from './Vista/modificarProducto';
 import Compromisos from './Vista/Compromisos'
 import Agenda from './Vista/Agenda';
 import Tienda from './Vista/Tienda';
-
+import Carrito from './Vista/Carrito';
 function Routes(){
     return(
         <BrowserRouter>
@@ -37,6 +37,7 @@ function Routes(){
                 <Route exact path="/Compromisos" component ={Compromisos}/>
                 <Route exact path="/Agenda" component ={Agenda}/>
                 <Route exact path="/Tienda" component ={Tienda}/>
+                <Route exact path="/Carrito" component ={Carrito}/>
             </Switch>
         </BrowserRouter>
     );
