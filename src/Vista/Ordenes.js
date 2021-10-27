@@ -44,32 +44,52 @@ export default class Carrito extends Component{
                             <Row xs={1} md={1} className="g-4">
                                 {Array.from({ length: 10 }).map((_, idx) => (
                                     <Card>
-                                        <Card.Img variant="top" src="holder.js/100px160" />
-                                        <Card.Body>
+                                    <Card.Img variant="top" src="holder.js/100px160" />
+                                    <Card.Body>
+                                        <Row>
+                                        <Col>
+                                        <Card.Title>Usuario:</Card.Title>
+                                        <Card.Text>
+                                            Usuario
+                                        </Card.Text>
+                                        </Col>
+                                        <Col>
+                                        <Card.Title>Dirección:</Card.Title>
+                                        <Card.Text>
+                                            Dirección
+                                        </Card.Text>
+                                        </Col>
+                                        <Col>
+                                        <Card.Title>ID:</Card.Title>
+                                        <Card.Text>
+                                            ID
+                                        </Card.Text>
+                                        </Col>
+                                        </Row>
+                                    </Card.Body>
+                                    </Card>
+                                ), Array.from({ length: 2 }).map((_, idx) => (
+                                    <Card>
+                                    <Card.Img variant="top" src="holder.js/100px160" />
+                                    <Card.Body>
                                             <Row>
                                             <Col>
-                                            <Card.Title>Usuario:</Card.Title>
+                                            <Card.Title>Producto:</Card.Title>
                                             <Card.Text>
-                                                Usuario
+                                                Producto
                                             </Card.Text>
                                             </Col>
                                             <Col>
-                                            <Card.Title>Dirección:</Card.Title>
+                                            <Card.Title>Cantidad:</Card.Title>
                                             <Card.Text>
-                                                Dirección
-                                            </Card.Text>
-                                            </Col>
-                                            <Col>
-                                            <Card.Title>ID:</Card.Title>
-                                            <Card.Text>
-                                                ID
+                                                Cantidad
                                             </Card.Text>
                                             </Col>
                                             </Row>
-                                        </Card.Body>
+                                    </Card.Body>
                                     </Card>
-                                    
-                                ))}
+                                ))
+                            )}
                             </Row>
                         </Form.Group>
                     </Form.Group>

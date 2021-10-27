@@ -1,5 +1,5 @@
-import GestorDB from "./GestorBD";
-import Usuario from "../Modelo/Usuario";
+/*import GestorDB from "./GestorBD";
+import Usuario from "../modelo/Usuario";
 import mysql from "./mysql";
 import axios from "axios";
 
@@ -11,4 +11,4 @@ export default class GestorUsuarios{
     }
     agregar(usuario){}
     obtenerLista(){}
-}
+}*/
