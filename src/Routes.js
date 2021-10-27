@@ -14,6 +14,7 @@ import CrearSubcategoria from './Vista/CrearSubcategoria';
 import ModificarPublicacion from './Vista/modificarPublicacion';
 import ModificarProducto from './Vista/modificarProducto';
 import Compromisos from './Vista/Compromisos'
+import Agenda from './Vista/Agenda';
 
 function Routes(){
     return(
@@ -33,6 +34,7 @@ function Routes(){
                 <Route exact path="/modificarPublicacion" component ={ModificarPublicacion}/>
                 <Route exact path="/modificarProducto" component ={ModificarProducto}/>
                 <Route exact path="/Compromisos" component ={Compromisos}/>
+                <Route exact path="/Agenda" component ={Agenda}/>
             </Switch>
         </BrowserRouter>
     );
