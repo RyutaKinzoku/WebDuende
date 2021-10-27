@@ -27,13 +27,13 @@ export default class TituloCompromiso extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="loginTitle" href="#loginTitle">Crear Compromiso</Navbar.Brand>
+                        <Navbar.Brand id="navTitle" href="">Crear Compromiso</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link className="botonNav" href="#tienda">Tienda</Nav.Link>
-                                <Nav.Link className="botonNav" href="#galery">Galería</Nav.Link>
-                                <Nav.Link className="botonNav" href="#agenda">Agenda</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Tienda">Tienda</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Galeria">Galería</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

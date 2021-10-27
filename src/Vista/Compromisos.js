@@ -22,13 +22,13 @@ export default class Compromisos extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="loginTitle" href="#loginTitle">Seleccione el tipo de compromiso</Navbar.Brand>
+                        <Navbar.Brand id="navTitle" href="">Seleccione el tipo de compromiso</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link className="botonNav" href="#tienda">Tienda</Nav.Link>
-                                <Nav.Link className="botonNav" href="#galery">Galería</Nav.Link>
-                                <Nav.Link className="botonNav" href="#agenda">Agenda</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Tienda">Tienda</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Galeria">Galería</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
@@ -41,13 +41,13 @@ export default class Compromisos extends Component{
                     <br/>
                     <br/>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" href="/DatosCompromiso">
                                 Entrega
                             </Button>
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" href="/UsuarioCompromiso">
                                 Cita
                             </Button>
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" href="/TituloCompromiso">
                                 Curso
                             </Button>
                         </div>
