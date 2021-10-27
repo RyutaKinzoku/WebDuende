@@ -42,7 +42,7 @@ export default class Registrarse extends Component{
                                     </svg>
                                 </Nav.Link>
                                 <Nav.Link className="botonNav" href="/Galeria">Galería</Nav.Link>
-                                <Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Tienda">Tienda</Nav.Link>
                             </Nav>
                             <Nav>
                                 <Nav.Link className="botonNav" href="/">Iniciar Sesión</Nav.Link>

@@ -56,7 +56,8 @@ export default class IniciarSesion extends Component{
                                     </svg>
                                 </Nav.Link>
                                 <Nav.Link className="botonNav" href="/galeria">Galería</Nav.Link>
-                                <Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Tienda">Tienda</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Agenda">Agenda TEMP</Nav.Link>
                             </Nav>
                             <Nav>
                                 <Nav.Link className="botonNav" href="/Registrarse">Registrarse</Nav.Link>
