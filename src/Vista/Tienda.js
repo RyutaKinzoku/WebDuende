@@ -6,20 +6,32 @@ import NavStyle from "./css/NavStyle.css";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Controladora from "../Controladora/Controladora"
 
 const cookies = new Cookies();
 
 export default class Galeria extends Component{
 
     state = {
-        correo: '',
-        contrasena: '',
+        productos: []
     }
 
     handleChange = e => {
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value
+        })
+    }
+
+    componentDidMount() {
+        this.obtenerProductos();    
+    }
+
+    obtenerProductos = async() => {
+        let controladora = new Controladora();
+        let productos = await controladora.obtenerProductos();
+        this.setState({
+            productos: productos
         })
     }
 
@@ -53,16 +65,18 @@ export default class Galeria extends Component{
                         <div>
                             <br/>
                             <Row xs={1} md={3} className="g-4">
-                                    {Array.from({ length: 10 }).map((_, idx) => (
+                                    {this.state.productos.map((producto => (
                                         <Col>
                                             <Card>
-                                                <Card.Img variant="top" src="holder.js/100px160" />
+                                                <Card.Img variant="top" src= {producto.imagen} />
                                                 <Card.Body>
-                                                    <Card.Title  class="text-center">
-                                                        Card title
+                                                    <Card.Title>
+                                                        {producto.nombre}
+                                                        <br/>
+                                                        {producto.descripcion}
                                                     </Card.Title>
-                                                    <Card.Text  class="text-center">
-                                                        ₡ 000 000 000
+                                                    <Card.Text>
+                                                        ₡ {producto.precio}
                                                     </Card.Text>
                                                     <Form.Group onChange= {this.handleChange}>
                                                         <Row>
@@ -112,7 +126,7 @@ export default class Galeria extends Component{
                                                 </Card.Body>
                                             </Card>
                                         </Col>
-                                    ))}
+                                    )))}
                             </Row>
                         </div>
                     </Form.Group>

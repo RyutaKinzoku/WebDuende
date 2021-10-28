@@ -1,11 +1,12 @@
 import Producto from "../modelo/Producto";
+import GestorProductos from "../DAO/GestorProductos"
 
 export default class ManejoProductos {
     constructor(){
         this.gestorProductos = new GestorProductos();
     }
     
-    obtenerProductos(){
+    async obtenerProductos(){
         return this.gestorProductos.obtenerLista();
     }
     
