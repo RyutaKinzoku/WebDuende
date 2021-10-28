@@ -18,8 +18,8 @@ export default class ManejoUsuarios {
         return usuario;
     }
 
-    registrarse(datosUsuario){
+    async registrarse(datosUsuario){
         let usuario = new Usuario(datosUsuario.correo, datosUsuario.nombre, datosUsuario.primerApellido, datosUsuario.segundoApellido, datosUsuario.telefono, datosUsuario.cedula, datosUsuario.contrasena, datosUsuario.rol);
-        this.gestorUsuarios.registrarse(usuario);
+        return this.gestorUsuarios.agregar(usuario);
     }
 }

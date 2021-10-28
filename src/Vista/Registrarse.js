@@ -3,11 +3,12 @@ import {Button, Nav, Navbar, Container, Form } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
+import Controladora from "../Controladora/Controladora";
+import DTOUsuario from "../modelo/DTOUsuario";
 
 const cookies = new Cookies();
 
 export default class Registrarse extends Component{
-
     state = {
         correo: '',
         contrasena: '',
@@ -25,7 +26,20 @@ export default class Registrarse extends Component{
         })
     }
 
-    enviar  = async (e) => {}
+    registrar = async (e) => {
+        e.preventDefault();
+        let datosUsuario = new DTOUsuario(this.state.correo, this.state.nombre, this.state.primerApellido, this.state.segundoApellido, this.state.telefono, this.state.cedula, this.state.contrasena, "COMUN");
+        let controladora = new Controladora();
+        let response = await controladora.registrarse(datosUsuario);
+        if(!response.data){
+            swal("Registro completo","" ,"success").then((value) => {
+                window.location.href="/";
+            })
+        }else{
+            swal("Error al registrar","", "warning").then((value) => {
+            });
+        }
+    };
 
     render(){
         return(
@@ -81,7 +95,7 @@ export default class Registrarse extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" onClick={this.registrar}>
                                 Registrarse
                             </Button>
                         </div>
