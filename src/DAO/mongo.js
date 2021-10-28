@@ -23,7 +23,6 @@ const conexionMongo = async() =>{
 conexionMongo();
 
 router.get('/listaProductos', async (_,res) => {
-    /*
     modelos.Producto.find({}, (err, docs) => {
         if(err){
             res.send(err);
@@ -31,17 +30,16 @@ router.get('/listaProductos', async (_,res) => {
         console.log(docs);
         res.send(docs);
     })
-    */
-    const message = new modelos.Producto({
-        id: 4,
-        nombre: "type",
-        descripcion: "a",
-        precio:"gh",
-        imagen: "gdsw",
-        cantidad: 56
+    /*const producto = new modelos.Producto({
+        id: 6,
+        nombre: "Vino",
+        descripcion: "Vino y copa",
+        precio: 1000,
+        imagen: "../../public/imagenes/vino.jpg",
+        cantidad: 100
     })
-    console.log(message);
-    await message.save();
+    console.log(producto);
+    await producto.save();*/
 })
 
 module.exports = router;

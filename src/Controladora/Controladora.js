@@ -1,7 +1,7 @@
 import ManejoUsuarios from './ManejoUsuarios';
 import ManejoProductos from './ManejoProductos'
 
-export default class ManejoAgenda{
+export default class Controladora{
     constructor(){
         this.manejoUsuarios = new ManejoUsuarios();
         this.manejoProductos = new ManejoProductos();

@@ -1,4 +1,3 @@
-import { response } from "express";
 import GestorDB from "./GestorBD";
 import Producto from "../modelo/Producto";
 import axios from "axios";

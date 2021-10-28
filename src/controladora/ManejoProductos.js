@@ -7,7 +7,7 @@ export default class ManejoProductos {
     }
     
     async obtenerProductos(){
-        return this.gestorProductos.obtenerLista();
+        return this.gestorProductos.obtenerLista()
     }
     
     obtenerProducto(idProducto){

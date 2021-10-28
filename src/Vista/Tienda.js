@@ -7,10 +7,11 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Controladora from "../Controladora/Controladora"
+import Producto from "../modelo/Producto";
 
 const cookies = new Cookies();
 
-export default class Galeria extends Component{
+export default class Tienda extends Component{
 
     state = {
         productos: []
@@ -68,7 +69,7 @@ export default class Galeria extends Component{
                                     {this.state.productos.map((producto => (
                                         <Col>
                                             <Card>
-                                                <Card.Img variant="top" src= {producto.imagen} />
+                                                <Card.Img variant="top" src="..\..\public\imagenes\vino.jpg" />
                                                 <Card.Body>
                                                     <Card.Title>
                                                         {producto.nombre}

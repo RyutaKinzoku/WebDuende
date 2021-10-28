@@ -1,4 +1,4 @@
-import { application } from 'express';
+/*import { application } from 'express';
 
 const express = require('express');
 const router = express.Router();
@@ -40,4 +40,4 @@ router.post("/eliminarCarrito", (req, res) =>{
     db.del(correo+'');
 })
 
-export default router;
+export default router;*/
