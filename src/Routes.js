@@ -28,7 +28,7 @@ function Routes(){
                 <Route exact path="/" component ={IniciarSesion}/>
                 <Route exact path="/Registrarse" component ={Registrarse}/>
                 <Route exact path="/Comprar" component ={Comprar}/>
-                <Route exact path="/galeria" component ={Galeria}/>
+                <Route exact path="/Galeria" component ={Galeria}/>
                 <Route exact path="/CrearPublicacion" component ={CrearPublicacion}/>
                 <Route exact path="/CrearProducto" component ={CrearProducto}/>
                 <Route exact path="/TituloCompromiso" component ={TituloCompromiso}/>
