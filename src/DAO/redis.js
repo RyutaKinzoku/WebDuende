@@ -2,6 +2,7 @@ import { application } from 'express';
 
 const express = require('express');
 const router = express.Router();
+const redis = require("redis");
 
 const db = redis.createClient ({
     port : '30203',
@@ -17,25 +18,25 @@ db.on('connect', function (err) {
 });
 
 router.post("/agregarProductoCarrito", (req, res) =>{
-    cantidad = req.body.cantidad;
-    idProducto = req.body.idProducto;
-    correo = req.body.correo;
+    let cantidad = req.body.cantidad;
+    let idProducto = req.body.idProducto;
+    let correo = req.body.correo;
     db.hmset(correo+'',idProducto+'',cantidad+'');
 })
 
 router.post("/eliminarProductoCarrito", (req,res) => {
-    idProducto = req.body.idProducto;
-    correo = req.body.correo;
+    let idProducto = req.body.idProducto;
+    let correo = req.body.correo;
     db.del(correo+'',idProducto+'');
 })
 
 router.post("/obtenerProductosCarrito", (req,res) => {
-    correo = req.body.correo;
+    let correo = req.body.correo;
     db.keys(correo+'');
 })
 
 router.post("/eliminarCarrito", (req, res) =>{
-    correo = req.body.correo;
+    let correo = req.body.correo;
     db.del(correo+'');
 })
 
