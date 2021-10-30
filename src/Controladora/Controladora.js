@@ -1,10 +1,12 @@
 import ManejoUsuarios from './ManejoUsuarios';
-import ManejoProductos from './ManejoProductos'
+import ManejoProductos from './ManejoProductos';
+import ManejoAgenda from './ManejoAgenda';
 
 export default class Controladora{
     constructor(){
         this.manejoUsuarios = new ManejoUsuarios();
         this.manejoProductos = new ManejoProductos();
+        this.manejoAgenda = new ManejoAgenda();
     }
 
     async iniciarSesion(correo, contrasena){
@@ -21,5 +23,13 @@ export default class Controladora{
 
     async crearProducto(nombre, descripcion, precio, cantidad, imagen){
         return this.manejoProductos.crearProducto(nombre, descripcion, precio, cantidad, imagen);
+    }
+
+    async agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden){
+        return this.manejoAgenda.agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden);
+    }
+
+    async agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
+        return this.manejoAgenda.agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar);
     }
 }

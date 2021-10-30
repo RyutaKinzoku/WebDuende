@@ -1,21 +1,29 @@
 import React, {Component} from 'react';
 import {Button, Nav, Navbar, Container, Form, NavDropdown} from "react-bootstrap";
 import Cookies from "universal-cookie";
-import swal from "sweetalert";
-import NavStyle from "./css/NavStyle.css";
-import Card from 'react-bootstrap/Card'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import FullCalendar from "@fullcalendar/react";
+import FullCalendar, { formatDate } from '@fullcalendar/react';
 import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from '@fullcalendar/timegrid';
+import Controladora from "../Controladora/Controladora";
 const cookies = new Cookies();
 
 export default class Agenda extends Component{
-
     handleChange = e => {
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value
+        })
+    }
+
+    componentDidMount() {
+        this.obtenerProductos();    
+    }
+
+    obtenerProductos = async() => {
+        let controladora = new Controladora();
+        let productos = await controladora.obtenerProductos();
+        this.setState({
+            productos: productos
         })
     }
 
@@ -46,11 +54,26 @@ export default class Agenda extends Component{
                 <div>
                     <br/>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <div className="App">
-                        <FullCalendar
-                            defaultView="dayGridMonth"
-                            plugins={[dayGridPlugin]}
-                        />
+                        <div className="App">
+                            <FullCalendar
+                                plugins={[timeGridPlugin]}
+                                headerToolbar={{
+                                    left: 'prev,next today',
+                                    center: 'title',
+                                    right: 'timeGridWeek'
+                                }}
+                                defaultView="timeGridPlugin"
+                                events={[
+                                    {
+                                        allDay: false,
+                                        id: 1,
+                                        title: 'The Title', // a property!
+                                        start: '2021-10-28T10:00', // a property!
+                                        end: '2021-10-28T12:00', // a property! ** see important note below about 'end' **
+                                        color: '#FFAF77'
+                                    }
+                                ]}
+                            />
                         </div>
                     </Form.Group>
                 </div >

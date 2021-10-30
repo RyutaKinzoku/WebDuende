@@ -17,6 +17,7 @@ router.use(cors());
 router.use(express.json())
 router.use(bodyParser.urlencoded({extended: true}));
 
+//Usuario
 router.get('/obtenerUsuario', (req,res) => {
     const sqlSelect = "SELECT * FROM Usuario WHERE correo = ?;"
     console.log(sqlSelect)
@@ -43,6 +44,26 @@ router.post("/agregarUsuario", (req,res) =>{
     })
 });
 
+//Curso
+router.post("/agregarCurso", (req,res) =>{
+    const id = req.body.id
+    const fechaHoraInicio = req.body.fechaHoraInicio
+    const fechaHoraFin = req.body.fechaHoraFin
+    const titulo = req.body.titulo
+    const lugar = req.body.lugar
+
+    const sqlInsertCompromiso = "INSERT INTO Compromiso (fechaHoraInicio, fechaHoraFin, ID, lugar) VALUES (?,?,?,?);";
+    const sqlInsertCurso = "INSERT INTO Curso (fechaHoraInicio, fechaHoraFin, ID, lugar, titulo) VALUES (?,?,?,?,?);"
+
+    db.query(sqlInsertCompromiso, [fechaHoraInicio, fechaHoraFin, id, lugar], () => {
+        db.query(sqlInsertCurso , [fechaHoraInicio, fechaHoraFin, id, lugar, titulo] ,(err) => {
+            console.log(err);
+            res.send(err);
+        })
+    })
+});
+
+//Obtener ID
 router.get("/getIdProducto", (_, res) => {
     const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'producto'"
     db.query(sqlSelect, (_, result) => {
@@ -58,6 +79,17 @@ router.post("/setIdProducto", (_, res) => {
             console.log(err);
             res.send(err);
         }
+    })
+})
+
+router.get('/getNextCompromisos', (req,res) => {
+    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor=ultimo_valor+1 WHERE nombre='compromiso'"
+    const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'compromiso';"
+    db.query(sqlUpdate, () => {
+        db.query(sqlSelect, [req.query.correo], (err, result) => {
+            console.log(result);
+            res.send(result);
+        })
     })
 })
 

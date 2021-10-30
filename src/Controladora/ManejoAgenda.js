@@ -1,5 +1,4 @@
-import FabricaCompromisos from "../Modelo/FabricaCompromisos/FabricaCompromisos";
-import Compromisos from "../Modelo/FabricaCompromisos/Compromisos";
+import FabricaCompromisos from "../modelo/FabricaCompromisos/FabricaCompromisos";
 import GestorCompromisos from "../DAO/GestorCompromisos";
 import GestorBD from "../DAO/GestorBD";/*
 import Cita from "../Modelo/FabricaCompromisos/Cita";
@@ -19,10 +18,10 @@ export default class ManejoAgenda{
         this.gestorCompromisos.eliminar(idCompromiso);
     }
 
-    agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
-        let idCompromiso = this.gestorCompromisos.getNext();
+    async agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
+        let idCompromiso = await this.gestorCompromisos.getNext();
         let curso = FabricaCompromisos.fabricarCompromiso("Curso;"+fechaHoraInicio+";"+fechaHoraFin+";"+titulo+";"+idCompromiso+";"+lugar);
-        this.gestorCompromisos.agregarCurso(curso);
+        return this.gestorCompromisos.agregarCurso(curso);
     }
 
     modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){

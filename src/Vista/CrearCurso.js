@@ -7,10 +7,16 @@ import Dropdown from '@restart/ui/esm/Dropdown';
 
 const cookies = new Cookies();
 
-export default class TituloCompromiso extends Component{
+export default class CrearCurso extends Component{
 
     state = {
         titulo:'',
+        fechaHoraInicio:'',
+        fechaHoraFin:'',
+        provincia:'',
+        canton:'',
+        distrito:'',
+        direccion:''
     }
 
     handleChange = e => {
@@ -20,7 +26,9 @@ export default class TituloCompromiso extends Component{
         })
     }
 
-    enviar  = async (e) => {}
+    crear = async (e) => {
+
+    }
 
     render(){
         return(
@@ -42,16 +50,34 @@ export default class TituloCompromiso extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>
                             <Form.Group onChange= {this.handleChange}>
-                                <h6>Por favor, ingrese el título del curso: </h6>
+                                <h6>Por favor, ingrese los datos del curso: </h6>
                                 <br/>
                                 <h6>Titulo:</h6>
                                 <Form.Control type="text" name='titulo' />
+                                <br/>
+                                <h6>Fecha y hora de inicio:</h6>
+                                <Form.Control type="datetime-local" name='fechaHoraInicio' />
+                                <br/>
+                                <h6>Fecha y hora de fin:</h6>
+                                <Form.Control type="datetime-local" name='fechaHoraFin' />
+                                <br/>
+                                <h6>Provincia:</h6>
+                                <Form.Control type="text" name='provincia' />
+                                <br/>
+                                <h6>Cantón:</h6>
+                                <Form.Control type="text" name='canton' />
+                                <br/>
+                                <h6>Distrito:</h6>
+                                <Form.Control type="text" name='distrito' />
+                                <br/>
+                                <h6>Dirección:</h6>
+                                <Form.Control type="text" name='direccion' />
                                 <br/>
                             </Form.Group>
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" onClick={this.crear}>
                                 Continuar
                             </Button>
                             <Button size="md" variant="secondary" type="submit">

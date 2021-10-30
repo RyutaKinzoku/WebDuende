@@ -1,3 +1,4 @@
+import axios from "axios";
 import GestorDB from "./GestorBD";
 
 export default class GestorCompromisos{
@@ -7,8 +8,20 @@ export default class GestorCompromisos{
     eliminar(idCompromiso){};
     obtener(idCompromiso){};
     agregarEntrega(entrega){};
-    agregarCurso(curso){};
+    async agregarCurso(curso){
+        let values = {
+            id: curso.id,
+            fechaHoraInicio: curso.fechaHoraInicio,
+            fechaHoraFin: curso.fechaHoraFin,
+            titulo: curso.titulo,
+            lugar: curso.lugar
+        }
+        return axios.post('http://localhost:3001/api/agregarCurso',values);
+    };
     agregarCita(cita){};
     obtenerLista(){};
-    getNext(){};
+    async getNext(){
+        let valor = await axios.get('http://localhost:3001/api/getNextCompromisos');
+        return valor.data[0].ultimo_valor;
+    };
 }

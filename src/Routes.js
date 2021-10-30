@@ -6,7 +6,7 @@ import Registrarse from './Vista/Registrarse'
 import Galeria from './Vista/Galeria';
 import CrearProducto from './Vista/CrearProducto';
 import CrearPublicacion from './Vista/CrearPublicacion';
-import TituloCompromiso from './Vista/TituloCompromiso';
+import CrearCurso from './Vista/CrearCurso';
 import UsuarioCompromiso from './Vista/UsuarioCompromiso';
 import DatosCompromiso from './Vista/DatosCompromiso';
 import CrearCategoria from './Vista/CrearCategoria';
@@ -31,7 +31,7 @@ function Routes(){
                 <Route exact path="/Galeria" component ={Galeria}/>
                 <Route exact path="/CrearPublicacion" component ={CrearPublicacion}/>
                 <Route exact path="/CrearProducto" component ={CrearProducto}/>
-                <Route exact path="/TituloCompromiso" component ={TituloCompromiso}/>
+                <Route exact path="/CrearCurso" component ={CrearCurso}/>
                 <Route exact path="/UsuarioCompromiso" component ={UsuarioCompromiso}/>
                 <Route exact path="/DatosCompromiso" component ={DatosCompromiso}/>
                 <Route exact path="/CrearCategoria" component ={CrearCategoria}/>
