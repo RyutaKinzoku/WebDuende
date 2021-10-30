@@ -12,7 +12,12 @@ const config = {
 export default class GestorProductos{
     async modificar(producto){}
 
-    async eliminar(idProducto){}
+    async eliminar(idProducto){
+        let values = {
+            idProducto: idProducto
+        }
+        return axios.post('http://localhost:3001/api/eliminarProducto', values);
+    }
 
     async obtener(idProducto){}
 

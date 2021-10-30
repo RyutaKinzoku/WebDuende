@@ -14,7 +14,7 @@ export default class ManejoProductos {
         return this.gestorProductos.obtener(idProducto);
     }
 
-    async crearProducto(nombre, descripcion, precio, cantidad, imagen){
+    async agregarProducto(nombre, descripcion, precio, cantidad, imagen){
         var producto = new Producto(0, nombre, descripcion, precio, cantidad, imagen[0]);
         this.gestorProductos.setNext();
         producto.id = await this.gestorProductos.getNext()

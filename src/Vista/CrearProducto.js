@@ -34,20 +34,18 @@ export default class CrearProducto extends Component{
     crearProducto  = async (e) => {
         e.preventDefault();
         let controladora = new Controladora();
-        console.log(this.state.imagen)
-        let response = await controladora.crearProducto(
+        let response = await controladora.agregarProducto(
             this.state.nombre, 
             this.state.descripcion, 
             this.state.precio, 
             this.state.cantidad, 
             this.state.imagen);
-        console.log(response.data);
-        if(!response.data){
-            swal("Registro completo","" ,"success").then((value) => {
-                window.location.href="/Tienda";
-            })
+        console.log("asdhiausdhiasdhiuhasdiudhsa " + response.data);
+        if(response.data){
+            swal("Producto agregado","","success")
+            //.then((value) => { window.location.href="/Tienda"; })
         }else{
-            swal("Error al registrar","", "warning");
+            swal("Error al agregar","", "warning");
         }
     }
 

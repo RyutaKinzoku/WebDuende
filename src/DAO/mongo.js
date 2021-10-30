@@ -48,7 +48,7 @@ router.get('/listaProductos', async (_,res) => {
         if(err){
             res.send(err);
         }
-        console.log(docs);
+        //console.log(docs);
         res.send(docs);
     })
 })
@@ -65,11 +65,16 @@ router.post('/agregarProducto', subida.single('imagen'), async function (req, re
     try{
         let resul = await producto.save();
         console.log(resul);
-        res.send(resul);
+        res.send(resul === producto);
     } catch (err){
         console.log(err);
-        res.send(err);
+        res.send(false);
     }
+})
+
+router.post('/eliminarProducto', async (req,res) =>{
+    const eliminados = await modelos.Producto.deleteOne({id: req.body.idProducto});
+    res.send(eliminados.deletedCount);
 })
 
 module.exports = router;
