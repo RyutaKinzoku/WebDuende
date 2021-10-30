@@ -15,7 +15,7 @@ const jsonParser = bodyParser.json()
 const URI = "mongodb+srv://admin:admin@web-duende.rfjvk.mongodb.net/web-duende?retryWrites=true&w=majority";
 
 const storage = multer.diskStorage({
-    destination: `${process.env.PUBLIC_URL}/assets/images/`,
+    destination: "../../public/assets/images",
     filename: (req, file, callback, filename) => {
       var ext = path.extname(file.originalname);
       try {
@@ -53,15 +53,16 @@ router.get('/listaProductos', async (_,res) => {
     })
 })
 
-router.post('/agregarProducto', subida.single('foto'), async function (req, res) {
+router.post('/agregarProducto', subida.single('imagen'), async function (req, res) {
     console.log("REQUESTED FILE " + req.file)
     const producto = new modelos.Producto({
         id: Number(req.body.idProducto),
         nombre: req.body.nombre,
         descripcion: req.body.descripcion,
         precio: Number(req.body.precio),
-        imagen: '',
+        //imagen: '',
         //imagen: req.body.imagen.filename + req.body.imagen.mimetype,
+        imagen: req.file.filename,
         cantidad: req.body.cantidad
     })
     try{

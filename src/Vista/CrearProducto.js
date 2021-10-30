@@ -22,7 +22,13 @@ export default class CrearProducto extends Component{
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value
-        })
+        });
+        if (e.target.files) {
+            let imagen = e.target.files;
+            this.setState({imagen: imagen}, () => { console.log(this.state.imagen[0]) })
+        } else {
+            console.log("Selecione un archivo")
+        }
     }
 
     crearProducto  = async (e) => {
@@ -35,7 +41,7 @@ export default class CrearProducto extends Component{
             this.state.precio, 
             this.state.cantidad, 
             this.state.imagen);
-        window.location.href="/Tienda";
+        //window.location.href="/Tienda";
     }
 
     render(){

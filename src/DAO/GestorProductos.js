@@ -23,6 +23,7 @@ export default class GestorProductos{
         form.append('descripcion', producto.descripcion);
         form.append('precio', producto.precio);
         form.append('cantidad', producto.cantidad);
+        console.log('iushdfoliuasfhdoiusdhfaoiu '+producto.imagen);
         //console.log(String(producto.imagen).split(/(\\|\/)/g).pop())
         form.append('imagen', producto.imagen);
         /*
