@@ -85,6 +85,28 @@ router.post("/agregarEntrega", (req,res) =>{
     })
 });
 
+//Cita
+router.post("/agregarCita", (req,res) =>{
+    const id = req.body.id
+    const fechaHoraInicio = req.body.fechaHoraInicio
+    const fechaHoraFin = req.body.fechaHoraFin
+    const lugar = req.body.lugar
+    const correoUsuario = req.body.correoUsuario
+    const idPublicacion = req.body.idPublicacion
+
+    const sqlInsertCompromiso = "INSERT INTO Compromiso (fechaHoraInicio, fechaHoraFin, ID, lugar) VALUES (?,?,?,?);";
+    const sqlInsertServicioIndividual = "INSERT INTO ServicioIndividual (fechaHoraInicio, fechaHoraFin, ID, lugar, correoUsuario) VALUES (?,?,?,?,?);";
+    const sqlInsertCita = "INSERT INTO Cita (fechaHoraInicio, fechaHoraFin, ID, lugar, correoUsuario, idPublicacion) VALUES (?,?,?,?,?,?);"
+    db.query(sqlInsertCompromiso, [fechaHoraInicio, fechaHoraFin, id, lugar], () => {
+        db.query(sqlInsertServicioIndividual, [fechaHoraInicio, fechaHoraFin, id, lugar, correoUsuario], () => {
+            db.query(sqlInsertCita , [fechaHoraInicio, fechaHoraFin, id, lugar, correoUsuario, idPublicacion] ,(err) => {
+                console.log(err);
+                res.send(err);
+            })
+        })
+    })
+});
+
 //Obtener ID
 router.get("/getIdProducto", (_, res) => {
     const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'producto'"

@@ -30,7 +30,17 @@ export default class GestorCompromisos{
         return axios.post('http://localhost:3001/api/agregarCurso',values);
     };
 
-    agregarCita(cita){};
+    async agregarCita(cita){
+        let values = {
+            id: cita.id,
+            fechaHoraInicio: cita.fechaHoraInicio,
+            fechaHoraFin: cita.fechaHoraFin,
+            lugar: cita.lugar,
+            correoUsuario: cita.usuario,
+            idPublicacion: cita.publicacion
+        }
+        return axios.post('http://localhost:3001/api/agregarCita',values);
+    };
     obtenerLista(){};
     async getNext(){
         let valor = await axios.get('http://localhost:3001/api/getNextCompromisos');

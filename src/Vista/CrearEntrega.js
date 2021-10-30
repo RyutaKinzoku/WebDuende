@@ -28,7 +28,7 @@ export default class CrearEntrega extends Component{
         })
     }
 
-    enviar  = async (e) => {
+    crear  = async (e) => {
         e.preventDefault();
         let controladora = new Controladora();
         let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
@@ -38,7 +38,12 @@ export default class CrearEntrega extends Component{
                 window.location.href="/Agenda";
             })
         }else{
-            swal("Error en el proceso de creación","", "warning");
+            if(response.data.errno === 1366){
+                swal("El número de orden debe ser un entero","", "warning");
+            } else if(response.data.errno === 1216){
+                swal("El correo del usuario no existe en el sistema","", "warning");
+            }
+            console.log(response);
         }
     }
 
@@ -47,7 +52,7 @@ export default class CrearEntrega extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="navTitle" href="">Crear Compromiso</Navbar.Brand>
+                        <Navbar.Brand id="navTitle">Crear Entrega</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
@@ -92,7 +97,7 @@ export default class CrearEntrega extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" onClick={this.enviar}>
+                            <Button size="md" variant="secondary" onClick={this.crear}>
                                 Continuar
                             </Button>
                             <Button size="md" variant="secondary" href="/Compromisos">

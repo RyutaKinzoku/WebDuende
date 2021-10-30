@@ -8,10 +8,11 @@ import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
 
-export default class CrearCurso extends Component{
+export default class CrearCita extends Component{
 
     state = {
-        titulo:'',
+        correoUsuario:'',
+        idPublicacion:'',
         fechaHoraInicio:'',
         fechaHoraFin:'',
         provincia:'',
@@ -27,17 +28,22 @@ export default class CrearCurso extends Component{
         })
     }
 
-    crear = async (e) => {
+    crear  = async (e) => {
         e.preventDefault();
         let controladora = new Controladora();
         let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
-        let response = await controladora.agregarCurso(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.state.titulo, lugar);
+        let response = await controladora.agregarCita(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.state.correoUsuario, lugar, this.state.idPublicacion);
         if(!response.data){
-            swal("Curso creado exitosamente","" ,"success").then((value) => {
+            swal("Cita creada exitosamente","" ,"success").then((value) => {
                 window.location.href="/Agenda";
             })
         }else{
-            swal("Error en el proceso de creación","", "warning");
+            if(response.data.errno === 1366){
+                swal("El número de publicación debe ser un entero","", "warning");
+            } else if(response.data.errno === 1216){
+                swal("El correo del usuario no existe en el sistema","", "warning");
+            }
+            console.log(response);
         }
     }
 
@@ -46,7 +52,7 @@ export default class CrearCurso extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="navTitle" href="">Crear Curso</Navbar.Brand>
+                        <Navbar.Brand id="navTitle">Crear Cita</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
@@ -61,10 +67,13 @@ export default class CrearCurso extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>
                             <Form.Group onChange= {this.handleChange}>
-                                <h6>Por favor, ingrese los datos del curso: </h6>
+                            <h6>Por favor, ingrese los siguientes datos: </h6>
                                 <br/>
-                                <h6>Titulo:</h6>
-                                <Form.Control type="text" name='titulo' />
+                                <h6>Número de publicación:</h6>
+                                <Form.Control type="text" name='idPublicacion' />
+                                <br/>
+                                <h6>Correo usuario:</h6>
+                                <Form.Control type="text" name='correoUsuario' />
                                 <br/>
                                 <h6>Fecha y hora de inicio:</h6>
                                 <Form.Control type="datetime-local" name='fechaHoraInicio' />

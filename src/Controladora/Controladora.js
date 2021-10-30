@@ -32,4 +32,8 @@ export default class Controladora{
     async agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
         return this.manejoAgenda.agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar);
     }
+
+    async agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion){
+        return this.manejoAgenda.agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion);
+    }
 }
