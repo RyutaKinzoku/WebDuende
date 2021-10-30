@@ -43,4 +43,22 @@ router.post("/agregarUsuario", (req,res) =>{
     })
 });
 
+router.get("/getIdProducto", (_, res) => {
+    const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'producto'"
+    db.query(sqlSelect, (_, result) => {
+    console.log(result);
+    res.send(result)
+    })
+})
+
+router.post("/setIdProducto", (_, res) => {
+    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor = ultimo_valor+1 WHERE nombre = 'producto'"
+    db.query(sqlUpdate, (err, _) => {
+        if(err){
+            console.log(err);
+            res.send(err);
+        }
+    })
+})
+
 module.exports = router;

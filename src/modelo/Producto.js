@@ -1,11 +1,11 @@
 export default class Producto {
-    constructor(id, nombre, descripcion, precio, imagen, cantidad){
+    constructor(id, nombre, descripcion, precio, cantidad, imagen){
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.imagen = imagen;
         this.cantidad = cantidad;
+        this.imagen = imagen;
     }
 
     set id(idProducto){
@@ -40,19 +40,19 @@ export default class Producto {
         this._precio = precio;
     }
 
-    get imagen(){
-        return this._imagen;
-    }
-
-    set imagen(imagen){
-        this._imagen = imagen;
-    }
-
     get cantidad(){
         return this._cantidad;
     }
 
     set cantidad(cantidad){
         this._cantidad = cantidad;
+    }
+
+    get imagen(){
+        return this._imagen;
+    }
+
+    set imagen(imagen){
+        this._imagen = imagen;
     }
 }

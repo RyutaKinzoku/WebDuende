@@ -18,4 +18,8 @@ export default class Controladora{
     async obtenerProductos(){
         return this.manejoProductos.obtenerProductos();
     }
+
+    async crearProducto(nombre, descripcion, precio, cantidad, imagen){
+        return this.manejoProductos.crearProducto(nombre, descripcion, precio, cantidad, imagen);
+    }
 }

@@ -14,17 +14,20 @@ export default class ManejoProductos {
         return this.gestorProductos.obtener(idProducto);
     }
 
-    crearProducto(nombre, descripcion, precio, imagen, existencias){
-        var producto = new Producto(this.gestorProductos.getNext(), nombre, descripcion, precio, imagen, existencias);
-        this.gestorProductos.agregar(producto);
+    async crearProducto(nombre, descripcion, precio, cantidad, imagen){
+        var producto = new Producto(0, nombre, descripcion, precio, cantidad, imagen);
+        this.gestorProductos.setNext();
+        producto.id = await this.gestorProductos.getNext()
+        //console.log(producto)
+        return this.gestorProductos.agregar(producto);
     }
 
     eliminarProducto(idProducto){
         this.gestorProductos.eliminar(idProducto);
     }
 
-    modificarProducto(idProducto, nombre, descripcion, precio, imagen, existencias){
-        var producto = new Producto(idProducto, nombre, descripcion, precio, imagen, existencias);
+    modificarProducto(idProducto, nombre, descripcion, precio, imagen, cantidad){
+        var producto = new Producto(idProducto, nombre, descripcion, precio, imagen, cantidad);
         this.gestorProductos.modificar(producto);
     }
 }

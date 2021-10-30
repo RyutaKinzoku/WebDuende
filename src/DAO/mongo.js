@@ -5,11 +5,32 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const modelos = require('./modelosMongo');
 const mongoose = require('mongoose');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const jsonParser = bodyParser.json()
 
 const URI = "mongodb+srv://admin:admin@web-duende.rfjvk.mongodb.net/web-duende?retryWrites=true&w=majority";
+
+const storage = multer.diskStorage({
+    destination: `${process.env.PUBLIC_URL}/assets/images/`,
+    filename: (req, file, callback, filename) => {
+      var ext = path.extname(file.originalname);
+      try {
+        if(ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg' ) {
+          throw new Error(" no es una imagen \n")
+        }
+        callback(null, uuidv4() + ext);
+      } catch (error) {
+        alert("El archivo selecionado" + error.name + "Solo se admiten archivos tipo: \n .png \n .jpg \n .gif \n .jpeg")
+      }
+    }
+}) 
+var subida = multer({storage})
+router.use(express.static(__dirname));
+router.use(jsonParser);
 
 const conexionMongo = async() =>{
     await mongoose.connect(URI, {
@@ -30,16 +51,26 @@ router.get('/listaProductos', async (_,res) => {
         console.log(docs);
         res.send(docs);
     })
-    /*const producto = new modelos.Producto({
-        id: 6,
-        nombre: "Vino",
-        descripcion: "Vino y copa",
-        precio: 1000,
-        imagen: "../../public/imagenes/vino.jpg",
-        cantidad: 100
+})
+
+router.post('/agregarProducto', subida.single('foto'), async function (req, res) {
+    console.log("REQUESTED FILE " + req.file)
+    const producto = new modelos.Producto({
+        id: Number(req.body.idProducto),
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        precio: Number(req.body.precio),
+        imagen: '',
+        //imagen: req.body.imagen.filename + req.body.imagen.mimetype,
+        cantidad: req.body.cantidad
     })
-    console.log(producto);
-    await producto.save();*/
+    try{
+        await producto.save();
+        res.send("Producto agregado")
+    } catch (err){
+        console.log(err);
+        res.send(err);
+    }
 })
 
 module.exports = router;

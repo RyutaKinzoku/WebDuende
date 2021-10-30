@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
 import Dropdown from '@restart/ui/esm/Dropdown';
+import Controladora from "../Controladora/Controladora";
 
 const cookies = new Cookies();
 
@@ -13,7 +14,8 @@ export default class CrearProducto extends Component{
         nombre:'',
         descripcion:'',
         precio:'',
-        imagen:'',
+        cantidad: '',
+        imagen: null,
     }
 
     handleChange = e => {
@@ -23,7 +25,18 @@ export default class CrearProducto extends Component{
         })
     }
 
-    enviar  = async (e) => {}
+    crearProducto  = async (e) => {
+        e.preventDefault();
+        let controladora = new Controladora();
+        console.log(this.state.imagen)
+        let response = await controladora.crearProducto(
+            this.state.nombre, 
+            this.state.descripcion, 
+            this.state.precio, 
+            this.state.cantidad, 
+            this.state.imagen);
+        window.location.href="/Tienda";
+    }
 
     render(){
         return(
@@ -56,6 +69,9 @@ export default class CrearProducto extends Component{
                                 <h6>Precio:</h6>
                                 <Form.Control type="text" name = 'precio' />
                                 <br/>
+                                <h6>Cantidad:</h6>
+                                <Form.Control type="text" name = 'cantidad' />
+                                <br/>
                                 <h6>Imagen:</h6>
                                 <Form.Control type="file" name='imagen' />
                                 <br/>
@@ -63,10 +79,10 @@ export default class CrearProducto extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" onClick={this.crearProducto}>
                                 Publicar
                             </Button>
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" href = "/Tienda">
                                 Cancelar
                             </Button>
                         </div>
