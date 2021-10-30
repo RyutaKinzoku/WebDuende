@@ -1,8 +1,9 @@
 export default class Compromiso {
-    constructor() {
-        if (this.constructor == Compromiso) {
-            throw new Error("Clase abstracta Compromiso no puede ser instanciada");
-        }
+    constructor(fechaHoraInicio, fechaHoraFin, id, lugar) {
+        this.fechaHoraInicio = fechaHoraInicio;
+        this.fechaHoraFin = fechaHoraFin;
+        this.id = id;
+        this.lugar = lugar;
     }
 
     get fechaHoraInicio(){

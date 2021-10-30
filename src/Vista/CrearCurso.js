@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
 import Dropdown from '@restart/ui/esm/Dropdown';
+import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
 
@@ -27,7 +28,17 @@ export default class CrearCurso extends Component{
     }
 
     crear = async (e) => {
-
+        e.preventDefault();
+        let controladora = new Controladora();
+        let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
+        let response = await controladora.agregarCurso(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.state.titulo, lugar);
+        if(!response.data){
+            swal("Curso creado exitosamente","" ,"success").then((value) => {
+                
+            })
+        }else{
+            swal("Error al crear","", "warning");
+        }
     }
 
     render(){

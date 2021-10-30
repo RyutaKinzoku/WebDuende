@@ -2,11 +2,8 @@ import Compromiso from "./Compromiso";
 
 export default class Curso extends Compromiso {
     constructor(fechaHoraInicio, fechaHoraFin, titulo, id, lugar) {
-        super.fechaHoraInicio = fechaHoraInicio;
-        super.fechaHoraFin = fechaHoraFin;
+        super(fechaHoraInicio, fechaHoraFin, id, lugar);
         this.titulo = titulo;
-        super.id = id;
-        super.lugar = lugar;
     }
 
     get titulo(){
