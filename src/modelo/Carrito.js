@@ -1,7 +1,8 @@
 export default class Carrito{
-    constructor(comprador, productos){
+    constructor(comprador, productos, cantidades){
         this.comprador = comprador;
         this.productos = productos;
+        this.cantidades = cantidades;
     }
 
     set comprador(comprador){
@@ -12,15 +13,19 @@ export default class Carrito{
         return this._comprador;
     }
 
-    set comprador(comprador){
-        this._comprador = comprador;
-    }
-
     get productos(){
         return this._productos;
     }
 
     set productos(productos){
         this._productos = productos;
+    }
+
+    get cantidades(){
+        return this._cantidades;
+    }
+
+    set cantidades(cantidades){
+        this._cantidades = cantidades;
     }
 }

@@ -1,6 +1,7 @@
 import Carrito from "../modelo/Carrito";
 import OrdenCompra from "../modelo/OrdenCompra";
-
+import GestorCarritos from "../DAO/GestorCarritos";
+import GestorOrdenes from "../DAO/GestorOrdenes";
 export default class ManejoCompras{
     constructor(){
         this.gestorCarritos = new GestorCarritos();
@@ -8,35 +9,31 @@ export default class ManejoCompras{
     }
 
     obtenerCarrito(correo){
-        return this.gestorCarritos.obtener(correo);
+        return this.gestorCarritos.obtenerCarrito(correo);
     }
 
-    obtenerProductosCarrito(correo){
-        var carrito = obtenerCarrito(correo);
-        return carrito.productos;
+    async obtenerProductosCarrito(correo){
+        return this.gestorCarritos.obtenerLista(correo);
     }
 
-    agregarProductoCarrito(correo, idProducto, cantidad){
-        if(obtenerCarrito(correo) === null){
-            var carrito = new Carrito(correo, producto, cantidad);
-            this.gestorCarritos.agregar(carrito);
-        } else {
-            this.gestorCarritos.agregarProducto(correo, idProducto);
-        }
+    async agregarProductoCarrito(correo, idProducto, cantidad){
+        var carrito = new Carrito(correo, idProducto, cantidad);
+        this.gestorCarritos.agregarProducto(carrito);
     }
 
     eliminarProductoCarrito(correo, idProducto){
-        this.gestorCarritos.eliminar(correo, idProducto)
+        var carrito = new Carrito(correo, idProducto, null);
+        this.gestorCarritos.eliminarProducto(carrito)
     }
 
     eliminarCarrito(correo){
-        this.gestorCarritos.eliminar(correo);
+        this.gestorCarritos.eliminarCarrito(correo);
     }
 
     comprar(correo, comprobante, direccion){
-        var productos = obtenerCarrito(correo).productos; //Map<idProducto: int, cantidad: int>
-        crearOrden(productos, correo, comprobante, direccion);
-        eliminarCarrito(correo);
+        var productos = this.obtenerProductosCarrito(correo).productos; //Map<idProducto: int, cantidad: int>
+        this.crearOrden(productos, correo, comprobante, direccion);
+        this.gestorCarritos.eliminarCarrito(correo);
     }
 
     obtenerOrdenes(){
@@ -47,12 +44,16 @@ export default class ManejoCompras{
         return this.gestorOrdenes.obtener(idOrden);
     }
 
-    crearOrden(idsProductos, correo, comprobante, direccion){
+    async crearOrden(idsProductos, correo, comprobante, direccion){
         var orden = new OrdenCompra(this.gestorOrdenes.getNext(), comprobante, direccion, correo, idsProductos);
         this.gestorOrdenes.agregar(orden);
     }
 
     eliminarOrden(idOrden){
         this.gestorOrdenes.eliminar(idOrden);
+    }
+
+    obtenerCantidadProductoCarrito(correo, idProducto){
+        
     }
 }

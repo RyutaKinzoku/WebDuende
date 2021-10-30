@@ -3,6 +3,7 @@ import {Button, Nav, Navbar, Container, Form } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
+import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
 

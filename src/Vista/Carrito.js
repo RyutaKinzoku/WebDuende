@@ -6,16 +6,42 @@ import NavStyle from "./css/NavStyle.css";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
 
 export default class Carrito extends Component{
 
+    state = {
+        productosCarrito: []
+    }
 
     handleChange = e => {
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value
+        })
+    }
+
+    componentDidMount() {
+        this.obtenerProductosCarrito();
+    }
+
+    eliminarProductoCarrito = async(idProducto) => {
+        let controladora = new Controladora();
+        let correo = cookies.get('correo');
+        let productosCarrito = await controladora.eliminarProductoCarrito(correo, idProducto)
+        this.setState({
+            productosCarrito: productosCarrito
+        })
+    }
+
+    obtenerProductosCarrito = async() => {
+        let controladora = new Controladora();
+        let correo = cookies.get('correo');
+        let productosCarrito = await controladora.obtenerProductosCarrito(correo);
+        this.setState({
+            productosCarrito: productosCarrito
         })
     }
 
@@ -46,7 +72,7 @@ export default class Carrito extends Component{
                         <br/>
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">
-                                {Array.from({ length: 10 }).map((_, idx) => (
+                                {this.state.productosCarrito.map(productoCarrito => (
                                     <Card>
                                         <Card.Img variant="top" src="holder.js/100px160" />
                                         <Card.Body>
@@ -54,13 +80,13 @@ export default class Carrito extends Component{
                                             <Col>
                                             <Card.Title>Descripción:</Card.Title>
                                             <Card.Text>
-                                                Texto
+                                                {productoCarrito.descripcion}
                                             </Card.Text>
                                             </Col>
                                             <Col>
                                             <Card.Title>Precio:</Card.Title>
                                             <Card.Text>
-                                                Precio
+                                                {productoCarrito.precio}
                                             </Card.Text>
                                             </Col>
                                             <Col>
@@ -76,7 +102,7 @@ export default class Carrito extends Component{
                                             </Card.Text>
                                             </Col>
                                             <Col>
-                                            <Button size="md" variant="secondary" type="submit">
+                                            <Button size="md" variant="secondary" type="submit"  onClick = {() => this.eliminarProductoCarrito(productoCarrito.id)}>
                                                 Borrar
                                             </Button>
                                             </Col>
@@ -92,7 +118,7 @@ export default class Carrito extends Component{
                     <Container>
                     </Container>
                         <Navbar.Brand id="navTitle2" href="">Total:</Navbar.Brand>
-                        <Nav.Link className="botonNav2" href="">Comprar</Nav.Link>
+                        <Nav.Link className="botonNav2" href="/Comprar">Comprar</Nav.Link>
                 </Navbar>
             </div>
         )

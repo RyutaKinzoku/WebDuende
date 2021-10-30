@@ -1,12 +1,15 @@
 import ManejoUsuarios from './ManejoUsuarios';
 import ManejoProductos from './ManejoProductos';
 import ManejoAgenda from './ManejoAgenda';
+import ManejoCompras from './ManejoCompras';
+import { ThemeProvider } from 'react-bootstrap';
 
 export default class Controladora{
     constructor(){
         this.manejoUsuarios = new ManejoUsuarios();
         this.manejoProductos = new ManejoProductos();
         this.manejoAgenda = new ManejoAgenda();
+        this.ManejoCompras = new ManejoCompras();
     }
 
     async iniciarSesion(correo, contrasena){
@@ -39,5 +42,25 @@ export default class Controladora{
 
     async agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion){
         return this.manejoAgenda.agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion);
+    }
+
+    async agregarProductoCarrito(correo, idProducto, cantidad){
+        return this.ManejoCompras.agregarProductoCarrito(correo, idProducto, cantidad);
+    }
+
+    async obtenerProductosCarrito(correo){
+        return this.ManejoCompras.obtenerProductosCarrito(correo);
+    }
+
+    async eliminarProductoCarrito(correo, idProducto){
+        return this.ManejoCompras.eliminarProductoCarrito(correo, idProducto);
+    }
+
+    async comprar(correo, comprobante, direccion){
+        return this.ManejoCompras.comprar(correo, comprobante, direccion);
+    }
+
+    async obtenerCantidadProductoCarrito(correo, idProducto){
+        return this.ManejoCompras.obtenerCantidadProductoCarrito(correo, idProducto);
     }
 }
