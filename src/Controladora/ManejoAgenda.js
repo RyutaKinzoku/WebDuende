@@ -44,12 +44,10 @@ export default class ManejoAgenda{
         this.gestorCompromisos.modificarCita(cita);
     }
 
-    agregarEntrega(fechaHoraInicio, fechaHoraFin, correoUsuario, lugar, idOrdenCompra){
-        let idCompromiso = this.gestorCompromisos.getNext();
-        let usuario = this.gestorUsuarios.obtener(correoUsuario);
-        let orden = this.gestorOrdenes.obtener(idOrdenCompra);
-        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega;"+fechaHoraInicio+";"+fechaHoraFin+";"+idCompromiso+";"+lugar+";"+usuario+";"+orden);
-        this.gestorCompromisos.agregarEntrega(entrega);
+    async agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden){
+        let idCompromiso = await this.gestorCompromisos.getNext();
+        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega;"+fechaHoraInicio+";"+fechaHoraFin+";"+idCompromiso+";"+usuario+";"+lugar+";"+orden);
+        return this.gestorCompromisos.agregarEntrega(entrega);
     }
 
     modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, correoUsuario, lugar, idOrdenCompra){

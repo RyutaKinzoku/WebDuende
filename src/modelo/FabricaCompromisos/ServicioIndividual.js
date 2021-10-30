@@ -1,10 +1,9 @@
 import Compromiso from "./Compromiso";
 
 export default class ServicioIndividual extends Compromiso {
-    constructor() {
-        if (this.constructor == ServicioIndividual) {
-            throw new Error("Clase abstracta servicioindividual no puede ser instanciada");
-        }
+    constructor(fechaHoraInicio, fechaHoraFin, id, lugar, usuario) {
+        super(fechaHoraInicio, fechaHoraFin, id, lugar);
+        this.usuario = usuario;
     }
 
     get usuario(){

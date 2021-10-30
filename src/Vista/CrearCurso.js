@@ -34,10 +34,10 @@ export default class CrearCurso extends Component{
         let response = await controladora.agregarCurso(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.state.titulo, lugar);
         if(!response.data){
             swal("Curso creado exitosamente","" ,"success").then((value) => {
-                
+                window.location.href="/Agenda";
             })
         }else{
-            swal("Error al crear","", "warning");
+            swal("Error en el proceso de creación","", "warning");
         }
     }
 
@@ -91,7 +91,7 @@ export default class CrearCurso extends Component{
                             <Button size="md" variant="secondary" onClick={this.crear}>
                                 Continuar
                             </Button>
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" href="/Compromisos">
                                 Cancelar
                             </Button>
                         </div>

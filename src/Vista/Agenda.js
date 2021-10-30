@@ -71,14 +71,6 @@ export default class Agenda extends Component{
                                         start: '2021-10-28T10:00', // a property!
                                         end: '2021-10-28T12:00', // a property! ** see important note below about 'end' **
                                         color: '#FFAF77'
-                                    },
-                                    {
-                                        allDay: false,
-                                        id: 2,
-                                        title: 'Hola', // a property!
-                                        start: '2021-10-28T10:00', // a property!
-                                        end: '2021-10-28T12:00', // a property! ** see important note below about 'end' **
-                                        color: '#FFAF77'
                                     }
                                 ]}
                             />

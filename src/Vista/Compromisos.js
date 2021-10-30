@@ -41,7 +41,7 @@ export default class Compromisos extends Component{
                     <br/>
                     <br/>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit" href="/DatosCompromiso">
+                            <Button size="md" variant="secondary" type="submit" href="/CrearEntrega">
                                 Entrega
                             </Button>
                             <Button size="md" variant="secondary" type="submit" href="/UsuarioCompromiso">

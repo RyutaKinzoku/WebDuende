@@ -7,7 +7,18 @@ export default class GestorCompromisos{
     modificarCita(cita){};
     eliminar(idCompromiso){};
     obtener(idCompromiso){};
-    agregarEntrega(entrega){};
+    async agregarEntrega(entrega){
+        let values = {
+            id: entrega.id,
+            fechaHoraInicio: entrega.fechaHoraInicio,
+            fechaHoraFin: entrega.fechaHoraFin,
+            lugar: entrega.lugar,
+            correoUsuario: entrega.usuario,
+            idOrdenCompra: entrega.orden
+        }
+        return axios.post('http://localhost:3001/api/agregarEntrega',values);
+    };
+
     async agregarCurso(curso){
         let values = {
             id: curso.id,
@@ -18,6 +29,7 @@ export default class GestorCompromisos{
         }
         return axios.post('http://localhost:3001/api/agregarCurso',values);
     };
+
     agregarCita(cita){};
     obtenerLista(){};
     async getNext(){
