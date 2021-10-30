@@ -54,20 +54,18 @@ router.get('/listaProductos', async (_,res) => {
 })
 
 router.post('/agregarProducto', subida.single('imagen'), async function (req, res) {
-    console.log("REQUESTED FILE " + req.file)
     const producto = new modelos.Producto({
         id: Number(req.body.idProducto),
         nombre: req.body.nombre,
         descripcion: req.body.descripcion,
         precio: Number(req.body.precio),
-        //imagen: '',
-        //imagen: req.body.imagen.filename + req.body.imagen.mimetype,
         imagen: req.file.filename,
         cantidad: req.body.cantidad
     })
     try{
-        await producto.save();
-        res.send("Producto agregado")
+        let resul = await producto.save();
+        console.log(resul);
+        res.send(resul);
     } catch (err){
         console.log(err);
         res.send(err);
@@ -75,45 +73,3 @@ router.post('/agregarProducto', subida.single('imagen'), async function (req, re
 })
 
 module.exports = router;
-
-
-/*
-const mongoose = require("mongoose");
-
-const cors =  require('cors')
-
-const express = require('express');
-const bodyParser = require("body-parser");
-const jsonParser = bodyParser.json()
-const router = express.Router();
-
-const productoEsquema = require('./modelosMongo').Producto;
-
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
-
-const app = express();
-const port = 3003;
-const uri = "mongodb+srv://admin:admin@web-duende.rfjvk.mongodb.net/web-duende?retryWrites=true&w=majority";
-
-app.use(cors());
-
-mongoose.connect(uri).then(() => console.log("Connected to Mongo"))
-    .catch((error) => console.log(error));
-
-app.get("/", (req, res) => {
-    res.send("123456");
-});
-
-app.listen(port, () =>
-    console.log("running on port", port));
-
-router.get("/get", function (req,res){
-    productoEsquema.find({}, (err, result) => {
-        if (err){
-            res.send(err);
-        }
-        console.log(result);
-        res.send(result);
-    })
-})
-*/

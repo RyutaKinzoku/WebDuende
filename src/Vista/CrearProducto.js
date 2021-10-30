@@ -41,7 +41,14 @@ export default class CrearProducto extends Component{
             this.state.precio, 
             this.state.cantidad, 
             this.state.imagen);
-        //window.location.href="/Tienda";
+        console.log(response.data);
+        if(!response.data){
+            swal("Registro completo","" ,"success").then((value) => {
+                window.location.href="/Tienda";
+            })
+        }else{
+            swal("Error al registrar","", "warning");
+        }
     }
 
     render(){

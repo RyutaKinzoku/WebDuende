@@ -11,6 +11,7 @@ const esquemaProducto = new Schema({
 
 const esquemaOrden = new Schema({
     id: {type: Number},
+    correoUsuario: {type: String},
     comprobante:{type: String},
     direccion: {type: String},
     productos: {type: [esquemaProducto]}
