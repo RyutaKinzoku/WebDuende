@@ -45,9 +45,9 @@ export default class GestorProductos{
     }
 
     async obtenerLista(){
-        var response = await axios.get('http://localhost:3001/api/listaProductos');
+        var idsProducto = await axios.get('http://localhost:3001/api/listaProductos');
         var productos = [];
-        response.data.forEach(p => {
+        idsProducto.data.forEach(p => {
             productos.push(new Producto(p.id, p.nombre, p.descripcion, p.precio, p.cantidad, p.imagen));
         });
         return productos;

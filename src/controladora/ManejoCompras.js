@@ -44,9 +44,11 @@ export default class ManejoCompras{
         return this.gestorOrdenes.obtener(idOrden);
     }
 
-    async crearOrden(idsProductos, correo, comprobante, direccion){
-        var orden = new OrdenCompra(this.gestorOrdenes.getNext(), comprobante, direccion, correo, idsProductos);
-        this.gestorOrdenes.agregar(orden);
+    async crearOrden(comprobante, direccion, correo, idsProductos){
+        var orden = new OrdenCompra(0, comprobante, direccion, correo, idsProductos);
+        this.gestorOrdenes.setNext();
+        orden.id = await this.gestorOrdenes.getNext();
+        return this.gestorOrdenes.agregar(orden);
     }
 
     eliminarOrden(idOrden){

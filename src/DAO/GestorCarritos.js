@@ -12,10 +12,16 @@ export default class GestorCarritos{
         return axios.post('http://localhost:3001/api/eliminarCarrito',correo);
     }
     agregar(carrito){} 
+
     async obtenerLista(correo){
-        var response = await axios.get('http://localhost:3001/ap1/obtenerProductosCarrito');
+        var idsProducto = await axios.get('http://localhost:3001/ap1/obtenerProductosCarrito', {params: {correo: correo}});
         var productos = [];
-        
+        idsProducto.data.forEach(tupla => {
+            let [idProducto, _] = tupla;
+            var producto = axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto} });
+            productos.push(producto);
+        });
+        return productos;
     }
     agregarProducto(carrito){
         let values = {

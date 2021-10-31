@@ -38,51 +38,26 @@ router.post("/eliminarCarrito", (req, res) =>{
 })
 
 router.get("/obtenerProductosCarrito", (req,res) => {
-  /*let correo = req.body.correo;
+  let correo = req.body.correo;
   var getPares = function( callback ) { 
       var pares = [];     
-  db.hkeys(correo+'', function (_error, value) {
-      if (value.length !== 0){
-        for (let index = 0; index < value.length; index++) {
-          db.hmget(correo + '', value[index] + '', function (_error, cantidad, ) {
-            let par = [value[index], cantidad.pop()];
-            pares.push(par);
-            if (index === value.length-1){
-              callback(pares)
-            }
-          });
-        };
-      } else {
-        callback(value);
-      }
-    })
-  };
-  var savePares = function(pares){
-    var sql = "SELECT * FROM producto WHERE idProducto = ?";
-    function getItems(callback){
-      if (pares.length !== 0){
-        for (let index = 0; index < pares.length; index++) {
-          const id = pares[index][0];
-          let items = []; 
-          mysql.pool.query(sql,[id], function (err, result) {
-            if (err) throw err;
-            items.push( result);
-            if (index === pares.length-1){
-              callback(items);
-            }
-            return true;
-          });
-        }
-      } else {
-        callback([]);
-      }
-    }
-    function saveItems(items){
-      res.render('carrito', {items, pares, currentUser: global.usuario});
-    }
-    getItems(saveItems);
-  }
-  getPares(savePares);*/
+      db.hkeys(correo+'', function (_error, value) {
+          if (value.length !== 0){
+            for (let index = 0; index < value.length; index++) {
+              db.hmget(correo + '', value[index] + '', function (_error, cantidad, ) {
+                let par = [value[index], cantidad.pop()];
+                pares.push(par);
+                if (index === value.length-1){
+                  callback(pares)
+                }
+              });
+            };
+          } else {
+            callback(value);
+          }
+        })
+      };
+  getPares();
 })
 
 export default router;
