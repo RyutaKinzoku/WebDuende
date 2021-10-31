@@ -40,10 +40,9 @@ export default class CrearProducto extends Component{
             this.state.precio, 
             this.state.cantidad, 
             this.state.imagen);
-        console.log("asdhiausdhiasdhiuhasdiudhsa " + response.data);
-        if(response.data){
+        if(response.data > 0){
             swal("Producto agregado","","success")
-            //.then((value) => { window.location.href="/Tienda"; })
+            .then((value) => { window.location.href="/Tienda"; })
         }else{
             swal("Error al agregar","", "warning");
         }

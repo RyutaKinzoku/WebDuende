@@ -82,8 +82,7 @@ router.post('/agregarProducto', subida.single('imagen'), async function (req, re
 
 router.post('/eliminarProducto', async (req,res) =>{
     const eliminados = await modelos.Producto.deleteOne({id: req.body.idProducto});
-    console.log()
-    res.send(eliminados.deletedCount);
+    res.sendStatus(eliminados.deletedCount);
 })
 
 module.exports = router;

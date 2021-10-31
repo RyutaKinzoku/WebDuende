@@ -22,11 +22,11 @@ export default class ManejoProductos {
     }
 
     eliminarProducto(idProducto){
-        this.gestorProductos.eliminar(idProducto);
+        return this.gestorProductos.eliminar(idProducto);
     }
 
     modificarProducto(idProducto, nombre, descripcion, precio, imagen, cantidad){
         var producto = new Producto(idProducto, nombre, descripcion, precio, imagen, cantidad);
-        this.gestorProductos.modificar(producto);
+        return this.gestorProductos.modificar(producto);
     }
 }
