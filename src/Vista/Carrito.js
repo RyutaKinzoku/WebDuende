@@ -30,10 +30,12 @@ export default class Carrito extends Component{
     eliminarProductoCarrito = async(idProducto) => {
         let controladora = new Controladora();
         let correo = cookies.get('correo');
-        let productosCarrito = await controladora.eliminarProductoCarrito(correo, idProducto)
-        this.setState({
-            productosCarrito: productosCarrito
-        })
+        let response = await controladora.eliminarProductoCarrito(correo, idProducto)
+        if(response.data){
+            await swal("Producto eliminado", "", "success");
+        } else {
+            swal("Error al eliminar","", "warning");
+        }
     }
 
     obtenerProductosCarrito = async() => {

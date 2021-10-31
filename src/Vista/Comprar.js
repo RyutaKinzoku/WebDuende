@@ -14,14 +14,33 @@ export default class Comprar extends Component{
         canton:'',
         distrito:'',
         direccion:'',
-        comprobante:'',
+        comprobante: null,
     }
 
     handleChange = e => {
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value
-        })
+        });
+        if (e.target.files) {
+            let comprobante = e.target.files;
+            this.setState({comprobante: comprobante}, () => { console.log(this.state.comprobante[0]) })
+        } else {
+            console.log("Selecione un archivo")
+        }
+    } 
+
+    comprar = async(e) => {
+        e.preventDefault();
+        let controladora = new Controladora();
+        let correo = cookies.get('correo');
+        let response = await controladora.comprar(correo, this.state.comprobante, this.state.direccion);
+        if(response.data){
+            swal("Compra existosa","","success")
+            //.then((value) => { window.location.href="/Carrito"; })
+        }else{
+            swal("Error al comprar","", "warning");
+        }
     }
 
     enviar  = async (e) => {}
@@ -67,10 +86,10 @@ export default class Comprar extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" onClick={this.comprar}>
                                 Comprar
                             </Button>
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" href = "/Tienda">
                                 Cancelar
                             </Button>
                         </div>
