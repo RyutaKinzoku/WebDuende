@@ -88,19 +88,19 @@ export default class Carrito extends Component{
                                             <Col>
                                             <Card.Title>Precio:</Card.Title>
                                             <Card.Text>
-                                                {productoCarrito.precio}
+                                                ₡ {productoCarrito.precio}
                                             </Card.Text>
                                             </Col>
                                             <Col>
                                             <Card.Title>Cantidad:</Card.Title>
                                             <Card.Text>
-                                                Cantidad
+                                                {productoCarrito.cantidad}
                                             </Card.Text>
                                             </Col>
                                             <Col>
                                             <Card.Title>Subtotal:</Card.Title>
                                             <Card.Text>
-                                                Total
+                                                ₡ {productoCarrito.cantidad*productoCarrito.precio}
                                             </Card.Text>
                                             </Col>
                                             <Col>
@@ -119,7 +119,7 @@ export default class Carrito extends Component{
                 <Navbar fixed="bottom" id="#navBarBottom" collapseOnSelect bg="" variant="light" expand="lg">
                     <Container>
                     </Container>
-                        <Navbar.Brand id="navTitle2" href="">Total:</Navbar.Brand>
+                        <Navbar.Brand id="navTitle2" href="">Total: ₡</Navbar.Brand>
                         <Nav.Link className="botonNav2" href="/Comprar">Comprar</Nav.Link>
                 </Navbar>
             </div>
