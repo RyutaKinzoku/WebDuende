@@ -8,6 +8,7 @@ const config = {
         "Content-Type": "multipart/form-data"
     }
 };
+var fs = require('fs');
 
 export default class GestorProductos{
     async modificar(producto){}
@@ -16,10 +17,19 @@ export default class GestorProductos{
         let values = {
             idProducto: idProducto
         }
+        let producto = await (await this.obtener(idProducto)).data[0];
+        let imagen = producto.imagen;
+        console.log(producto);
+        console.log("../../public/assets/images" + imagen);
+        fs.unlink("../../public/assets/images" + imagen, function(err){
+            if (err) return err;
+        });
         return axios.post('http://localhost:3001/api/eliminarProducto', values);
     }
 
-    async obtener(idProducto){}
+    async obtener(idProducto){
+        return axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto} });
+    }
 
     async agregar(producto){
         const form = new FormData();

@@ -30,13 +30,15 @@ export default class Tienda extends Component{
 
     eliminarProducto = async(idProducto) => {
         let controladora = new Controladora();
-        window.location.href = "/Tienda"
+        //window.location.href = "/Tienda"
         let res = await controladora.eliminarProducto(idProducto);
+        /*
         if(res.data == 1){
             await swal("Producto eliminado", "", "success");
         } else {
             swal("Error al eliminar","", "warning");
         }
+        */
     }
 
     obtenerProductos = async() => {

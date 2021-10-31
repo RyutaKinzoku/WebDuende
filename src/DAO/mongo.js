@@ -48,7 +48,15 @@ router.get('/listaProductos', async (_,res) => {
         if(err){
             res.send(err);
         }
-        //console.log(docs);
+        res.send(docs);
+    })
+})
+
+router.get('/obtenerProducto', async (req,res) => {
+    modelos.Producto.find({id: req.query.idProducto}, (err, docs) => {
+        if(err){
+            res.send(err);
+        }
         res.send(docs);
     })
 })
@@ -74,6 +82,7 @@ router.post('/agregarProducto', subida.single('imagen'), async function (req, re
 
 router.post('/eliminarProducto', async (req,res) =>{
     const eliminados = await modelos.Producto.deleteOne({id: req.body.idProducto});
+    console.log()
     res.send(eliminados.deletedCount);
 })
 
