@@ -24,6 +24,10 @@ export default class Controladora{
         return this.manejoProductos.obtenerProductos();
     }
 
+    async obtenerProducto(idProducto){
+        return this.manejoProductos.obtenerProducto(idProducto);
+    }
+
     async agregarProducto(nombre, descripcion, precio, cantidad, imagen){
         return this.manejoProductos.agregarProducto(nombre, descripcion, precio, cantidad, imagen);
     }

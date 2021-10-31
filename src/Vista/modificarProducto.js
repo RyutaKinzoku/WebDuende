@@ -7,6 +7,7 @@ import Dropdown from '@restart/ui/esm/Dropdown';
 import Image from 'react-bootstrap/Image'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Controladora from "../Controladora/Controladora"
 
 const cookies = new Cookies();
 
@@ -16,7 +17,8 @@ export default class ModificarProducto extends Component{
         nombre:'',
         descripcion:'',
         precio:'',
-        imagen:'',
+        cantidad: '',
+        imagen:null,
     }
 
     handleChange = e => {
@@ -24,6 +26,25 @@ export default class ModificarProducto extends Component{
             ...this.state,
             [e.target.name]: e.target.value
         })
+    }
+
+    obtenerProducto = async(idProducto) =>{
+        let controladora = new Controladora();
+        console.log(idProducto);
+        let producto = (await controladora.obtenerProducto(idProducto)).data[0];
+        this.setState({
+            nombre: producto.nombre,
+            descripcion: producto.descripcion,
+            precio: producto.precio,
+            cantidad: producto.cantidad,
+            imagen:producto.imagen,
+        })
+        console.log(this.state.imagen)
+        console.log(`${process.env.PUBLIC_URL}/assets/images/${this.state.imagen}`)
+    }
+
+    componentDidMount() {
+        this.obtenerProducto(this.props.match.params.id);    
     }
 
     enviar  = async (e) => {}
@@ -53,21 +74,24 @@ export default class ModificarProducto extends Component{
                                         <h6>Por favor, modificar los datos deseados: </h6>
                                         <br/>
                                         <h6>Nombre:</h6>
-                                        <Form.Control type="text" name='nombre' />
+                                        <Form.Control type="text" name='nombre' defaultValue={this.state.nombre}/>
                                         <br/>
                                         <h6>Descripcion:</h6>
-                                        <Form.Control type="text" name = 'descripcion' />
+                                        <Form.Control type="text" name = 'descripcion' defaultValue={this.state.descripcion}/>
                                         <br/>
                                         <h6>Precio:</h6>
-                                        <Form.Control type="text" name = 'precio' />
+                                        <Form.Control type="text" name = 'precio' defaultValue={this.state.precio}/>
+                                        <br/>
+                                        <h6>Cantidad:</h6>
+                                        <Form.Control type="text" name = 'cantidad' defaultValue={this.state.cantidad}/>
                                         <br/>
                                         <h6>Imagen:</h6>
-                                        <Form.Control type="file" name='imagen' />
+                                        <Form.Control type="file" name='imagen'/>
                                         <br/>
                                     </Form.Group>
                                 </div>
                                 <div className="d-grid gap-2">
-                                    <Button size="md" variant="secondary" type="submit">
+                                    <Button size="md" variant="secondary" type="submit" onClick={this.modificarProducto}>
                                         Modificar
                                     </Button>
                                     <Button size="md" variant="secondary" type="submit">
@@ -78,7 +102,7 @@ export default class ModificarProducto extends Component{
                         </Col>
                         <Col>
                             <div className="center container w-55 p-8 py-2 my-3  mt-5">
-                                <Image src="holder.js/171x180" rounded />
+                                <Image src={`${process.env.PUBLIC_URL}/assets/images/${this.state.imagen}`} rounded />
                             </div>
                         </Col>
                     </Row>
