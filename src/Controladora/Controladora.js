@@ -28,8 +28,12 @@ export default class Controladora{
         return this.manejoProductos.agregarProducto(nombre, descripcion, precio, cantidad, imagen);
     }
 
-    async eliminarProducto(id){
-        return this.manejoProductos.eliminarProducto(id);
+    async eliminarProducto(idProducto){
+        return this.manejoProductos.eliminarProducto(idProducto);
+    }
+
+    async modificarProducto(idProducto, nombre, descripcion, precio, cantidad, imagen){
+        return this.manejoProductos.modificarProducto(idProducto, nombre, descripcion, precio, cantidad, imagen)
     }
 
     async agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden){

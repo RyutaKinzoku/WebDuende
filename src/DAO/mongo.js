@@ -85,4 +85,16 @@ router.post('/eliminarProducto', async (req,res) =>{
     res.sendStatus(eliminados.deletedCount);
 })
 
+router.post('/modificarProducto', async (req, res) =>{
+    const producto = new modelos.Producto({
+        id: Number(req.body.idProducto),
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        precio: Number(req.body.precio),
+        imagen: req.file.filename,
+        cantidad: req.body.cantidad
+    })
+    modelos.Producto.findOneAndUpdate({id: req.body.idProducto}, producto)
+})
+
 module.exports = router;

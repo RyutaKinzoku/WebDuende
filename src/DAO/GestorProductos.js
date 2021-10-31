@@ -10,7 +10,17 @@ const config = {
 };
 
 export default class GestorProductos{
-    async modificar(producto){}
+    async modificar(producto){
+        let values = {
+            idProducto: producto.id,
+            nombre: producto.nombre,
+            descripcion: producto.descripcion,
+            precio: producto.precio,
+            cantidad: producto.cantidad,
+            imagen: producto.imagen
+        }
+        return axios.post('http://localhost:3001/api/modificarProducto')
+    }
 
     async eliminar(idProducto){
         let values = {
