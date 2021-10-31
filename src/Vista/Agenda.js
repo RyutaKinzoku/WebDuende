@@ -3,11 +3,17 @@ import {Button, Nav, Navbar, Container, Form, NavDropdown} from "react-bootstrap
 import Cookies from "universal-cookie";
 import FullCalendar, { formatDate } from '@fullcalendar/react';
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from '@fullcalendar/timegrid';
+import timeGridPlugin, { TimeColsSlatsCoords } from '@fullcalendar/timegrid';
 import Controladora from "../Controladora/Controladora";
 const cookies = new Cookies();
 
 export default class Agenda extends Component{
+    
+    state = {
+        compromisos: [],
+        eventos: []
+    }
+    
     handleChange = e => {
         this.setState({
             ...this.state,
@@ -16,15 +22,58 @@ export default class Agenda extends Component{
     }
 
     componentDidMount() {
-        this.obtenerProductos();    
+        this.obtenerCompromisos();    
     }
 
-    obtenerProductos = async() => {
+    obtenerCompromisos = async() => {
         let controladora = new Controladora();
-        let productos = await controladora.obtenerProductos();
+        let compromisos = await controladora.obtenerCompromisos();
         this.setState({
-            productos: productos
-        })
+            compromisos: compromisos
+        });
+        let eventos = [];
+        this.state.compromisos.forEach(element => {
+            if(element.type() == "Curso"){
+                eventos.push({
+                    allDay: false,
+                    id: parseInt(element.id),
+                    groupId: 1,
+                    title: 'Curso: '+element.titulo,
+                    start: element.fechaHoraInicio,
+                    end: element.fechaHoraFin,
+                    color: '#252525'
+                });
+            };
+            if(element.type() == "Cita"){
+                eventos.push({
+                    allDay: false,
+                    id: parseInt(element.id),
+                    groupId: 2,
+                    title: 'Cita con el usuario '+element.usuario+ ' para el maquillaje '+element.publicacion,
+                    start: element.fechaHoraInicio,
+                    end: element.fechaHoraFin,
+                    color: '#F359D1'
+                });
+            };
+            if(element.type() == "Entrega"){
+                eventos.push({
+                    allDay: false,
+                    id: parseInt(element.id),
+                    groupId: 3,
+                    title: 'Entrega de la orden número '+element.orden+ ' para el usuario '+element.usuario,
+                    start: element.fechaHoraInicio,
+                    end: element.fechaHoraFin,
+                    color: '#81C769'
+                });
+            };
+        });
+        this.setState({
+            eventos: eventos
+        });
+    }
+
+    verCurso(id){
+        
     }
 
     render(){
@@ -63,16 +112,18 @@ export default class Agenda extends Component{
                                     right: 'timeGridWeek'
                                 }}
                                 defaultView="timeGridPlugin"
-                                events={[
-                                    {
-                                        allDay: false,
-                                        id: 1,
-                                        title: 'The Title', // a property!
-                                        start: '2021-10-28T10:00', // a property!
-                                        end: '2021-10-28T12:00', // a property! ** see important note below about 'end' **
-                                        color: '#FFAF77'
+                                events={this.state.eventos}
+                                eventClick={function(info) {
+                                    if(info.event.groupId === "1"){
+                                        console.log("Curso")
                                     }
-                                ]}
+                                    else if(info.event.groupId === "2"){
+                                        console.log("Cita")
+                                    }
+                                    else if(info.event.groupId === "3"){
+                                        console.log("Entrega")
+                                    }
+                                }}
                             />
                         </div>
                     </Form.Group>

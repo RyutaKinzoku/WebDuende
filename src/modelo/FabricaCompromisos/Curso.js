@@ -13,4 +13,8 @@ export default class Curso extends Compromiso {
     set titulo(titulo){
         this._titulo = titulo;
     }
+
+    type(){
+        return "Curso";
+    }
 }

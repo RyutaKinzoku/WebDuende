@@ -13,4 +13,8 @@ export default class Cita extends ServicioIndividual {
     set publicacion(publicacion){
         this._publicacion = publicacion;
     }
+    
+    type(){
+        return "Cita";
+    }
 }

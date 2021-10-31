@@ -67,4 +67,8 @@ export default class Controladora{
     async obtenerCantidadProductoCarrito(correo, idProducto){
         return this.ManejoCompras.obtenerCantidadProductoCarrito(correo, idProducto);
     }
+
+    async obtenerCompromisos(){
+        return this.manejoAgenda.obtenerCompromisos();
+    }
 }

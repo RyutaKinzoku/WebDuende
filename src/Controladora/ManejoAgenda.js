@@ -10,7 +10,7 @@ export default class ManejoAgenda{
         this.gestorCompromisos = new GestorCompromisos();
     }
 
-    obtenerCompromisos(){
+    async obtenerCompromisos(){
         return this.gestorCompromisos.obtenerLista();
     }
 
@@ -44,7 +44,7 @@ export default class ManejoAgenda{
 
     async agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden){
         let idCompromiso = await this.gestorCompromisos.getNext();
-        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega;"+fechaHoraInicio+";"+fechaHoraFin+";"+idCompromiso+";"+usuario+";"+lugar+";"+orden);
+        let entrega = FabricaCompromisos.fabricarCompromiso("Entrega;"+fechaHoraInicio+";"+fechaHoraFin+";"+idCompromiso+";"+lugar+";"+usuario+";"+orden);
         return this.gestorCompromisos.agregarEntrega(entrega);
     }
 

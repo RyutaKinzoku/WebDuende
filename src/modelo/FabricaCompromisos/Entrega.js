@@ -1,7 +1,7 @@
 import ServicioIndividual from "./ServicioIndividual";
 
 export default class Entrega extends ServicioIndividual {
-    constructor(fechaHoraInicio, fechaHoraFin, id, usuario, lugar, orden) {
+    constructor(fechaHoraInicio, fechaHoraFin, id, lugar, usuario, orden) {
         super(fechaHoraInicio, fechaHoraFin, id, lugar, usuario);
         this.orden = orden;
     }
@@ -12,5 +12,9 @@ export default class Entrega extends ServicioIndividual {
 
     set orden(orden){
         this._orden = orden;
+    }
+
+    type(){
+        return "Entrega";
     }
 }

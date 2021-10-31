@@ -44,6 +44,31 @@ router.post("/agregarUsuario", (req,res) =>{
     })
 });
 
+//Compromisos
+router.get('/getCursos', (_,res) => {
+    const sqlSelectCursos = "SELECT * FROM Curso;"
+    db.query(sqlSelectCursos, (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+router.get('/getCitas', (_,res) => {
+    const sqlSelectCitas = "SELECT * FROM Cita;"
+    db.query(sqlSelectCitas, (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+router.get('/getEntregas', (_,res) => {
+    const sqlSelectEntregas = "SELECT * FROM Entrega;"
+    db.query(sqlSelectEntregas, (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 //Curso
 router.post("/agregarCurso", (req,res) =>{
     const id = req.body.id

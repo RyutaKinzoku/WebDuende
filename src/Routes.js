@@ -21,6 +21,7 @@ import Ordenes from './Vista/Ordenes';
 import VerOrden from './Vista/VerOrden';
 import VerCategorias from './Vista/VerCategorias';
 import VerSubcategorias from './Vista/VerSubcategorias'
+import VerCurso from './Vista/VerCurso';
 function Routes(){
     return(
         <BrowserRouter>
@@ -46,6 +47,7 @@ function Routes(){
                 <Route exact path="/VerOrden" component ={VerOrden}/>
                 <Route exact path="/VerCategorias" component = {VerCategorias}/>
                 <Route exact path="/VerSubcategorias" component = {VerSubcategorias}/>
+                <Route exact path="/VerCurso/:id" component = {VerCurso}/>
             </Switch>
         </BrowserRouter>
     );
