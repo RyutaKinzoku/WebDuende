@@ -89,6 +89,29 @@ router.post('/eliminarCurso', (req,res) => {
     })
 })
 
+router.get('/obtenerCita', (req,res) => {
+    const sqlSelect = "SELECT * FROM Cita WHERE ID = ?;"
+    console.log(sqlSelect)
+    db.query(sqlSelect, [req.query.idCompromiso], (err, result) => {
+        console.log(result);
+        res.send(result);
+    })
+})
+
+router.post('/eliminarCita', (req,res) => {
+    const sqlDeleteCita = "DELETE FROM `Cita` WHERE ID=?;"
+    const sqlDeleteServicioIndividual = "DELETE FROM `ServicioIndividual` WHERE ID=?;"
+    const sqlDeleteCompromiso = "DELETE FROM `Compromiso` WHERE ID=?;"
+    db.query(sqlDeleteCita, [req.body.idCompromiso], () => {
+        db.query(sqlDeleteServicioIndividual, [req.body.idCompromiso], () => {
+            db.query(sqlDeleteCompromiso, [req.body.idCompromiso], (err, _) => {
+                console.log(err);
+                res.send(err);
+            })
+        })
+    })
+})
+
 //Curso
 router.post("/agregarCurso", (req,res) =>{
     const id = req.body.id
@@ -163,6 +186,28 @@ router.post("/agregarCita", (req,res) =>{
     db.query(sqlInsertCompromiso, [fechaHoraInicio, fechaHoraFin, id, lugar], () => {
         db.query(sqlInsertServicioIndividual, [fechaHoraInicio, fechaHoraFin, id, lugar, correoUsuario], () => {
             db.query(sqlInsertCita , [fechaHoraInicio, fechaHoraFin, id, lugar, correoUsuario, idPublicacion] ,(err) => {
+                console.log(err);
+                res.send(err);
+            })
+        })
+    })
+});
+
+router.post("/modificarCita", (req,res) =>{
+    const id = req.body.id
+    const fechaHoraInicio = req.body.fechaHoraInicio
+    const fechaHoraFin = req.body.fechaHoraFin
+    const correoUsuario = req.body.correoUsuario
+    const idPublicacion = req.body.idPublicacion
+    const lugar = req.body.lugar
+
+    const sqlUpdateCompromiso = "UPDATE `Compromiso` SET `fechaHoraInicio`=?,`fechaHoraFin`=?,`lugar`=? WHERE `ID`=?";
+    const sqlUpdateServicioIndividual = "UPDATE `ServicioIndividual` SET `fechaHoraInicio`=?,`fechaHoraFin`=?,`lugar`=?,`correoUsuario`=? WHERE `ID`=?";
+    const sqlUpdateCurso = "UPDATE `Cita` SET `fechaHoraInicio`=?,`fechaHoraFin`=?,`lugar`=?,`correoUsuario`=?,`idPublicacion`=? WHERE `ID`=?"
+
+    db.query(sqlUpdateCompromiso, [fechaHoraInicio, fechaHoraFin, lugar, id], () => {
+        db.query(sqlUpdateCurso , [fechaHoraInicio, fechaHoraFin, lugar, correoUsuario, id] ,() => {
+            db.query(sqlUpdateCurso , [fechaHoraInicio, fechaHoraFin, lugar, correoUsuario, idPublicacion, id] ,(err) => {
                 console.log(err);
                 res.send(err);
             })

@@ -118,7 +118,7 @@ export default class Agenda extends Component{
                                         window.location.href="/VerCurso/"+info.event.id;
                                     }
                                     else if(info.event.groupId === "2"){
-                                        console.log("Cita")
+                                        window.location.href="/VerCita/"+info.event.id;
                                     }
                                     else if(info.event.groupId === "3"){
                                         console.log("Entrega")

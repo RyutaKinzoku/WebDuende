@@ -39,11 +39,9 @@ export default class ManejoAgenda{
         return this.gestorCompromisos.agregarCita(cita);
     }
 
-    modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, correoUsuario, lugar, idPublicacion){
-        let usuario = this.gestorUsuarios.obtener(correoUsuario);
-        let publicacion = this.gestorPublicaciones.obtener(idPublicacion);
+    async modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, publicacion){
         let cita = FabricaCompromisos.fabricarCompromiso("Cita;"+fechaHoraInicio+";"+fechaHoraFin+";"+idCompromiso+";"+lugar+";"+usuario+";"+publicacion);
-        this.gestorCompromisos.modificarCita(cita);
+        return this.gestorCompromisos.modificarCita(cita);
     }
 
     async agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden){

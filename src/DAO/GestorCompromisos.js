@@ -5,7 +5,7 @@ import FabricaCompromisos from "../modelo/FabricaCompromisos/FabricaCompromisos"
 export default class GestorCompromisos{
     modificarEntrega(entrega){};
 
-    modificarCurso(curso){
+    async modificarCurso(curso){
         let values = {
             id: curso.id,
             fechaHoraInicio: curso.fechaHoraInicio,
@@ -16,13 +16,26 @@ export default class GestorCompromisos{
         return axios.post('http://localhost:3001/api/modificarCurso',values);
     };
 
-    modificarCita(cita){};
-    eliminar(type, idCompromiso){
+    async modificarCita(cita){
+        let values = {
+            id: cita.id,
+            fechaHoraInicio: cita.fechaHoraInicio,
+            fechaHoraFin: cita.fechaHoraFin,
+            correoUsuario: cita.usuario,
+            lugar: cita.lugar,
+            idPublicacion: cita.publicacion
+        }
+        return axios.post('http://localhost:3001/api/modificarCita',values);
+    };
+
+    async eliminar(type, idCompromiso){
         let values = {
             idCompromiso: idCompromiso
         }
         if(type === "Curso"){
             return axios.post('http://localhost:3001/api/eliminarCurso',values);
+        } else if(type === "Cita"){
+            return axios.post('http://localhost:3001/api/eliminarCita',values);
         }
     };
 
@@ -32,6 +45,13 @@ export default class GestorCompromisos{
             if(response.data.length>0){
                 let curso = response.data[0];
                 let c = FabricaCompromisos.fabricarCompromiso("Curso;"+curso.fechaHoraInicio+";"+curso.fechaHoraFin+";"+curso.titulo+";"+curso.idCompromiso+";"+curso.lugar);
+                return c;
+            }
+        }else if(type === "Cita"){
+            var response = await axios.get('http://localhost:3001/api/obtenerCita',{params: {idCompromiso: idCompromiso} });
+            if(response.data.length>0){
+                let cita = response.data[0];
+                let c = FabricaCompromisos.fabricarCompromiso("Cita;"+cita.fechaHoraInicio+";"+cita.fechaHoraFin+";"+cita.ID+";"+cita.lugar+";"+cita.correoUsuario+";"+cita.idPublicacion);
                 return c;
             }
         }

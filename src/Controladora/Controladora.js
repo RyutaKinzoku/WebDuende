@@ -56,6 +56,10 @@ export default class Controladora{
         return this.manejoAgenda.agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion);
     }
 
+    async modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, publicacion){
+        return this.manejoAgenda.modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, publicacion);
+    }
+
     async agregarProductoCarrito(correo, idProducto, cantidad){
         return this.ManejoCompras.agregarProductoCarrito(correo, idProducto, cantidad);
     }
