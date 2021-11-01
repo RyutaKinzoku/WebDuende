@@ -18,12 +18,12 @@ export default class ManejoCompras{
 
     async agregarProductoCarrito(correo, idProducto, cantidad){
         var carrito = new Carrito(correo, idProducto, cantidad);
-        this.gestorCarritos.agregarProducto(carrito);
+        return this.gestorCarritos.agregarProducto(carrito);
     }
 
     eliminarProductoCarrito(correo, idProducto){
         var carrito = new Carrito(correo, idProducto, null);
-        this.gestorCarritos.eliminarProducto(carrito)
+        return this.gestorCarritos.eliminarProducto(carrito)
     }
 
     eliminarCarrito(correo){

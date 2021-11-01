@@ -55,7 +55,7 @@ export default class Tienda extends Component{
         let controladora = new Controladora();
         let correo = cookies.get('correo');
         let response = await controladora.agregarProductoCarrito(correo, idProducto, cantidad);
-        if(response === true){
+        if(response.data === true){
             await swal("Producto agregado", "", "success");
         } else {
             swal("Error al agregar","", "warning");

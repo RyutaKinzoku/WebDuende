@@ -15,7 +15,6 @@ export default class GestorCarritos{
     async obtenerLista(correo){
         var idsProducto = await axios.get('http://localhost:3001/api/obtenerProductosCarrito', {params: {correo: correo}});
         var productos = [];
-        console.log(idsProducto.data[0]);
         for(let i=0; i<idsProducto.data.length;i++){
             var tupla = idsProducto.data[i];
             var [idProducto, cantidad] = tupla;

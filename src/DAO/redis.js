@@ -28,9 +28,7 @@ router.post("/agregarProductoCarrito", (req, res)=>{
 router.post("/eliminarProductoCarrito", (req,res) => {
     const idProducto = req.body.idProducto;
     const correo = req.body.correo;
-    console.log(correo, idProducto);
     db.hdel(correo+'',idProducto+'');
-    console.log(db.hkeys(correo+''))
     res.send(db.hkeys(correo+''));
 })
 
