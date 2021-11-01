@@ -14,7 +14,8 @@ const cookies = new Cookies();
 export default class Tienda extends Component{
 
     state = {
-        productos: []
+        productos: [],
+        cantidad: '1',
     }
 
     handleChange = e => {
@@ -51,8 +52,9 @@ export default class Tienda extends Component{
     modificarProducto = async(idProducto) => {
         window.location.href = `/modificarProducto/${idProducto}`
     }
-    agregarProductoCarrito = async(idProducto, cantidad) => {
+    agregarProductoCarrito = async(idProducto) => {
         let controladora = new Controladora();
+        let cantidad = document.getElementById(idProducto).value;
         let correo = cookies.get('correo');
         let response = await controladora.agregarProductoCarrito(correo, idProducto, cantidad);
         if(response.data === true){
@@ -62,6 +64,15 @@ export default class Tienda extends Component{
         }
     }
 
+    subir = async(id) => {
+        document.getElementById(id).value = Number(document.getElementById(id).value) + 1;
+    }
+
+    bajar = async(id) =>{
+        if (Number(document.getElementById(id).value) !== 1){
+            document.getElementById(id).value = Number(document.getElementById(id).value) - 1;
+        }
+    }
     render(){
         return(
             <div>
@@ -109,17 +120,17 @@ export default class Tienda extends Component{
                                                         <Row>
                                                             <h6>Cantidad:</h6>
                                                             <Col sm={2}>
-                                                                <Form.Control type="text" name = 'cantidad' />
+                                                                <Form.Control id={producto.id} type="text" name = 'cantidad' defaultValue='1'/>
                                                             </Col>
                                                             <Col>
                                                                 <Row>
                                                                     <Col sm={4}>
-                                                                        <Button variant="secondary">
+                                                                        <Button variant="secondary" onClick = {() => this.bajar(producto.id)}>
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
                                                                               <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
                                                                             </svg>
                                                                         </Button>
-                                                                        <Button variant="secondary">
+                                                                        <Button variant="secondary" onClick = {() => this.subir(producto.id)}>
                                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                                                               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                                                             </svg>
@@ -135,7 +146,7 @@ export default class Tienda extends Component{
                                                         </Row>
                                                         <br/>
                                                     </Form.Group>{' '}
-                                                    <Button size="md" variant="secondary"  type="submit" onClick = {() => this.agregarProductoCarrito(producto.id, 1)}>
+                                                    <Button size="md" variant="secondary"  type="submit" onClick = {() => this.agregarProductoCarrito(producto.id)}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
                                                           <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/>
                                                         </svg>

@@ -21,15 +21,23 @@ router.post("/agregarProductoCarrito", (req, res)=>{
     const cantidad = req.body.cantidad;
     const idProducto = req.body.idProducto;
     const correo = req.body.correo;
-    db.hmset(correo+'',idProducto+'',cantidad+'');
-    res.send(db.hkeys(correo+''));
+    if (db.hexists(correo+'', idProducto+'') === true){
+      db.hmset(correo+'',idProducto+'',cantidad+'');
+      res.send(true);
+    } else {
+      res.send(false);
+    }
 });
 
 router.post("/eliminarProductoCarrito", (req,res) => {
     const idProducto = req.body.idProducto;
     const correo = req.body.correo;
-    db.hdel(correo+'',idProducto+'');
-    res.send(db.hkeys(correo+''));
+    if (db.hexists(correo+'', idProducto+'') === true){
+      db.hdel(correo+'',idProducto+'');
+      res.send(true);
+    } else{
+      res.send(false);
+    }
 })
 
 router.post("/eliminarCarrito", (req, res) =>{
