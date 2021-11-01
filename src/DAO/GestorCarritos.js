@@ -4,38 +4,42 @@ import Carrito from "../modelo/Carrito";
 import axios from "axios"; 
 
 export default class GestorCarritos{
+    agregar(carrito){} 
     modificar(carrito){}
     eliminarCarrito(correo){
         return axios.post('http://localhost:3001/api/eliminarCarrito',correo);
     }
     obtenerCarrito(correo){
-        return axios.post('http://localhost:3001/api/eliminarCarrito',correo);
+        return axios.post('http://localhost:3001/api/obtenerCarrito', {params: {correo: correo}});
     }
-    agregar(carrito){} 
-
     async obtenerLista(correo){
-        var idsProducto = await axios.get('http://localhost:3001/ap1/obtenerProductosCarrito', {params: {correo: correo}});
+        var idsProducto = await axios.get('http://localhost:3001/api/obtenerProductosCarrito', {params: {correo: correo}});
         var productos = [];
-        idsProducto.data.forEach(tupla => {
-            let [idProducto, cantidad] = tupla;
-            var producto = axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto} });
-            productos.push(new Producto(producto.id, producto.nombre, producto.descripcion, producto.precio, cantidad, producto.imagen));
-        });
+        console.log(idsProducto.data[0]);
+        for(let i=0; i<idsProducto.data.length;i++){
+            var tupla = idsProducto.data[i];
+            var [idProducto, cantidad] = tupla;
+            var producto = (await axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto} })).data[0];
+            var producto2 = new Producto(producto.id, producto.nombre, producto.descripcion, producto.precio, cantidad, producto.imagen)
+            productos.push(producto2);
+        }
         return productos;
     }
-    agregarProducto(carrito){
+
+    async agregarProducto(carrito){
         let values = {
-            correo: carrito.correo,
-            idProducto: carrito.idProducto,
-            cantidad: carrito.cantidad,
+            correo: carrito.comprador,
+            idProducto: carrito.productos,
+            cantidad: carrito.cantidades,
         }
-        return axios.post('http://localhost:3001/api/agregarProductoCarrito',values);
+        return await axios.post('http://localhost:3001/api/agregarProductoCarrito', values);
     }
-    eliminarProducto(productoEnCarrito){
+
+    async eliminarProducto(productoEnCarrito){
         let values = {
-            correo: productoEnCarrito.correo,
-            idProducto: productoEnCarrito.idProducto,
+            correo: productoEnCarrito.comprador,
+            idProducto: productoEnCarrito.productos,
         }
-        return axios.post('http://localhost:3001/api/eliminarProductoCarrito',values);
+        return await axios.post('http://localhost:3001/api/eliminarProductoCarrito',values);
     }
 }

@@ -31,7 +31,7 @@ export default class Carrito extends Component{
         let controladora = new Controladora();
         let correo = cookies.get('correo');
         let response = await controladora.eliminarProductoCarrito(correo, idProducto)
-        if(response.data){
+        if(response === false){
             await swal("Producto eliminado", "", "success");
         } else {
             swal("Error al eliminar","", "warning");
@@ -74,7 +74,7 @@ export default class Carrito extends Component{
                         <br/>
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">
-                                {this.state.productosCarrito.map(productoCarrito => (
+                                {this.state.productosCarrito.map((productoCarrito => (
                                     <Card>
                                         <Card.Img variant="top" src="holder.js/100px160" />
                                         <Card.Body>
@@ -83,6 +83,7 @@ export default class Carrito extends Component{
                                             <Card.Title>Descripción:</Card.Title>
                                             <Card.Text>
                                                 {productoCarrito.descripcion}
+                                
                                             </Card.Text>
                                             </Col>
                                             <Col>
@@ -100,7 +101,7 @@ export default class Carrito extends Component{
                                             <Col>
                                             <Card.Title>Subtotal:</Card.Title>
                                             <Card.Text>
-                                                ₡ {productoCarrito.cantidad*productoCarrito.precio}
+                                                ₡ {Number(productoCarrito.cantidad)*Number(productoCarrito.precio)}
                                             </Card.Text>
                                             </Col>
                                             <Col>
@@ -111,7 +112,7 @@ export default class Carrito extends Component{
                                             </Row>
                                         </Card.Body>
                                     </Card>
-                                ))}
+                                )))}
                             </Row>
                         </Form.Group>
                     </Form.Group>

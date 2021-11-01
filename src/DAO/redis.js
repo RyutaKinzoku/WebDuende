@@ -1,5 +1,3 @@
-import { application } from 'express';
-
 const express = require('express');
 const router = express.Router();
 const redis = require("redis");
@@ -19,45 +17,55 @@ db.on('connect', function (err) {
 });
 
 
-router.post("/agregarProductoCarrito", (req, res) =>{
-    let cantidad = req.body.cantidad;
-    let idProducto = req.body.idProducto;
-    let correo = req.body.correo;
+router.post("/agregarProductoCarrito", (req, res)=>{
+    const cantidad = req.body.cantidad;
+    const idProducto = req.body.idProducto;
+    const correo = req.body.correo;
     db.hmset(correo+'',idProducto+'',cantidad+'');
-})
+    res.send(db.hkeys(correo+''));
+});
 
 router.post("/eliminarProductoCarrito", (req,res) => {
-    let idProducto = req.body.idProducto;
-    let correo = req.body.correo;
-    db.del(correo+'',idProducto+'');
+    const idProducto = req.body.idProducto;
+    const correo = req.body.correo;
+    console.log(correo, idProducto);
+    db.hdel(correo+'',idProducto+'');
+    console.log(db.hkeys(correo+''))
+    res.send(db.hkeys(correo+''));
 })
 
 router.post("/eliminarCarrito", (req, res) =>{
     let correo = req.body.correo;
     db.del(correo+'');
 })
-
-router.get("/obtenerProductosCarrito", (req,res) => {
-  let correo = req.body.correo;
-  var getPares = function( callback ) { 
-      var pares = [];     
-      db.hkeys(correo+'', function (_error, value) {
-          if (value.length !== 0){
-            for (let index = 0; index < value.length; index++) {
-              db.hmget(correo + '', value[index] + '', function (_error, cantidad, ) {
-                let par = [value[index], cantidad.pop()];
-                pares.push(par);
-                if (index === value.length-1){
-                  callback(pares)
-                }
-              });
-            };
-          } else {
-            callback(value);
-          }
-        })
-      };
-  getPares();
+router.post("/obtenerCarrito", (req,res) =>{
+    db.hmget(req);
 })
 
-export default router;
+router.get("/obtenerProductosCarrito", (req,res) => {
+  let correo = req.query.correo;
+  var getPares = function( callback ) { 
+    var pares = [];           
+    db.hkeys(correo + '', function (_error, value) {
+      if (value.length !== 0){
+        for (let index = 0; index < value.length; index++) {
+          db.hmget(correo + '', value[index] + '', function (_error, cantidad, ) {
+            let par = [value[index], cantidad.pop()];
+            pares.push(par);
+            if (index === value.length-1){
+              callback(pares)
+            }
+          });
+        };
+      } else {
+        callback(value);
+      }
+    });
+  };
+  function savePares(pares){
+    res.send(pares);
+  }
+  getPares(savePares);
+})
+
+module.exports = router;
