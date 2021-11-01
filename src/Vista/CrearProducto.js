@@ -40,7 +40,7 @@ export default class CrearProducto extends Component{
             this.state.precio, 
             this.state.cantidad, 
             this.state.imagen);
-        if(response.data > 0){
+        if(response.data){
             swal("Producto agregado","","success")
             .then((value) => { window.location.href="/Tienda"; })
         }else{

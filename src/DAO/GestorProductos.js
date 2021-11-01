@@ -19,7 +19,7 @@ export default class GestorProductos{
             cantidad: producto.cantidad,
             imagen: producto.imagen
         }
-        return axios.post('http://localhost:3001/api/modificarProducto')
+        return axios.post('http://localhost:3001/api/modificarProducto', values)
     }
 
     async eliminar(idProducto){

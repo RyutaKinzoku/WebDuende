@@ -25,12 +25,18 @@ export default class ModificarProducto extends Component{
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value
-        })
+        });
+        if (e.target.files) {
+            let imagen = e.target.files;
+            this.setState({imagen: imagen}, () => { console.log(this.state.imagen[0]) })
+        } else {
+            console.log("Selecione un archivo")
+        }
     }
 
     obtenerProducto = async(idProducto) =>{
         let controladora = new Controladora();
-        console.log(idProducto);
+        //console.log(idProducto);
         let producto = (await controladora.obtenerProducto(idProducto)).data[0];
         this.setState({
             nombre: producto.nombre,
@@ -39,15 +45,34 @@ export default class ModificarProducto extends Component{
             cantidad: producto.cantidad,
             imagen:producto.imagen,
         })
-        console.log(this.state.imagen)
-        console.log(`${process.env.PUBLIC_URL}/assets/images/${this.state.imagen}`)
+        //console.log(this.state.imagen)
+        //console.log(`${process.env.PUBLIC_URL}/assets/images/${this.state.imagen}`)
     }
 
     componentDidMount() {
         this.obtenerProducto(this.props.match.params.id);    
     }
 
-    enviar  = async (e) => {}
+    modificarProducto  = async (e) => {
+        e.preventDefault();
+        let controladora = new Controladora();
+        //console.log(this.state.imagen)
+        let response = await controladora.modificarProducto(
+            this.props.match.params.id,
+            this.state.nombre, 
+            this.state.descripcion, 
+            this.state.precio, 
+            this.state.cantidad, 
+            this.state.imagen
+        );
+        window.location.href="/Tienda";
+        if(response.data > 0){
+            swal("Producto modificado","","success")
+            .then((value) => { window.location.href="/Tienda"; })
+        }else{
+            swal("Error al modificar","", "warning");
+        }
+    }
 
     render(){
         return(
@@ -94,7 +119,7 @@ export default class ModificarProducto extends Component{
                                     <Button size="md" variant="secondary" type="submit" onClick={this.modificarProducto}>
                                         Modificar
                                     </Button>
-                                    <Button size="md" variant="secondary" type="submit">
+                                    <Button size="md" variant="secondary" type="submit" href = "/Tienda">
                                         Cancelar
                                     </Button>
                                 </div>

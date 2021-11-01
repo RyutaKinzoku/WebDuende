@@ -71,30 +71,39 @@ router.post('/agregarProducto', subida.single('imagen'), async function (req, re
         cantidad: req.body.cantidad
     })
     try{
-        let resul = await producto.save();
-        console.log(resul);
-        res.send(resul === producto);
+        await producto.save();
     } catch (err){
-        console.log(err);
-        res.send(false);
+        res.send(err);
     }
 })
 
 router.post('/eliminarProducto', async (req,res) =>{
-    const eliminados = await modelos.Producto.deleteOne({id: req.body.idProducto});
-    res.sendStatus(eliminados.deletedCount);
+    const eliminados = await modelos.Producto.deleteOne({id: req.body.idProducto}
+        , (err, _) => {
+            if(err){
+                res.send(err);
+            }
+        }
+    );
 })
 
 router.post('/modificarProducto', async (req, res) =>{
-    const producto = new modelos.Producto({
-        id: Number(req.body.idProducto),
-        nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
-        precio: Number(req.body.precio),
-        imagen: req.file.filename,
-        cantidad: req.body.cantidad
-    })
-    modelos.Producto.findOneAndUpdate({id: req.body.idProducto}, producto)
+    modelos.Producto.findOneAndUpdate({id: req.body.idProducto}, 
+        {$set:
+            {
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion,
+            precio: Number(req.body.precio),
+            imagen: req.file.filename,
+            cantidad: req.body.cantidad
+            }
+        }
+        , (err, _) => {
+            if(err){
+                res.send(err);
+            }
+        }
+    )
 })
 
 module.exports = router;

@@ -29,6 +29,7 @@ export default class Controladora{
     }
 
     async agregarProducto(nombre, descripcion, precio, cantidad, imagen){
+        console.log(imagen)
         return this.manejoProductos.agregarProducto(nombre, descripcion, precio, cantidad, imagen);
     }
 
@@ -37,6 +38,7 @@ export default class Controladora{
     }
 
     async modificarProducto(idProducto, nombre, descripcion, precio, cantidad, imagen){
+        console.log(imagen)
         return this.manejoProductos.modificarProducto(idProducto, nombre, descripcion, precio, cantidad, imagen)
     }
 
