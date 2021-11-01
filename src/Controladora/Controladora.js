@@ -80,12 +80,20 @@ export default class Controladora{
         return this.ManejoCompras.eliminarProductoCarrito(correo, idProducto);
     }
 
+    async eliminarCarrito(correo){
+        return this.ManejoCompras.eliminarCarrito(correo);
+    }
+
     async comprar(correo, comprobante, direccion){
         return this.ManejoCompras.comprar(correo, comprobante, direccion);
     }
 
-    async obtenerCantidadProductoCarrito(correo, idProducto){
-        return this.ManejoCompras.obtenerCantidadProductoCarrito(correo, idProducto);
+    async obtenerOrdenes(){
+        return this.ManejoCompras.obtenerOrdenes();
+    }
+    
+    async agregarOrden(productos, correo, comprobante, direccion){
+        return this.ManejoCompras.agregarOrden(productos, correo, comprobante, direccion);
     }
 
     async obtenerCompromisos(){

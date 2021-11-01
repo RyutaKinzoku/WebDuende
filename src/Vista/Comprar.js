@@ -34,8 +34,9 @@ export default class Comprar extends Component{
         e.preventDefault();
         let controladora = new Controladora();
         let correo = cookies.get('correo');
-        let response = await controladora.comprar(correo, this.state.comprobante, this.state.direccion);
-        if(response.data){
+        let responseCompra = await controladora.comprar(correo, this.state.comprobante, this.state.direccion);
+        let responseCarrito = await controladora.eliminarCarrito(correo);
+        if(responseCompra.data && responseCarrito){
             swal("Compra existosa","","success")
             //.then((value) => { window.location.href="/Carrito"; })
         }else{

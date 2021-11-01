@@ -27,16 +27,12 @@ export default class ManejoCompras{
     }
 
     eliminarCarrito(correo){
-        this.gestorCarritos.eliminarCarrito(correo);
+        var carrito = new Carrito(correo, null, null);
+        this.gestorCarritos.eliminarCarrito(carrito);
     }
 
-    comprar(correo, comprobante, direccion){
-        var productos = this.obtenerProductosCarrito(correo).productos; //Map<idProducto: int, cantidad: int>
-        this.crearOrden(productos, correo, comprobante, direccion);
-        this.gestorCarritos.eliminarCarrito(correo);
-    }
-
-    obtenerOrdenes(){
+    //OrdenCompra
+    async obtenerOrdenes(){
         return this.gestorOrdenes.obtenerLista();
     }
 
@@ -44,18 +40,19 @@ export default class ManejoCompras{
         return this.gestorOrdenes.obtener(idOrden);
     }
 
-    async crearOrden(comprobante, direccion, correo, idsProductos){
-        var orden = new OrdenCompra(0, comprobante, direccion, correo, idsProductos);
+    async comprar(correo, comprobante, direccion){
+        var productos = await this.obtenerProductosCarrito(correo); //Map<idProducto: int, cantidad: int>
+        return this.agregarOrden(productos, correo, comprobante, direccion);
+    }
+
+    async agregarOrden(productos, correo, comprobante, direccion){
+        var orden = new OrdenCompra(0, comprobante, direccion, correo, productos);
         this.gestorOrdenes.setNext();
         orden.id = await this.gestorOrdenes.getNext();
         return this.gestorOrdenes.agregar(orden);
     }
 
     eliminarOrden(idOrden){
-        this.gestorOrdenes.eliminar(idOrden);
-    }
-
-    obtenerCantidadProductoCarrito(correo, idProducto){
-        
+        return this.gestorOrdenes.eliminar(idOrden);
     }
 }

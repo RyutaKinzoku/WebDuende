@@ -77,9 +77,11 @@ export default class Carrito extends Component{
                             <Row xs={1} md={1} className="g-4">
                                 {this.state.productosCarrito.map((productoCarrito => (
                                     <Card>
-                                        <Card.Img variant="top" src="holder.js/100px160" />
                                         <Card.Body>
                                             <Row>
+                                            <Col sm={1}>
+                                                <Card.Img variant="top"  src={`${process.env.PUBLIC_URL}/assets/images/${productoCarrito.imagen}`} />
+                                            </Col>
                                             <Col>
                                             <Card.Title>Descripción:</Card.Title>
                                             <Card.Text>

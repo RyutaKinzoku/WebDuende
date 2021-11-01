@@ -12,25 +12,37 @@ var fs = require('fs');
 
 export default class GestorOrdenes{
     modificar(orden){}
-    eliminar(idOrden){}
+    eliminar(idOrden){
+        let values = {
+            idOrden: idOrden
+        }
+        return axios.post('http://localhost:3001/api/eliminarOrden', values);
+    }
     obtener(idOrden){}
     agregar(orden){
         const form = new FormData();
-        form.append('idProducto', orden.id);
-        form.append('nombre', orden.comprobante);
-        form.append('descripcion', orden.direccion);
-        form.append('precio', orden.correo);
-        form.append('cantidad', orden.idsProductos);
-        return axios.post('http://localhost:3001/api/agregar', form, {
+        form.append('idOrden', orden.id);
+        form.append('comprobante', orden.comprobante);
+        form.append('direccion', orden.direccion);
+        form.append('correo', orden.correo);
+        form.append('idsProductos', orden.idsProductos);
+        return axios.post('http://localhost:3001/api/agregarOrden', form, {
             headers: config.headers,
         })
     }
 
-    obtenerLista(){}
+    async obtenerLista(){
+        var idsOrden = await axios.get('http://localhost:3001/api/listaCompras');
+        var ordenes = [];
+        idsOrden.data.forEach(o => {
+            ordenes.push(new OrdenCompra(o.id, o.comprobante, o.direccion, o.comprador, o.productos))
+        });
+        return ordenes;
+    }
 
-    getNext(){
-        /*var response = await axios.get('http://localhost:3001/api/getIdOrden');
-        return response.data[0].ultimo_valor;*/
+    async getNext(){
+        var response = await axios.get('http://localhost:3001/api/getIdOrden');
+        return response.data[0].ultimo_valor;
     }
 
     async setNext(){

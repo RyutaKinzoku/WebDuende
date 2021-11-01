@@ -41,8 +41,9 @@ router.post("/eliminarProductoCarrito", (req,res) => {
 })
 
 router.post("/eliminarCarrito", (req, res) =>{
-    let correo = req.body.correo;
+    const correo = req.body.correo;
     db.del(correo+'');
+    res.send(true);
 })
 router.post("/obtenerCarrito", (req,res) =>{
     db.hmget(req);

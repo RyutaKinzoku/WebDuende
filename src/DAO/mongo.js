@@ -52,6 +52,15 @@ router.get('/listaProductos', async (_,res) => {
     })
 })
 
+router.get('/listaCompras', async (_,res) => {
+    modelos.Orden.find({}, (err, docs) => {
+        if(err){
+            res.send(err);
+        }
+        res.send(docs);
+    })
+})
+
 router.get('/obtenerProducto', async (req,res) => {
     modelos.Producto.find({id: req.query.idProducto}, (err, docs) => {
         if(err){
@@ -77,6 +86,23 @@ router.post('/agregarProducto', subida.single('imagen'), async function (req, re
     }
 })
 
+router.post('/agregarOrden', subida.single('comprobante'), async function (req, res) {
+    const orden = new modelos.Orden({
+        id: Number(req.body.idOrden),
+        direccion: req.body.direccion,
+        correo: req.body.correo,
+        imagen: req.file.filename,
+    })
+    try{
+        let resul = await orden.save();
+        console.log(resul);
+        res.send(resul === orden);
+    } catch (err){
+        console.log(err);
+        res.send(false);
+    }
+})
+
 router.post('/eliminarProducto', async (req,res) =>{
     const eliminados = await modelos.Producto.deleteOne({id: req.body.idProducto}
         , (err, _) => {
@@ -85,6 +111,11 @@ router.post('/eliminarProducto', async (req,res) =>{
             }
         }
     );
+})
+
+router.post('/eliminarOrden', async (req,res) =>{
+    const eliminados = await modelos.Orden.deleteOne({id: req.body.idOrden});
+    res.sendStatus(eliminados.deletedCount);
 })
 
 router.post('/modificarProducto', async (req, res) =>{

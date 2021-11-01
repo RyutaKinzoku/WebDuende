@@ -6,8 +6,11 @@ import axios from "axios";
 export default class GestorCarritos{
     agregar(carrito){} 
     modificar(carrito){}
-    eliminarCarrito(correo){
-        return axios.post('http://localhost:3001/api/eliminarCarrito',correo);
+    async eliminarCarrito(carrito){
+        let values = {
+            correo: carrito.comprador 
+        }
+        return await axios.post('http://localhost:3001/api/eliminarCarrito',values);
     }
     obtenerCarrito(correo){
         return axios.post('http://localhost:3001/api/obtenerCarrito', {params: {correo: correo}});
