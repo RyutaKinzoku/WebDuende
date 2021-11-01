@@ -45,7 +45,7 @@ export default class Galeria extends Component{
                                 </Nav.Link>: <div></div>}
                                 <Nav.Link className="botonNav" href="/Tienda">Tienda</Nav.Link>
                                 <Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>
-                                {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? <Nav.Link className="botonNav" href="">Ver Categorías</Nav.Link>: <div></div>}
+                                {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? <Nav.Link className="botonNav" href="/VerCategorias">Ver Categorías</Nav.Link>: <div></div>}
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? <Nav.Link className="botonNav" href="/CrearPublicacion">Crear Publicación</Nav.Link>: <div></div>}
                             </Nav>
                             <Nav>
