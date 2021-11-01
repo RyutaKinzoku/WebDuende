@@ -72,10 +72,6 @@ export default class Agenda extends Component{
         });
     }
 
-    verCurso = function(id){
-        window.location.href="/VerCurso/"+id;
-    }
-
     render(){
         return(
             <div>

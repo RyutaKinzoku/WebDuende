@@ -1,6 +1,9 @@
 import Publicacion from "../modelo/Publicacion";
 import Categoria from "../modelo/Categoria"
 import Subcategoria from "../modelo/Subcategoria"
+import GestorPublicaciones from "../DAO/GestorPublicaciones";
+import GestorCategorias from "../DAO/GestorCategorias";
+import GestorSubcategorias from "../DAO/GestorSubcategorias";
 
 export default class ManejoGaleria{
     constructor(){
@@ -46,8 +49,8 @@ export default class ManejoGaleria{
         this.gestorPublicaciones.eliminarPublicacion(idPublicacion);
     }
 
-    obtenerCategorias(){
-        return this.gestorCategorias.obtenerCategorias();
+    async obtenerCategorias(){
+        return this.gestorCategorias.obtenerLista();
     }
 
     agregarCategoria(nombre){

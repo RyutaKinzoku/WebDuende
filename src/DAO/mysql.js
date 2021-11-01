@@ -260,6 +260,15 @@ router.post("/modificarCita", (req,res) =>{
     })
 });
 
+//Categorias
+router.get('/getCategorias', (_,res) => {
+    const sqlSelectCategorias = "SELECT * FROM Categoria;"
+    db.query(sqlSelectCategorias, (_, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
 //Obtener ID
 router.get("/getIdProducto", (_, res) => {
     const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'producto'"

@@ -2,6 +2,7 @@ import ManejoUsuarios from './ManejoUsuarios';
 import ManejoProductos from './ManejoProductos';
 import ManejoAgenda from './ManejoAgenda';
 import ManejoCompras from './ManejoCompras';
+import ManejoGaleria from './ManejoGaleria';
 import { ThemeProvider } from 'react-bootstrap';
 
 export default class Controladora{
@@ -10,6 +11,7 @@ export default class Controladora{
         this.manejoProductos = new ManejoProductos();
         this.manejoAgenda = new ManejoAgenda();
         this.ManejoCompras = new ManejoCompras();
+        this.manejoGaleria = new ManejoGaleria();
     }
 
     async iniciarSesion(correo, contrasena){
@@ -96,5 +98,9 @@ export default class Controladora{
 
     async eliminarCompromiso(type, idCompromiso){
         return this.manejoAgenda.eliminarCompromiso(type, idCompromiso);
+    }
+
+    async obtenerCategorias(){
+        return this.manejoGaleria.obtenerCategorias();
     }
 }

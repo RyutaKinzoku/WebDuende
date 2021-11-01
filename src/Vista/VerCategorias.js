@@ -8,12 +8,16 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Dropdown from '@restart/ui/esm/Dropdown';
 import { DropdownButton } from 'react-bootstrap';
+import Controladora from "../Controladora/Controladora";
 
 const cookies = new Cookies();
 
 export default class VerCategorias extends Component{
 
-
+    state = {
+        categorias: []
+    }
+    
     handleChange = e => {
         this.setState({
             ...this.state,
@@ -21,7 +25,17 @@ export default class VerCategorias extends Component{
         })
     }
 
-    enviar  = async (e) => {}
+    componentDidMount() {
+        this.obtenerCategorias();    
+    }
+
+    obtenerCategorias = async() => {
+        let controladora = new Controladora();
+        let categorias = await controladora.obtenerCategorias();
+        this.setState({
+            categorias: categorias
+        });
+    }
 
     render(){
         return(
@@ -43,13 +57,12 @@ export default class VerCategorias extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">
-                                {Array.from({ length: 10 }).map((_, idx) => (
+                                {this.state.categorias.map(categoria => (
                                     <Card>
-                                    <Card.Img variant="top" src="holder.js/100px160" />
                                     <Card.Body>
                                         <Row>
                                         <Col>
-                                        <Card.Title>Nombre</Card.Title>
+                                        <Card.Title>{categoria.nombre}</Card.Title>
                                         </Col>
                                         <Col>
                                         </Col>
@@ -75,10 +88,10 @@ export default class VerCategorias extends Component{
                     </Container>
                         <Row>
                             <Col>
-                                <Nav.Link className="botonNav2" href="/Galeria">Volver</Nav.Link>{' '}
+                                <Nav.Link className="botonNav2" href="/CrearCategoria">Crear Categoría</Nav.Link>{' '}
                             </Col>
                             <Col>
-                                <Nav.Link className="botonNav2" href="/CrearCategoria">CrearCategoría</Nav.Link>{' '}
+                                <Nav.Link className="botonNav2" href="/Galeria">Volver</Nav.Link>{' '}
                             </Col>
                         </Row>
                 </Navbar>
