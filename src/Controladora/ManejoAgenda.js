@@ -14,8 +14,12 @@ export default class ManejoAgenda{
         return this.gestorCompromisos.obtenerLista();
     }
 
-    eliminarCompromiso(idCompromiso){
-        this.gestorCompromisos.eliminar(idCompromiso);
+    async obtenerCompromiso(type, idCompromiso){
+        return this.gestorCompromisos.obtener(type, idCompromiso);
+    }
+
+    async eliminarCompromiso(type, idCompromiso){
+        return this.gestorCompromisos.eliminar(type, idCompromiso);
     }
 
     async agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
@@ -24,9 +28,9 @@ export default class ManejoAgenda{
         return this.gestorCompromisos.agregarCurso(curso);
     }
 
-    modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){
+    async modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){
         let curso = FabricaCompromisos.fabricarCompromiso("Curso;"+fechaHoraInicio+";"+fechaHoraFin+";"+titulo+";"+idCompromiso+";"+lugar);
-        this.gestorCompromisos.modificarCurso(curso);
+        return this.gestorCompromisos.modificarCurso(curso);
     }
     
     async agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion){

@@ -8,7 +8,7 @@ import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
 
-export default class CrearCurso extends Component{
+export default class VerCurso extends Component{
 
     state = {
         titulo:'',
@@ -27,17 +27,55 @@ export default class CrearCurso extends Component{
         })
     }
 
-    crear = async (e) => {
-        e.preventDefault();
+    componentDidMount(){
+        this.obtenerCurso();
+    }
+
+    obtenerCurso = async(e) =>{
         let controladora = new Controladora();
-        let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
-        let response = await controladora.agregarCurso(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.state.titulo, lugar);
+        let curso = await controladora.obtenerCompromiso("Curso", this.props.match.params.id);
+        let lugar = curso.lugar.split('-');
+        document.getElementById("titulo").value = curso.titulo;
+        document.getElementById("fechaHoraInicio").value = curso.fechaHoraInicio;
+        document.getElementById("fechaHoraFin").value = curso.fechaHoraFin;
+        document.getElementById("provincia").value = lugar[0];
+        document.getElementById("canton").value = lugar[1];
+        document.getElementById("distrito").value = lugar[2];
+        document.getElementById("direccion").value = lugar[3];
+        this.setState({
+            titulo: curso.titulo,
+            fechaHoraInicio: curso.fechaHoraInicio,
+            fechaHoraFin: curso.fechaHoraFin,
+            provincia: lugar[0],
+            canton: lugar[1],
+            distrito: lugar[2],
+            direccion: lugar[3]
+        })
+    }
+
+    eliminar = async(e) =>{
+        let controladora = new Controladora();
+        let response = await controladora.eliminarCompromiso("Curso", this.props.match.params.id);
         if(!response.data){
-            swal("Curso creado exitosamente","" ,"success").then((value) => {
+            swal("Curso eliminado exitosamente","" ,"success").then((value) => {
                 window.location.href="/Agenda";
             })
         }else{
-            swal("Error en el proceso de creación","", "warning");
+            swal("Error al eliminar","", "warning");
+        }
+    }
+
+    modificar = async(e) =>{
+        e.preventDefault();
+        let controladora = new Controladora();
+        let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
+        let response = await controladora.modificarCurso(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.state.titulo, this.props.match.params.id, lugar);
+        if(!response.data){
+            swal("Curso modificado exitosamente","" ,"success").then((value) => {
+                window.location.href="/Agenda";
+            })
+        }else{
+            swal("Error en el proceso de modificación","", "warning");
         }
     }
 
@@ -46,7 +84,7 @@ export default class CrearCurso extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="navTitle" href="">Crear Curso</Navbar.Brand>
+                        <Navbar.Brand id="navTitle" href="">Ver Curso</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
@@ -61,37 +99,40 @@ export default class CrearCurso extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>
                             <Form.Group onChange= {this.handleChange}>
-                                <h6>Por favor, ingrese los datos del curso: </h6>
+                                <h6>Datos curso actual: </h6>
                                 <br/>
                                 <h6>Titulo:</h6>
-                                <Form.Control type="text" name='titulo' />
+                                <Form.Control id="titulo" type="text" name='titulo' />
                                 <br/>
                                 <h6>Fecha y hora de inicio:</h6>
-                                <Form.Control type="datetime-local" name='fechaHoraInicio' />
+                                <Form.Control id="fechaHoraInicio" type="datetime-local" name='fechaHoraInicio' />
                                 <br/>
                                 <h6>Fecha y hora de fin:</h6>
-                                <Form.Control type="datetime-local" name='fechaHoraFin' />
+                                <Form.Control id="fechaHoraFin" type="datetime-local" name='fechaHoraFin' />
                                 <br/>
                                 <h6>Provincia:</h6>
-                                <Form.Control type="text" name='provincia' />
+                                <Form.Control id="provincia" type="text" name='provincia' />
                                 <br/>
                                 <h6>Cantón:</h6>
-                                <Form.Control type="text" name='canton' />
+                                <Form.Control id="canton" type="text" name='canton' />
                                 <br/>
                                 <h6>Distrito:</h6>
-                                <Form.Control type="text" name='distrito' />
+                                <Form.Control id="distrito" type="text" name='distrito' />
                                 <br/>
                                 <h6>Dirección:</h6>
-                                <Form.Control type="text" name='direccion' />
+                                <Form.Control id="direccion" type="text" name='direccion' />
                                 <br/>
                             </Form.Group>
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" onClick={this.crear}>
-                                Continuar
+                            <Button size="md" variant="secondary" onClick={this.modificar}>
+                                Modificar
                             </Button>
-                            <Button size="md" variant="secondary" href="/Compromisos">
+                            <Button size="md" variant="secondary" onClick={this.eliminar}>
+                                Eliminar
+                            </Button>
+                            <Button size="md" variant="secondary" href="/Agenda">
                                 Cancelar
                             </Button>
                         </div>

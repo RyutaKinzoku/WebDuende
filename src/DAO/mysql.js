@@ -69,6 +69,26 @@ router.get('/getEntregas', (_,res) => {
     });
 });
 
+router.get('/obtenerCurso', (req,res) => {
+    const sqlSelect = "SELECT * FROM Curso WHERE ID = ?;"
+    console.log(sqlSelect)
+    db.query(sqlSelect, [req.query.idCompromiso], (err, result) => {
+        console.log(result);
+        res.send(result);
+    })
+})
+
+router.post('/eliminarCurso', (req,res) => {
+    const sqlDeleteCurso = "DELETE FROM `Curso` WHERE ID=?;"
+    const sqlDeleteCompromiso = "DELETE FROM `Compromiso` WHERE ID=?;"
+    db.query(sqlDeleteCurso, [req.body.idCompromiso], () => {
+        db.query(sqlDeleteCompromiso, [req.body.idCompromiso], (err, _) => {
+            console.log(err);
+            res.send(err);
+        })
+    })
+})
+
 //Curso
 router.post("/agregarCurso", (req,res) =>{
     const id = req.body.id
@@ -82,6 +102,24 @@ router.post("/agregarCurso", (req,res) =>{
 
     db.query(sqlInsertCompromiso, [fechaHoraInicio, fechaHoraFin, id, lugar], () => {
         db.query(sqlInsertCurso , [fechaHoraInicio, fechaHoraFin, id, lugar, titulo] ,(err) => {
+            console.log(err);
+            res.send(err);
+        })
+    })
+});
+
+router.post("/modificarCurso", (req,res) =>{
+    const id = req.body.id
+    const fechaHoraInicio = req.body.fechaHoraInicio
+    const fechaHoraFin = req.body.fechaHoraFin
+    const titulo = req.body.titulo
+    const lugar = req.body.lugar
+
+    const sqlUpdateCompromiso = "UPDATE `Compromiso` SET `fechaHoraInicio`=?,`fechaHoraFin`=?,`lugar`=? WHERE `ID`=?";
+    const sqlUpdateCurso = "UPDATE `Curso` SET `fechaHoraInicio`=?,`fechaHoraFin`=?,`lugar`=?,`titulo`=? WHERE `ID`=?"
+
+    db.query(sqlUpdateCompromiso, [fechaHoraInicio, fechaHoraFin, lugar, id], () => {
+        db.query(sqlUpdateCurso , [fechaHoraInicio, fechaHoraFin, lugar, titulo, id] ,(err) => {
             console.log(err);
             res.send(err);
         })

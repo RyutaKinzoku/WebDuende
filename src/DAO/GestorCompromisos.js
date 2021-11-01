@@ -4,10 +4,38 @@ import FabricaCompromisos from "../modelo/FabricaCompromisos/FabricaCompromisos"
 
 export default class GestorCompromisos{
     modificarEntrega(entrega){};
-    modificarCurso(curso){};
+
+    modificarCurso(curso){
+        let values = {
+            id: curso.id,
+            fechaHoraInicio: curso.fechaHoraInicio,
+            fechaHoraFin: curso.fechaHoraFin,
+            titulo: curso.titulo,
+            lugar: curso.lugar
+        }
+        return axios.post('http://localhost:3001/api/modificarCurso',values);
+    };
+
     modificarCita(cita){};
-    eliminar(idCompromiso){};
-    obtener(idCompromiso){};
+    eliminar(type, idCompromiso){
+        let values = {
+            idCompromiso: idCompromiso
+        }
+        if(type === "Curso"){
+            return axios.post('http://localhost:3001/api/eliminarCurso',values);
+        }
+    };
+
+    async obtener(type, idCompromiso){
+        if(type === "Curso"){
+            var response = await axios.get('http://localhost:3001/api/obtenerCurso',{params: {idCompromiso: idCompromiso} });
+            if(response.data.length>0){
+                let curso = response.data[0];
+                let c = FabricaCompromisos.fabricarCompromiso("Curso;"+curso.fechaHoraInicio+";"+curso.fechaHoraFin+";"+curso.titulo+";"+curso.idCompromiso+";"+curso.lugar);
+                return c;
+            }
+        }
+    };
 
     async agregarEntrega(entrega){
         let values = {

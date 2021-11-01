@@ -48,6 +48,10 @@ export default class Controladora{
         return this.manejoAgenda.agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar);
     }
 
+    async modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){
+        return this.manejoAgenda.modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar);
+    }
+
     async agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion){
         return this.manejoAgenda.agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion);
     }
@@ -74,5 +78,13 @@ export default class Controladora{
 
     async obtenerCompromisos(){
         return this.manejoAgenda.obtenerCompromisos();
+    }
+
+    async obtenerCompromiso(type, idCompromiso){
+        return this.manejoAgenda.obtenerCompromiso(type, idCompromiso);
+    }
+
+    async eliminarCompromiso(type, idCompromiso){
+        return this.manejoAgenda.eliminarCompromiso(type, idCompromiso);
     }
 }

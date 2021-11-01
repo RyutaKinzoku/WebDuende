@@ -72,8 +72,8 @@ export default class Agenda extends Component{
         });
     }
 
-    verCurso(id){
-        
+    verCurso = function(id){
+        window.location.href="/VerCurso/"+id;
     }
 
     render(){
@@ -115,7 +115,7 @@ export default class Agenda extends Component{
                                 events={this.state.eventos}
                                 eventClick={function(info) {
                                     if(info.event.groupId === "1"){
-                                        console.log("Curso")
+                                        window.location.href="/VerCurso/"+info.event.id;
                                     }
                                     else if(info.event.groupId === "2"){
                                         console.log("Cita")
