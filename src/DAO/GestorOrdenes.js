@@ -19,13 +19,13 @@ export default class GestorOrdenes{
         return axios.post('http://localhost:3001/api/eliminarOrden', values);
     }
     obtener(idOrden){}
-    agregar(orden){
+    async agregarOrden(orden){
         const form = new FormData();
         form.append('idOrden', orden.id);
-        form.append('comprobante', orden.comprobante);
         form.append('direccion', orden.direccion);
         form.append('correo', orden.correo);
-        form.append('idsProductos', orden.idsProductos);
+        form.append('Productos', orden.productos);
+        form.append('comprobante', orden.comprobante);
         return axios.post('http://localhost:3001/api/agregarOrden', form, {
             headers: config.headers,
         })

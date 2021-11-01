@@ -91,15 +91,14 @@ router.post('/agregarOrden', subida.single('comprobante'), async function (req, 
         id: Number(req.body.idOrden),
         direccion: req.body.direccion,
         correo: req.body.correo,
-        imagen: req.file.filename,
+        productos: req.body.productos,
+        comprobante: req.file.filename
     })
+    console.log(orden);
     try{
-        let resul = await orden.save();
-        console.log(resul);
-        res.send(resul === orden);
+        await orden.save();
     } catch (err){
-        console.log(err);
-        res.send(false);
+        res.send(err);
     }
 })
 

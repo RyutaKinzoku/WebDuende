@@ -34,12 +34,13 @@ export default class Comprar extends Component{
         e.preventDefault();
         let controladora = new Controladora();
         let correo = cookies.get('correo');
-        let responseCompra = await controladora.comprar(correo, this.state.comprobante, this.state.direccion);
-        let responseCarrito = await controladora.eliminarCarrito(correo);
-        if(responseCompra.data && responseCarrito){
+        let direccionCompleta = 'Dirección: '+this.state.direccion+'. Provicia: '+this.state.provincia+'. Cantón: '+this.state.canton+'. Distrito: '+this.state.distrito+'.';
+        try{
+            await controladora.comprar(correo, this.state.comprobante, direccionCompleta);
+            await controladora.eliminarCarrito(correo);
             swal("Compra existosa","","success")
-            //.then((value) => { window.location.href="/Carrito"; })
-        }else{
+            window.location.href="/Carrito";
+        }catch(err){
             swal("Error al comprar","", "warning");
         }
     }
@@ -71,7 +72,7 @@ export default class Comprar extends Component{
                                 <h6>Provincia:</h6>
                                 <Form.Control type="text" name = 'provincia' />
                                 <br/>
-                                <h6>Canton:</h6>
+                                <h6>Cantón:</h6>
                                 <Form.Control type="text" name = 'canton' />
                                 <br/>
                                 <h6>Distrito:</h6>
@@ -87,10 +88,10 @@ export default class Comprar extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit" onClick={this.comprar}>
+                            <Button size="md" variant="secondary" type="submit" onClick={this.comprar} href = "/Tienda">
                                 Comprar
                             </Button>
-                            <Button size="md" variant="secondary" type="submit" href = "/Tienda">
+                            <Button size="md" variant="secondary" type="submit" href = "/Carrito">
                                 Cancelar
                             </Button>
                         </div>
