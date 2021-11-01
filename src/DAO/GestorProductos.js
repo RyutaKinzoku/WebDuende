@@ -11,15 +11,16 @@ const config = {
 
 export default class GestorProductos{
     async modificar(producto){
-        let values = {
-            idProducto: producto.id,
-            nombre: producto.nombre,
-            descripcion: producto.descripcion,
-            precio: producto.precio,
-            cantidad: producto.cantidad,
-            imagen: producto.imagen
-        }
-        return axios.post('http://localhost:3001/api/modificarProducto', values)
+        const form = new FormData();
+        form.append('idProducto', producto.id);
+        form.append('nombre', producto.nombre);
+        form.append('descripcion', producto.descripcion);
+        form.append('precio', producto.precio);
+        form.append('cantidad', producto.cantidad);
+        form.append('imagen', producto.imagen);
+        return axios.post('http://localhost:3001/api/modificarProducto', form, {
+            headers: config.headers,
+        })
     }
 
     async eliminar(idProducto){

@@ -29,8 +29,6 @@ export default class ModificarProducto extends Component{
         if (e.target.files) {
             let imagen = e.target.files;
             this.setState({imagen: imagen}, () => { console.log(this.state.imagen[0]) })
-        } else {
-            console.log("Selecione un archivo")
         }
     }
 
@@ -45,8 +43,6 @@ export default class ModificarProducto extends Component{
             cantidad: producto.cantidad,
             imagen:producto.imagen,
         })
-        //console.log(this.state.imagen)
-        //console.log(`${process.env.PUBLIC_URL}/assets/images/${this.state.imagen}`)
     }
 
     componentDidMount() {
@@ -56,20 +52,18 @@ export default class ModificarProducto extends Component{
     modificarProducto  = async (e) => {
         e.preventDefault();
         let controladora = new Controladora();
-        //console.log(this.state.imagen)
-        let response = await controladora.modificarProducto(
-            this.props.match.params.id,
-            this.state.nombre, 
-            this.state.descripcion, 
-            this.state.precio, 
-            this.state.cantidad, 
-            this.state.imagen
-        );
-        window.location.href="/Tienda";
-        if(response.data > 0){
-            swal("Producto modificado","","success")
-            .then((value) => { window.location.href="/Tienda"; })
-        }else{
+        try{
+            await controladora.modificarProducto(
+                this.props.match.params.id,
+                this.state.nombre, 
+                this.state.descripcion, 
+                this.state.precio, 
+                this.state.cantidad, 
+                this.state.imagen
+            );
+            swal("Producto modificado","","success");
+            window.location.href="/Tienda";
+        } catch (err){
             swal("Error al modificar","", "warning");
         }
     }
@@ -111,7 +105,7 @@ export default class ModificarProducto extends Component{
                                         <Form.Control type="text" name = 'cantidad' defaultValue={this.state.cantidad}/>
                                         <br/>
                                         <h6>Imagen:</h6>
-                                        <Form.Control type="file" name='imagen'/>
+                                        <Form.Control type="file" name='imagen'defaultValue={this.state.imagen}/>
                                         <br/>
                                     </Form.Group>
                                 </div>

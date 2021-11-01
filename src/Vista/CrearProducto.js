@@ -34,16 +34,17 @@ export default class CrearProducto extends Component{
     crearProducto  = async (e) => {
         e.preventDefault();
         let controladora = new Controladora();
-        let response = await controladora.agregarProducto(
-            this.state.nombre, 
-            this.state.descripcion, 
-            this.state.precio, 
-            this.state.cantidad, 
-            this.state.imagen);
-        if(response.data){
-            swal("Producto agregado","","success")
-            .then((value) => { window.location.href="/Tienda"; })
-        }else{
+        try{
+            await controladora.agregarProducto(
+                this.state.nombre, 
+                this.state.descripcion, 
+                this.state.precio, 
+                this.state.cantidad, 
+                this.state.imagen
+            );
+            swal("Producto agregado","","success");
+            window.location.href="/Tienda";
+        }catch(err){
             swal("Error al agregar","", "warning");
         }
     }
