@@ -3,7 +3,17 @@ import GestorDB from "./GestorBD";
 import FabricaCompromisos from "../modelo/FabricaCompromisos/FabricaCompromisos";
 
 export default class GestorCompromisos{
-    modificarEntrega(entrega){};
+    async modificarEntrega(entrega){
+        let values = {
+            id: entrega.id,
+            fechaHoraInicio: entrega.fechaHoraInicio,
+            fechaHoraFin: entrega.fechaHoraFin,
+            correoUsuario: entrega.usuario,
+            lugar: entrega.lugar,
+            idOrdenCompra: entrega.orden
+        }
+        return axios.post('http://localhost:3001/api/modificarEntrega',values);
+    };
 
     async modificarCurso(curso){
         let values = {
@@ -34,8 +44,10 @@ export default class GestorCompromisos{
         }
         if(type === "Curso"){
             return axios.post('http://localhost:3001/api/eliminarCurso',values);
-        } else if(type === "Cita"){
+        } else if(type === "Cita") {
             return axios.post('http://localhost:3001/api/eliminarCita',values);
+        } else if(type === "Entrega") {
+            return axios.post('http://localhost:3001/api/eliminarEntrega',values);
         }
     };
 
@@ -53,6 +65,13 @@ export default class GestorCompromisos{
                 let cita = response.data[0];
                 let c = FabricaCompromisos.fabricarCompromiso("Cita;"+cita.fechaHoraInicio+";"+cita.fechaHoraFin+";"+cita.ID+";"+cita.lugar+";"+cita.correoUsuario+";"+cita.idPublicacion);
                 return c;
+            }
+        }else if(type === "Entrega"){
+            var response = await axios.get('http://localhost:3001/api/obtenerEntrega',{params: {idCompromiso: idCompromiso} });
+            if(response.data.length>0){
+                let entrega = response.data[0];
+                let e = FabricaCompromisos.fabricarCompromiso("Entrega;"+entrega.fechaHoraInicio+";"+entrega.fechaHoraFin+";"+entrega.ID+";"+entrega.lugar+";"+entrega.correoUsuario+";"+entrega.idOrdenCompra);
+                return e;
             }
         }
     };

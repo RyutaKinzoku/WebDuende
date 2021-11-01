@@ -46,6 +46,10 @@ export default class Controladora{
         return this.manejoAgenda.agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden);
     }
 
+    async modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, orden){
+        return this.manejoAgenda.modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, orden);
+    }
+
     async agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
         return this.manejoAgenda.agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar);
     }
