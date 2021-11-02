@@ -12,13 +12,16 @@ var fs = require('fs');
 
 export default class GestorOrdenes{
     modificar(orden){}
+
     eliminar(idOrden){
         let values = {
             idOrden: idOrden
         }
         return axios.post('http://localhost:3001/api/eliminarOrden', values);
     }
+
     obtener(idOrden){}
+
     async agregarOrden(orden){
         const form = new FormData();
         form.append('idOrden', orden.id);
