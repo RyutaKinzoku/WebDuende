@@ -4,13 +4,14 @@ import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
 import Dropdown from '@restart/ui/esm/Dropdown';
+import Controladora from "../Controladora/Controladora";
 
 const cookies = new Cookies();
 
 export default class CrearPublicacion extends Component{
 
     state = {
-        imagen:'',
+        imagen: null,
         descripcion:'',
         tags:'',
         categoria:'',
@@ -22,9 +23,31 @@ export default class CrearPublicacion extends Component{
             ...this.state,
             [e.target.name]: e.target.value
         })
+        if (e.target.files) {
+            let imagen = e.target.files;
+            this.setState({imagen: imagen}, () => { console.log(this.state.imagen[0]) })
+        } else {
+            console.log("Selecione un archivo")
+        }
     }
 
-    enviar  = async (e) => {}
+    crearPublicacion  = async (e) => {
+        e.preventDefault();
+        let controladora = new Controladora();
+        try{ //imagen, descripcion, tags, idCategoria, idSubcategoria = null
+            await controladora.agregarPublicacion(
+                this.state.imagen,
+                this.state.descripcion,
+                this.state.tags,
+                this.state.categoria,
+                this.state.subcategoria,
+            );
+            swal("Producto agregado","","success");
+            window.location.href="/galeria";
+        }catch(err){
+            swal("Error al agregar","", "warning");
+        }
+    }
 
     render(){
         return(
@@ -65,10 +88,10 @@ export default class CrearPublicacion extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" onClick={this.crearPublicacion}>
                                 Publicar
                             </Button>
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" href = "/galeria">
                                 Cancelar
                             </Button>
                         </div>

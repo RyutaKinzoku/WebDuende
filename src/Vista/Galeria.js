@@ -6,14 +6,15 @@ import NavStyle from "./css/NavStyle.css";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Controladora from "../Controladora/Controladora"
+import Publicacion from "../modelo/Publicacion";
 
 const cookies = new Cookies();
 
 export default class Galeria extends Component{
 
     state = {
-        correo: '',
-        contrasena: '',
+        publicaciones: [],
     }
 
     cerrarSesion = () =>{
@@ -27,6 +28,22 @@ export default class Galeria extends Component{
             ...this.state,
             [e.target.name]: e.target.value
         })
+    }
+
+    componentDidMount() {
+        this.obtenerPublicaciones();    
+    }
+
+    obtenerPublicaciones = async(idCategoria = null) => {
+        let controladora = new Controladora();
+        if(idCategoria == null){
+            let publicaciones = await controladora.obtenerPublicaciones();
+            this.setState({
+                publicaciones: publicaciones
+            })
+        } else{
+            // prublicaciones filtradas
+        }
     }
 
     render(){
@@ -77,14 +94,20 @@ export default class Galeria extends Component{
                         <br/>
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={3} className="g-4">
-                                {Array.from({ length: 10 }).map((_, idx) => (
+                                {this.state.publicaciones.map((publicacion) => (
                                     <Col>
                                         <Card>
                                             <Card.Img variant="top" src="holder.js/100px160" />
                                             <Card.Body>
-                                            <Card.Title>Card title</Card.Title>
+                                            <Card.Title>{publicacion.descripcion}</Card.Title>
                                             <Card.Text>
-                                                Tags:
+                                                Tags: {publicacion.tags}
+                                            </Card.Text>
+                                            <Card.Text>
+                                                Categoría: {publicacion.categoria}
+                                            </Card.Text>
+                                            <Card.Text>
+                                                Subcategoría: {publicacion.subcategoria}
                                             </Card.Text>
                                             <Button size="md" variant="secondary" type="submit">
                                                 Comentar

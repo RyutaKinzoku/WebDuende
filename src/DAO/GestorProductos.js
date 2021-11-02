@@ -31,7 +31,7 @@ export default class GestorProductos{
     }
 
     async obtener(idProducto){
-        return axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto} });
+        return axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto}});
     }
 
     async agregar(producto){

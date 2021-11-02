@@ -52,6 +52,24 @@ router.get('/listaProductos', async (_,res) => {
     })
 })
 
+router.get('/listaPublicaciones', async (req,res) => {
+    if(req.query.idCategoria == null){
+        modelos.Publicacion.find({}, (err, docs) => {
+            if(err){
+                res.send(err);
+            }
+            res.send(docs);
+        })
+    } else {
+        modelos.Publicacion.find({idCategoria: req.query.idCategoria}, (err, docs) => {
+            if(err){
+                res.send(err);
+            }
+            res.send(docs);
+        })
+    }
+})
+
 router.get('/listaCompras', async (_,res) => {
     modelos.Orden.find({}, (err, docs) => {
         if(err){

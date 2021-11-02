@@ -12,8 +12,8 @@ export default class ManejoGaleria{
         this.gestorSubcategorias = new GestorSubcategorias();
     }
 
-    obtenerPublicaciones(){
-        return this.gestorPublicaciones.obtenerPublicaciones();
+    obtenerPublicaciones(idCategoria = null){
+        return this.gestorPublicaciones.obtenerLista(idCategoria);
     }
 
     /*obtenerPublicaciones(idCategoria = null){
@@ -23,30 +23,19 @@ export default class ManejoGaleria{
         });
     }*/
 
-    agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria){
+    agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){
         let idPublicacion = this.gestorPublicaciones.getNext();
         let publicacion = new Publicacion(idPublicacion,imagen,descripcion,tags,idCategoria,idSubcategoria);
-        this.gestorPublicaciones.agregarPublicacion(publicacion);
+        this.gestorPublicaciones.agregar(publicacion);
     }
 
-    agregarPublicacion(imagen, descripcion, tags, idCategoria){
-        let idPublicacion = this.gestorPublicaciones.getNext();
-        let publicacion = new Publicacion(idPublicacion,imagen,descripcion,tags,idCategoria, null);
-        this.gestorPublicaciones.agregarPublicacion(publicacion);
-    }
-
-    modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria){
+    modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria = null){
         let publicacion = new Publicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria);
-        this.gestorPublicaciones.modificarPublicacion(publicacion);
-    }
-
-    modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria){
-        let publicacion = new Publicacion(idPublicacion, imagen, descripcion, tags, idCategoria, null);
-        this.gestorPublicaciones.modificarPublicacion(publicacion);
+        this.gestorPublicaciones.modificar(publicacion);
     }
 
     eliminarPublicacion(idPublicacion){
-        this.gestorPublicaciones.eliminarPublicacion(idPublicacion);
+        this.gestorPublicaciones.eliminar(idPublicacion);
     }
 
     async obtenerCategorias(){
@@ -56,30 +45,30 @@ export default class ManejoGaleria{
     agregarCategoria(nombre){
         let idCategoria = this.gestorCategorias.getNext();
         let categoria = new Categoria(idCategoria,nombre, null);
-        this.gestorCategorias.agregarCategoria(categoria);
+        this.gestorCategorias.agregar(categoria);
     }
 
     eliminarCategoria(idCategoria){
-        this.gestorCategorias.eliminarCategoria(idCategoria);
+        this.gestorCategorias.eliminar(idCategoria);
     }
 
     modificarCategoria(idCategoria, nombre){
         let categoria = new Categoria(idCategoria,nombre,null)
-        this.gestorCategorias.modificarCategoria(categoria)
+        this.gestorCategorias.modificar(categoria);
     }
 
     agregarSubcategoria(idCategoria, nombre){
         let idSubcategoria = this.gestorSubcategorias.getNext();
         let subcategoria = new Subcategoria(idSubcategoria,nombre,idCategoria);
-        this.gestorSubcategorias.agregarSubcategoria(subcategoria);
+        this.gestorSubcategorias.agregar(subcategoria);
     }
 
     eliminarSubcategoria(idSubcategoria){
-        this.gestorSubcategorias.eliminarSubcategoria(idSubcategoria);
+        this.gestorSubcategorias.eliminar(idSubcategoria);
     }
 
     modificarSubcategoria(idSubcategoria, nombre, idCategoria){
         let subcategoria = new Categoria(idSubcategoria,nombre,idCategoria);
-        this.gestorSubcategorias.modificarSubcategoria(subcategoria)
+        this.gestorSubcategorias.modificar(subcategoria);
     }
 }

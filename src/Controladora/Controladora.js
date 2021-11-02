@@ -110,4 +110,12 @@ export default class Controladora{
     async obtenerCategorias(){
         return this.manejoGaleria.obtenerCategorias();
     }
+
+    async obtenerPublicaciones(idCategoria = null){
+        return this.manejoGaleria.obtenerPublicaciones(idCategoria);
+    }
+
+    async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){//imagen, descripcion, tags, idCategoria, idSubcategoria = null
+        return this.manejoGaleria.agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria);
+    }
 }
