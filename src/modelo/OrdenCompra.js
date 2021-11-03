@@ -3,7 +3,7 @@ export default class OrdenCompra {
         this.id = id;
         this.comprobante = comprobante;
         this.direccion = direccion;
-        this.comprador = null;
+        this.comprador = comprador;
         this.productos = productos;
     }
 

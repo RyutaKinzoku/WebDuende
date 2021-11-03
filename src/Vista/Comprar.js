@@ -34,9 +34,10 @@ export default class Comprar extends Component{
         e.preventDefault();
         let controladora = new Controladora();
         let correo = cookies.get('correo');
-        let direccionCompleta = 'Dirección: '+this.state.direccion+'. Provicia: '+this.state.provincia+'. Cantón: '+this.state.canton+'. Distrito: '+this.state.distrito+'.';
+        let direccionCompleta = this.state.provincia+'-'+this.state.canton+'-'+this.state.distrito+'-'+this.state.direccion;
         try{
             await controladora.comprar(correo, this.state.comprobante, direccionCompleta);
+            console.log("Saved Correctly");
             await controladora.eliminarCarrito(correo);
             swal("Compra existosa","","success")
             window.location.href="/Carrito";
@@ -88,7 +89,7 @@ export default class Comprar extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit" onClick={this.comprar} href = "/Tienda">
+                            <Button size="md" variant="secondary" type="submit" onClick={this.comprar}>
                                 Comprar
                             </Button>
                             <Button size="md" variant="secondary" type="submit" href = "/Carrito">

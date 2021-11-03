@@ -1,6 +1,7 @@
 import GestorDB from "./GestorBD";
 import OrdenCompra from "../modelo/OrdenCompra";
 import axios from "axios";
+import Producto from "../modelo/Producto";
 
 const FormData = require('form-data');
 const config = {
@@ -24,10 +25,14 @@ export default class GestorOrdenes{
 
     async agregarOrden(orden){
         const form = new FormData();
+        var trueProductos = "";
+        for (var producto of orden.productos){
+            trueProductos+=producto.id+"|"+producto.nombre+"|"+producto.descripcion+"|"+producto.precio+"|"+producto.cantidad+"|"+producto.imagen+"¨"
+        }
         form.append('idOrden', orden.id);
         form.append('direccion', orden.direccion);
         form.append('correo', orden.correo);
-        form.append('Productos', orden.productos);
+        form.append('productos', trueProductos);
         form.append('comprobante', orden.comprobante);
         return axios.post('http://localhost:3001/api/agregarOrden', form, {
             headers: config.headers,

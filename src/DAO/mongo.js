@@ -11,6 +11,8 @@ const { v4: uuidv4 } = require('uuid');
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const jsonParser = bodyParser.json()
+router.use(express.json())
+router.use(bodyParser.urlencoded({extended: true}));
 
 const URI = "mongodb+srv://admin:admin@web-duende.rfjvk.mongodb.net/web-duende?retryWrites=true&w=majority";
 
@@ -105,14 +107,31 @@ router.post('/agregarProducto', subida.single('imagen'), async function (req, re
 })
 
 router.post('/agregarOrden', subida.single('comprobante'), async function (req, res) {
+    var productosLista = req.body.productos.split("¨");
+    var atributosProducto =[];
+    for(var producto of productosLista){
+        atributosProducto.push(producto.split("|"));
+    }
+    atributosProducto.pop();
+    var trueProductos = [];
+    for (var producto of atributosProducto) {
+        var newProducto = new modelos.Producto({
+            id: Number(producto[0]),
+            nombre: producto[1],
+            descripcion: producto[2],
+            precio: Number(producto[3]),
+            imagen: producto[5],
+            cantidad: producto[4]
+        })
+        trueProductos.push(newProducto);
+    }
     const orden = new modelos.Orden({
         id: Number(req.body.idOrden),
         direccion: req.body.direccion,
         correo: req.body.correo,
-        productos: req.body.productos,
+        productos: trueProductos,
         comprobante: req.file.filename
     })
-    console.log(orden);
     try{
         await orden.save();
     } catch (err){
