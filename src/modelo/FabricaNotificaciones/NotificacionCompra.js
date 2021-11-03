@@ -2,7 +2,7 @@ import Notificacion from "./Notificacion";
 
 export default class NotificacionCita extends Notificacion {
     constructor(id, idOrdenCompra) {
-        super.id = id;
+        super(id);
         this.idOrdenCompra = idOrdenCompra;
     }
 

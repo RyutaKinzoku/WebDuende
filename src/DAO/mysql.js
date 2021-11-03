@@ -325,4 +325,108 @@ router.get('/getNextCompromisos', (req,res) => {
     })
 })
 
+//Notificaciones
+
+router.post("/modificarNotificacionCompra", (req,res) =>{});
+router.post("/modificarNotificacionCita", (req,res) =>{});
+
+router.post('/eliminarNotificacionCita', (req,res) => {
+    const sqlDeleteNotificacionCita = "DELETE FROM `NotificacionCita` WHERE ID=?;"
+    const sqlDeleteNotificacion = "DELETE FROM `Notificacion` WHERE ID=?;"
+    db.query(sqlDeleteNotificacionCita, [req.body.idNotificacion], () => {
+        db.query(sqlDeleteNotificacion, [req.body.idNotificacion], (err, _) => {
+            console.log(err);
+            res.send(err);
+        })
+    })
+})
+
+router.post('/eliminarNotificacionCompra', (req,res) => {
+    const sqlDeleteNotificacionCompra = "DELETE FROM `NotificacionCompra` WHERE ID=?;"
+    const sqlDeleteNotificacion = "DELETE FROM `Notificacion` WHERE ID=?;"
+    db.query(sqlDeleteNotificacionCompra, [req.body.idNotificacion], () => {
+        db.query(sqlDeleteNotificacion, [req.body.idNotificacion], (err, _) => {
+            console.log(err);
+            res.send(err);
+        })
+    })
+})
+
+router.get('/obtenerNotificacionCita', (req,res) => {
+    const sqlSelect = "SELECT * FROM NotificacionCita WHERE ID = ?;"
+    console.log(sqlSelect)
+    db.query(sqlSelect, [req.query.idNotificacion], (err, result) => {
+        console.log(result);
+        res.send(result);
+    })
+})
+
+router.get('/obtenerNotificacionCompra', (req,res) => {
+    const sqlSelect = "SELECT * FROM NotificacionCompra WHERE ID = ?;"
+    console.log(sqlSelect)
+    db.query(sqlSelect, [req.query.idNotificacion], (err, result) => {
+        console.log(result);
+        res.send(result);
+    })
+})
+
+router.post("/agregarNotificacionCompra", (req,res) =>{
+    const id = req.body.id
+    const idOrdenCompra = req.body.idOrdenCompra
+
+    const sqlInsertNotificacion = "INSERT INTO Notificacion (ID) VALUES (?);";
+    const sqlInsertNotificacionCompra = "INSERT INTO NotificacionCompra (ID, idOrdenCompra) VALUES (?,?);"
+
+    db.query(sqlInsertNotificacion, [id], () => {
+        db.query(sqlInsertNotificacionCompra , [id, idOrdenCompra] ,(err) => {
+            console.log(err);
+            res.send(err);
+        })
+    })
+});
+
+router.post("/agregarNotificacionCita", (req,res) =>{
+    const id = req.body.id
+    const mensaje = req.body.mensaje;
+    const idPublicacion = req.body.idPublicacion;
+    const correoUsuario = req.body.correoUsuario;
+
+    const sqlInsertNotificacion = "INSERT INTO Notificacion (ID) VALUES (?);";
+    const sqlInsertNotificacionCompra = "INSERT INTO NotificacionCita (ID, mensaje, idPublicacion, correoUsuario) VALUES (?,?,?,?);"
+
+    db.query(sqlInsertNotificacion, [id], () => {
+        db.query(sqlInsertNotificacionCompra , [id, mensaje, idPublicacion,correoUsuario] ,(err) => {
+            console.log(err);
+            res.send(err);
+        })
+    })
+});
+
+router.get('/getNotificacionesCita', (_,res) => {
+    const sqlSelectNotificacionesCita = "SELECT * FROM NotificacionCita;"
+    db.query(sqlSelectNotificacionesCita, (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+router.get('/getNotificacionesCompra', (_,res) => {
+    const sqlSelectNotificacionesCompra= "SELECT * FROM NotificacionCompra;"
+    db.query(sqlSelectNotificacionesCompra, (err, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+router.get('/getNextNotificaciones', (req,res) => {
+    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor=ultimo_valor+1 WHERE nombre='notificacion'"
+    const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'notificacion';"
+    /*db.query(sqlUpdate, () => {
+        db.query(sqlSelect, [req.query.correo], (err, result) => {
+            console.log(result);
+            res.send(result);
+        })*/
+    })
+})
+
 module.exports = router;
