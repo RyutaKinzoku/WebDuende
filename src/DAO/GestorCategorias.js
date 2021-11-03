@@ -2,7 +2,7 @@ import axios from "axios";
 import Categoria from "../modelo/Categoria";
 import GestorDB from "./GestorBD";
 
-export default class GestorCategorias{
+export default class GestorCategorias extends GestorDB{
     modificar(categoria){}
     eliminar(idCategoria){}
     obtener(idCategoria){}

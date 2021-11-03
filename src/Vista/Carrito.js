@@ -13,7 +13,8 @@ const cookies = new Cookies();
 export default class Carrito extends Component{
 
     state = {
-        productosCarrito: []
+        productosCarrito: [],
+        precioTotal: 0,
     }
 
     handleChange = e => {
@@ -43,6 +44,9 @@ export default class Carrito extends Component{
         let controladora = new Controladora();
         let correo = cookies.get('correo');
         let productosCarrito = await controladora.obtenerProductosCarrito(correo);
+        productosCarrito.map(async producto => {
+            this.state.precioTotal += Number(producto.cantidad)*Number(producto.precio);
+        })
         this.setState({
             productosCarrito: productosCarrito
         })
@@ -123,7 +127,7 @@ export default class Carrito extends Component{
                 <Navbar fixed="bottom" id="#navBarBottom" collapseOnSelect bg="" variant="light" expand="lg">
                     <Container>
                     </Container>
-                        <Navbar.Brand id="navTitle2" href="">Total: ₡</Navbar.Brand>
+                        <Navbar.Brand id="navTitle2" href="">Total: ₡ {Number(this.state.precioTotal)}</Navbar.Brand>
                         <Nav.Link className="botonNav2" href="/Comprar">Comprar</Nav.Link>
                 </Navbar>
             </div>

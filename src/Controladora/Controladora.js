@@ -3,6 +3,7 @@ import ManejoProductos from './ManejoProductos';
 import ManejoAgenda from './ManejoAgenda';
 import ManejoCompras from './ManejoCompras';
 import ManejoGaleria from './ManejoGaleria';
+import ManejoNotificaciones from './ManejoNotificaciones';
 import { ThemeProvider } from 'react-bootstrap';
 
 export default class Controladora{
@@ -10,8 +11,9 @@ export default class Controladora{
         this.manejoUsuarios = new ManejoUsuarios();
         this.manejoProductos = new ManejoProductos();
         this.manejoAgenda = new ManejoAgenda();
-        this.ManejoCompras = new ManejoCompras();
+        this.manejoCompras = new ManejoCompras();
         this.manejoGaleria = new ManejoGaleria();
+        this.manejoNotificaciones = new ManejoNotificaciones();
     }
 
     async iniciarSesion(correo, contrasena){
@@ -68,31 +70,31 @@ export default class Controladora{
     }
 
     async agregarProductoCarrito(correo, idProducto, cantidad){
-        return this.ManejoCompras.agregarProductoCarrito(correo, idProducto, cantidad);
+        return this.manejoCompras.agregarProductoCarrito(correo, idProducto, cantidad);
     }
 
     async obtenerProductosCarrito(correo){
-        return this.ManejoCompras.obtenerProductosCarrito(correo);
+        return this.manejoCompras.obtenerProductosCarrito(correo);
     }
 
     async eliminarProductoCarrito(correo, idProducto){
-        return this.ManejoCompras.eliminarProductoCarrito(correo, idProducto);
+        return this.manejoCompras.eliminarProductoCarrito(correo, idProducto);
     }
 
     async eliminarCarrito(correo){
-        return this.ManejoCompras.eliminarCarrito(correo);
+        return this.manejoCompras.eliminarCarrito(correo);
     }
 
     async comprar(correo, comprobante, direccion){
-        return this.ManejoCompras.comprar(correo, comprobante, direccion);
+        return this.manejoCompras.comprar(correo, comprobante, direccion);
     }
 
     async obtenerOrdenes(){
-        return this.ManejoCompras.obtenerOrdenes();
+        return this.manejoCompras.obtenerOrdenes();
     }
     
     async agregarOrden(productos, correo, comprobante, direccion){
-        return this.ManejoCompras.agregarOrden(productos, correo, comprobante, direccion);
+        return this.manejoCompras.agregarOrden(productos, correo, comprobante, direccion);
     }
 
     async obtenerCompromisos(){
@@ -117,5 +119,17 @@ export default class Controladora{
 
     async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){//imagen, descripcion, tags, idCategoria, idSubcategoria = null
         return this.manejoGaleria.agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria);
+    }
+
+    async agregarNotificacionCompra(idOrden){
+        return this.manejoNotificaciones.agregarNotificacionCompra(idOrden);
+    }
+
+    async agregarNotificacionCita(idPublicacion, correo, mensaje){
+        return this.manejoNotificaciones.agregarNotificacionCita(idPublicacion, correo, mensaje);
+    }
+    
+    async eliminar(idNotificacion){
+        return this.manejoNotificaciones.eliminar(idNotificacion);
     }
 }

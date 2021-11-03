@@ -2,7 +2,7 @@ import GestorDB from "./GestorBD";
 import Usuario from "../modelo/Usuario";
 import axios from "axios";
 
-export default class GestorUsuarios{
+export default class GestorUsuarios  extends GestorDB{
     modificar(usuario){}
     eliminar(correo){}
     async obtener(correo){

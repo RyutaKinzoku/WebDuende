@@ -9,7 +9,7 @@ const config = {
     }
 };
 
-export default class GestorProductos{
+export default class GestorProductos  extends GestorDB{
     async modificar(producto){
         const form = new FormData();
         form.append('idProducto', producto.id);

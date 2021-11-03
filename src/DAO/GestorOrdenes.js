@@ -11,7 +11,7 @@ const config = {
 };
 var fs = require('fs');
 
-export default class GestorOrdenes{
+export default class GestorOrdenes  extends GestorDB{
     modificar(orden){}
 
     eliminar(idOrden){
@@ -34,9 +34,14 @@ export default class GestorOrdenes{
         form.append('correo', orden.correo);
         form.append('productos', trueProductos);
         form.append('comprobante', orden.comprobante);
-        return axios.post('http://localhost:3001/api/agregarOrden', form, {
+        var err = await axios.post('http://localhost:3001/api/agregarOrden', form, {
             headers: config.headers,
         })
+        if(!err.data){
+            return orden.id;
+        }else{
+            return -1;
+        }
     }
 
     async obtenerLista(){

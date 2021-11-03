@@ -1,6 +1,6 @@
 import GestorDB from "./GestorBD";
 
-export default class GestorSubcategorias{
+export default class GestorSubcategorias  extends GestorDB{
     modificar(subcategoria){}
     eliminar(idSubcategoria){}
     obtener(idSubcategoria){}

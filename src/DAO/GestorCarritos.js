@@ -3,7 +3,7 @@ import Producto from "../modelo/Producto";
 import Carrito from "../modelo/Carrito";
 import axios from "axios"; 
 
-export default class GestorCarritos{
+export default class GestorCarritos  extends GestorDB{
     agregar(carrito){} 
     modificar(carrito){}
     async eliminarCarrito(carrito){

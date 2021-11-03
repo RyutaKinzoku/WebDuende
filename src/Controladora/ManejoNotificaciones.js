@@ -1,9 +1,9 @@
-import FabricaNotificaciones from "../Modelo/FabricaNotificaciones/FabricaNotificaciones";
-import Notificaciones from "../Modelo/FabricaNotificaciones/Notificaciones";
+import FabricaNotificaciones from "../modelo/FabricaNotificaciones/FabricaNotificaciones";
+import Notificaciones from "../modelo/FabricaNotificaciones/Notificacion";
 import GestorNotificaciones from "../DAO/GestorNotificaciones";
-import GestorBD from "../DAO/GestorBD";
-import NotificacionCita from "../Modelo/FabricaCompromisos/NotificacionCita";
-import NotificacionCompra from "../Modelo/FabricaCompromisos/NotificacionCompra";
+import GestorDB from "../DAO/GestorBD";
+import NotificacionCita from "../modelo/FabricaNotificaciones/NotificacionCita";
+import NotificacionCompra from "../modelo/FabricaNotificaciones/NotificacionCompra";
 
 export default class ManejoNotificaciones{
     constructor(){
@@ -26,7 +26,7 @@ export default class ManejoNotificaciones{
         this.gestorNotificaciones.agregarNotificacionCompra(notificacionCompra);
     }
     
-    eliminar(idNotificacion){
+    eliminarNotificacion(idNotificacion){
         this.gestorNotificaciones.eliminar(idNotificacion);
     }
 }

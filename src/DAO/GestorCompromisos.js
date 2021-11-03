@@ -2,7 +2,7 @@ import axios from "axios";
 import GestorDB from "./GestorBD";
 import FabricaCompromisos from "../modelo/FabricaCompromisos/FabricaCompromisos";
 
-export default class GestorCompromisos{
+export default class GestorCompromisos extends GestorDB{
     async modificarEntrega(entrega){
         let values = {
             id: entrega.id,

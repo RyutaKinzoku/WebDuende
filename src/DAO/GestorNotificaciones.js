@@ -1,8 +1,8 @@
 import GestorDB from "./GestorBD";
 import axios from "axios";
-import FabricaNotificaciones from "../Modelo/FabricaNotificaciones/FabricaNotificaciones";
+import FabricaNotificaciones from "../modelo/FabricaNotificaciones/FabricaNotificaciones";
 
-export default class GestorNotificaciones{
+export default class GestorNotificaciones extends GestorDB{
     modificarNotificacionCompra(notificacionCompra){
         let values = {
             id: notificacionCompra.id,

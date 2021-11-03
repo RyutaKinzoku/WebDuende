@@ -1,9 +1,4 @@
 export default class GestorBD{
-    constructor() {
-        if (this.constructor == GestorBD) {
-            throw new Error("Clase abstracta GestorBD no puede ser instanciada");
-        }
-    }
 
     modificar(objeto){
         throw new Error("Método 'modificar(objeto)' debe ser implementado");
