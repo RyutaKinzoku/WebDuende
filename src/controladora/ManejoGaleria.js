@@ -43,15 +43,13 @@ export default class ManejoGaleria{
     }
 
     async agregarCategoria(nombre){
-        console.log("En Manejo");
         let idCategoria = await this.gestorCategorias.getNext();
-        console.log(idCategoria);
         let categoria = new Categoria(idCategoria,nombre, null);
         return this.gestorCategorias.agregar(categoria);
     }
 
-    async eliminarCategoria(idCategoria){
-        return this.gestorCategorias.eliminar(idCategoria);
+    eliminarCategoria(idCategoria){
+        this.gestorCategorias.eliminar(idCategoria);
     }
 
     modificarCategoria(idCategoria, nombre){
@@ -66,7 +64,7 @@ export default class ManejoGaleria{
     }
 
     eliminarSubcategoria(idSubcategoria){
-        this.gestorSubcategorias.eliminar(idSubcategoria);
+        return this.gestorSubcategorias.eliminar(idSubcategoria);
     }
 
     modificarSubcategoria(idSubcategoria, nombre, idCategoria){
