@@ -35,15 +35,20 @@ export default class CrearPublicacion extends Component{
         e.preventDefault();
         let controladora = new Controladora();
         try{ //imagen, descripcion, tags, idCategoria, idSubcategoria = null
+            console.log(this.state);
             await controladora.agregarPublicacion(
                 this.state.imagen,
                 this.state.descripcion,
                 this.state.tags,
+                1,
+                1
+                /*
                 this.state.categoria,
                 this.state.subcategoria,
+                */
             );
             swal("Producto agregado","","success");
-            window.location.href="/galeria";
+            //window.location.href="/galeria";
         }catch(err){
             swal("Error al agregar","", "warning");
         }

@@ -62,6 +62,5 @@ export default class GestorProductos  extends GestorDB{
     }
 
     async setNext(){
-        return axios.post('http://localhost:3001/api/setIdProducto');
     }
 }

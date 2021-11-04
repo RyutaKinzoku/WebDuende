@@ -23,9 +23,12 @@ export default class ManejoGaleria{
         });
     }*/
 
-    agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){
-        let idPublicacion = this.gestorPublicaciones.getNext();
-        let publicacion = new Publicacion(idPublicacion,imagen,descripcion,tags,idCategoria,idSubcategoria);
+    async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){
+        this.gestorPublicaciones.setNext();
+        let idPublicacion = await this.gestorPublicaciones.getNext();
+        var listaTags = tags.split(',');
+        let publicacion = new Publicacion(idPublicacion, imagen[0], descripcion, listaTags, idCategoria, idSubcategoria);
+        console.log(publicacion);
         this.gestorPublicaciones.agregar(publicacion);
     }
 

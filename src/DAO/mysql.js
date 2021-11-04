@@ -279,6 +279,7 @@ router.post('/eliminarCategoria', (req,res)=> {
 })
 
 //Obtener ID
+
 router.get("/getIdProducto", (_, res) => {
     const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'producto'"
     db.query(sqlSelect, (_, result) => {
@@ -287,11 +288,31 @@ router.get("/getIdProducto", (_, res) => {
     })
 })
 
-router.get("/getIdProducto", (_, res) => {
-    const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'producto'"
+router.post("/setIdProducto", (_, res) => {
+    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor = ultimo_valor+1 WHERE nombre = 'producto'"
+    db.query(sqlUpdate, (err, _) => {
+        if(err){
+            console.log(err);
+            res.send(err);
+        }
+    })
+})
+
+router.get("/getIdPublicacion", (_, res) => {
+    const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'publicacion'"
     db.query(sqlSelect, (_, result) => {
     console.log(result);
     res.send(result)
+    })
+})
+
+router.post("/setIdPublicacion", (_, res) => {
+    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor = ultimo_valor+1 WHERE nombre = 'publicacion'"
+    db.query(sqlUpdate, (err, _) => {
+        if(err){
+            console.log(err);
+            res.send(err);
+        }
     })
 })
 
@@ -305,16 +326,6 @@ router.get("/getIdOrden", (_, res) => {
 
 router.post("/setIdORden", (_, res) => {
     const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor = ultimo_valor+1 WHERE nombre = 'orden'"
-    db.query(sqlUpdate, (err, _) => {
-        if(err){
-            console.log(err);
-            res.send(err);
-        }
-    })
-})
-
-router.post("/setIdProducto", (_, res) => {
-    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor = ultimo_valor+1 WHERE nombre = 'producto'"
     db.query(sqlUpdate, (err, _) => {
         if(err){
             console.log(err);

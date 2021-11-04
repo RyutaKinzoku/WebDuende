@@ -118,6 +118,7 @@ export default class Controladora{
     }
 
     async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){//imagen, descripcion, tags, idCategoria, idSubcategoria = null
+        console.log(imagen, descripcion, tags, idCategoria, idSubcategoria);
         return this.manejoGaleria.agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria);
     }
 
