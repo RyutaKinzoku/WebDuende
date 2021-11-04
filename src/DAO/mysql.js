@@ -269,6 +269,15 @@ router.get('/getCategorias', (_,res) => {
     });
 });
 
+router.post('/eliminarCategoria', (req,res)=> {
+    console.log(req.body.idCategoria);
+    const sqlDeleteCategoria = "DELETE FROM Categoria WHERE ID=?;"
+    db.query(sqlDeleteCategoria, [req.body.idCategoria], (err, _) => {
+        console.log(err);
+        res.send(err);
+    })
+})
+
 //Obtener ID
 router.get("/getIdProducto", (_, res) => {
     const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'producto'"
@@ -421,6 +430,27 @@ router.get('/getNotificacionesCompra', (_,res) => {
 router.get('/getNextNotificaciones', (req,res) => {
     const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor=ultimo_valor+1 WHERE nombre='notificacion'"
     const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'notificacion';"
+    db.query(sqlUpdate, () => {
+        db.query(sqlSelect, (err, result) => {
+            console.log(result);
+            res.send(result);
+        })
+    })
+})
+
+router.post("/agregarCategoria", (req,res) =>{
+    const idCategoria = req.body.idCategoria
+    const nombre = req.body.nombre
+    const sqlInsertCategoria = "INSERT INTO Categoria (ID, nombre) VALUES (?,?)";
+    db.query(sqlInsertCategoria , [idCategoria, nombre] ,(err) => {
+        console.log(err);
+        res.send(err);
+    })
+});
+
+router.get('/getNextCategorias', (req,res) => {
+    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor=ultimo_valor+1 WHERE nombre='categoria';"
+    const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'categoria';"
     db.query(sqlUpdate, () => {
         db.query(sqlSelect, (err, result) => {
             console.log(result);

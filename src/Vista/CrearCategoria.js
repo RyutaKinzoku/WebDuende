@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
 import Dropdown from '@restart/ui/esm/Dropdown';
+import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
 
@@ -18,6 +19,18 @@ export default class CrearCategoria extends Component{
             ...this.state,
             [e.target.name]: e.target.value
         })
+    }
+
+    agregar  = async (e) => {
+        let controladora = new Controladora();
+        let response = await controladora.agregarCategoria(this.state.nombre);
+        if(!response.data){
+            swal("Categoria creada exitosamente","" ,"success").then((value) => {
+                window.location.href="/VerCategorias";
+            })
+        }else{
+            console.log(response);
+        }
     }
 
     enviar  = async (e) => {}
@@ -51,7 +64,7 @@ export default class CrearCategoria extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" onClick = {() => this.agregar()}>
                                 Crear
                             </Button>
                             <Button size="md" variant="secondary" type="submit">
