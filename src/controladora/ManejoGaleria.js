@@ -55,8 +55,8 @@ export default class ManejoGaleria{
         return this.gestorCategorias.agregar(categoria);
     }
 
-    eliminarCategoria(idCategoria){
-        this.gestorCategorias.eliminar(idCategoria);
+    async eliminarCategoria(idCategoria){
+        return this.gestorCategorias.eliminar(idCategoria);
     }
 
     async modificarCategoria(idCategoria, nombre){

@@ -30,9 +30,8 @@ export default class GestorCategorias extends GestorDB{
         let values = {
             idCategoria: categoria.id,
             nombre: categoria.nombre,
-            
         }
-        return await axios.post('http://localhost:3001/api/agregarCategoria',values);
+        return axios.post('http://localhost:3001/api/agregarCategoria',values);
     }
 
     async obtenerLista(){
