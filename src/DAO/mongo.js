@@ -182,16 +182,16 @@ router.post('/modificarProducto', async (req, res) =>{
 })
 
 router.post('/agregarPublicacion', subida.single('imagen'), async function (req, res) {
-    const producto = new modelos.Publicacion({
-        id: Number(req.body.idProducto),
-        nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
-        precio: Number(req.body.precio),
+    const publicacion = new modelos.Publicacion({
+        id: Number(req.body.id),
         imagen: req.file.filename,
-        cantidad: req.body.cantidad
+        descripcion: req.body.descripcion,
+        tags: req.body.tags,
+        categoria: Number(req.body.categoria),
+        subcategoria: Number(req.body.subcategoria),
     })
     try{
-        await producto.save();
+        await publicacion.save();
     } catch (err){
         res.send(err);
     }
