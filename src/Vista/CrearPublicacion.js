@@ -31,7 +31,7 @@ export default class CrearPublicacion extends Component{
         }
     }
 
-    crearPublicacion  = async (e) => {
+    agregarPublicacion  = async (e) => {
         e.preventDefault();
         let controladora = new Controladora();
         try{ //imagen, descripcion, tags, idCategoria, idSubcategoria = null
@@ -93,7 +93,7 @@ export default class CrearPublicacion extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit" onClick={this.crearPublicacion}>
+                            <Button size="md" variant="secondary" type="submit" onClick={this.agregarPublicacion}>
                                 Publicar
                             </Button>
                             <Button size="md" variant="secondary" type="submit" href = "/galeria">

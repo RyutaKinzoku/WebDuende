@@ -194,7 +194,7 @@ router.post('/agregarPublicacion', subida.single('imagen'), async function (req,
         id: Number(req.body.id),
         imagen: req.file.filename,
         descripcion: req.body.descripcion,
-        tags: req.body.tags,
+        tags: req.body.tags.split(","),
         categoria: Number(req.body.categoria),
         subcategoria: Number(req.body.subcategoria),
     })

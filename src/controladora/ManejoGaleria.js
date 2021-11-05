@@ -26,8 +26,7 @@ export default class ManejoGaleria{
     async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){
         this.gestorPublicaciones.setNext();
         let idPublicacion = await this.gestorPublicaciones.getNext();
-        var listaTags = tags.split(',');
-        let publicacion = new Publicacion(idPublicacion, imagen[0], descripcion, listaTags, idCategoria, idSubcategoria);
+        let publicacion = new Publicacion(idPublicacion, imagen[0], descripcion, tags, idCategoria, idSubcategoria);
         this.gestorPublicaciones.agregar(publicacion);
     }
 

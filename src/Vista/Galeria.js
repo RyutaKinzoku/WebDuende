@@ -111,7 +111,7 @@ export default class Galeria extends Component{
                                             <Card.Body>
                                             <Card.Title>{publicacion.descripcion}</Card.Title>
                                             <Card.Text>
-                                                Tags: {publicacion.tags}
+                                                Tags: {publicacion.tags + " "}
                                             </Card.Text>
                                             <Card.Text>
                                                 Categoría: {publicacion.categoria}

@@ -18,7 +18,6 @@ export default class gestorPublicaciones  extends GestorDB{
     }
     obtener(idPublicacion){}
     agregar(publicacion){
-        console.log(publicacion)
         const form = new FormData();
         form.append('id',publicacion.id);
         form.append('imagen', publicacion.imagen);
