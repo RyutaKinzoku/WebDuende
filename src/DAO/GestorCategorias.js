@@ -3,15 +3,29 @@ import Categoria from "../modelo/Categoria";
 import GestorDB from "./GestorBD";
 
 export default class GestorCategorias extends GestorDB{
-    modificar(categoria){}
+    async modificar(categoria){
+        let values = {
+            idCategoria: categoria.id,
+            nombre: categoria.nombre,
+        }
+        return axios.post('http://localhost:3001/api/modificarCategoria',values);
+    };
     async eliminar(idCategoria){
         let values = {
             idCategoria: idCategoria
         }
         return axios.post('http://localhost:3001/api/eliminarCategoria', values);
     }
-    
-    obtener(idCategoria){}
+
+    async obtener(idCategoria){
+        var response = await axios.get('http://localhost:3001/api/obtenerCategoria',{params: {idCategoria: idCategoria} });
+        if(response.data.length>0){
+            let categoria = response.data[0];
+            let c = new Categoria(categoria.id,categoria.nombre,null);
+            return c;
+        }
+        return null;
+    }
     async agregar(categoria){
         let values = {
             idCategoria: categoria.id,

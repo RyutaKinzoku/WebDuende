@@ -22,27 +22,25 @@ export default class modificarCategoria extends Component{
     }
 
     componentDidMount(){
-        this.obtenerCita();
+        this.obtenerCategoria();
     }
 
-    obtenerCita = async(e) =>{
+    obtenerCategoria = async(e) =>{
         let controladora = new Controladora();
         let categoria = await controladora.obtenerCategoria(this.props.match.params.id);
-        console.log(categoria);
         document.getElementById("nombre").value = categoria.nombre;
         this.setState({
             correoUsuario: categoria.nombre,
         })
     }
 
-    modificar = async(e) =>{
-        e.preventDefault();
+    modificarCategoria = async(e) =>{
+
         let controladora = new Controladora();
-        let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
-        let response = await controladora.modificarCita(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.props.match.params.id, this.state.correoUsuario, lugar, this.state.idPublicacion);
+        let response = await controladora.modificarCategoria(this.props.match.params.id,  this.state.nombre);
         if(!response.data){
             swal("Cita modificada exitosamente","" ,"success").then((value) => {
-                window.location.href="/Agenda";
+                window.location.href="/VerCategorias";
             })
         }else{
             swal("Error en el proceso de modificación","", "warning");
@@ -54,7 +52,7 @@ export default class modificarCategoria extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="navTitle" href="">Ver Cita</Navbar.Brand>
+                        <Navbar.Brand id="navTitle" href="">Modificar Categoria</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
@@ -69,43 +67,19 @@ export default class modificarCategoria extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>
                             <Form.Group onChange= {this.handleChange}>
-                                <h6>Datos cita actual: </h6>
+                                <h6>Datos categoria actual: </h6>
                                 <br/>
-                                <h6>Número de publicación:</h6>
-                                <Form.Control id="idPublicacion" type="text" name='idPublicacion' />
-                                <br/>
-                                <h6>Correo usuario:</h6>
-                                <Form.Control id="correoUsuario" type="text" name='correoUsuario' />
-                                <br/>
-                                <h6>Fecha y hora de inicio:</h6>
-                                <Form.Control id="fechaHoraInicio" type="datetime-local" name='fechaHoraInicio' />
-                                <br/>
-                                <h6>Fecha y hora de fin:</h6>
-                                <Form.Control id="fechaHoraFin" type="datetime-local" name='fechaHoraFin' />
-                                <br/>
-                                <h6>Provincia:</h6>
-                                <Form.Control id="provincia" type="text" name='provincia' />
-                                <br/>
-                                <h6>Cantón:</h6>
-                                <Form.Control id="canton" type="text" name='canton' />
-                                <br/>
-                                <h6>Distrito:</h6>
-                                <Form.Control id="distrito" type="text" name='distrito' />
-                                <br/>
-                                <h6>Dirección:</h6>
-                                <Form.Control id="direccion" type="text" name='direccion' />
+                                <h6>Nombre:</h6>
+                                <Form.Control id="nombre" type="text" name='nombre' />
                                 <br/>
                             </Form.Group>
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" onClick={this.modificar}>
+                            <Button size="md" variant="secondary" onClick = {() => this.modificarCategoria()}>
                                 Modificar
                             </Button>
-                            <Button size="md" variant="secondary" onClick={this.eliminar}>
-                                Eliminar
-                            </Button>
-                            <Button size="md" variant="secondary" href="/Agenda">
+                            <Button size="md" variant="secondary" href="/VerCategorias">
                                 Cancelar
                             </Button>
                         </div>

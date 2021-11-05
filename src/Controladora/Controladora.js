@@ -113,6 +113,10 @@ export default class Controladora{
         return this.manejoGaleria.obtenerCategorias();
     }
 
+    async obtenerCategoria(idCategoria){
+        return this.manejoGaleria.obtenerCategoria(idCategoria);
+    }
+
     async obtenerPublicaciones(idCategoria = null){
         return this.manejoGaleria.obtenerPublicaciones(idCategoria);
     }
@@ -140,5 +144,9 @@ export default class Controladora{
 
     async eliminarCategoria(idCategoria){
         return this.manejoGaleria.eliminarCategoria(idCategoria);
+    }
+
+    async modificarCategoria(idCategoria, nombre){
+        return this.manejoGaleria.modificarCategoria(idCategoria, nombre);
     }
 }

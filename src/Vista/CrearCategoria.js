@@ -67,7 +67,7 @@ export default class CrearCategoria extends Component{
                             <Button size="md" variant="secondary" onClick = {() => this.agregar()}>
                                 Crear
                             </Button>
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" href="/VerCategorias">
                                 Cancelar
                             </Button>
                         </div>

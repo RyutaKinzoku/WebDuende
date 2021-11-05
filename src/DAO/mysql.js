@@ -470,4 +470,22 @@ router.get('/getNextCategorias', (req,res) => {
     })
 })
 
+router.post("/modificarCategoria", (req,res) =>{
+    const idCategoria = req.body.idCategoria
+    const nombre = req.body.nombre;
+    const sqlUpdateCategoria = "UPDATE `Categoria` SET `nombre`=? WHERE `ID`=?";
+    db.query(sqlUpdateCategoria , [nombre, idCategoria] ,(err) => {
+        console.log(err);
+        res.send(err);
+    })
+});
+
+router.get('/obtenerCategoria', (req,res) => {
+    const sqlSelect = "SELECT * FROM Categoria WHERE ID = ?;"
+    db.query(sqlSelect, [req.query.idCategoria], (err, result) => {
+        console.log(result);
+        res.send(result);
+    })
+})
+
 module.exports = router;
