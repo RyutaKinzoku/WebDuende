@@ -8,7 +8,7 @@ import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
 
-export default class modificarCategoria extends Component{
+export default class modificarSubcategoria extends Component{
 
     state = {
         nombre:''
@@ -22,25 +22,24 @@ export default class modificarCategoria extends Component{
     }
 
     componentDidMount(){
-        this.obtenerCategoria();
+        this.obtenerSubcategoria();
     }
 
-    obtenerCategoria = async(e) =>{
+    obtenerSubcategoria = async(e) =>{
         let controladora = new Controladora();
-        let categoria = await controladora.obtenerCategoria(this.props.match.params.id);
-        document.getElementById("nombre").value = categoria.nombre;
+        let subcategoria = await controladora.obtenerSubcategoria(this.props.match.params.id);
+        document.getElementById("nombre").value = subcategoria.nombre;
         this.setState({
-            nombre: categoria.nombre,
+            nombre: subcategoria.nombre,
         })
     }
 
-    modificarCategoria = async(e) =>{
-
+    modificarSubcategoria = async(e) =>{
         let controladora = new Controladora();
-        let response = await controladora.modificarCategoria(this.props.match.params.id,  this.state.nombre);
+        let response = await controladora.modificarSubcategoria(this.props.match.params.id,  this.state.nombre);
         if(!response.data){
-            swal("Categoría modificada exitosamente","" ,"success").then((value) => {
-                window.location.href="/VerCategorias";
+            swal("Subcategoría modificada exitosamente","" ,"success").then((value) => {
+                window.location.href='/VerSubCategorias/'+this.props.match.params.id;
             })
         }else{
             swal("Error en el proceso de modificación","", "warning");
@@ -52,7 +51,7 @@ export default class modificarCategoria extends Component{
             <div>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="navTitle" href="">Modificar Categoría</Navbar.Brand>
+                        <Navbar.Brand id="navTitle" href="">Modificar Subcategoría</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
@@ -67,7 +66,7 @@ export default class modificarCategoria extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>
                             <Form.Group onChange= {this.handleChange}>
-                                <h6>Datos de categoría actual: </h6>
+                                <h6>Datos de subcategoría actual: </h6>
                                 <br/>
                                 <h6>Nombre:</h6>
                                 <Form.Control id="nombre" type="text" name='nombre' />
@@ -76,7 +75,7 @@ export default class modificarCategoria extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" onClick = {() => this.modificarCategoria()}>
+                            <Button size="md" variant="secondary" onClick = {() => this.modificarSubcategoria()}>
                                 Modificar
                             </Button>
                             <Button size="md" variant="secondary" href="/VerCategorias">

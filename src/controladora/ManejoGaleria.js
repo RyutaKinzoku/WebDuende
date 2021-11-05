@@ -48,6 +48,10 @@ export default class ManejoGaleria{
         return this.gestorCategorias.obtener(idCategoria);
     }
 
+    async obtenerSubcategoria(idSubcategoria){
+        return this.gestorSubcategorias.obtener(idSubcategoria);
+    }
+
     async agregarCategoria(nombre){
         let idCategoria = await this.gestorCategorias.getNext();
         let categoria = new Categoria(idCategoria,nombre, null);
@@ -73,8 +77,12 @@ export default class ManejoGaleria{
         return this.gestorSubcategorias.eliminar(idSubcategoria);
     }
 
-    modificarSubcategoria(idSubcategoria, nombre, idCategoria){
-        let subcategoria = new Categoria(idSubcategoria,nombre,idCategoria);
-        this.gestorSubcategorias.modificar(subcategoria);
+    async modificarSubcategoria(idSubcategoria, nombre){
+        let subcategoria = new Subcategoria(idSubcategoria,nombre,null);
+        return this.gestorSubcategorias.modificar(subcategoria);
+    }
+
+    async obtenerSubcategorias(idCategoria){
+        return this.gestorSubcategorias.obtenerLista(idCategoria);
     }
 }

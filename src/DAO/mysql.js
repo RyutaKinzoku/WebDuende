@@ -488,4 +488,30 @@ router.get('/obtenerCategoria', (req,res) => {
     })
 })
 
+//Subcategorias
+router.get('/getSubcategorias', (req,res) => {
+    const sqlSelect = "SELECT * FROM Subcategoria WHERE idCategoria = ?;"
+    db.query(sqlSelect, [req.query.idCategoria], (err, result) => {
+        console.log(result);
+        res.send(result);
+    })
+});
+
+router.get('/obtenerSubcategoria', (req,res) => {
+    const sqlSelect = "SELECT * FROM Subcategoria WHERE ID = ?;"
+    db.query(sqlSelect, [req.query.idSubcategoria], (err, result) => {
+        console.log(result);
+        res.send(result);
+    })
+})
+
+router.post("/modificarSubcategoria", (req,res) =>{
+    const idSubcategoria = req.body.idSubcategoria
+    const nombre = req.body.nombre;
+    const sqlUpdateSubcategoria = "UPDATE `Subcategoria` SET `nombre`=? WHERE `ID`=?";
+    db.query(sqlUpdateSubcategoria , [nombre, idSubcategoria] ,(err) => {
+        console.log(err);
+        res.send(err);
+    })
+});
 module.exports = router;

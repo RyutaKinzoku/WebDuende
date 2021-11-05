@@ -14,6 +14,7 @@ import CrearSubcategoria from './Vista/CrearSubcategoria';
 import ModificarPublicacion from './Vista/modificarPublicacion';
 import ModificarProducto from './Vista/modificarProducto';
 import ModificarCategoria from './Vista/modificarCategoria';
+import ModificarSubcategoria from './Vista/modificarSubcategoria';
 import Compromisos from './Vista/Compromisos'
 import Agenda from './Vista/Agenda';
 import Tienda from './Vista/Tienda';
@@ -44,6 +45,7 @@ function Routes(){
                 <Route exact path="/modificarPublicacion" component ={ModificarPublicacion}/>
                 <Route exact path="/modificarProducto/:id" component ={ModificarProducto}/>
                 <Route exact path="/modificarCategoria/:id" component ={ModificarCategoria}/>
+                <Route exact path="/modificarSubcategoria/:id" component ={ModificarSubcategoria}/>
                 <Route exact path="/Compromisos" component ={Compromisos}/>
                 <Route exact path="/Agenda" component ={Agenda}/>
                 <Route exact path="/Tienda" component ={Tienda}/>
@@ -51,7 +53,7 @@ function Routes(){
                 <Route exact path="/Ordenes" component ={Ordenes}/>
                 <Route exact path="/VerOrden" component ={VerOrden}/>
                 <Route exact path="/VerCategorias" component = {VerCategorias}/>
-                <Route exact path="/VerSubcategorias" component = {VerSubcategorias}/>
+                <Route exact path="/VerSubcategorias/:id" component = {VerSubcategorias}/>
                 <Route exact path="/VerCurso/:id" component = {VerCurso}/>
                 <Route exact path="/VerCita/:id" component = {VerCita}/>
                 <Route exact path="/VerEntrega/:id" component = {VerEntrega}/>
