@@ -47,7 +47,7 @@ export default class CrearPublicacion extends Component{
                 this.state.subcategoria,
                 */
             );
-            swal("Producto agregado","","success");
+            swal("Publicación agregada","","success");
             //window.location.href="/galeria";
         }catch(err){
             swal("Error al agregar","", "warning");

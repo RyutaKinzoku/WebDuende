@@ -28,7 +28,6 @@ export default class ManejoGaleria{
         let idPublicacion = await this.gestorPublicaciones.getNext();
         var listaTags = tags.split(',');
         let publicacion = new Publicacion(idPublicacion, imagen[0], descripcion, listaTags, idCategoria, idSubcategoria);
-        console.log(publicacion);
         this.gestorPublicaciones.agregar(publicacion);
     }
 

@@ -121,9 +121,12 @@ export default class Controladora{
         return this.manejoGaleria.obtenerPublicaciones(idCategoria);
     }
 
-    async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){//imagen, descripcion, tags, idCategoria, idSubcategoria = null
-        console.log(imagen, descripcion, tags, idCategoria, idSubcategoria);
+    async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){
         return this.manejoGaleria.agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria);
+    }
+
+    async eliminarPublicacion(idPublicacion){
+        return this.manejoGaleria.eliminarPublicacion(idPublicacion);
     }
 
     async agregarNotificacionCompra(idOrden){

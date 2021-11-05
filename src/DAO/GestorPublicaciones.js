@@ -10,7 +10,12 @@ const config = {
 
 export default class gestorPublicaciones  extends GestorDB{
     modificar(publicacion){}
-    eliminar(idPublicacion){}
+    eliminar(idPublicacion){
+        let values = {
+            idPublicacion: idPublicacion
+        }
+        return axios.post('http://localhost:3001/api/eliminarPublicacion', values);
+    }
     obtener(idPublicacion){}
     agregar(publicacion){
         console.log(publicacion)

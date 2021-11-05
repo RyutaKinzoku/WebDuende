@@ -147,6 +147,14 @@ router.post('/eliminarProducto', async (req,res) =>{
     }
 })
 
+router.post('/eliminarPublicacion', async (req,res) =>{
+    try{
+        await modelos.Publicacion.deleteOne({id: req.body.idPublicacion});
+    } catch (err){
+        res.send(err);
+    }
+}) 
+
 router.post('/eliminarOrden', async (req,res) =>{
     const eliminados = await modelos.Orden.deleteOne({id: req.body.idOrden});
     res.sendStatus(eliminados.deletedCount);
