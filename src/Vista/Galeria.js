@@ -8,6 +8,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Controladora from "../Controladora/Controladora"
 import Publicacion from "../modelo/Publicacion";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 const cookies = new Cookies();
 
@@ -15,6 +17,8 @@ export default class Galeria extends Component{
 
     state = {
         publicaciones: [],
+        categoria:'',
+        categorias: [],
     }
 
     cerrarSesion = () =>{
@@ -31,18 +35,37 @@ export default class Galeria extends Component{
     }
 
     componentDidMount() {
-        this.obtenerPublicaciones();    
+        this.obtenerPublicaciones();
+        this.obtenerCategorias();
+    }
+
+    obtenerCategorias = async() => {
+        let controladora = new Controladora();
+        let categoriasBD = await controladora.obtenerCategorias();
+        var nombresCategorias = [];
+        categoriasBD.forEach(c =>
+            nombresCategorias.push({nombre: c.nombre, id: c.id})
+        )
+        this.setState({
+            categorias: nombresCategorias
+        })
     }
 
     obtenerPublicaciones = async(idCategoria = null) => {
         let controladora = new Controladora();
-        if(idCategoria == null){
-            let publicaciones = await controladora.obtenerPublicaciones();
+        let publicaciones = await controladora.obtenerPublicaciones(idCategoria);
+        this.setState({
+            publicaciones: publicaciones
+        })
+    }
+
+    setCategoria = async() => {
+        let cat = this.state.categorias.find(c => c.nombre === document.getElementById('combo-box-categoria').value)
+        if(cat !== undefined){
             this.setState({
-                publicaciones: publicaciones
+                categoria: cat.id
             })
-        } else{
-            // prublicaciones filtradas
+            this.obtenerPublicaciones(cat.id)
         }
     }
 
@@ -84,10 +107,18 @@ export default class Galeria extends Component{
                                 <div></div>}
                             </Nav>
                             <Nav>
-                                <Form.Control className="botonNav" type="text" name = 'correo' />
+                                <Autocomplete
+                                  disablePortal
+                                  id="combo-box-categoria"
+                                  options={this.state.categorias}
+                                  sx={{ width: 300 }}
+                                  nombre = 'categoria'
+                                  getOptionLabel={(option) => option.nombre}
+                                  renderInput={(params) => <TextField {...params} label="Categoria" />}
+                                />
                             </Nav>
                             <Nav>
-                                <Nav.Link className="botonNav" href="">
+                                <Nav.Link className="botonNav" onClick={()=>this.setCategoria()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                 </svg>
