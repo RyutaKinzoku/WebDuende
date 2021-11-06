@@ -5,6 +5,8 @@ import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
 import Dropdown from '@restart/ui/esm/Dropdown';
 import Controladora from "../Controladora/Controladora";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 const cookies = new Cookies();
 
@@ -16,6 +18,8 @@ export default class CrearPublicacion extends Component{
         tags:'',
         categoria:'',
         subcategoria:'',
+        categorias: [],
+        subcategorias: [],
     }
 
     handleChange = e => {
@@ -31,24 +35,80 @@ export default class CrearPublicacion extends Component{
         }
     }
 
+    setCategoria = async() => {
+        let cat = this.state.categorias.find(c => c.nombre === document.getElementById('combo-box-categoria').value)
+        if(cat !== undefined){
+            this.setState({
+                categoria: cat.id
+            })
+            this.obtenerSubcategorias(cat.id)
+        }
+        this.setState({
+            subcategoria: ''
+        })
+    }
+
+    setSubcategoria = async() => {
+        let sub = this.state.subcategorias.find(s => s.nombre === document.getElementById('combo-box-subcategoria').value)
+        if(sub !== undefined){
+            this.setState({
+                subcategoria: sub.id
+            })
+            this.obtenerSubcategorias(sub.id)
+        }
+    }
+
+    componentDidMount() {
+        this.obtenerCategorias();
+    }
+
+    obtenerCategorias = async() => {
+        let controladora = new Controladora();
+        let categoriasBD = await controladora.obtenerCategorias();
+        var nombresCategorias = [];
+        categoriasBD.forEach(c =>
+            nombresCategorias.push({nombre: c.nombre, id: c.id})
+        )
+        this.setState({
+            categorias: nombresCategorias
+        })
+    }
+
+    obtenerSubcategorias = async(idCategoria) => {
+        let controladora = new Controladora();
+        let subcategoriasBD = await controladora.obtenerSubcategorias(idCategoria);
+        var nombresSubcategorias = [];
+        subcategoriasBD.forEach(s =>
+            nombresSubcategorias.push({nombre: s.nombre, id: s.id})
+        )
+        this.setState({
+            subcategorias: nombresSubcategorias
+        })
+    }
+
     agregarPublicacion  = async (e) => {
         e.preventDefault();
         let controladora = new Controladora();
-        try{ //imagen, descripcion, tags, idCategoria, idSubcategoria = null
+        try{
             console.log(this.state);
-            await controladora.agregarPublicacion(
-                this.state.imagen,
-                this.state.descripcion,
-                this.state.tags,
-                1,
-                1
-                /*
-                this.state.categoria,
-                this.state.subcategoria,
-                */
-            );
+            if(this.state.subcategoria === ''){
+                await controladora.agregarPublicacion(
+                    this.state.imagen,
+                    this.state.descripcion,
+                    this.state.tags,
+                    this.state.categoria,
+                );
+            } else {
+                await controladora.agregarPublicacion(
+                    this.state.imagen,
+                    this.state.descripcion,
+                    this.state.tags,
+                    this.state.categoria,
+                    this.state.subcategoria
+                );
+            }
             swal("Publicación agregada","","success");
-            //window.location.href="/galeria";
+            window.location.href="/galeria";
         }catch(err){
             swal("Error al agregar","", "warning");
         }
@@ -86,8 +146,28 @@ export default class CrearPublicacion extends Component{
                                 <Form.Control type="text" name = 'tags' />
                                 <br/>
                                 <h6>Categoría:</h6>
+                                <Autocomplete
+                                  disablePortal
+                                  id="combo-box-categoria"
+                                  options={this.state.categorias}
+                                  sx={{ width: 300 }}
+                                  nombre = 'categoria'
+                                  getOptionLabel={(option) => option.nombre}
+                                  onBlur = {() => this.setCategoria()}
+                                  renderInput={(params) => <TextField {...params} label="Categoria" />}
+                                />
                                 <br/>
                                 <h6>Subcategoría:</h6>
+                                <Autocomplete
+                                  disablePortal
+                                  id="combo-box-subcategoria"
+                                  options={this.state.subcategorias}
+                                  sx={{ width: 300 }}
+                                  nombre = 'subcategoria'
+                                  getOptionLabel={(option) => option.nombre}
+                                  onBlur = {() => this.setSubcategoria()}
+                                  renderInput={(params) => <TextField {...params} label="Subcategoria" />}
+                                />
                                 <br/>
                             </Form.Group>
 

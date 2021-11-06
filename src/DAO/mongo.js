@@ -191,14 +191,26 @@ router.post('/modificarProducto', async (req, res) =>{
 })
 
 router.post('/agregarPublicacion', subida.single('imagen'), async function (req, res) {
-    const publicacion = new modelos.Publicacion({
-        id: Number(req.body.id),
-        imagen: req.file.filename,
-        descripcion: req.body.descripcion,
-        tags: req.body.tags.split(","),
-        categoria: Number(req.body.categoria),
-        subcategoria: Number(req.body.subcategoria),
-    })
+    console.log(req.body)
+    var publicacion;
+    if(req.body.idSubcategoria == null){
+        publicacion = new modelos.Publicacion({
+            id: Number(req.body.id),
+            imagen: req.file.filename,
+            descripcion: req.body.descripcion,
+            tags: req.body.tags.split(","),
+            idCategoria: Number(req.body.categoria),
+        })
+    } else {
+        publicacion = new modelos.Publicacion({
+            id: Number(req.body.id),
+            imagen: req.file.filename,
+            descripcion: req.body.descripcion,
+            tags: req.body.tags.split(","),
+            idCategoria: Number(req.body.categoria),
+            idSubcategoria: Number(req.body.subcategoria),
+        })
+    }
     try{
         await publicacion.save();
     } catch (err){
