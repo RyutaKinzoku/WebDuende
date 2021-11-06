@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Nav, Navbar, Container, Form, Offcanvas} from "react-bootstrap";
+import {Button, Nav, Navbar, Container, Form, Offcanvas, Card, Row, Col} from "react-bootstrap";
 import Cookies from "universal-cookie";
 import FullCalendar, { formatDate } from '@fullcalendar/react';
 import timeGridPlugin, { TimeColsSlatsCoords } from '@fullcalendar/timegrid';
@@ -77,13 +77,12 @@ export default class Agenda extends Component{
     obtenerNotificaciones = async() => {
         let controladora = new Controladora();
         let response = await controladora.obtenerNotificaciones();
-        console.log(response);
         response.forEach(notificacion => {
             if(notificacion.type() === "NotificacionCita"){
-                this.state.notificaciones.push(notificacion.mensaje + notificacion.idPublicacion);
+                this.state.notificaciones.push(notificacion.mensaje + notificacion.idPublicacion+ "\r\n");
             }
             if(notificacion.type() === "NotificacionCompra"){
-                this.state.notificaciones.push("Se ha realizado una nueva compra, pedido #"+notificacion.idOrdenCompra);
+                this.state.notificaciones.push("Se ha realizado una nueva compra, pedido #"+notificacion.idOrdenCompra+"\r\n");
             }
         });
     }
@@ -100,7 +99,9 @@ export default class Agenda extends Component{
                         <Offcanvas.Title>Notificaciones</Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
-                        {this.state.notificaciones}
+                        {this.state.notificaciones.map(notificacion => {
+                            return notificacion 
+                        })}
                     </Offcanvas.Body>
                     </Offcanvas>
                 </>
@@ -119,7 +120,7 @@ export default class Agenda extends Component{
                                 <Nav.Link className="botonNav" href="/Galeria">Galería</Nav.Link>
                             </Nav>
                             <Nav>
-                                <Nav.Link className="botonNav" href="">Ver Ordenes</Nav.Link>
+                                <Nav.Link className="botonNav" href="/Ordenes">Ver Ordenes</Nav.Link>
                                 <Nav.Link className="botonNav" href="/Compromisos">Crear</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>

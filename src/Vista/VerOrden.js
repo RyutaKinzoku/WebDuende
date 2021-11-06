@@ -66,11 +66,6 @@ export default class VerOrden extends Component{
                         </Form.Group>
                     </Form.Group>
                 </div>
-                <Navbar fixed="bottom" id="#navBarBottom" collapseOnSelect bg="" variant="light" expand="lg">
-                    <Container>
-                    </Container>
-                    <Nav.Link className="botonNav2" href="/DatosCompromiso">Crear Entrega</Nav.Link>
-                </Navbar>
             </div>
         )
     }

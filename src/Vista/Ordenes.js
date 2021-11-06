@@ -6,11 +6,15 @@ import NavStyle from "./css/NavStyle.css";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
 
 export default class Ordenes extends Component{
 
+    state = {
+        ordenes: []
+    }
 
     handleChange = e => {
         this.setState({
@@ -19,7 +23,18 @@ export default class Ordenes extends Component{
         })
     }
 
-    enviar  = async (e) => {}
+    componentDidMount(){
+        this.obtenerOrdenes();
+    }
+
+    obtenerOrdenes  = async (e) => {
+        let controladora = new Controladora();
+        let ordenes = await controladora.obtenerOrdenes();
+        console.log(ordenes);
+        this.setState({
+            ordenes: ordenes
+        });
+    }
 
     render(){
         return(
@@ -41,27 +56,29 @@ export default class Ordenes extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">
-                                {Array.from({ length: 10 }).map((_, idx) => (
+                                {this.state.ordenes.map(orden => (
                                     <Card>
-                                    <Card.Img variant="top" src="holder.js/100px160" />
                                     <Card.Body>
                                         <Row>
+                                        <Col sm={2}>
+                                            <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/images/${orden.comprobante}`} />
+                                        </Col>
                                         <Col>
                                         <Card.Title>Usuario:</Card.Title>
                                         <Card.Text>
-                                            Usuario
+                                            {orden.comprador}
                                         </Card.Text>
                                         </Col>
                                         <Col>
                                         <Card.Title>Dirección:</Card.Title>
                                         <Card.Text>
-                                            Dirección
+                                            {orden.direccion}
                                         </Card.Text>
                                         </Col>
                                         <Col>
                                         <Card.Title>ID:</Card.Title>
                                         <Card.Text>
-                                            ID
+                                            {orden.id}
                                         </Card.Text>
                                         </Col>
                                         <Col>

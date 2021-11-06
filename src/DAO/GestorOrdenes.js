@@ -48,9 +48,11 @@ export default class GestorOrdenes  extends GestorDB{
     async obtenerLista(){
         var idsOrden = await axios.get('http://localhost:3001/api/listaCompras');
         var ordenes = [];
+        console.log(idsOrden);
         idsOrden.data.forEach(o => {
-            ordenes.push(new OrdenCompra(o.id, o.comprobante, o.direccion, o.comprador, o.productos))
+            ordenes.push(new OrdenCompra(o.id, o.comprobante, o.direccion, o.correoUsuario, o.productos))
         });
+        console.log(ordenes);
         return ordenes;
     }
 
