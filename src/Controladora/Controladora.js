@@ -145,8 +145,8 @@ export default class Controladora{
         return this.manejoNotificaciones.agregarNotificacionCita(idPublicacion, correo, mensaje);
     }
     
-    async eliminarNotificacion(idNotificacion){
-        return this.manejoNotificaciones.eliminarNotificacion(idNotificacion);
+    async eliminarNotificacion(type, idOrden){
+        return this.manejoNotificaciones.eliminarNotificacion(type, idOrden);
     }
 
     async agregarCategoria(nombre){
@@ -179,5 +179,9 @@ export default class Controladora{
 
     async obtenerNotificaciones(){
         return this.manejoNotificaciones.obtenerNotificaciones();
+    }
+
+    async eliminarOrden(idOrden){
+        return this.manejoCompras.eliminarOrden(idOrden);
     }
 }

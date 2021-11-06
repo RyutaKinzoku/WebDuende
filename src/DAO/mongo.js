@@ -157,8 +157,11 @@ router.post('/eliminarPublicacion', async (req,res) =>{
 }) 
 
 router.post('/eliminarOrden', async (req,res) =>{
-    const eliminados = await modelos.Orden.deleteOne({id: req.body.idOrden});
-    res.sendStatus(eliminados.deletedCount);
+    try{ 
+        await modelos.Orden.deleteOne({id: req.body.idOrden});
+    }catch(err) {
+        res.send(err);
+    }
 })
 
 router.post('/modificarProducto', async (req, res) =>{
@@ -219,7 +222,6 @@ router.post('/agregarPublicacion', subida.single('imagen'), async function (req,
 })
 
 router.get('/listaProductosOrden', async (req,res) => {
-    console.log(req.query.idOrden)
     modelos.Orden.find({id: req.query.idOrden}, (err, docs) => {
         if(err){
             res.send(err);

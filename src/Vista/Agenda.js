@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import FullCalendar, { formatDate } from '@fullcalendar/react';
 import timeGridPlugin, { TimeColsSlatsCoords } from '@fullcalendar/timegrid';
 import Controladora from "../Controladora/Controladora";
+import swal from "sweetalert";
 const cookies = new Cookies();
 
 export default class Agenda extends Component{
@@ -74,6 +75,18 @@ export default class Agenda extends Component{
         });
     }
 
+    eliminarNotificacion = async (idOrden)=>{
+        /*let controladora = new Controladora();
+        let response = await controladora.eliminarNotificacion("NotificacionCompra", idOrden);
+        if(!response.data){
+            swal("Notificación eliminada", "", "success").then((value)=>{
+                window.location.href='/Agenda'
+            })
+        } else {
+            swal("Error al eliminar","", "warning");
+        }*/
+    }
+
     obtenerNotificaciones = async() => {
         let controladora = new Controladora();
         let response = await controladora.obtenerNotificaciones();
@@ -104,7 +117,12 @@ export default class Agenda extends Component{
                            <Card.Body>
                                <Row>
                                {notificacion}
-                               </Row>
+                               <Button size="md" variant="secondary" type="submit" onClick = {() => this.eliminarNotificacion(notificacion.split("#")[1])}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                    </svg>
+                                </Button>
+                                </Row>
                            </Card.Body>
                            </Card>
                         )}

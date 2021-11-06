@@ -26,7 +26,7 @@ export default class ManejoNotificaciones{
         return this.gestorNotificaciones.agregarNotificacionCompra(notificacionCompra);
     }
     
-    eliminarNotificacion(idNotificacion){
-        this.gestorNotificaciones.eliminar(idNotificacion);
+    async eliminarNotificacion(type, idOrden){
+        return this.gestorNotificaciones.eliminar(type, idOrden);
     }
 }

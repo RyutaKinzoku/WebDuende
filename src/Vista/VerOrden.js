@@ -13,7 +13,8 @@ const cookies = new Cookies();
 export default class VerOrden extends Component{
 
     state = {
-        productos: []
+        productos: [],
+        precioTotal: 0
     }
 
     handleChange = e => {
@@ -31,6 +32,9 @@ export default class VerOrden extends Component{
         console.log(this.props.match.params.id)
         let controladora = new Controladora();
         let productos = await controladora.obtenerProductosOrden(this.props.match.params.id);
+        productos.map(async producto => {
+            this.state.precioTotal += Number(producto.cantidad)*Number(producto.precio);
+        })
         this.setState({
             productos: productos
         });
@@ -53,6 +57,7 @@ export default class VerOrden extends Component{
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
+                        <Navbar.Brand id="navTitle" href="">Total: ₡ {Number(this.state.precioTotal)}</Navbar.Brand>
                 </Navbar>
                 <div className="center container w-70 p-8 py-2 my-3  mt-5">
                     <Form.Group className="mb-3" controlId="formBasicEmail">

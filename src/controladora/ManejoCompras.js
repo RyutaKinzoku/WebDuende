@@ -52,7 +52,7 @@ export default class ManejoCompras{
         return this.gestorOrdenes.agregarOrden(orden);
     }
 
-    eliminarOrden(idOrden){
+    async eliminarOrden(idOrden){
         return this.gestorOrdenes.eliminar(idOrden);
     }
 

@@ -29,7 +29,6 @@ export default class GestorOrdenes  extends GestorDB{
         for (var producto of orden.productos){
             trueProductos+=producto.id+"|"+producto.nombre+"|"+producto.descripcion+"|"+producto.precio+"|"+producto.cantidad+"|"+producto.imagen+"¨"
         }
-        console.log(orden.comprador)
         form.append('idOrden', orden.id);
         form.append('direccion', orden.direccion);
         form.append('comprador', orden.comprador);

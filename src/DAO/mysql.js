@@ -361,7 +361,7 @@ router.post('/eliminarNotificacionCita', (req,res) => {
 })
 
 router.post('/eliminarNotificacionCompra', (req,res) => {
-    const sqlDeleteNotificacionCompra = "DELETE FROM `NotificacionCompra` WHERE ID=?;"
+    const sqlDeleteNotificacionCompra = "DELETE FROM `NotificacionCompra` WHERE idOrdenCompra=?;"
     const sqlDeleteNotificacion = "DELETE FROM `Notificacion` WHERE ID=?;"
     db.query(sqlDeleteNotificacionCompra, [req.body.idNotificacion], () => {
         db.query(sqlDeleteNotificacion, [req.body.idNotificacion], (err, _) => {
