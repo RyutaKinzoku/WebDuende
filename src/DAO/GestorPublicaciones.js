@@ -32,9 +32,17 @@ export default class gestorPublicaciones  extends GestorDB{
     async obtenerLista(idCategoria = null){
         var idsPublicacion = await axios.get('http://localhost:3001/api/listaPublicaciones', {params: {idCategoria: idCategoria}});
         var publicaciones = [];
-        idsPublicacion.data.forEach(p => {
-            publicaciones.push(new Publicacion(p.id, p.imagen, p.descripcion, p.tags, p.categoria, p.subcategoria));
-        });
+        for(var p of idsPublicacion.data) {
+            var responseC = await axios.get('http://localhost:3001/api/obtenerCategoria',{params: {idCategoria: p.idCategoria} });
+            var responseS = await axios.get('http://localhost:3001/api/obtenerSubcategoria',{params: {idSubcategoria: p.idSubcategoria} });
+            if(responseC.data.length>0){
+                if(responseS.data.length>0){
+                    publicaciones.push(new Publicacion(p.id, p.imagen, p.descripcion, p.tags, responseC.data[0].nombre, responseS.data[0].nombre));
+                } else{
+                    publicaciones.push(new Publicacion(p.id, p.imagen, p.descripcion, p.tags, responseC.data[0].nombre, "NA"));
+                }
+            }
+        }
         return publicaciones;
     }
     async getNext(){
