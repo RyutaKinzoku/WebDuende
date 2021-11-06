@@ -2,7 +2,7 @@ import ManejoUsuarios from './ManejoUsuarios';
 import ManejoProductos from './ManejoProductos';
 import ManejoAgenda from './ManejoAgenda';
 import ManejoCompras from './ManejoCompras';
-import ManejoGaleria from './ManejoGaleria.js';
+import ManejoGaleria from './ManejoGaleria';
 import ManejoNotificaciones from './ManejoNotificaciones';
 import { ThemeProvider } from 'react-bootstrap';
 
