@@ -4,13 +4,13 @@ import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
 import Dropdown from '@restart/ui/esm/Dropdown';
+import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
 
 export default class CrearSubcategoria extends Component{
 
     state = {
-        categoria:'',
         nombre:'',
     }
 
@@ -23,6 +23,17 @@ export default class CrearSubcategoria extends Component{
 
     enviar  = async (e) => {}
 
+    agregar  = async (e) => {
+        let controladora = new Controladora();
+        let response = await controladora.agregarSubcategoria(this.props.match.params.id, this.state.nombre);
+        if(!response.data){
+            swal("Subcategoria creada exitosamente","" ,"success").then((value) => {
+                window.location.href="/VerSubcategorias/"+this.props.match.params.id;
+            })
+        }else{
+            console.log(response);
+        }
+    }
     render(){
         return(
             <div>
@@ -45,20 +56,17 @@ export default class CrearSubcategoria extends Component{
                             <Form.Group onChange= {this.handleChange}>
                                 <h6>Por favor, ingrese el nombre de la subcategoría: </h6>
                                 <br/>
-                                <h6>Categoria a la que pertenece:</h6>
-                                <Form.Control type="text" name='categoria' />
-                                <br/>
                                 <h6>Nombre:</h6>
-                                <Form.Control type="text" name='nombre' />
+                                <Form.Control type="text" name='nombre'/>
                                 <br/>
                             </Form.Group>
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" onClick = {() => this.agregar()}>
                                 Crear
                             </Button>
-                            <Button size="md" variant="secondary" type="submit">
+                            <Button size="md" variant="secondary" type="submit" href="/VerCategorias">
                                 Cancelar
                             </Button>
                         </div>

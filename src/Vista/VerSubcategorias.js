@@ -35,12 +35,17 @@ export default class VerSubcategorias extends Component{
         window.location.href='/modificarsubcategoria/'+idSubcategoria; 
     }
 
+    agregarSubcategoria = async(idCategoria) =>{
+        window.location.href='/CrearSubcategoria/'+idCategoria; 
+    }
+
     eliminarSubcategoria = async(idSubcategoria) => {
         let controladora = new Controladora();
         let response = await controladora.eliminarSubcategoria(idSubcategoria);
         if(!response.data){
-            window.location.href='/VerSubCategorias/'+this.props.match.params.id
-            await swal("Categoría eliminada", "", "success");
+            swal("Subcategoría eliminada", "", "success").then((value)=>{
+                window.location.href='/VerSubcategorias/'+this.props.match.params.id
+            })
         } else {
             swal("Error al eliminar","", "warning");
         }
@@ -108,10 +113,10 @@ export default class VerSubcategorias extends Component{
                     </Container>
                         <Row>
                             <Col>
-                                <Nav.Link className="botonNav2" href="/VerCategorias">Volver</Nav.Link>{' '}
+                                <Nav.Link className="botonNav2" onClick = {() => this.agregarSubcategoria(this.props.match.params.id)}>Crear Subcategoría</Nav.Link>{' '}
                             </Col>
                             <Col>
-                                <Nav.Link className="botonNav2" href="/CrearSubcategoria">CrearSubcategoría</Nav.Link>{' '}
+                                <Nav.Link className="botonNav2" href="/VerCategorias">Volver</Nav.Link>{' '}
                             </Col>
                         </Row>
                 </Navbar>

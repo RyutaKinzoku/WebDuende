@@ -41,7 +41,7 @@ function Routes(){
                 <Route exact path="/CrearCita" component ={CrearCita}/>
                 <Route exact path="/CrearEntrega" component ={CrearEntrega}/>
                 <Route exact path="/CrearCategoria" component ={CrearCategoria}/>
-                <Route exact path="/CrearSubcategoria" component ={CrearSubcategoria}/>
+                <Route exact path="/CrearSubcategoria/:id" component ={CrearSubcategoria}/>
                 <Route exact path="/modificarPublicacion" component ={ModificarPublicacion}/>
                 <Route exact path="/modificarProducto/:id" component ={ModificarProducto}/>
                 <Route exact path="/modificarCategoria/:id" component ={ModificarCategoria}/>

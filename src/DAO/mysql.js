@@ -270,7 +270,6 @@ router.get('/getCategorias', (_,res) => {
 });
 
 router.post('/eliminarCategoria', (req,res)=> {
-    console.log(req.body.idCategoria);
     const sqlDeleteCategoria = "DELETE FROM Categoria WHERE ID=?;"
     db.query(sqlDeleteCategoria, [req.body.idCategoria], (err, _) => {
         console.log(err);
@@ -514,4 +513,36 @@ router.post("/modificarSubcategoria", (req,res) =>{
         res.send(err);
     })
 });
+
+router.post("/agregarSubcategoria", (req,res) =>{
+    const idSubcategoria = req.body.idSubcategoria
+    const nombre = req.body.nombre
+    const idCategoria = req.body.idCategoria;
+    console.log(idSubcategoria, nombre, idCategoria);
+    const sqlInsertSubcategoria = "INSERT INTO Subcategoria (ID, nombre, idCategoria) VALUES (?,?,?)";
+    db.query(sqlInsertSubcategoria , [idSubcategoria, nombre, idCategoria] ,(err) => {
+        console.log(err);
+        res.send(err);
+    })
+});
+
+router.get('/getNextSubcategorias', (req,res) => {
+    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor=ultimo_valor+1 WHERE nombre='subcategoria';"
+    const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'subcategoria';"
+    db.query(sqlUpdate, () => {
+        db.query(sqlSelect, (err, result) => {
+            console.log(result);
+            res.send(result);
+        })
+    })
+})
+
+router.post('/eliminarSubcategoria', (req,res)=> {
+    const sqlDeleteSubcategoria = "DELETE FROM Subcategoria WHERE ID=?;"
+    db.query(sqlDeleteSubcategoria, [req.body.idSubcategoria], (err, _) => {
+        console.log(err);
+        res.send(err);
+    })
+})
+
 module.exports = router;

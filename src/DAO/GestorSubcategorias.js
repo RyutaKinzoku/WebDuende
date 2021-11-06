@@ -10,7 +10,12 @@ export default class GestorSubcategorias  extends GestorDB{
         }
         return axios.post('http://localhost:3001/api/modificarSubcategoria',values);
     }
-    eliminar(idSubcategoria){}
+    eliminar(idSubcategoria){
+        let values = {
+            idSubcategoria: idSubcategoria
+        }
+        return axios.post('http://localhost:3001/api/eliminarSubcategoria', values);
+    }
     async obtener(idSubcategoria){
         var response = await axios.get('http://localhost:3001/api/obtenerSubcategoria',{params: {idSubcategoria: idSubcategoria} });
         if(response.data.length>0){
@@ -20,7 +25,14 @@ export default class GestorSubcategorias  extends GestorDB{
         }
         return null;
     }
-    agregar(subcategoria){}
+    async agregar(subcategoria){
+        let values = {
+            idSubcategoria: subcategoria.id,
+            idCategoria: subcategoria.idCategoria,
+            nombre: subcategoria.nombre,
+        }
+        return axios.post('http://localhost:3001/api/agregarSubcategoria',values);
+    }
     async obtenerLista(idCategoria){
         let lista = await axios.get('http://localhost:3001/api/getSubcategorias', {params: {idCategoria: idCategoria}});
         let subcategorias = []
@@ -30,5 +42,8 @@ export default class GestorSubcategorias  extends GestorDB{
         });
         return subcategorias;
     }
-    getNext(){}
+    async getNext(){
+        let valor = await axios.get('http://localhost:3001/api/getNextSubcategorias');
+        return valor.data[0].ultimo_valor;
+    }
 }

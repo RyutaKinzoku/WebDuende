@@ -49,8 +49,9 @@ export default class VerCategorias extends Component{
         let controladora = new Controladora();
         let response = await controladora.eliminarCategoria(idCategoria);
         if(!response.data){
-            window.location.href='/VerCategorias'
-            await swal("Categoría eliminada", "", "success");
+            await swal("Categoría eliminada", "", "success").then((value)=>{
+                window.location.href='/VerCategorias'
+            });
         } else {
             if (response.data.errno === 1217){
                 swal("No se puede eliminar la categoría","", "warning");

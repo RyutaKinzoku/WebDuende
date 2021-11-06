@@ -164,4 +164,12 @@ export default class Controladora{
     async obtenerSubcategorias(idCategoria){
         return this.manejoGaleria.obtenerSubcategorias(idCategoria);
     }
+
+    async agregarSubcategoria(idCategoria, nombre){
+        return this.manejoGaleria.agregarSubcategoria(idCategoria, nombre);
+    }
+
+    async eliminarSubcategoria(idSubcategoria){
+        return this.manejoGaleria.eliminarSubcategoria(idSubcategoria);
+    }
 }
