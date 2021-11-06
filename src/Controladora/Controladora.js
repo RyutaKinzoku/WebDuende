@@ -172,4 +172,8 @@ export default class Controladora{
     async eliminarSubcategoria(idSubcategoria){
         return this.manejoGaleria.eliminarSubcategoria(idSubcategoria);
     }
+
+    async obtenerNotificaciones(){
+        return this.manejoNotificaciones.obtenerNotificaciones();
+    }
 }

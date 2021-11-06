@@ -31,4 +31,8 @@ export default class NotificacionCita extends Notificacion {
     set correoUsuario(correoUsuario){
         this._correoUsuario = correoUsuario;
     }
+
+    type(){
+        return "NotificacionCita";
+    }
 }

@@ -10,8 +10,8 @@ export default class ManejoNotificaciones{
         this.gestorNotificaciones = new GestorNotificaciones();
     }
 
-    obtener(){
-        return this.gestorNotificaciones.obtener();
+    async obtenerNotificaciones(){
+        return this.gestorNotificaciones.obtenerLista();
     }
 
     agregarNotificacionCita(idPublicacion, correo, mensaje){

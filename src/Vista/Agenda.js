@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Button, Nav, Navbar, Container, Form, NavDropdown} from "react-bootstrap";
+import {Button, Nav, Navbar, Container, Form, Offcanvas} from "react-bootstrap";
 import Cookies from "universal-cookie";
 import FullCalendar, { formatDate } from '@fullcalendar/react';
-import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin, { TimeColsSlatsCoords } from '@fullcalendar/timegrid';
 import Controladora from "../Controladora/Controladora";
 const cookies = new Cookies();
@@ -11,7 +10,9 @@ export default class Agenda extends Component{
     
     state = {
         compromisos: [],
-        eventos: []
+        eventos: [],
+        notificaciones: [],
+        show: false
     }
     
     handleChange = e => {
@@ -22,7 +23,8 @@ export default class Agenda extends Component{
     }
 
     componentDidMount() {
-        this.obtenerCompromisos();    
+        this.obtenerCompromisos();
+        this.obtenerNotificaciones();
     }
 
     obtenerCompromisos = async() => {
@@ -72,16 +74,43 @@ export default class Agenda extends Component{
         });
     }
 
+    obtenerNotificaciones = async() => {
+        let controladora = new Controladora();
+        let response = await controladora.obtenerNotificaciones();
+        console.log(response);
+        response.forEach(notificacion => {
+            if(notificacion.type() === "NotificacionCita"){
+                this.state.notificaciones.push(notificacion.mensaje + notificacion.idPublicacion);
+            }
+            if(notificacion.type() === "NotificacionCompra"){
+                this.state.notificaciones.push("Se ha realizado una nueva compra, pedido #"+notificacion.idOrdenCompra);
+            }
+        });
+    }
+
+    handleClose = () => this.setState({show: false});
+    handleShow = () => this.setState({show: true});
+
     render(){
         return(
             <div>
+                <>
+                    <Offcanvas show={this.state.show} onHide={this.handleClose}>
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title>Notificaciones</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        {this.state.notificaciones}
+                    </Offcanvas.Body>
+                    </Offcanvas>
+                </>
                 <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
                         <Navbar.Brand id="navTitle" href="">Agenda de Duende</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link className="botonNav" href="">
+                                <Nav.Link className="botonNav" onClick={this.handleShow}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
                                     <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
                                 </svg>

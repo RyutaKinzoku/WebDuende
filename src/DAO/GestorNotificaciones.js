@@ -67,11 +67,11 @@ export default class GestorNotificaciones extends GestorDB{
         let notificacionesCompra = await axios.get('http://localhost:3001/api/getNotificacionesCompra');
         let notificaciones = [];
         notificacionesCita.data.forEach(element => {
-            let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+element.idNotificacion+";"+element.idPublicacion+";"+element.correo+";"+element.mensaje)
+            let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+element.ID+";"+element.idPublicacion+";"+element.correoUsuario+";"+element.mensaje)
             notificaciones.push(notificacionCita);
         });
         notificacionesCompra.data.forEach(element => {
-            let notificacionCompra = FabricaNotificaciones.fabricarNotificacion("NotificacionCompra;"+element.idNotificacion+";"+element.idOrden);
+            let notificacionCompra = FabricaNotificaciones.fabricarNotificacion("NotificacionCompra;"+element.ID+";"+element.idOrdenCompra);
             notificaciones.push(notificacionCompra);
         });
         return notificaciones;
