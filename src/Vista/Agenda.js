@@ -99,9 +99,15 @@ export default class Agenda extends Component{
                         <Offcanvas.Title>Notificaciones</Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
-                        {this.state.notificaciones.map(notificacion => {
-                            return notificacion 
-                        })}
+                        {this.state.notificaciones.map(notificacion => 
+                           <Card>
+                           <Card.Body>
+                               <Row>
+                               {notificacion}
+                               </Row>
+                           </Card.Body>
+                           </Card>
+                        )}
                     </Offcanvas.Body>
                     </Offcanvas>
                 </>
