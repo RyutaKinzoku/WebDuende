@@ -14,16 +14,16 @@ export default class ManejoNotificaciones{
         return this.gestorNotificaciones.obtenerLista();
     }
 
-    agregarNotificacionCita(idPublicacion, correo, mensaje){
-        let idNotificacion = this.gestorNotificaciones.getNext();
+    async agregarNotificacionCita(idPublicacion, correo, mensaje){
+        let idNotificacion = await this.gestorNotificaciones.getNext();
         let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+idNotificacion+";"+idPublicacion+";"+correo+";"+mensaje);
-        this.gestorNotificaciones.agregarNotificacionCita(notificacionCita);
+        return this.gestorNotificaciones.agregarNotificacionCita(notificacionCita);
     }
 
-    agregarNotificacionCompra(idOrden){
-        let idNotificacion = this.gestorNotificaciones.getNext();
+    async agregarNotificacionCompra(idOrden){
+        let idNotificacion = await this.gestorNotificaciones.getNext();
         let notificacionCompra =  FabricaNotificaciones.fabricarNotificacion("NotificacionCompra;"+idNotificacion+";"+idOrden);
-        this.gestorNotificaciones.agregarNotificacionCompra(notificacionCompra);
+        return this.gestorNotificaciones.agregarNotificacionCompra(notificacionCompra);
     }
     
     eliminarNotificacion(idNotificacion){

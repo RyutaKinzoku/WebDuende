@@ -438,7 +438,7 @@ router.get('/getNotificacionesCompra', (_,res) => {
 });
 
 router.get('/getNextNotificaciones', (req,res) => {
-    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor=ultimo_valor+1 WHERE nombre='notificacion'"
+    const sqlUpdate = "UPDATE Consecutivo SET ultimo_valor=ultimo_valor+1 WHERE nombre='notificacion';"
     const sqlSelect = "SELECT ultimo_valor FROM Consecutivo WHERE nombre = 'notificacion';"
     db.query(sqlUpdate, () => {
         db.query(sqlSelect, (err, result) => {

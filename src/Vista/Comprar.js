@@ -40,8 +40,9 @@ export default class Comprar extends Component{
             if (idOrden >  0){
                 await controladora.agregarNotificacionCompra(idOrden);
                 await controladora.eliminarCarrito(correo);
-                swal("Compra existosa","","success")
-                window.location.href="/Carrito";
+                swal("Compra existosa","","success").then((value)=>{
+                    window.location.href="/Carrito";
+                })
             }
         }catch(err){
             swal("Error al comprar","", "warning");

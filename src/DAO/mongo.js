@@ -128,12 +128,13 @@ router.post('/agregarOrden', subida.single('comprobante'), async function (req, 
     const orden = new modelos.Orden({
         id: Number(req.body.idOrden),
         direccion: req.body.direccion,
-        correo: req.body.correo,
+        correoUsuario: req.body.comprador,
         productos: trueProductos,
         comprobante: req.file.filename
     })
     try{
         await orden.save();
+        res.send(res);
     } catch (err){
         res.send(err);
     }

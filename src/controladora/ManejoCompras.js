@@ -41,7 +41,7 @@ export default class ManejoCompras{
     }
 
     async comprar(correo, comprobante, direccion){
-        var productos = await this.obtenerProductosCarrito(correo); //Map<idProducto: int, cantidad: int>
+        var productos = await this.obtenerProductosCarrito(correo);
         return this.agregarOrden(productos, correo, comprobante, direccion);
     }
 

@@ -29,15 +29,16 @@ export default class GestorOrdenes  extends GestorDB{
         for (var producto of orden.productos){
             trueProductos+=producto.id+"|"+producto.nombre+"|"+producto.descripcion+"|"+producto.precio+"|"+producto.cantidad+"|"+producto.imagen+"¨"
         }
+        console.log(orden.comprador)
         form.append('idOrden', orden.id);
         form.append('direccion', orden.direccion);
-        form.append('correo', orden.correo);
+        form.append('comprador', orden.comprador);
         form.append('productos', trueProductos);
         form.append('comprobante', orden.comprobante);
         var err = await axios.post('http://localhost:3001/api/agregarOrden', form, {
             headers: config.headers,
         })
-        if(!err.data){
+        if(err.data){
             return orden.id;
         }else{
             return -1;

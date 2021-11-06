@@ -46,14 +46,14 @@ export default class GestorNotificaciones extends GestorDB{
             }
         }
     }
-    agregarNotificacionCompra(notificacionCompra){
+    async agregarNotificacionCompra(notificacionCompra){
         let values = {
             id: notificacionCompra.id,
             idOrdenCompra: notificacionCompra.idOrdenCompra
         }
         return axios.post('http://localhost:3001/api/agregarNotificacionCompra',values);
     }
-    agregarNotificacionCita(notificacionCita){
+    async agregarNotificacionCita(notificacionCita){
         let values = {
             id: notificacionCita.id,
             mensaje: notificacionCita.mensaje,
