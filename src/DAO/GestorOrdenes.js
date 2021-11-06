@@ -14,7 +14,7 @@ var fs = require('fs');
 export default class GestorOrdenes  extends GestorDB{
     modificar(orden){}
 
-    eliminar(idOrden){
+    async eliminar(idOrden){
         let values = {
             idOrden: idOrden
         }

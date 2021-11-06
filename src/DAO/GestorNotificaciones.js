@@ -3,14 +3,14 @@ import axios from "axios";
 import FabricaNotificaciones from "../modelo/FabricaNotificaciones/FabricaNotificaciones";
 
 export default class GestorNotificaciones extends GestorDB{
-    modificarNotificacionCompra(notificacionCompra){
+    async modificarNotificacionCompra(notificacionCompra){
         let values = {
             id: notificacionCompra.id,
             idOrdenCompra: notificacionCompra.idOrdenCompra
         }
         return axios.post('http://localhost:3001/api/modificarNotificacionCompra',values);
     }
-    modificarNotificacionCita(notificacionCita){
+    async modificarNotificacionCita(notificacionCita){
         let values = {
             id: notificacionCita.id,
             mensaje: notificacionCita.mensaje,
@@ -19,7 +19,7 @@ export default class GestorNotificaciones extends GestorDB{
         }
         return axios.post('http://localhost:3001/api/modificarNotificacionCita',values);
     }
-    eliminar(type, idNotificacion){
+    async eliminar(type, idNotificacion){
         let values = {
             idNotificacion: idNotificacion
         }
