@@ -77,6 +77,10 @@ export default class Controladora{
         return this.manejoCompras.obtenerProductosCarrito(correo);
     }
 
+    async obtenerProductosOrden(idOrden){
+        return this.manejoCompras.obtenerProductosOrden(idOrden);
+    }
+
     async eliminarProductoCarrito(correo, idProducto){
         return this.manejoCompras.eliminarProductoCarrito(correo, idProducto);
     }

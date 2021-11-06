@@ -218,4 +218,14 @@ router.post('/agregarPublicacion', subida.single('imagen'), async function (req,
     }
 })
 
+router.get('/listaProductosOrden', async (req,res) => {
+    console.log(req.query.idOrden)
+    modelos.Orden.find({id: req.query.idOrden}, (err, docs) => {
+        if(err){
+            res.send(err);
+        }
+        res.send(docs);
+    })
+})
+
 module.exports = router;

@@ -55,4 +55,8 @@ export default class ManejoCompras{
     eliminarOrden(idOrden){
         return this.gestorOrdenes.eliminar(idOrden);
     }
+
+    async obtenerProductosOrden(idOrden){
+        return this.gestorOrdenes.obtenerProductosOrden(idOrden);
+    }
 }

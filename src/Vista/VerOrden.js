@@ -6,17 +6,34 @@ import NavStyle from "./css/NavStyle.css";
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Controladora from "../Controladora/Controladora";
 
 const cookies = new Cookies();
 
 export default class VerOrden extends Component{
 
+    state = {
+        productos: []
+    }
 
     handleChange = e => {
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value
         })
+    }
+
+    componentDidMount() {
+        this.obtenerProductosOrden();    
+    }
+
+    obtenerProductosOrden = async() => {
+        console.log(this.props.match.params.id)
+        let controladora = new Controladora();
+        let productos = await controladora.obtenerProductosOrden(this.props.match.params.id);
+        this.setState({
+            productos: productos
+        });
     }
 
     enviar  = async (e) => {}
@@ -41,21 +58,27 @@ export default class VerOrden extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">
-                                {Array.from({ length: 4 }).map((_, idx) => (
+                                {this.state.productos.map(producto => (
                                     <Card>
-                                    <Card.Img variant="top" src="holder.js/100px160" />
                                     <Card.Body>
                                             <Row>
+                                            <Col sm={2}>
+                                            <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/images/${producto.imagen}`} />
+                                            </Col>   
                                             <Col>
                                             <Card.Title>Producto:</Card.Title>
                                             <Card.Text>
-                                                Producto
+                                                {producto.nombre}
                                             </Card.Text>
                                             </Col>
                                             <Col>
                                             <Card.Title>Cantidad:</Card.Title>
                                             <Card.Text>
-                                                Cantidad
+                                                {producto.cantidad}
+                                            </Card.Text>
+                                            <Card.Title>Subtotal:</Card.Title>
+                                            <Card.Text>
+                                                ₡ {Number(producto.cantidad)*Number(producto.precio)}
                                             </Card.Text>
                                             </Col>
                                             </Row>

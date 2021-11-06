@@ -64,4 +64,11 @@ export default class GestorOrdenes  extends GestorDB{
     async setNext(){
         return axios.post('http://localhost:3001/api/setIdORden');
     }
+
+    async obtenerProductosOrden(idOrden){
+        console.log(idOrden);
+        var response = await axios.get('http://localhost:3001/api/listaProductosOrden',{params:{idOrden: idOrden}});
+        console.log(response.data[0].productos);
+        return response.data[0].productos;
+    }
 }

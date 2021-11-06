@@ -27,6 +27,10 @@ export default class Ordenes extends Component{
         this.obtenerOrdenes();
     }
 
+    verOrden = async(idOrden) =>{
+        window.location.href='/VerOrden/'+idOrden; 
+    }
+
     obtenerOrdenes  = async (e) => {
         let controladora = new Controladora();
         let ordenes = await controladora.obtenerOrdenes();
@@ -82,7 +86,7 @@ export default class Ordenes extends Component{
                                         </Card.Text>
                                         </Col>
                                         <Col>
-                                        <Button size="md" variant="secondary" type="submit" href="/VerOrden">
+                                        <Button size="md" variant="secondary" type="submit"  onClick = {() => this.verOrden(orden.id)}>
                                             Ver
                                         </Button>
                                         </Col>

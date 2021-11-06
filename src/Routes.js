@@ -51,7 +51,7 @@ function Routes(){
                 <Route exact path="/Tienda" component ={Tienda}/>
                 <Route exact path="/Carrito" component ={Carrito}/>
                 <Route exact path="/Ordenes" component ={Ordenes}/>
-                <Route exact path="/VerOrden" component ={VerOrden}/>
+                <Route exact path="/VerOrden/:id" component ={VerOrden}/>
                 <Route exact path="/VerCategorias" component = {VerCategorias}/>
                 <Route exact path="/VerSubcategorias/:id" component = {VerSubcategorias}/>
                 <Route exact path="/VerCurso/:id" component = {VerCurso}/>
