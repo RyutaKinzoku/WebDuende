@@ -26,7 +26,7 @@ export default class ManejoProductos {
     }
 
     modificarProducto(idProducto, nombre, descripcion, precio, cantidad, imagen){
-        var producto = new Producto(idProducto, nombre, descripcion, precio, cantidad, imagen);
+        var producto = new Producto(idProducto, nombre, descripcion, precio, cantidad, imagen[0]);
         return this.gestorProductos.modificar(producto);
     }
 }
