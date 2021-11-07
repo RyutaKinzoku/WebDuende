@@ -63,7 +63,7 @@ export default class Comprar extends Component{
                             <Nav className="me-auto">
                                 <Nav.Link className="botonNav" href="/Tienda">Tienda</Nav.Link>
                                 <Nav.Link className="botonNav" href="/Galeria">Galería</Nav.Link>
-                                <Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>
+                                {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ?<Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>:<div></div>}
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
