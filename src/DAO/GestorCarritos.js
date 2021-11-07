@@ -28,6 +28,21 @@ export default class GestorCarritos  extends GestorDB{
         return productos;
     }
 
+    async actualizarProductos(correo){
+        var idsProducto = await axios.get('http://localhost:3001/api/obtenerProductosCarrito', {params: {correo: correo}});
+        for(let i=0; i<idsProducto.data.length;i++){
+            var tupla = idsProducto.data[i];
+            var [idProducto, cantidad] = tupla;
+            var producto = (await axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto} })).data[0];
+            var producto2 = new Producto(producto.id, producto.nombre, producto.descripcion, producto.precio, producto.cantidad-cantidad, producto.imagen)
+            let values = {
+                id: producto2.id,
+                cantidad: producto2.cantidad
+            }
+            axios.put('http://localhost:3001/api/actualizarProducto',values)
+        }
+    }
+
     async agregarProducto(carrito){
         let values = {
             correo: carrito.comprador,

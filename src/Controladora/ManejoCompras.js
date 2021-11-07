@@ -42,6 +42,7 @@ export default class ManejoCompras{
 
     async comprar(correo, comprobante, direccion){
         var productos = await this.obtenerProductosCarrito(correo);
+        this.gestorCarritos.actualizarProductos(correo);
         return this.agregarOrden(productos, correo, comprobante, direccion);
     }
 

@@ -200,6 +200,16 @@ router.put('/modificarProducto', subida.single('imagen'), async function (req, r
     }
 })
 
+router.put('/actualizarProducto', async function (req, res){
+    try{
+        modelos.Producto.findOne({id: req.body.id}).then((producto) => {
+            producto.cantidad = Number(req.body.cantidad);
+            producto.save()})
+    } catch (err){
+        res.send(err);
+    }
+})
+
 router.post('/agregarPublicacion', subida.single('imagen'), async function (req, res) {
     var publicacion;
     if(req.body.idSubcategoria == null){
