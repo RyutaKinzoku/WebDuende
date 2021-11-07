@@ -105,14 +105,6 @@ export default class Galeria extends Component{
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? <Nav.Link className="botonNav" href="/CrearPublicacion">Crear Publicación</Nav.Link>: <div></div>}
                             </Nav>
                             <Nav>
-                                {cookies.get('correo') === undefined? 
-                                <Nav.Link className="botonNav" href="/">Iniciar Sesión</Nav.Link>:
-                                <div></div>}
-                                {cookies.get('correo') === undefined? 
-                                <Nav.Link className="botonNav" href="/Registrarse">Registrarse</Nav.Link>:
-                                <div></div>}
-                            </Nav>
-                            <Nav>
                                 <Autocomplete
                                   disablePortal
                                   id="combo-box-categoria"
@@ -131,6 +123,12 @@ export default class Galeria extends Component{
                                 </Nav.Link>
                                 {cookies.get('correo') !== undefined? 
                                 <Nav.Link className="botonNav" onClick={()=>this.cerrarSesion()}>Cerrar Sesión</Nav.Link>:
+                                <div></div>}
+                                {cookies.get('correo') === undefined? 
+                                <Nav.Link className="botonNav" href="/">Iniciar Sesión</Nav.Link>:
+                                <div></div>}
+                                {cookies.get('correo') === undefined? 
+                                <Nav.Link className="botonNav" href="/Registrarse">Registrarse</Nav.Link>:
                                 <div></div>}
                             </Nav>
                         </Navbar.Collapse>
@@ -156,9 +154,10 @@ export default class Galeria extends Component{
                                             <Card.Text>
                                                 Subcategoría: {publicacion.subcategoria}
                                             </Card.Text>
+                                            {cookies.get('correo') !== undefined? 
                                             <Button size="md" variant="secondary" type="submit">
                                                 Comentar
-                                            </Button>{' '}
+                                            </Button>: <div></div>}{' '}
                                             {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? 
                                             <Button size="md" variant="secondary"  type="submit" onClick = {() => this.modificarPublicacion(publicacion.id)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">

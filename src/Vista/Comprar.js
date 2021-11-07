@@ -17,6 +17,12 @@ export default class Comprar extends Component{
         comprobante: null,
     }
 
+    cerrarSesion = () =>{
+        cookies.remove('correo',    {path: "/"});
+        cookies.remove('rol',       {path: "/"});
+        window.location.href="/";
+    }
+
     handleChange = e => {
         this.setState({
             ...this.state,
@@ -64,6 +70,11 @@ export default class Comprar extends Component{
                                 <Nav.Link className="botonNav" href="/Tienda">Tienda</Nav.Link>
                                 <Nav.Link className="botonNav" href="/Galeria">Galería</Nav.Link>
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ?<Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>:<div></div>}
+                            </Nav>
+                            <Nav>
+                                {cookies.get('correo') !== undefined? 
+                                <Nav.Link className="botonNav" onClick={()=>this.cerrarSesion()}>Cerrar Sesión</Nav.Link>:
+                                <div></div>}
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

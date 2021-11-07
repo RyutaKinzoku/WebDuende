@@ -15,6 +15,12 @@ export default class Agenda extends Component{
         notificaciones: [],
         show: false
     }
+
+    cerrarSesion = () =>{
+        cookies.remove('correo',    {path: "/"});
+        cookies.remove('rol',       {path: "/"});
+        window.location.href="/";
+    }
     
     handleChange = e => {
         this.setState({
@@ -146,6 +152,15 @@ export default class Agenda extends Component{
                             <Nav>
                                 <Nav.Link className="botonNav" href="/Ordenes">Ver Ordenes</Nav.Link>
                                 <Nav.Link className="botonNav" href="/Compromisos">Crear</Nav.Link>
+                                {cookies.get('correo') !== undefined? 
+                                <Nav.Link className="botonNav" onClick={()=>this.cerrarSesion()}>Cerrar Sesión</Nav.Link>:
+                                <div></div>}
+                                {cookies.get('correo') === undefined? 
+                                <Nav.Link className="botonNav" href="/">Iniciar Sesión</Nav.Link>:
+                                <div></div>}
+                                {cookies.get('correo') === undefined? 
+                                <Nav.Link className="botonNav" href="/Registrarse">Registrarse</Nav.Link>:
+                                <div></div>}
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

@@ -16,6 +16,12 @@ export default class Carrito extends Component{
         productosCarrito: [],
         precioTotal: 0,
     }
+    
+    cerrarSesion = () =>{
+        cookies.remove('correo',    {path: "/"});
+        cookies.remove('rol',       {path: "/"});
+        window.location.href="/";
+    }
 
     handleChange = e => {
         this.setState({
@@ -69,8 +75,15 @@ export default class Carrito extends Component{
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ?<Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>:<div></div>}
                             </Nav>
                             <Nav>
-                                <Nav.Link className="botonNav" href="/">Iniciar Sesión</Nav.Link>
-                                <Nav.Link className="botonNav" href="/Registrarse">Registrarse</Nav.Link>
+                                {cookies.get('correo') !== undefined? 
+                                <Nav.Link className="botonNav" onClick={()=>this.cerrarSesion()}>Cerrar Sesión</Nav.Link>:
+                                <div></div>}
+                                {cookies.get('correo') === undefined? 
+                                <Nav.Link className="botonNav" href="/">Iniciar Sesión</Nav.Link>:
+                                <div></div>}
+                                {cookies.get('correo') === undefined? 
+                                <Nav.Link className="botonNav" href="/Registrarse">Registrarse</Nav.Link>:
+                                <div></div>}
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

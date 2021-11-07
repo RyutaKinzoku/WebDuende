@@ -21,6 +21,12 @@ export default class CrearSubcategoria extends Component{
         })
     }
 
+    cerrarSesion = () =>{
+        cookies.remove('correo',    {path: "/"});
+        cookies.remove('rol',       {path: "/"});
+        window.location.href="/";
+    }
+
     enviar  = async (e) => {}
 
     agregar  = async (e) => {
@@ -46,6 +52,11 @@ export default class CrearSubcategoria extends Component{
                                 <Nav.Link className="botonNav" href="/Tienda">Tienda</Nav.Link>
                                 <Nav.Link className="botonNav" href="/Galeria">Galería</Nav.Link>
                                 <Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>
+                            </Nav>
+                            <Nav>
+                                {cookies.get('correo') !== undefined? 
+                                <Nav.Link className="botonNav" onClick={()=>this.cerrarSesion()}>Cerrar Sesión</Nav.Link>:
+                                <div></div>}
                             </Nav>
                         </Navbar.Collapse>
                     </Container>

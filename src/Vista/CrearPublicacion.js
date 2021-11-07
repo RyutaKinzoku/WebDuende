@@ -22,6 +22,12 @@ export default class CrearPublicacion extends Component{
         subcategorias: [],
     }
 
+    cerrarSesion = () =>{
+        cookies.remove('correo',    {path: "/"});
+        cookies.remove('rol',       {path: "/"});
+        window.location.href="/";
+    }
+
     handleChange = e => {
         this.setState({
             ...this.state,
@@ -124,6 +130,11 @@ export default class CrearPublicacion extends Component{
                                 <Nav.Link className="botonNav" href="/Tienda">Tienda</Nav.Link>
                                 <Nav.Link className="botonNav" href="/Galeria">Galería</Nav.Link>
                                 <Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>
+                            </Nav>
+                            <Nav>
+                                {cookies.get('correo') !== undefined? 
+                                <Nav.Link className="botonNav" onClick={()=>this.cerrarSesion()}>Cerrar Sesión</Nav.Link>:
+                                <div></div>}
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
