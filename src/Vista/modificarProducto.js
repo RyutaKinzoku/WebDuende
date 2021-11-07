@@ -18,7 +18,7 @@ export default class ModificarProducto extends Component{
         descripcion:'',
         precio:'',
         cantidad: '',
-        imagen:null,
+        imagen: null,
     }
 
     handleChange = e => {

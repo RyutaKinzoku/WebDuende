@@ -208,6 +208,8 @@ router.put('/modificarProducto', subida.single('imagen'), async function (req, r
 })
 
 router.put('/modificarPublicacion', subida.single('imagen'), async function (req, res){
+    console.log(req.file)
+    console.log(req.body.imagen)
     try{
         if (req.file){
             modelos.Publicacion.findOne({

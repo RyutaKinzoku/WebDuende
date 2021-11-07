@@ -138,6 +138,7 @@ export default class Controladora{
     }
 
     async modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria = null){
+        console.log(imagen)
         return this.manejoGaleria.modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria);
     }
 

@@ -28,7 +28,12 @@ export default class ManejoGaleria{
     }
 
     modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria = null){
-        let publicacion = new Publicacion(idPublicacion, imagen[0], descripcion, tags, idCategoria, idSubcategoria);
+        let publicacion;
+        if(typeof imagen === 'string' || imagen instanceof String){
+            publicacion = new Publicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria);
+        } else {
+            publicacion = new Publicacion(idPublicacion, imagen[0], descripcion, tags, idCategoria, idSubcategoria);
+        }
         this.gestorPublicaciones.modificar(publicacion);
     }
 

@@ -87,6 +87,7 @@ export default class modificarPublicacion extends Component{
         try{
             if(this.state.subcategoria === ''){
                 await controladora.modificarPublicacion(
+                    this.props.match.params.id,
                     this.state.imagen,
                     this.state.descripcion,
                     this.state.tags,
@@ -94,6 +95,7 @@ export default class modificarPublicacion extends Component{
                 );
             } else {
                 await controladora.modificarPublicacion(
+                    this.props.match.params.id,
                     this.state.imagen,
                     this.state.descripcion,
                     this.state.tags,
