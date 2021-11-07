@@ -89,6 +89,7 @@ export default class modificarPublicacion extends Component{
 
     modificarPublicacion  = async (e) => {
         e.preventDefault();
+        if(this.state.imagen !== null && this.state.descripcion !== "" && this.state.tags !== "" && this.state.categoria !== ""){
         let controladora = new Controladora();
         try{
             if(this.state.subcategoria === ''){
@@ -114,6 +115,9 @@ export default class modificarPublicacion extends Component{
         } catch (err){
             swal("Error al modificar","", "warning");
         }
+    } else {
+        swal("Alguna casilla se encuentra vacía","" ,"warning");
+    }
     }
 
     obtenerCategorias = async() => {

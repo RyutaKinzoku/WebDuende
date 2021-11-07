@@ -30,6 +30,7 @@ export default class CrearSubcategoria extends Component{
     enviar  = async (e) => {}
 
     agregar  = async (e) => {
+        if(this.state.nombre !== ""){
         let controladora = new Controladora();
         let response = await controladora.agregarSubcategoria(this.props.match.params.id, this.state.nombre);
         if(!response.data){
@@ -39,6 +40,9 @@ export default class CrearSubcategoria extends Component{
         }else{
             console.log(response);
         }
+    } else {
+        swal("Alguna casilla se encuentra vacía","" ,"warning");
+    }
     }
     render(){
         return(

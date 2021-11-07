@@ -28,6 +28,7 @@ export default class CrearCategoria extends Component{
     }
 
     agregar  = async (e) => {
+    if(this.state.nombre !== ""){
         let controladora = new Controladora();
         let response = await controladora.agregarCategoria(this.state.nombre);
         if(!response.data){
@@ -37,6 +38,9 @@ export default class CrearCategoria extends Component{
         }else{
             console.log(response);
         }
+    }else{
+        swal("Alguna casilla se encuentra vacía","" ,"warning");
+    }
     }
 
     enviar  = async (e) => {}

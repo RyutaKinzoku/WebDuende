@@ -38,6 +38,7 @@ export default class Comprar extends Component{
 
     comprar = async(e) => {
         e.preventDefault();
+        if(this.state.provincia !== "" && this.state.canton !== "" && this.state.distrito !== "" && this.state.direccion && this.state.comprobante !== null){
         let controladora = new Controladora();
         let correo = cookies.get('correo');
         let direccionCompleta = this.state.provincia+'-'+this.state.canton+'-'+this.state.distrito+'-'+this.state.direccion;
@@ -53,7 +54,9 @@ export default class Comprar extends Component{
         }catch(err){
             swal("Error al comprar","", "warning");
         }
-
+        } else {
+            swal("Alguna casilla se encuentra vacía","" ,"warning");
+        }
     }
 
     enviar  = async (e) => {}

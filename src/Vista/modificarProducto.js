@@ -56,6 +56,7 @@ export default class ModificarProducto extends Component{
 
     modificarProducto  = async (e) => {
         e.preventDefault();
+        if(this.state.nombre !== "" && this.state.descripcion !== "" && this.state.precio !== "" && this.state.cantidad !== "" && this.state.imagen !== null){
         let controladora = new Controladora();
         try{
             await controladora.modificarProducto(
@@ -71,6 +72,9 @@ export default class ModificarProducto extends Component{
         } catch (err){
             swal("Error al modificar","", "warning");
         }
+    } else {
+        swal("Alguna casilla se encuentra vacía","" ,"warning");
+    }
     }
 
     render(){

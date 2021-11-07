@@ -35,6 +35,7 @@ export default class CrearEntrega extends Component{
     }
 
     crear  = async (e) => {
+        if(this.state.correoUsuario !== "" && this.state.idOrdenCompra !== "" && this.state.fechaHoraInicio !== "" && this.state.fechaHoraFin !== "" && this.state.provincia !== "" && this.state.distrito !== "" && this.state.canton !== "" && this.state.direccion !== ""){
         e.preventDefault();
         let controladora = new Controladora();
         let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
@@ -51,6 +52,9 @@ export default class CrearEntrega extends Component{
             }
             console.log(response);
         }
+    }else{
+        swal("Alguna casilla se encuentra vacía","" ,"warning");
+    }
     }
 
     render(){

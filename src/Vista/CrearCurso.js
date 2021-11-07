@@ -35,6 +35,7 @@ export default class CrearCurso extends Component{
 
     crear = async (e) => {
         e.preventDefault();
+    if(this.state.titulo !== "" && this.state.fechaHoraInicio !== "" && this.state.fechaHoraFin !== "" && this.state.provincia !== "" && this.state.distrito !== "" && this.state.canton !== "" && this.state.direccion !== ""){
         let controladora = new Controladora();
         let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
         let response = await controladora.agregarCurso(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.state.titulo, lugar);
@@ -45,6 +46,9 @@ export default class CrearCurso extends Component{
         }else{
             swal("Error en el proceso de creación","", "warning");
         }
+    }else{
+        swal("Alguna casilla se encuentra vacía","" ,"warning");
+    }
     }
 
     render(){

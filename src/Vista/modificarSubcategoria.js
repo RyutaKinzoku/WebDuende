@@ -41,6 +41,7 @@ export default class modificarSubcategoria extends Component{
     }
 
     modificarSubcategoria = async(e) =>{
+        if(this.state.nombre !== ""){
         let controladora = new Controladora();
         let response = await controladora.modificarSubcategoria(this.props.match.params.id,  this.state.nombre);
         if(!response.data){
@@ -50,6 +51,9 @@ export default class modificarSubcategoria extends Component{
         }else{
             swal("Error en el proceso de modificación","", "warning");
         }
+    } else {
+        swal("Alguna casilla se encuentra vacía","" ,"warning");
+    }
     }
 
     render(){

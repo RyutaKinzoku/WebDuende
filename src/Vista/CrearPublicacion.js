@@ -93,6 +93,7 @@ export default class CrearPublicacion extends Component{
 
     agregarPublicacion  = async (e) => {
         e.preventDefault();
+        if(this.state.descripcion !== "" && this.state.tags !== "" && this.state.categoria !== "" && this.state.imagen !== null){
         let controladora = new Controladora();
         try{
             if(this.state.subcategoria === ''){
@@ -116,6 +117,9 @@ export default class CrearPublicacion extends Component{
         }catch(err){
             swal("Error al agregar","", "warning");
         }
+    } else {
+        swal("Alguna casilla se encuentra vacía","" ,"warning");
+    }
     }
 
     render(){
