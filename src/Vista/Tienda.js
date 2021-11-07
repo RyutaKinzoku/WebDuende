@@ -82,7 +82,7 @@ export default class Tienda extends Component{
     }
 
     bajar = async(id) =>{
-        if (Number(document.getElementById(id).value) !== 1){
+        if (Number(document.getElementById(id).value) > 1){
             document.getElementById(id).value = Number(document.getElementById(id).value) - 1;
         }
     }
@@ -142,7 +142,12 @@ export default class Tienda extends Component{
                                                             <h6>Cantidad: {producto.cantidad}</h6>
                                                             {cookies.get('rol') === "COMUN" && cookies.get('correo') !== undefined ?
                                                             <Col sm={2}>
-                                                                <Form.Control id={producto.id} type="text" name = 'cantidad' defaultValue='1'/>
+                                                                {producto.cantidad > 0 ?
+                                                                    <Form.Control id={producto.id} type="text" name = 'cantidad' defaultValue='1'/>
+                                                                :<div></div>}
+                                                                {producto.cantidad === 0 ?
+                                                                    <Form.Control id={producto.id} type="text" name = 'cantidad' defaultValue='0'/>
+                                                                :<div></div>}
                                                             </Col>
                                                             :<div></div>}
                                                             {cookies.get('rol') === "COMUN" && cookies.get('correo') !== undefined ?
