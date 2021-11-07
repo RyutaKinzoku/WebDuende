@@ -66,6 +66,8 @@ export default class Galeria extends Component{
                 categoria: cat.id
             })
             this.obtenerPublicaciones(cat.id)
+        } else {
+            this.obtenerPublicaciones()
         }
     }
 
