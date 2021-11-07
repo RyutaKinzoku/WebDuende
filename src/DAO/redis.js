@@ -13,7 +13,7 @@ db.on('error', function (err) {
     console.log('No se pudo conectar con Redis' + err);
 });
 db.on('connect', function (err) {
-    console.log('RedisDB conectado');
+    
 });
 
 

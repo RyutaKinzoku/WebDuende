@@ -143,10 +143,10 @@ export default class Tienda extends Component{
                                                             {cookies.get('rol') === "COMUN" && cookies.get('correo') !== undefined ?
                                                             <Col sm={2}>
                                                                 {producto.cantidad > 0 ?
-                                                                    <Form.Control id={producto.id} type="text" name = 'cantidad' defaultValue='1'/>
+                                                                    <Form.Control readOnly id={producto.id} type="text readonly" name = 'cantidad' defaultValue='1'/>
                                                                 :<div></div>}
                                                                 {producto.cantidad === 0 ?
-                                                                    <Form.Control id={producto.id} type="text" name = 'cantidad' defaultValue='0'/>
+                                                                    <Form.Control readOnly id={producto.id} type="text readonly" name = 'cantidad' defaultValue='0'/>
                                                                 :<div></div>}
                                                             </Col>
                                                             :<div></div>}
