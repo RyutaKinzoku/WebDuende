@@ -29,15 +29,21 @@ export default class IniciarSesion extends Component{
 
     enviar = async (e) => {
         let controladora = new Controladora();
-        let usuario = await controladora.iniciarSesion(this.state.correo, this.state.contrasena);
-        if(usuario !== null){
-            cookies.set('correo',          usuario.correo,            {path: "/"});
-            cookies.set('rol',               usuario.rol,               {path: "/"});
-            swal("Usuario encontrado","" ,"success").then((value) => {
-                window.location.href="/Galeria";
-            });
-        }else{
-            swal("Usuario incorrecto","" ,"warning");
+        let usuario = null;
+
+        if(this.state.correo !== "" && this.state.contrasena !== ""){
+            usuario = await controladora.iniciarSesion(this.state.correo, this.state.contrasena);
+            if(usuario !== null){
+                cookies.set('correo',          usuario.correo,            {path: "/"});
+                cookies.set('rol',               usuario.rol,               {path: "/"});
+                swal("Usuario encontrado","" ,"success").then((value) => {
+                    window.location.href="/Galeria";
+                });
+            }else{
+                swal("Usuario incorrecto","" ,"warning");
+            }
+        } else {
+            swal("Alguna casilla se encuentra vacía","" ,"warning");
         }
     }
 

@@ -12,6 +12,7 @@ export default class Registrarse extends Component{
     state = {
         correo: '',
         contrasena: '',
+        confirmacion: '',
         cedula: '',
         nombre: '',
         primerApellido: '',
@@ -28,15 +29,23 @@ export default class Registrarse extends Component{
 
     registrar = async (e) => {
         e.preventDefault();
-        let datosUsuario = new DTOUsuario(this.state.correo, this.state.nombre, this.state.primerApellido, this.state.segundoApellido, this.state.telefono, this.state.cedula, this.state.contrasena, "COMUN");
-        let controladora = new Controladora();
-        let response = await controladora.registrarse(datosUsuario);
-        if(!response.data){
-            swal("Registro completo","" ,"success").then((value) => {
-                window.location.href="/";
-            })
-        }else{
-            swal("Error al registrar","", "warning");
+        if(this.state.correo !== "" && this.state.nombre !== "" && this.state.primerApellido !== "" && this.state.segundoApellido !== "" && this.state.telefono !== "" && this.state.cedula !== "" && this.state.contrasena !== "" && this.state.confirmacion !== ""){
+            if(this.state.contrasena === this.state.confirmacion){
+                let datosUsuario = new DTOUsuario(this.state.correo, this.state.nombre, this.state.primerApellido, this.state.segundoApellido, this.state.telefono, this.state.cedula, this.state.contrasena, "COMUN");
+                let controladora = new Controladora();
+                let response = await controladora.registrarse(datosUsuario);
+                if(!response.data){
+                    swal("Registro completo","" ,"success").then((value) => {
+                        window.location.href="/";
+                    })
+                }else{
+                    swal("Error al registrar","", "warning");
+                }
+            } else {
+                swal("Las contraseñas no coinciden","", "warning");
+            }
+        } else {
+            swal("Alguna casilla se encuentra vacía","" ,"warning");
         }
     };
 
@@ -69,6 +78,9 @@ export default class Registrarse extends Component{
                                 <br/>
                                 <h6>Contraseña:</h6>
                                 <Form.Control type="password" name = 'contrasena' />
+                                <br/>
+                                <h6>Confirmar contraseña:</h6>
+                                <Form.Control type="password" name = 'confirmacion' />
                                 <br/>
                                 <h6>Cédula:</h6>
                                 <Form.Control type="text" name = 'cedula' />
