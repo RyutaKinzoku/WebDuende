@@ -164,29 +164,36 @@ router.post('/eliminarOrden', async (req,res) =>{
     }
 })
 
-router.post('/modificarProducto', async (req, res) =>{
+router.put('/modificarProducto', subida.single('imagen'), async function (req, res){
     console.log(req.body);
     console.log(req.file);
     try{
-        if (req.body.imagen){
-            modelos.Producto.updateOne({id: req.body.idProducto}, 
-                {
-                nombre: req.body.nombre,
-                descripcion: req.body.descripcion,
-                precio: Number(req.body.precio),
-                cantidad: req.body.cantidad
-                }
-            )
+        if (req.file){
+            modelos.Producto.findOne({
+                id: req.body.idProducto
+            })
+            .then((producto) => {
+                producto.nombre = req.body.nombre;
+                producto.descripcion = req.body.descripcion;
+                producto.precio = Number(req.body.precio);
+                producto.imagen = req.file.filename;
+                producto.cantidad = Number(req.body.cantidad);
+                producto
+                    .save()
+            })
         } else {
-            modelos.Producto.updateOne({id: req.body.idProducto}, 
-                {
-                nombre: req.body.nombre,
-                descripcion: req.body.descripcion,
-                precio: Number(req.body.precio),
-                imagen: req.file.filename,
-                cantidad: req.body.cantidad
-                }
-            )
+            modelos.Producto.findOne({
+                id: req.body.idProducto
+            })
+            .then((producto) => {
+                producto.nombre = req.body.nombre;
+                producto.descripcion = req.body.descripcion;
+                producto.precio = Number(req.body.precio);
+                producto.imagen = req.body.imagen;
+                producto.cantidad = Number(req.body.cantidad);
+                producto
+                    .save()
+            })
         }
     } catch (err){
         res.send(err);
@@ -194,7 +201,6 @@ router.post('/modificarProducto', async (req, res) =>{
 })
 
 router.post('/agregarPublicacion', subida.single('imagen'), async function (req, res) {
-    console.log(req.body)
     var publicacion;
     if(req.body.idSubcategoria == null){
         publicacion = new modelos.Publicacion({
