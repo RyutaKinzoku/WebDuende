@@ -116,7 +116,7 @@ export default class Galeria extends Component{
                                   sx={{ width: 300 }}
                                   nombre = 'categoria'
                                   getOptionLabel={(option) => option.nombre}
-                                  renderInput={(params) => <TextField {...params} label="Categoria" />}
+                                  renderInput={(params) => <TextField {...params} label="Categoria" style={{ backgroundColor: "rgb(255, 255, 255)" }} />}
                                 />
                             </Nav>
                             <Nav>
