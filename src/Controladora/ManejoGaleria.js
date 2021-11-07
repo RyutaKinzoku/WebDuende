@@ -16,12 +16,9 @@ export default class ManejoGaleria{
         return this.gestorPublicaciones.obtenerLista(idCategoria);
     }
 
-    /*obtenerPublicaciones(idCategoria = null){
-        var publicaciones = this.gestorPublicaciones.obtenerLista();
-        publicaciones.forEach(publicacion => {
-            publicacion.categoria = this.gestorCategorias.obtenerPublicaciones.idCategoria
-        });
-    }*/
+    obtenerPublicacion(idCategoria){
+        return this.gestorPublicaciones.obtener(idCategoria);
+    }
 
     async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){
         this.gestorPublicaciones.setNext();
@@ -31,7 +28,7 @@ export default class ManejoGaleria{
     }
 
     modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria = null){
-        let publicacion = new Publicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria);
+        let publicacion = new Publicacion(idPublicacion, imagen[0], descripcion, tags, idCategoria, idSubcategoria);
         this.gestorPublicaciones.modificar(publicacion);
     }
 

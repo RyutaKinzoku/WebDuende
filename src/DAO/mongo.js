@@ -90,6 +90,15 @@ router.get('/obtenerProducto', async (req,res) => {
     })
 })
 
+router.get('/obtenerPublicacion', async (req,res) => {
+    modelos.Publicacion.find({id: req.query.idPublicacion}, (err, docs) => {
+        if(err){
+            res.send(err);
+        }
+        res.send(docs);
+    })
+})
+
 router.post('/agregarProducto', subida.single('imagen'), async function (req, res) {
     const producto = new modelos.Producto({
         id: Number(req.body.idProducto),
@@ -165,8 +174,6 @@ router.post('/eliminarOrden', async (req,res) =>{
 })
 
 router.put('/modificarProducto', subida.single('imagen'), async function (req, res){
-    console.log(req.body);
-    console.log(req.file);
     try{
         if (req.file){
             modelos.Producto.findOne({
@@ -193,6 +200,38 @@ router.put('/modificarProducto', subida.single('imagen'), async function (req, r
                 producto.cantidad = Number(req.body.cantidad);
                 producto
                     .save()
+            })
+        }
+    } catch (err){
+        res.send(err);
+    }
+})
+
+router.put('/modificarPublicacion', subida.single('imagen'), async function (req, res){
+    try{
+        if (req.file){
+            modelos.Publicacion.findOne({
+                id: req.body.idPublicacion
+            })
+            .then((publicacion) => {
+                publicacion.imagen = req.file.filename;
+                publicacion.descripcion = req.body.descripcion;
+                publicacion.tags = req.body.tags;
+                publicacion.categoria = req.body.categoria;
+                publicacion.subcategoria = req.body.subcategoria;
+                publicacion.save()
+            })
+        } else {
+            modelos.Publicacion.findOne({
+                id: req.body.idPublicacion
+            })
+            .then((publicacion) => {
+                publicacion.imagen = req.body.imagen;
+                publicacion.descripcion = req.body.descripcion;
+                publicacion.tags = req.body.tags;
+                publicacion.categoria = req.body.categoria;
+                publicacion.subcategoria = req.body.subcategoria;
+                publicacion.save()
             })
         }
     } catch (err){

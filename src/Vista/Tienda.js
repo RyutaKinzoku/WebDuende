@@ -47,10 +47,10 @@ export default class Tienda extends Component{
         })
     }
 
-
     modificarProducto = async(idProducto) => {
         window.location.href = `/modificarProducto/${idProducto}`
     }
+    
     agregarProductoCarrito = async(idProducto) => {
         let controladora = new Controladora();
         let cantidad = document.getElementById(idProducto).value;

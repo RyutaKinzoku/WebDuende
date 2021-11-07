@@ -34,7 +34,6 @@ export default class ModificarProducto extends Component{
 
     obtenerProducto = async(idProducto) =>{
         let controladora = new Controladora();
-        //console.log(idProducto);
         let producto = (await controladora.obtenerProducto(idProducto)).data[0];
         this.setState({
             nombre: producto.nombre,

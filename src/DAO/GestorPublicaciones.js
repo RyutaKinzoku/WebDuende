@@ -9,14 +9,30 @@ const config = {
 };
 
 export default class gestorPublicaciones  extends GestorDB{
-    modificar(publicacion){}
+    modificar(publicacion){
+        const form = new FormData();
+        form.append('idPublicacion', publicacion.id);
+        form.append('imagen', publicacion.imagen);
+        form.append('descripcion', publicacion.descripcion);
+        form.append('tags', publicacion.tags);
+        form.append('categoria', publicacion.categoria);
+        form.append('subcategoria', publicacion.subcategoria);
+        for (var pair of form.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+        return axios.put('http://localhost:3001/api/modificarPublicacion', form, {
+            headers: config.headers,
+        })
+    }
     eliminar(idPublicacion){
         let values = {
             idPublicacion: idPublicacion
         }
         return axios.post('http://localhost:3001/api/eliminarPublicacion', values);
     }
-    obtener(idPublicacion){}
+    obtener(idPublicacion){
+        return axios.get('http://localhost:3001/api/obtenerPublicacion', {params: {idPublicacion: idPublicacion}});
+    }
     agregar(publicacion){
         const form = new FormData();
         form.append('id',publicacion.id);

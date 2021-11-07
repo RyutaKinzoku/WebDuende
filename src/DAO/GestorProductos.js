@@ -11,7 +11,6 @@ const config = {
 
 export default class GestorProductos  extends GestorDB{
     async modificar(producto){
-        console.log(producto)
         const form = new FormData();
         form.append('idProducto', producto.id);
         form.append('nombre', producto.nombre);
@@ -19,9 +18,6 @@ export default class GestorProductos  extends GestorDB{
         form.append('precio', producto.precio);
         form.append('cantidad', producto.cantidad);
         form.append('imagen', producto.imagen);
-        for (var pair of form.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
         return axios.put('http://localhost:3001/api/modificarProducto', form, {
             headers: config.headers,
         })

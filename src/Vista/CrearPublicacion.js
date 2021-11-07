@@ -54,7 +54,6 @@ export default class CrearPublicacion extends Component{
             this.setState({
                 subcategoria: sub.id
             })
-            this.obtenerSubcategorias(sub.id)
         }
     }
 
@@ -90,7 +89,6 @@ export default class CrearPublicacion extends Component{
         e.preventDefault();
         let controladora = new Controladora();
         try{
-            console.log(this.state);
             if(this.state.subcategoria === ''){
                 await controladora.agregarPublicacion(
                     this.state.imagen,
