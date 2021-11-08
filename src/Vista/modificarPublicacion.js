@@ -23,7 +23,10 @@ export default class modificarPublicacion extends Component{
             nombre: '',
             id: '',
         },
-        subcategoria:'',
+        subcategoria:{
+            nombre: '',
+            id: '',
+        },
         categorias: [],
         subcategorias: [],
     }
@@ -56,16 +59,11 @@ export default class modificarPublicacion extends Component{
             this.obtenerSubcategorias(cat.id)
         }
         this.setState({
-            subcategoria: ''
+            subcategoria:{
+                nombre: '',
+                id: '',
+            }
         })
-    }
-
-    getNombreCategoria = () => {
-        /*console.log(this.state.categoria)
-        console.log(this.state.categorias)
-        console.log(this.state.categorias.find(c => c.nombre === 'Maquillaje Básico'))
-        console.log(this.state.categorias.find(c => c.id === this.state.categoria))*/
-        //return this.state.categorias.find(c => c.id === this.state.categoria).nombre;
     }
 
     cargarPublicacion = async() => {
@@ -93,7 +91,7 @@ export default class modificarPublicacion extends Component{
         let sub = this.state.subcategorias.find(s => s.nombre === document.getElementById('combo-box-subcategoria').value)
         if(sub !== undefined){
             this.setState({
-                subcategoria: sub.id
+                subcategoria: {id: sub.id}
             })
         }
     }
@@ -102,25 +100,12 @@ export default class modificarPublicacion extends Component{
         this.cargarPublicacion();
     }
 
-    obtenerPublicacion = async(idPublicacion) =>{
-        let controladora = new Controladora();
-        let publicacion = (await controladora.obtenerPublicacion(idPublicacion)).data[0];
-        this.obtenerSubcategorias(publicacion.idCategoria);
-        this.setState({
-            imagen: publicacion.imagen,
-            descripcion:publicacion.descripcion,
-            tags:publicacion.tags,
-            categoria:publicacion.idCategoria,
-            subcategoria:publicacion.idSubcategoria,
-        })
-    }
-
     modificarPublicacion  = async (e) => {
         e.preventDefault();
         if(this.state.imagen !== null && this.state.descripcion !== "" && this.state.tags !== "" && this.state.categoria !== ""){
         let controladora = new Controladora();
         try{
-            if(this.state.subcategoria === ''){
+            if(this.state.subcategoria.id === ''){
                 await controladora.modificarPublicacion(
                     this.props.match.params.id,
                     this.state.imagen,
@@ -136,7 +121,7 @@ export default class modificarPublicacion extends Component{
                     this.state.descripcion,
                     this.state.tags,
                     this.state.categoria.id,
-                    this.state.subcategoria
+                    this.state.subcategoria.id
                 );
             }
             swal("Publicación modificada","","success");
