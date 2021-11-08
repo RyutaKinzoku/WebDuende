@@ -16,6 +16,7 @@ export default class Controladora{
         this.manejoNotificaciones = new ManejoNotificaciones();
     }
 
+    //Usuario
     async iniciarSesion(correo, contrasena){
         return this.manejoUsuarios.iniciarSesion(correo, contrasena);
     }
@@ -24,6 +25,91 @@ export default class Controladora{
         return this.manejoUsuarios.registrarse(datosUsuario);
     }
 
+    //Publicacion
+    async obtenerPublicaciones(idCategoria = null){
+        return this.manejoGaleria.obtenerPublicaciones(idCategoria);
+    }
+
+    async obtenerPublicacion(idProducto){
+        return this.manejoGaleria.obtenerPublicacion(idProducto);
+    }
+
+    async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){
+        return this.manejoGaleria.agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria);
+    }
+
+    async modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria = null){
+        return this.manejoGaleria.modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria);
+    }
+
+    async eliminarPublicacion(idPublicacion){
+        return this.manejoGaleria.eliminarPublicacion(idPublicacion);
+    }
+
+    //Categorias
+    async obtenerCategorias(){
+        return this.manejoGaleria.obtenerCategorias();
+    }
+
+    async obtenerCategoria(idCategoria){
+        return this.manejoGaleria.obtenerCategoria(idCategoria);
+    }
+
+    async agregarCategoria(nombre){
+        return this.manejoGaleria.agregarCategoria(nombre);
+    }
+
+    async eliminarCategoria(idCategoria){
+        return this.manejoGaleria.eliminarCategoria(idCategoria);
+    }
+
+    async modificarCategoria(idCategoria, nombre){
+        return this.manejoGaleria.modificarCategoria(idCategoria, nombre);
+    }
+
+    //Subcategorias
+    async obtenerSubcategorias(idCategoria){
+        return this.manejoGaleria.obtenerSubcategorias(idCategoria);
+    }
+
+    async obtenerSubcategoria(idSubcategoria){
+        return this.manejoGaleria.obtenerSubcategoria(idSubcategoria);
+    }
+
+    async modificarSubcategoria(idSubcategoria, nombre){
+        return this.manejoGaleria.modificarSubcategoria(idSubcategoria, nombre);
+    }
+
+    async agregarSubcategoria(idCategoria, nombre){
+        return this.manejoGaleria.agregarSubcategoria(idCategoria, nombre);
+    }
+
+    async eliminarSubcategoria(idSubcategoria){
+        return this.manejoGaleria.eliminarSubcategoria(idSubcategoria);
+    }
+
+    //Compras
+    async agregarProductoCarrito(correo, idProducto, cantidad){
+        return this.manejoCompras.agregarProductoCarrito(correo, idProducto, cantidad);
+    }
+
+    async obtenerProductosCarrito(correo){
+        return this.manejoCompras.obtenerProductosCarrito(correo);
+    }
+
+    async eliminarProductoCarrito(correo, idProducto){
+        return this.manejoCompras.eliminarProductoCarrito(correo, idProducto);
+    }
+
+    async eliminarCarrito(correo){
+        return this.manejoCompras.eliminarCarrito(correo);
+    }
+
+    async comprar(correo, comprobante, direccion){
+        return this.manejoCompras.comprar(correo, comprobante, direccion);
+    }
+
+    //Productos
     async obtenerProductos(){
         return this.manejoProductos.obtenerProductos();
     }
@@ -45,62 +131,24 @@ export default class Controladora{
         return this.manejoProductos.modificarProducto(idProducto, nombre, descripcion, precio, cantidad, imagen)
     }
 
-    async agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden){
-        return this.manejoAgenda.agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden);
-    }
-
-    async modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, orden){
-        return this.manejoAgenda.modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, orden);
-    }
-
-    async agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
-        return this.manejoAgenda.agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar);
-    }
-
-    async modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){
-        return this.manejoAgenda.modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar);
-    }
-
-    async agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion){
-        return this.manejoAgenda.agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion);
-    }
-
-    async modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, publicacion){
-        return this.manejoAgenda.modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, publicacion);
-    }
-
-    async agregarProductoCarrito(correo, idProducto, cantidad){
-        return this.manejoCompras.agregarProductoCarrito(correo, idProducto, cantidad);
-    }
-
-    async obtenerProductosCarrito(correo){
-        return this.manejoCompras.obtenerProductosCarrito(correo);
+    //Ordenes
+    async obtenerOrdenes(){
+        return this.manejoCompras.obtenerOrdenes();
     }
 
     async obtenerProductosOrden(idOrden){
         return this.manejoCompras.obtenerProductosOrden(idOrden);
-    }
-
-    async eliminarProductoCarrito(correo, idProducto){
-        return this.manejoCompras.eliminarProductoCarrito(correo, idProducto);
-    }
-
-    async eliminarCarrito(correo){
-        return this.manejoCompras.eliminarCarrito(correo);
-    }
-
-    async comprar(correo, comprobante, direccion){
-        return this.manejoCompras.comprar(correo, comprobante, direccion);
-    }
-
-    async obtenerOrdenes(){
-        return this.manejoCompras.obtenerOrdenes();
     }
     
     async agregarOrden(productos, correo, comprobante, direccion){
         return this.manejoCompras.agregarOrden(productos, correo, comprobante, direccion);
     }
 
+    async eliminarOrden(idOrden){
+        return this.manejoCompras.eliminarOrden(idOrden);
+    }
+
+    //Compromisos
     async obtenerCompromisos(){
         return this.manejoAgenda.obtenerCompromisos();
     }
@@ -113,38 +161,34 @@ export default class Controladora{
         return this.manejoAgenda.eliminarCompromiso(type, idCompromiso);
     }
 
-    async obtenerCategorias(){
-        return this.manejoGaleria.obtenerCategorias();
+    //Curso
+    async agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar){
+        return this.manejoAgenda.agregarCurso(fechaHoraInicio, fechaHoraFin, titulo, lugar);
     }
 
-    async obtenerCategoria(idCategoria){
-        return this.manejoGaleria.obtenerCategoria(idCategoria);
+    async modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar){
+        return this.manejoAgenda.modificarCurso(fechaHoraInicio, fechaHoraFin, titulo, idCompromiso, lugar);
     }
 
-    async obtenerSubcategoria(idSubcategoria){
-        return this.manejoGaleria.obtenerSubcategoria(idSubcategoria);
+    //Cita
+    async agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion){
+        return this.manejoAgenda.agregarCita(fechaHoraInicio, fechaHoraFin, usuario, lugar, publicacion);
     }
 
-    async obtenerPublicaciones(idCategoria = null){
-        return this.manejoGaleria.obtenerPublicaciones(idCategoria);
+    async modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, publicacion){
+        return this.manejoAgenda.modificarCita(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, publicacion);
     }
 
-    async obtenerPublicacion(idProducto){
-        return this.manejoGaleria.obtenerPublicacion(idProducto);
+    //Entrega
+    async agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden){
+        return this.manejoAgenda.agregarEntrega(fechaHoraInicio, fechaHoraFin, usuario, lugar, orden);
     }
 
-    async agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria = null){
-        return this.manejoGaleria.agregarPublicacion(imagen, descripcion, tags, idCategoria, idSubcategoria);
+    async modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, orden){
+        return this.manejoAgenda.modificarEntrega(fechaHoraInicio, fechaHoraFin, idCompromiso, usuario, lugar, orden);
     }
 
-    async modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria = null){
-        return this.manejoGaleria.modificarPublicacion(idPublicacion, imagen, descripcion, tags, idCategoria, idSubcategoria);
-    }
-
-    async eliminarPublicacion(idPublicacion){
-        return this.manejoGaleria.eliminarPublicacion(idPublicacion);
-    }
-
+    //Notificacion
     async agregarNotificacionCompra(idOrden){
         return this.manejoNotificaciones.agregarNotificacionCompra(idOrden);
     }
@@ -157,39 +201,7 @@ export default class Controladora{
         return this.manejoNotificaciones.eliminarNotificacion(type, idOrden);
     }
 
-    async agregarCategoria(nombre){
-        return this.manejoGaleria.agregarCategoria(nombre);
-    }
-
-    async eliminarCategoria(idCategoria){
-        return this.manejoGaleria.eliminarCategoria(idCategoria);
-    }
-
-    async modificarCategoria(idCategoria, nombre){
-        return this.manejoGaleria.modificarCategoria(idCategoria, nombre);
-    }
-
-    async modificarSubcategoria(idSubcategoria, nombre){
-        return this.manejoGaleria.modificarSubcategoria(idSubcategoria, nombre);
-    }
-
-    async obtenerSubcategorias(idCategoria){
-        return this.manejoGaleria.obtenerSubcategorias(idCategoria);
-    }
-
-    async agregarSubcategoria(idCategoria, nombre){
-        return this.manejoGaleria.agregarSubcategoria(idCategoria, nombre);
-    }
-
-    async eliminarSubcategoria(idSubcategoria){
-        return this.manejoGaleria.eliminarSubcategoria(idSubcategoria);
-    }
-
     async obtenerNotificaciones(){
         return this.manejoNotificaciones.obtenerNotificaciones();
-    }
-
-    async eliminarOrden(idOrden){
-        return this.manejoCompras.eliminarOrden(idOrden);
     }
 }
