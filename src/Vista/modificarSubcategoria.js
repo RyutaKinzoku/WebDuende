@@ -95,7 +95,7 @@ export default class modificarSubcategoria extends Component{
                             <Button size="md" variant="secondary" onClick = {() => this.modificarSubcategoria()}>
                                 Modificar
                             </Button>
-                            <Button size="md" variant="secondary" href="/VerCategorias">
+                            <Button size="md" variant="secondary" href={"/VerSubcategorias/"+this.state.idCategoria}>
                                 Cancelar
                             </Button>
                         </div>
