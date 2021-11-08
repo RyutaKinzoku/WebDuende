@@ -11,7 +11,8 @@ const cookies = new Cookies();
 export default class modificarSubcategoria extends Component{
 
     state = {
-        nombre:''
+        nombre:'',
+        idCategoria: ''
     }
 
     cerrarSesion = () =>{
@@ -36,6 +37,7 @@ export default class modificarSubcategoria extends Component{
         let subcategoria = await controladora.obtenerSubcategoria(this.props.match.params.id);
         document.getElementById("nombre").value = subcategoria.nombre;
         this.setState({
+            idCategoria: subcategoria.idCategoria,
             nombre: subcategoria.nombre,
         })
     }
@@ -46,7 +48,7 @@ export default class modificarSubcategoria extends Component{
         let response = await controladora.modificarSubcategoria(this.props.match.params.id,  this.state.nombre);
         if(!response.data){
             swal("Subcategoría modificada exitosamente","" ,"success").then((value) => {
-                window.location.href='/VerSubCategorias/'+this.props.match.params.id;
+                window.location.href='/VerSubCategorias/'+this.state.idCategoria;
             })
         }else{
             swal("Error en el proceso de modificación","", "warning");
