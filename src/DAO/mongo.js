@@ -208,8 +208,6 @@ router.put('/modificarProducto', subida.single('imagen'), async function (req, r
 })
 
 router.put('/modificarPublicacion', subida.single('imagen'), async function (req, res){
-    console.log(req.file)
-    console.log(req.body.imagen)
     try{
         if (req.file){
             modelos.Publicacion.findOne({
@@ -219,8 +217,8 @@ router.put('/modificarPublicacion', subida.single('imagen'), async function (req
                 publicacion.imagen = req.file.filename;
                 publicacion.descripcion = req.body.descripcion;
                 publicacion.tags = req.body.tags;
-                publicacion.categoria = req.body.categoria;
-                publicacion.subcategoria = req.body.subcategoria;
+                publicacion.idCategoria = req.body.categoria;
+                publicacion.idSubcategoria = req.body.subcategoria;
                 publicacion.save()
             })
         } else {
@@ -231,8 +229,8 @@ router.put('/modificarPublicacion', subida.single('imagen'), async function (req
                 publicacion.imagen = req.body.imagen;
                 publicacion.descripcion = req.body.descripcion;
                 publicacion.tags = req.body.tags;
-                publicacion.categoria = req.body.categoria;
-                publicacion.subcategoria = req.body.subcategoria;
+                publicacion.idCategoria = req.body.categoria;
+                publicacion.idSubcategoria = req.body.subcategoria;
                 publicacion.save()
             })
         }
@@ -253,24 +251,14 @@ router.put('/actualizarProducto', async function (req, res){
 
 router.post('/agregarPublicacion', subida.single('imagen'), async function (req, res) {
     var publicacion;
-    if(req.body.idSubcategoria == null){
-        publicacion = new modelos.Publicacion({
-            id: Number(req.body.id),
-            imagen: req.file.filename,
-            descripcion: req.body.descripcion,
-            tags: req.body.tags.split(","),
-            idCategoria: Number(req.body.categoria),
-        })
-    } else {
-        publicacion = new modelos.Publicacion({
-            id: Number(req.body.id),
-            imagen: req.file.filename,
-            descripcion: req.body.descripcion,
-            tags: req.body.tags.split(","),
-            idCategoria: Number(req.body.categoria),
-            idSubcategoria: Number(req.body.subcategoria),
-        })
-    }
+    publicacion = new modelos.Publicacion({
+        id: Number(req.body.id),
+        imagen: req.file.filename,
+        descripcion: req.body.descripcion,
+        tags: req.body.tags.split(","),
+        idCategoria: Number(req.body.categoria),
+        idSubcategoria: Number(req.body.subcategoria),
+    })
     try{
         await publicacion.save();
     } catch (err){

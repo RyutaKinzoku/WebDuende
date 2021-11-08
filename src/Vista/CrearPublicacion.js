@@ -102,6 +102,7 @@ export default class CrearPublicacion extends Component{
                     this.state.descripcion,
                     this.state.tags,
                     this.state.categoria,
+                    0
                 );
             } else {
                 await controladora.agregarPublicacion(
