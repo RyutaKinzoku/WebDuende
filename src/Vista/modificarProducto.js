@@ -100,7 +100,7 @@ export default class ModificarProducto extends Component{
                 </Navbar>
                 <div className="center container w-55 p-8 py-2 my-3  mt-5">
                     <Row>
-                        <Col>
+                        <Col sm={5}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <div>
                                     <Form.Group onChange= {this.handleChange}>
@@ -133,9 +133,9 @@ export default class ModificarProducto extends Component{
                                 </div>
                             </Form.Group>
                         </Col>
-                        <Col>
+                        <Col sm ={7}>
                             <div className="center container w-55 p-8 py-2 my-3  mt-5">
-                                <Image src={`${process.env.PUBLIC_URL}/assets/images/${this.state.imagen}`} rounded />
+                                <Image src={`${process.env.PUBLIC_URL}/assets/images/${this.state.imagen}`} rounded fluid/>
                             </div>
                         </Col>
                     </Row>

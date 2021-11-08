@@ -218,6 +218,7 @@ export default class modificarPublicacion extends Component{
                                         defaultValue={this.state.subcategoria}
                                         renderInput={(params) => <TextField {...params} label="Subcategoria" defaultValue= {this.state.subcategoria.nombre}/>}
                                         />
+                                        <br/>
                                     </Form.Group>
                                 </div>
                                 <div className="d-grid gap-2">
@@ -230,9 +231,9 @@ export default class modificarPublicacion extends Component{
                                 </div>
                             </Form.Group>
                         </Col>
-                        <Col>
+                        <Col sm = {5}>
                             <div className="center container w-55 p-8 py-2 my-3  mt-5">
-                                <Image src={`${process.env.PUBLIC_URL}/assets/images/${this.state.imagen}`} rounded />
+                                <Image src={`${process.env.PUBLIC_URL}/assets/images/${this.state.imagen}`} rounded fluid/>
                             </div>
                         </Col>
                     </Row>    
