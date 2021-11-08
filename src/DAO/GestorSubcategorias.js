@@ -20,7 +20,7 @@ export default class GestorSubcategorias  extends GestorDB{
         var response = await axios.get('http://localhost:3001/api/obtenerSubcategoria',{params: {idSubcategoria: idSubcategoria} });
         if(response.data.length>0){
             let subcategoria = response.data[0];
-            let c = new Subcategoria(subcategoria.id,subcategoria.nombre,null);
+            let c = new Subcategoria(subcategoria.id,subcategoria.nombre,subcategoria.idCategoria);
             return c;
         }
         return null;
