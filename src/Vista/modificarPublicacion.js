@@ -66,6 +66,15 @@ export default class modificarPublicacion extends Component{
         })
     }
 
+    setSubcategoria = async() => {
+        let sub = this.state.subcategorias.find(s => s.nombre === document.getElementById('combo-box-subcategoria').value)
+        if(sub !== undefined){
+            this.setState({
+                subcategoria: {id: sub.id}
+            })
+        }
+    }
+
     cargarPublicacion = async() => {
         let controladora = new Controladora();
         let categoriasBD = await controladora.obtenerCategorias();
@@ -78,20 +87,20 @@ export default class modificarPublicacion extends Component{
         })
         let publicacion = (await controladora.obtenerPublicacion(this.props.match.params.id)).data[0];
         this.obtenerSubcategorias(publicacion.idCategoria);
-        this.setState({
-            imagen: publicacion.imagen,
-            descripcion:publicacion.descripcion,
-            tags:publicacion.tags,
-            categoria: this.state.categorias.find(c => c.id === publicacion.idCategoria),
-            subcategoria:publicacion.idSubcategoria,
-        })
-    }
-
-    setSubcategoria = async() => {
-        let sub = this.state.subcategorias.find(s => s.nombre === document.getElementById('combo-box-subcategoria').value)
-        if(sub !== undefined){
+        if(this.state.subcategorias.length > 0){
             this.setState({
-                subcategoria: {id: sub.id}
+                imagen: publicacion.imagen,
+                descripcion:publicacion.descripcion,
+                tags:publicacion.tags,
+                categoria: this.state.categorias.find(c => c.id === publicacion.idCategoria),
+                subcategoria:this.state.categorias.find(s => s.id === publicacion.idSubcategoria),
+            })
+        } else {
+            this.setState({
+                imagen: publicacion.imagen,
+                descripcion:publicacion.descripcion,
+                tags:publicacion.tags,
+                categoria: this.state.categorias.find(c => c.id === publicacion.idCategoria),
             })
         }
     }
@@ -105,7 +114,7 @@ export default class modificarPublicacion extends Component{
         if(this.state.imagen !== null && this.state.descripcion !== "" && this.state.tags !== "" && this.state.categoria !== ""){
         let controladora = new Controladora();
         try{
-            if(this.state.subcategoria.id === ''){
+            if(this.state.subcategoria.id === '' || this.state.subcategoria.id == null){
                 await controladora.modificarPublicacion(
                     this.props.match.params.id,
                     this.state.imagen,
@@ -207,7 +216,7 @@ export default class modificarPublicacion extends Component{
                                         getOptionLabel={(option) => option.nombre}
                                         onBlur = {() => this.setSubcategoria()}
                                         defaultValue={this.state.subcategoria}
-                                        renderInput={(params) => <TextField {...params} label="Subcategoria" />}
+                                        renderInput={(params) => <TextField {...params} label="Subcategoria" defaultValue= {this.state.subcategoria.nombre}/>}
                                         />
                                     </Form.Group>
                                 </div>
