@@ -19,7 +19,10 @@ export default class modificarPublicacion extends Component{
         imagen: null,
         descripcion:'',
         tags:'',
-        categoria:'',
+        categoria:{
+            nombre: '',
+            id: '',
+        },
         subcategoria:'',
         categorias: [],
         subcategorias: [],
@@ -48,12 +51,41 @@ export default class modificarPublicacion extends Component{
         let cat = this.state.categorias.find(c => c.nombre === document.getElementById('combo-box-categoria').value)
         if(cat !== undefined){
             this.setState({
-                categoria: cat.id
+                categoria: {id: cat.id}
             })
             this.obtenerSubcategorias(cat.id)
         }
         this.setState({
             subcategoria: ''
+        })
+    }
+
+    getNombreCategoria = () => {
+        /*console.log(this.state.categoria)
+        console.log(this.state.categorias)
+        console.log(this.state.categorias.find(c => c.nombre === 'Maquillaje Básico'))
+        console.log(this.state.categorias.find(c => c.id === this.state.categoria))*/
+        //return this.state.categorias.find(c => c.id === this.state.categoria).nombre;
+    }
+
+    cargarPublicacion = async() => {
+        let controladora = new Controladora();
+        let categoriasBD = await controladora.obtenerCategorias();
+        var nombresCategorias = [];
+        categoriasBD.forEach(c =>
+            nombresCategorias.push({nombre: c.nombre, id: c.id})
+        )
+        this.setState({
+            categorias: nombresCategorias
+        })
+        let publicacion = (await controladora.obtenerPublicacion(this.props.match.params.id)).data[0];
+        this.obtenerSubcategorias(publicacion.idCategoria);
+        this.setState({
+            imagen: publicacion.imagen,
+            descripcion:publicacion.descripcion,
+            tags:publicacion.tags,
+            categoria: this.state.categorias.find(c => c.id === publicacion.idCategoria),
+            subcategoria:publicacion.idSubcategoria,
         })
     }
 
@@ -67,15 +99,12 @@ export default class modificarPublicacion extends Component{
     }
 
     componentDidMount() {
-        this.obtenerPublicacion(this.props.match.params.id);
-        this.obtenerCategorias();
+        this.cargarPublicacion();
     }
 
     obtenerPublicacion = async(idPublicacion) =>{
         let controladora = new Controladora();
         let publicacion = (await controladora.obtenerPublicacion(idPublicacion)).data[0];
-        console.log(publicacion.idCategoria)
-        console.log(publicacion.idSubcategoria)
         this.obtenerSubcategorias(publicacion.idCategoria);
         this.setState({
             imagen: publicacion.imagen,
@@ -84,7 +113,6 @@ export default class modificarPublicacion extends Component{
             categoria:publicacion.idCategoria,
             subcategoria:publicacion.idSubcategoria,
         })
-        console.log(this.state.categoria)
     }
 
     modificarPublicacion  = async (e) => {
@@ -98,7 +126,8 @@ export default class modificarPublicacion extends Component{
                     this.state.imagen,
                     this.state.descripcion,
                     this.state.tags,
-                    this.state.categoria,
+                    this.state.categoria.id,
+                    0
                 );
             } else {
                 await controladora.modificarPublicacion(
@@ -106,7 +135,7 @@ export default class modificarPublicacion extends Component{
                     this.state.imagen,
                     this.state.descripcion,
                     this.state.tags,
-                    this.state.categoria,
+                    this.state.categoria.id,
                     this.state.subcategoria
                 );
             }
@@ -118,18 +147,6 @@ export default class modificarPublicacion extends Component{
     } else {
         swal("Alguna casilla se encuentra vacía","" ,"warning");
     }
-    }
-
-    obtenerCategorias = async() => {
-        let controladora = new Controladora();
-        let categoriasBD = await controladora.obtenerCategorias();
-        var nombresCategorias = [];
-        categoriasBD.forEach(c =>
-            nombresCategorias.push({nombre: c.nombre, id: c.id})
-        )
-        this.setState({
-            categorias: nombresCategorias
-        })
     }
 
     obtenerSubcategorias = async(idCategoria) => {
@@ -183,9 +200,30 @@ export default class modificarPublicacion extends Component{
                                         <Form.Control type="text" name = 'tags' defaultValue={this.state.tags}/>
                                         <br/>
                                         <h6>Categoría:</h6>
+                                        <Autocomplete
+                                        disablePortal
+                                        id="combo-box-categoria"
+                                        options={this.state.categorias}
+                                        sx={{ width: 300 }}
+                                        nombre = 'categoria'
+                                        getOptionLabel={(option) => option.nombre}
+                                        onBlur = {() => this.setCategoria()}
+                                        defaultValue= {this.state.categoria}
+                                        renderInput={(params) => <TextField {...params} label="Categoria" defaultValue= {this.state.categoria.nombre} />}
+                                        />
                                         <br/>
                                         <h6>Subcategoría:</h6>
-                                        <br/>
+                                        <Autocomplete
+                                        disablePortal
+                                        id="combo-box-subcategoria"
+                                        options={this.state.subcategorias}
+                                        sx={{ width: 300 }}
+                                        nombre = 'subcategoria'
+                                        getOptionLabel={(option) => option.nombre}
+                                        onBlur = {() => this.setSubcategoria()}
+                                        defaultValue={this.state.subcategoria}
+                                        renderInput={(params) => <TextField {...params} label="Subcategoria" />}
+                                        />
                                     </Form.Group>
                                 </div>
                                 <div className="d-grid gap-2">
