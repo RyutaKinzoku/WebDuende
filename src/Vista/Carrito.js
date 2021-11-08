@@ -142,7 +142,7 @@ export default class Carrito extends Component{
                     <Container>
                     </Container>
                         <Navbar.Brand id="navTitle2" href="">Total: ₡ {Number(this.state.precioTotal)}</Navbar.Brand>
-                        {this.state.productosCarrito.length ==! 0?<Nav.Link className="botonNav2" href="/Comprar">Comprar</Nav.Link>:<div></div>}
+                        {this.state.productosCarrito.length !== 0?<Nav.Link className="botonNav2" href="/Comprar">Comprar</Nav.Link>:<div></div>}
                 </Navbar>
             </div>
         )
