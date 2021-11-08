@@ -134,7 +134,7 @@ export default class modificarPublicacion extends Component{
                 );
             }
             swal("Publicación modificada","","success");
-            //window.location.href="/galeria";
+            window.location.href="/galeria";
         } catch (err){
             swal("Error al modificar","", "warning");
         }
