@@ -47,15 +47,11 @@ export default class Ordenes extends Component{
 
     eliminarOrden = async (idOrden)=>{
         let controladora = new Controladora();
-        let response = await controladora.eliminarNotificacion("NotificacionCompra", idOrden);
+        //controladora.eliminarNotificacionDesdeOrden("NotificacionCompra", idOrden);
         controladora.eliminarOrden(idOrden);
-        if(!response.data){
-            swal("Orden eliminada", "", "success").then((value)=>{
-                window.location.href='/Ordenes'
-            })
-        } else {
-            swal("Error al eliminar","", "warning");
-        }
+        swal("Orden eliminada", "", "success").then((value)=>{
+            window.location.href='/Ordenes'
+        })
     }
 
     render(){

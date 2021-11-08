@@ -82,15 +82,15 @@ export default class Agenda extends Component{
     }
 
     eliminarNotificacion = async (idOrden)=>{
-        /*let controladora = new Controladora();
+        let controladora = new Controladora();
         let response = await controladora.eliminarNotificacion("NotificacionCompra", idOrden);
         if(!response.data){
-            swal("Notificación eliminada", "", "success").then((value)=>{
+            swal("Notificación escondida", "", "success").then((value)=>{
                 window.location.href='/Agenda'
             })
         } else {
-            swal("Error al eliminar","", "warning");
-        }*/
+            swal("Error al esconder","", "warning");
+        }
     }
 
     obtenerNotificaciones = async() => {
@@ -98,10 +98,10 @@ export default class Agenda extends Component{
         let response = await controladora.obtenerNotificaciones();
         response.forEach(notificacion => {
             if(notificacion.type() === "NotificacionCita"){
-                this.state.notificaciones.push(notificacion.mensaje + notificacion.idPublicacion+ "\r\n");
+                this.state.notificaciones.push(notificacion);
             }
             if(notificacion.type() === "NotificacionCompra"){
-                this.state.notificaciones.push("Se ha realizado una nueva compra, pedido #"+notificacion.idOrdenCompra+"\r\n");
+                this.state.notificaciones.push(notificacion);
             }
         });
     }
@@ -120,16 +120,19 @@ export default class Agenda extends Component{
                     <Offcanvas.Body>
                         {this.state.notificaciones.map(notificacion => 
                            <Card>
+                               {Number(notificacion.vista) === 1 ?
                            <Card.Body>
                                <Row>
-                               {notificacion}
-                               <Button size="md" variant="secondary" type="submit" onClick = {() => this.eliminarNotificacion(notificacion.split("#")[1])}>
+                               <Card.Text>
+                               Nueva compra, pedido #{notificacion.idOrdenCompra}
+                               </Card.Text>
+                               <Button size="md" variant="secondary" type="submit" onClick = {() => this.eliminarNotificacion(notificacion.id)}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                     </svg>
                                 </Button>
                                 </Row>
-                           </Card.Body>
+                           </Card.Body>:<div></div>}
                            </Card>
                         )}
                     </Offcanvas.Body>

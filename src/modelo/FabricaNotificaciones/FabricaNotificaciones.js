@@ -5,10 +5,11 @@ import NotificacionCompra from "./NotificacionCompra";
 export default class FabricaNotificaciones {
     static fabricarNotificacion(estructura){
         let datos = estructura.split(';');
+        console.log(datos);
         if(datos[0] === "NotificacionCita"){
-            return new NotificacionCita(datos[1],datos[2],datos[3],datos[4]);
+            return new NotificacionCita(datos[1],datos[2],datos[3],datos[4], datos[5]);
         }else if(datos[0] === "NotificacionCompra"){
-            return new NotificacionCompra(datos[1],datos[2]);
+            return new NotificacionCompra(datos[1],datos[2], datos[3]);
         }else{
             return new Error("Notificacion no existente");
         }

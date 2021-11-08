@@ -47,9 +47,8 @@ export default class ManejoCompras{
     }
 
     async agregarOrden(productos, correo, comprobante, direccion){
-        var orden = new OrdenCompra(0, comprobante[0], direccion, correo, productos);
-        this.gestorOrdenes.setNext();
-        orden.id = await this.gestorOrdenes.getNext();
+        let id = await this.gestorOrdenes.getNext();
+        var orden = new OrdenCompra(id, comprobante[0], direccion, correo, productos);
         return this.gestorOrdenes.agregarOrden(orden);
     }
 

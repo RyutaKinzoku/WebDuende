@@ -56,7 +56,7 @@ export default class GestorOrdenes  extends GestorDB{
     }
 
     async getNext(){
-        var response = await axios.get('http://localhost:3001/api/getIdOrden');
+        var response = await axios.get('http://localhost:3001/api/getNextOrden');
         return response.data[0].ultimo_valor;
     }
 

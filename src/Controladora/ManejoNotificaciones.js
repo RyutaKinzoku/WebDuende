@@ -22,11 +22,15 @@ export default class ManejoNotificaciones{
 
     async agregarNotificacionCompra(idOrden){
         let idNotificacion = await this.gestorNotificaciones.getNext();
-        let notificacionCompra =  FabricaNotificaciones.fabricarNotificacion("NotificacionCompra;"+idNotificacion+";"+idOrden);
+        let notificacionCompra =  FabricaNotificaciones.fabricarNotificacion("NotificacionCompra;"+idNotificacion+";"+idOrden+";");
         return this.gestorNotificaciones.agregarNotificacionCompra(notificacionCompra);
     }
     
-    async eliminarNotificacion(type, idOrden){
-        return this.gestorNotificaciones.eliminar(type, idOrden);
+    async eliminarNotificacion(type, idNotificacion){
+        return this.gestorNotificaciones.eliminar(type, idNotificacion);
+    }
+
+    async eliminarNotificacionDesdeOrden(type, idOrden){
+        return this.gestorNotificaciones.eliminarNotificacionDesdeOrden(type, idOrden);
     }
 }
