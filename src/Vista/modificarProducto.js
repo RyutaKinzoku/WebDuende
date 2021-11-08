@@ -59,7 +59,7 @@ export default class ModificarProducto extends Component{
         if(this.state.nombre !== "" && this.state.descripcion !== "" && this.state.precio !== "" && this.state.cantidad !== "" && this.state.imagen !== null){
         let controladora = new Controladora();
         try{
-            await controladora.modificarProducto(
+            controladora.modificarProducto(
                 this.props.match.params.id,
                 this.state.nombre, 
                 this.state.descripcion, 

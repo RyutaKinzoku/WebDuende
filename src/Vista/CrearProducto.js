@@ -49,9 +49,8 @@ export default class CrearProducto extends Component{
                 this.state.cantidad, 
                 this.state.imagen
             );
-            swal("Producto agregado","","success").then((value)=>{
-                window.location.href="/Tienda";
-            });
+            swal("Producto agregado","","success");
+            window.location.href="/Tienda";
         }catch(err){
             swal("Error al agregar","", "warning");
         }
