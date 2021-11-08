@@ -1,6 +1,7 @@
 export default class Notificacion {
-    constructor(id) {
+    constructor(id, vista) {
         this.id = id;
+        this.vista = vista;
     }
 
     get id(){
@@ -9,5 +10,13 @@ export default class Notificacion {
 
     set id(id){
         this._id = id;
+    }
+
+    get vista(){
+        return this._vista;
+    }
+
+    set vista(vista){
+        this._vista = vista;
     }
 }

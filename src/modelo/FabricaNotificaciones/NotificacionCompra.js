@@ -1,8 +1,8 @@
 import Notificacion from "./Notificacion";
 
 export default class NotificacionCompra extends Notificacion {
-    constructor(id, idOrdenCompra) {
-        super(id);
+    constructor(id, idOrdenCompra, vista) {
+        super(id, vista);
         this.idOrdenCompra = idOrdenCompra;
     }
 
