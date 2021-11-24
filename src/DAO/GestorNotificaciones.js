@@ -89,4 +89,24 @@ export default class GestorNotificaciones extends GestorDB{
         let valor = await axios.get('http://localhost:3001/api/getNextNotificaciones');
         return valor.data[0].ultimo_valor;
     }
+
+    async obtenerNotificacionesCita(){
+        let notificacionesCita = await axios.get('http://localhost:3001/api/getNotificacionesCita');
+        let notificaciones = [];
+        notificacionesCita.data.forEach(element => {
+            let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+element.ID+";"+element.idPublicacion+";"+element.correoUsuario+";"+element.mensaje+";"+element.vista)
+            notificaciones.push(notificacionCita);
+        });
+        return notificaciones;
+    }
+
+    async obtenerNotificacionesCompra(){
+        let notificacionesCompra = await axios.get('http://localhost:3001/api/getNotificacionesCompra');
+        let notificaciones = [];
+        notificacionesCompra.data.forEach(element => {
+            let notificacionCompra = FabricaNotificaciones.fabricarNotificacion("NotificacionCompra;"+element.ID+";"+element.idOrdenCompra+";"+element.vista);
+            notificaciones.push(notificacionCompra);
+        });
+        return notificaciones;
+    }
 }

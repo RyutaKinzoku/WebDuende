@@ -4,10 +4,26 @@ import GestorNotificaciones from "../DAO/GestorNotificaciones";
 import GestorDB from "../DAO/GestorBD";
 import NotificacionCita from "../modelo/FabricaNotificaciones/NotificacionCita";
 import NotificacionCompra from "../modelo/FabricaNotificaciones/NotificacionCompra";
+import Contexto from "../modelo/NotificacionStrategy/Contexto";
+import NotificacionesCita from "../modelo/NotificacionStrategy/NotificacionesCita";
+import NotificacionesCompra from "../modelo/NotificacionStrategy/NotificacionesCompra";
 
 export default class ManejoNotificaciones{
     constructor(){
         this.gestorNotificaciones = new GestorNotificaciones();
+        this.contexto = new Contexto();
+    }
+
+    obtenerNotificacionesCita(){
+        let estrategia = new NotificacionesCita();
+        this.contexto.cambiarSrategy(estrategia);
+        return this.contexto.getNotificaciones();
+    }
+
+    obtenerNotificacionesCompra(){
+        let estrategia = new NotificacionesCompra();
+        this.contexto.cambiarSrategy(estrategia);
+        return this.contexto.getNotificaciones();
     }
 
     async obtenerNotificaciones(){

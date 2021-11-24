@@ -208,4 +208,12 @@ export default class Controladora{
     async obtenerNotificaciones(){
         return this.manejoNotificaciones.obtenerNotificaciones();
     }
+
+    obtenerNotificacionesCita(){
+        return this.manejoNotificaciones.obtenerNotificacionesCita();
+    }
+
+    obtenerNotificacionesCompra(){
+        return this.manejoNotificaciones.obtenerNotificacionesCompra();
+    }
 }
