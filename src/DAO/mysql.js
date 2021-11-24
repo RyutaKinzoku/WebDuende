@@ -435,11 +435,10 @@ router.post("/agregarNotificacionCita", (req,res) =>{
     const idPublicacion = req.body.idPublicacion;
     const correoUsuario = req.body.correoUsuario;
 
-    const sqlInsertNotificacion = "INSERT INTO Notificacion (ID) VALUES (?);";
-    const sqlInsertNotificacionCompra = "INSERT INTO NotificacionCita (ID, mensaje, idPublicacion, correoUsuario) VALUES (?,?,?,?);"
-
-    db.query(sqlInsertNotificacion, [id], () => {
-        db.query(sqlInsertNotificacionCompra , [id, mensaje, idPublicacion,correoUsuario] ,(err) => {
+    const sqlInsertNotificacion = "INSERT INTO Notificacion (ID, vista) VALUES (?,?);";
+    const sqlInsertNotificacionCita = "INSERT INTO NotificacionCita (ID, mensaje, idPublicacion, correoUsuario, vista) VALUES (?,?,?,?,?);"
+    db.query(sqlInsertNotificacion, [id, true], () => {
+        db.query(sqlInsertNotificacionCita , [id, mensaje, idPublicacion,correoUsuario, true] ,(err) => {
             console.log(err);
             res.send(err);
         })

@@ -19,6 +19,7 @@ export default class Galeria extends Component{
         publicaciones: [],
         categoria:'',
         categorias: [],
+        mensaje: '',
     }
 
     cerrarSesion = () =>{
@@ -82,6 +83,20 @@ export default class Galeria extends Component{
             window.location.href='/galeria';
         } catch (err){
             swal("Error al eliminar","", "warning");
+        }
+    }
+
+    comentar = async(idPublicacion, mensaje, correoUsuario)=>{
+        if(mensaje !== ""){
+        let controladora = new Controladora();
+        try{
+            await controladora.agregarNotificacionCita(idPublicacion, correoUsuario, mensaje);
+            //window.location.href='/galeria';
+        } catch (err){
+            swal("Error al comentar","", "warning");
+        }
+        } else {
+            swal("La casilla de comentario se encuentra vacía","" ,"warning");
         }
     }
 
@@ -155,7 +170,11 @@ export default class Galeria extends Component{
                                                 Subcategoría: {publicacion.subcategoria}
                                             </Card.Text>
                                             {cookies.get('rol') !== "ADMIN" && cookies.get('correo') !== undefined? 
-                                            <Button size="md" variant="secondary" type="submit">
+                                            <Form.Control as="textarea" rows={3} name="mensaje"/>
+                                            : <div></div>}
+                                            <br/>
+                                            {cookies.get('rol') !== "ADMIN" && cookies.get('correo') !== undefined? 
+                                            <Button size="md" variant="secondary" type="submit" onClick = {()=> this.comentar(publicacion.id, this.state.mensaje, cookies.get('correo'))}>
                                                 Comentar
                                             </Button>: <div></div>}{' '}
                                             {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? 
