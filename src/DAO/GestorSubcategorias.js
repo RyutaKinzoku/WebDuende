@@ -8,16 +8,16 @@ export default class GestorSubcategorias  extends GestorDB{
             idSubcategoria: subcategoria.id,
             nombre: subcategoria.nombre,
         }
-        return axios.post('http://localhost:3001/api/modificarSubcategoria',values);
+        return axios.post('https://web-duende-server.herokuapp.com/modificarSubcategoria',values);
     }
     eliminar(idSubcategoria){
         let values = {
             idSubcategoria: idSubcategoria
         }
-        return axios.post('http://localhost:3001/api/eliminarSubcategoria', values);
+        return axios.post('https://web-duende-server.herokuapp.com/eliminarSubcategoria', values);
     }
     async obtener(idSubcategoria){
-        var response = await axios.get('http://localhost:3001/api/obtenerSubcategoria',{params: {idSubcategoria: idSubcategoria} });
+        var response = await axios.get('https://web-duende-server.herokuapp.com/obtenerSubcategoria',{params: {idSubcategoria: idSubcategoria} });
         if(response.data.length>0){
             let subcategoria = response.data[0];
             let c = new Subcategoria(subcategoria.id,subcategoria.nombre,subcategoria.idCategoria);
@@ -31,10 +31,10 @@ export default class GestorSubcategorias  extends GestorDB{
             idCategoria: subcategoria.idCategoria,
             nombre: subcategoria.nombre,
         }
-        return axios.post('http://localhost:3001/api/agregarSubcategoria',values);
+        return axios.post('https://web-duende-server.herokuapp.com/agregarSubcategoria',values);
     }
     async obtenerLista(idCategoria){
-        let lista = await axios.get('http://localhost:3001/api/getSubcategorias', {params: {idCategoria: idCategoria}});
+        let lista = await axios.get('https://web-duende-server.herokuapp.com/getSubcategorias', {params: {idCategoria: idCategoria}});
         let subcategorias = []
         lista.data.forEach(element => {
             let subcategoria = new Subcategoria(element.ID, element.nombre, element.idCategoria);
@@ -43,7 +43,7 @@ export default class GestorSubcategorias  extends GestorDB{
         return subcategorias;
     }
     async getNext(){
-        let valor = await axios.get('http://localhost:3001/api/getNextSubcategorias');
+        let valor = await axios.get('https://web-duende-server.herokuapp.com/getNextSubcategorias');
         return valor.data[0].ultimo_valor;
     }
 }
