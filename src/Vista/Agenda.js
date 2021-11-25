@@ -127,7 +127,7 @@ export default class Agenda extends Component{
                                <Row>
                                <Card.Text>
                                 {notificacion.idOrdenCompra !== undefined ? "Nueva compra, pedido #"+notificacion.idOrdenCompra :<div></div>}
-                                {notificacion.correoUsuario !== undefined ? "Nuevo comentario de "+notificacion.correoUsuario :<div></div>}
+                                {notificacion.correoUsuario !== undefined ? "Nuevo comentario de "+notificacion.correoUsuario+" en la publicacion #"+notificacion.idPublicacion :<div></div>}
                                 <br/>
                                 {notificacion.correoUsuario !== undefined ? notificacion.mensaje :<div></div>}
                                </Card.Text>

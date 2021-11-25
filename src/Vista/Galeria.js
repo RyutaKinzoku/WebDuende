@@ -90,8 +90,12 @@ export default class Galeria extends Component{
         if(mensaje !== ""){
         let controladora = new Controladora();
         try{
-            await controladora.agregarNotificacionCita(idPublicacion, correoUsuario, mensaje);
-            window.location.href='/galeria';
+            let response = await controladora.agregarNotificacionCita(idPublicacion, correoUsuario, mensaje);
+            if (response.data.errno === 1406){
+                swal("El comentario es muy largo","", "warning");
+            }else{
+                window.location.href='/galeria';
+            }
         } catch (err){
             swal("Error al comentar","", "warning");
         }
