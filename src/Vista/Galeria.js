@@ -91,7 +91,7 @@ export default class Galeria extends Component{
         let controladora = new Controladora();
         try{
             await controladora.agregarNotificacionCita(idPublicacion, correoUsuario, mensaje);
-            //window.location.href='/galeria';
+            window.location.href='/galeria';
         } catch (err){
             swal("Error al comentar","", "warning");
         }

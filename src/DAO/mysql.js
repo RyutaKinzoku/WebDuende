@@ -361,10 +361,10 @@ router.post("/modificarNotificacionCompra", (req,res) =>{});
 router.post("/modificarNotificacionCita", (req,res) =>{});
 
 router.post('/eliminarNotificacionCita', (req,res) => {
-    const sqlDeleteNotificacionCita = "DELETE FROM `NotificacionCita` WHERE ID=?;"
-    const sqlDeleteNotificacion = "DELETE FROM `Notificacion` WHERE ID=?;"
-    db.query(sqlDeleteNotificacionCita, [req.body.idNotificacion], () => {
-        db.query(sqlDeleteNotificacion, [req.body.idNotificacion], (err, _) => {
+    const sqlDeleteNotificacionCita = "UPDATE `NotificacionCita` SET `vista`=? WHERE ID=?;"
+    const sqlDeleteNotificacion = "UPDATE `Notificacion` SET `vista`=? WHERE ID=?;"
+    db.query(sqlDeleteNotificacionCita, [false,req.body.idNotificacion], () => {
+        db.query(sqlDeleteNotificacion, [false,req.body.idNotificacion], (err, _) => {
             console.log(err);
             res.send(err);
         })
@@ -435,7 +435,7 @@ router.post("/agregarNotificacionCita", (req,res) =>{
     const idPublicacion = req.body.idPublicacion;
     const correoUsuario = req.body.correoUsuario;
 
-    const sqlInsertNotificacion = "INSERT INTO Notificacion (ID, vista) VALUES (?,?);";
+    const sqlInsertNotificacion = "INSERT INTO Notificacion (ID,vista) VALUES (?,?);";
     const sqlInsertNotificacionCita = "INSERT INTO NotificacionCita (ID, mensaje, idPublicacion, correoUsuario, vista) VALUES (?,?,?,?,?);"
     db.query(sqlInsertNotificacion, [id, true], () => {
         db.query(sqlInsertNotificacionCita , [id, mensaje, idPublicacion,correoUsuario, true] ,(err) => {

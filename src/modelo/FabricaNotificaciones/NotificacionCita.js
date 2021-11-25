@@ -1,7 +1,7 @@
 import Notificacion from "./Notificacion";
 
 export default class NotificacionCita extends Notificacion {
-    constructor(id, idPublicacion, mensaje, correoUsuario, vista) {
+    constructor(id, idPublicacion, correoUsuario, mensaje, vista) {
         super(id, vista);
         this.mensaje = mensaje;
         this.idPublicacion = idPublicacion;
