@@ -36,8 +36,8 @@ export default class ManejoCompras{
         return this.gestorOrdenes.obtenerLista();
     }
 
-    obtenerOrden(idOrden){
-        return this.gestorOrdenes.obtener(idOrden);
+    obtenerOrden(idOrdenCompra){
+        return this.gestorOrdenes.obtener(idOrdenCompra);
     }
 
     async comprar(correo, comprobante, direccion){

@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
         }
         callback(null, uuidv4() + ext);
       } catch (error) {
-        alert("El archivo selecionado" + error.name + "Solo se admiten archivos tipo: \n .png \n .jpg \n .gif \n .jpeg")
+        console.log("El archivo selecionado" + error.name + "Solo se admiten archivos tipo: \n .png \n .jpg \n .gif \n .jpeg")
       }
     }
 }) 
@@ -83,6 +83,15 @@ router.get('/listaCompras', async (_,res) => {
 
 router.get('/obtenerProducto', async (req,res) => {
     modelos.Producto.find({id: req.query.idProducto}, (err, docs) => {
+        if(err){
+            res.send(err);
+        }
+        res.send(docs);
+    })
+})
+
+router.get('/obtenerOrden', async (req,res) => {
+    modelos.Orden.find({id: req.query.idOrdenCompra}, (err, docs) => {
         if(err){
             res.send(err);
         }

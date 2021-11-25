@@ -21,7 +21,9 @@ export default class GestorOrdenes  extends GestorDB{
         return axios.post('http://localhost:3001/api/eliminarOrden', values);
     }
 
-    obtener(idOrden){}
+    obtener(idOrdenCompra){
+        return axios.get('http://localhost:3001/api/obtenerOrden', {params: {idOrdenCompra: idOrdenCompra}});
+    }
 
     async agregarOrden(orden){
         const form = new FormData();

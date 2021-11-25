@@ -136,6 +136,10 @@ export default class Controladora{
         return this.manejoCompras.obtenerOrdenes();
     }
 
+    obtenerOrden(idOrdenCompra){
+        return this.manejoCompras.obtenerOrden(idOrdenCompra);
+    }
+
     async obtenerProductosOrden(idOrden){
         return this.manejoCompras.obtenerProductosOrden(idOrden);
     }

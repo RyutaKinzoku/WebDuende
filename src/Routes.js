@@ -26,6 +26,7 @@ import VerSubcategorias from './Vista/VerSubcategorias'
 import VerCurso from './Vista/VerCurso';
 import VerCita from './Vista/VerCita';
 import VerEntrega from './Vista/VerEntrega';
+import NotificacionesCompra from './Vista/NotificacionesCompra';
 
 function Routes(){
     return(
@@ -56,7 +57,7 @@ function Routes(){
                 <Route exact path="/VerSubcategorias/:id" component = {VerSubcategorias}/>
                 <Route exact path="/VerCurso/:id" component = {VerCurso}/>
                 <Route exact path="/VerCita/:id" component = {VerCita}/>
-                <Route exact path="/VerEntrega/:id" component = {VerEntrega}/>
+                <Route exact path="/NotificacionesCompra" component = {NotificacionesCompra}/>
             </Switch>
         </BrowserRouter>
     );
