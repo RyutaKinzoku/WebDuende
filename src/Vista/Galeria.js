@@ -19,7 +19,6 @@ export default class Galeria extends Component{
         publicaciones: [],
         categoria:'',
         categorias: [],
-        mensaje: '',
     }
 
     cerrarSesion = () =>{
@@ -83,24 +82,6 @@ export default class Galeria extends Component{
             window.location.href='/galeria';
         } catch (err){
             swal("Error al eliminar","", "warning");
-        }
-    }
-
-    comentar = async(idPublicacion, mensaje, correoUsuario)=>{
-        if(mensaje !== ""){
-        let controladora = new Controladora();
-        try{
-            let response = await controladora.agregarNotificacionCita(idPublicacion, correoUsuario, mensaje);
-            if (response.data.errno === 1406){
-                swal("El comentario es muy largo","", "warning");
-            }else{
-                window.location.href='/galeria';
-            }
-        } catch (err){
-            swal("Error al comentar","", "warning");
-        }
-        } else {
-            swal("La casilla de comentario se encuentra vacía","" ,"warning");
         }
     }
 
@@ -174,11 +155,7 @@ export default class Galeria extends Component{
                                                 Subcategoría: {publicacion.subcategoria}
                                             </Card.Text>
                                             {cookies.get('rol') !== "ADMIN" && cookies.get('correo') !== undefined? 
-                                            <Form.Control as="textarea" rows={3} name="mensaje"/>
-                                            : <div></div>}
-                                            <br/>
-                                            {cookies.get('rol') !== "ADMIN" && cookies.get('correo') !== undefined? 
-                                            <Button size="md" variant="secondary" type="submit" onClick = {()=> this.comentar(publicacion.id, this.state.mensaje, cookies.get('correo'))}>
+                                            <Button size="md" variant="secondary" type="submit" href={"/Comentar/"+publicacion.id}>
                                                 Comentar
                                             </Button>: <div></div>}{' '}
                                             {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? 

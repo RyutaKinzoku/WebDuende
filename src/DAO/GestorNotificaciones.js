@@ -15,7 +15,7 @@ export default class GestorNotificaciones extends GestorDB{
             id: notificacionCita.id,
             mensaje: notificacionCita.mensaje,
             idPublicacion: notificacionCita.idPublicacion,
-            correoUsuario: notificacionCita.correoUsuario
+            correoUsuario: notificacionCita.correoUsuario,
         }
         return axios.post('http://localhost:3001/api/modificarNotificacionCita',values);
     }
@@ -43,7 +43,7 @@ export default class GestorNotificaciones extends GestorDB{
             var response = await axios.get('http://localhost:3001/api/obtenerNotificacionCita',{params: {idNotificacion: idNotificacion} });
             if(response.data.length>0){
                 let notificacionCita = response.data[0];
-                let c = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+notificacionCita.idNotificacion+";"+notificacionCita.idPublicacion+";"+notificacionCita.correo+";"+notificacionCita.mensaje+";"+notificacionCita.vista);
+                let c = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+notificacionCita.idNotificacion+";"+notificacionCita.idPublicacion+";"+notificacionCita.correo+";"+notificacionCita.mensaje+";"+notificacionCita.lugar +";"+notificacionCita.vista);
                 return c;
             }
         }else if(type === "NotificacionCompra"){
@@ -67,8 +67,10 @@ export default class GestorNotificaciones extends GestorDB{
             id: notificacionCita.id,
             mensaje: notificacionCita.mensaje,
             idPublicacion: notificacionCita.idPublicacion,
-            correoUsuario: notificacionCita.correoUsuario
+            correoUsuario: notificacionCita.correoUsuario,
+            lugar: notificacionCita.lugar
         }
+
         return axios.post('http://localhost:3001/api/agregarNotificacionCita',values);
     }
     async obtenerLista(){
@@ -76,7 +78,7 @@ export default class GestorNotificaciones extends GestorDB{
         let notificacionesCompra = await axios.get('http://localhost:3001/api/getNotificacionesCompra');
         let notificaciones = [];
         notificacionesCita.data.forEach(element => {
-            let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+element.ID+";"+element.idPublicacion+";"+element.correoUsuario+";"+element.mensaje+";"+element.vista)
+            let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+element.ID+";"+element.idPublicacion+";"+element.correoUsuario+";"+element.mensaje+";"+element.lugar+";"+element.vista)
             notificaciones.push(notificacionCita);
         });
         notificacionesCompra.data.forEach(element => {
@@ -94,7 +96,7 @@ export default class GestorNotificaciones extends GestorDB{
         let notificacionesCita = await axios.get('http://localhost:3001/api/getNotificacionesCita');
         let notificaciones = [];
         notificacionesCita.data.forEach(element => {
-            let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+element.ID+";"+element.idPublicacion+";"+element.correoUsuario+";"+element.mensaje+";"+element.vista)
+            let notificacionCita = FabricaNotificaciones.fabricarNotificacion("NotificacionCita;"+element.ID+";"+element.idPublicacion+";"+element.correoUsuario+";"+element.mensaje+";"+element.lugar+";"+element.vista)
             notificaciones.push(notificacionCita);
         });
         return notificaciones;

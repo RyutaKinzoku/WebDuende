@@ -197,8 +197,8 @@ export default class Controladora{
         return this.manejoNotificaciones.agregarNotificacionCompra(idOrden);
     }
 
-    async agregarNotificacionCita(idPublicacion, correo, mensaje){
-        return this.manejoNotificaciones.agregarNotificacionCita(idPublicacion, correo, mensaje);
+    async agregarNotificacionCita(idPublicacion, correo, mensaje, lugar){
+        return this.manejoNotificaciones.agregarNotificacionCita(idPublicacion, correo, mensaje, lugar);
     }
     
     async eliminarNotificacion(type, idNotificacion){

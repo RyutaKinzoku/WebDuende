@@ -128,8 +128,10 @@ export default class Agenda extends Component{
                                <Card.Text>
                                 {notificacion.idOrdenCompra !== undefined ? "Nueva compra, pedido #"+notificacion.idOrdenCompra :<div></div>}
                                 {notificacion.correoUsuario !== undefined ? "Nuevo comentario de "+notificacion.correoUsuario+" en la publicacion #"+notificacion.idPublicacion :<div></div>}
-                                <br/>
-                                {notificacion.correoUsuario !== undefined ? notificacion.mensaje :<div></div>}
+                                {notificacion.correoUsuario !== undefined ? <br/> :<div></div>}
+                                {notificacion.correoUsuario !== undefined ? "Lugar: "+notificacion.lugar :<div></div>}
+                                {notificacion.correoUsuario !== undefined ? <br/> :<div></div>}
+                                {notificacion.correoUsuario !== undefined ? "Menasje: "+notificacion.mensaje :<div></div>}
                                </Card.Text>
                                {notificacion.correoUsuario !== undefined ?
                                <Button size="md" variant="secondary" type="submit" onClick = {() => this.eliminarNotificacion("NotificacionCita",notificacion.id)}>

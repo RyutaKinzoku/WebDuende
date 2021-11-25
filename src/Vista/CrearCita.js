@@ -115,7 +115,7 @@ export default class CrearCita extends Component{
                             <Button size="md" variant="secondary" onClick={this.crear}>
                                 Continuar
                             </Button>
-                            <Button size="md" variant="secondary" href="/Compromisos">
+                            <Button size="md" variant="secondary" href="/Galeria">
                                 Cancelar
                             </Button>
                         </div>
