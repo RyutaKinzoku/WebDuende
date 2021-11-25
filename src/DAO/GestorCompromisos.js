@@ -12,7 +12,7 @@ export default class GestorCompromisos extends GestorDB{
             lugar: entrega.lugar,
             idOrdenCompra: entrega.orden
         }
-        return axios.post('http://localhost:3001/api/modificarEntrega',values);
+        return axios.post('https://web-duende-server.herokuapp.com/api/modificarEntrega',values);
     };
 
     async modificarCurso(curso){
@@ -23,7 +23,7 @@ export default class GestorCompromisos extends GestorDB{
             titulo: curso.titulo,
             lugar: curso.lugar
         }
-        return axios.post('http://localhost:3001/api/modificarCurso',values);
+        return axios.post('https://web-duende-server.herokuapp.com/api/modificarCurso',values);
     };
 
     async modificarCita(cita){
@@ -35,7 +35,7 @@ export default class GestorCompromisos extends GestorDB{
             lugar: cita.lugar,
             idPublicacion: cita.publicacion
         }
-        return axios.post('http://localhost:3001/api/modificarCita',values);
+        return axios.post('https://web-duende-server.herokuapp.com/api/modificarCita',values);
     };
 
     async eliminar(type, idCompromiso){
@@ -43,31 +43,31 @@ export default class GestorCompromisos extends GestorDB{
             idCompromiso: idCompromiso
         }
         if(type === "Curso"){
-            return axios.post('http://localhost:3001/api/eliminarCurso',values);
+            return axios.post('https://web-duende-server.herokuapp.com/api/eliminarCurso',values);
         } else if(type === "Cita") {
-            return axios.post('http://localhost:3001/api/eliminarCita',values);
+            return axios.post('https://web-duende-server.herokuapp.com/api/eliminarCita',values);
         } else if(type === "Entrega") {
-            return axios.post('http://localhost:3001/api/eliminarEntrega',values);
+            return axios.post('https://web-duende-server.herokuapp.com/api/eliminarEntrega',values);
         }
     };
 
     async obtener(type, idCompromiso){
         if(type === "Curso"){
-            var response = await axios.get('http://localhost:3001/api/obtenerCurso',{params: {idCompromiso: idCompromiso} });
+            var response = await axios.get('https://web-duende-server.herokuapp.com/api/obtenerCurso',{params: {idCompromiso: idCompromiso} });
             if(response.data.length>0){
                 let curso = response.data[0];
                 let c = FabricaCompromisos.fabricarCompromiso("Curso;"+curso.fechaHoraInicio+";"+curso.fechaHoraFin+";"+curso.titulo+";"+curso.idCompromiso+";"+curso.lugar);
                 return c;
             }
         }else if(type === "Cita"){
-            var response = await axios.get('http://localhost:3001/api/obtenerCita',{params: {idCompromiso: idCompromiso} });
+            var response = await axios.get('https://web-duende-server.herokuapp.com/api/obtenerCita',{params: {idCompromiso: idCompromiso} });
             if(response.data.length>0){
                 let cita = response.data[0];
                 let c = FabricaCompromisos.fabricarCompromiso("Cita;"+cita.fechaHoraInicio+";"+cita.fechaHoraFin+";"+cita.ID+";"+cita.lugar+";"+cita.correoUsuario+";"+cita.idPublicacion);
                 return c;
             }
         }else if(type === "Entrega"){
-            var response = await axios.get('http://localhost:3001/api/obtenerEntrega',{params: {idCompromiso: idCompromiso} });
+            var response = await axios.get('https://web-duende-server.herokuapp.com/api/obtenerEntrega',{params: {idCompromiso: idCompromiso} });
             if(response.data.length>0){
                 let entrega = response.data[0];
                 let e = FabricaCompromisos.fabricarCompromiso("Entrega;"+entrega.fechaHoraInicio+";"+entrega.fechaHoraFin+";"+entrega.ID+";"+entrega.lugar+";"+entrega.correoUsuario+";"+entrega.idOrdenCompra);
@@ -85,7 +85,7 @@ export default class GestorCompromisos extends GestorDB{
             correoUsuario: entrega.usuario,
             idOrdenCompra: entrega.orden
         }
-        return axios.post('http://localhost:3001/api/agregarEntrega',values);
+        return axios.post('https://web-duende-server.herokuapp.com/api/agregarEntrega',values);
     };
 
     async agregarCurso(curso){
@@ -96,7 +96,7 @@ export default class GestorCompromisos extends GestorDB{
             titulo: curso.titulo,
             lugar: curso.lugar
         }
-        return axios.post('http://localhost:3001/api/agregarCurso',values);
+        return axios.post('https://web-duende-server.herokuapp.com/api/agregarCurso',values);
     };
 
     async agregarCita(cita){
@@ -108,13 +108,13 @@ export default class GestorCompromisos extends GestorDB{
             correoUsuario: cita.usuario,
             idPublicacion: cita.publicacion
         }
-        return axios.post('http://localhost:3001/api/agregarCita',values);
+        return axios.post('https://web-duende-server.herokuapp.com/api/agregarCita',values);
     };
 
     async obtenerLista(){
-        let cursos = await axios.get('http://localhost:3001/api/getCursos');
-        let citas = await axios.get('http://localhost:3001/api/getCitas');
-        let entregas = await axios.get('http://localhost:3001/api/getEntregas');
+        let cursos = await axios.get('https://web-duende-server.herokuapp.com/api/getCursos');
+        let citas = await axios.get('https://web-duende-server.herokuapp.com/api/getCitas');
+        let entregas = await axios.get('https://web-duende-server.herokuapp.com/api/getEntregas');
         let compromisos = [];
         cursos.data.forEach(element => {
             let curso = FabricaCompromisos.fabricarCompromiso("Curso;"+element.fechaHoraInicio+";"+element.fechaHoraFin+";"+element.titulo+";"+element.ID+";"+element.lugar);
@@ -132,7 +132,7 @@ export default class GestorCompromisos extends GestorDB{
     };
 
     async getNext(){
-        let valor = await axios.get('http://localhost:3001/api/getNextCompromisos');
+        let valor = await axios.get('https://web-duende-server.herokuapp.com/api/getNextCompromisos');
         return valor.data[0].ultimo_valor;
     };
 }
