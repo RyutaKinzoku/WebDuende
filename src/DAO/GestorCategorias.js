@@ -8,17 +8,17 @@ export default class GestorCategorias extends GestorDB{
             idCategoria: categoria.id,
             nombre: categoria.nombre,
         }
-        return axios.post('http://localhost:3001/api/modificarCategoria',values);
+        return axios.post('https://web-duende-server.herokuapp.com/api/modificarCategoria',values);
     };
     async eliminar(idCategoria){
         let values = {
             idCategoria: idCategoria
         }
-        return axios.post('http://localhost:3001/api/eliminarCategoria', values);
+        return axios.post('https://web-duende-server.herokuapp.com/api/eliminarCategoria', values);
     }
 
     async obtener(idCategoria){
-        var response = await axios.get('http://localhost:3001/api/obtenerCategoria',{params: {idCategoria: idCategoria} });
+        var response = await axios.get('https://web-duende-server.herokuapp.com/api/obtenerCategoria',{params: {idCategoria: idCategoria} });
         if(response.data.length>0){
             let categoria = response.data[0];
             let c = new Categoria(categoria.id,categoria.nombre,null);
@@ -31,11 +31,11 @@ export default class GestorCategorias extends GestorDB{
             idCategoria: categoria.id,
             nombre: categoria.nombre,
         }
-        return axios.post('http://localhost:3001/api/agregarCategoria',values);
+        return axios.post('https://web-duende-server.herokuapp.com/api/agregarCategoria',values);
     }
 
     async obtenerLista(){
-        let lista = await axios.get('http://localhost:3001/api/getCategorias');
+        let lista = await axios.get('https://web-duende-server.herokuapp.com/api/getCategorias');
         let categorias = []
         lista.data.forEach(element => {
             let categoria = new Categoria(element.ID, element.nombre);
@@ -45,7 +45,7 @@ export default class GestorCategorias extends GestorDB{
     }
 
     async getNext(){
-        let valor = await axios.get('http://localhost:3001/api/getNextCategorias');
+        let valor = await axios.get('https://web-duende-server.herokuapp.com/api/getNextCategorias');
         return valor.data[0].ultimo_valor;
     }
 }
