@@ -64,7 +64,7 @@ export default class Carrito extends Component{
     render(){
         return(
             <div>
-                <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="top" id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
                         <Navbar.Brand id="navTitle" href="">Carrito</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -90,6 +90,8 @@ export default class Carrito extends Component{
                 </Navbar>
                 <div>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <br/>
+                        <br/>
                         <br/>
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">

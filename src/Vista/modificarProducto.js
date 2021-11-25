@@ -80,7 +80,7 @@ export default class ModificarProducto extends Component{
     render(){
         return(
             <div>
-                <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="top "id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
                         <Navbar.Brand id="navTitle" href="">Modificar Producto</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -102,10 +102,11 @@ export default class ModificarProducto extends Component{
                     <Row>
                         <Col sm={5}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <br/>
                                 <div>
                                     <Form.Group onChange= {this.handleChange}>
                                         <h6>Por favor, modificar los datos deseados: </h6>
-                                        <br/>
+                                        
                                         <h6>Nombre:</h6>
                                         <Form.Control type="text" name='nombre' defaultValue={this.state.nombre}/>
                                         <br/>
@@ -124,12 +125,16 @@ export default class ModificarProducto extends Component{
                                     </Form.Group>
                                 </div>
                                 <div className="d-grid gap-2">
+                                    <Row>
+                                        <Col>
                                     <Button size="md" variant="secondary" type="submit" onClick={this.modificarProducto}>
                                         Modificar
-                                    </Button>
+                                    </Button>{' '}
                                     <Button size="md" variant="secondary" type="submit" href = "/Tienda">
                                         Cancelar
                                     </Button>
+                                    </Col>
+                                    </Row>
                                 </div>
                             </Form.Group>
                         </Col>

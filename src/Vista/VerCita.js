@@ -4,6 +4,8 @@ import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
 import Dropdown from '@restart/ui/esm/Dropdown';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
@@ -92,7 +94,7 @@ export default class VerCita extends Component{
     render(){
         return(
             <div>
-                <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="top" id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
                         <Navbar.Brand id="navTitle" href="">Ver Cita</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -112,10 +114,11 @@ export default class VerCita extends Component{
                 </Navbar>
                 <div className="center container w-50 p-8 py-2 my-3  mt-5">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <br/>
                         <div>
                             <Form.Group onChange= {this.handleChange}>
                                 <h6>Datos cita actual: </h6>
-                                <br/>
+                               
                                 <h6>Número de publicación:</h6>
                                 <Form.Control id="idPublicacion" type="text" name='idPublicacion' />
                                 <br/>
@@ -144,15 +147,19 @@ export default class VerCita extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
+                            <Row>
+                                <Col>
                             <Button size="md" variant="secondary" onClick={this.modificar}>
                                 Modificar
-                            </Button>
+                            </Button>{' '}
                             <Button size="md" variant="secondary" onClick={this.eliminar}>
                                 Eliminar
-                            </Button>
+                            </Button>{' '}
                             <Button size="md" variant="secondary" href="/Agenda">
                                 Cancelar
                             </Button>
+                            </Col>
+                            </Row>
                         </div>
                     </Form.Group>
                 </div >

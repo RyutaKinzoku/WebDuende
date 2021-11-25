@@ -88,7 +88,7 @@ export default class Galeria extends Component{
     render(){
         return(
             <div>
-                <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="top" id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
                         <Navbar.Brand id="navTitle" href="">Galería de Duende</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -136,7 +136,10 @@ export default class Galeria extends Component{
                 </Navbar>
                 <div>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={3} className="g-4">
                                 {this.state.publicaciones.map((publicacion) => (

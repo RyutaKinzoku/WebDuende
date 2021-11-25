@@ -51,7 +51,7 @@ export default class VerOrden extends Component{
     render(){
         return(
             <div>
-                <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="top" id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
                         <Navbar.Brand id="navTitle" href="">Orden</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -62,6 +62,7 @@ export default class VerOrden extends Component{
                                 <Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>
                             </Nav>
                             <Nav>
+                                <Nav.Link className="botonNav" href="/Ordenes">Volver</Nav.Link>
                                 {cookies.get('correo') !== undefined? 
                                 <Nav.Link className="botonNav" onClick={()=>this.cerrarSesion()}>Cerrar Sesión</Nav.Link>:
                                 <div></div>}
@@ -72,6 +73,7 @@ export default class VerOrden extends Component{
                 </Navbar>
                 <div className="center container w-70 p-8 py-2 my-3  mt-5">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <br/>
                         <Form.Group onChange= {this.handleChange}>
                             <Row xs={1} md={1} className="g-4">
                                 {this.state.productos.map(producto => (

@@ -154,7 +154,7 @@ export default class Agenda extends Component{
                     </Offcanvas.Body>
                     </Offcanvas>
                 </>
-                <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="top" id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
                         <Navbar.Brand id="navTitle" href="">Agenda de Duende</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -185,8 +185,11 @@ export default class Agenda extends Component{
                     </Container>
                 </Navbar>
                 <div>
-                    <br/>
+                
                     <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <br/>
+                        <br/>
+                        <br/>
                         <div className="App">
                             <FullCalendar
                                 plugins={[timeGridPlugin]}

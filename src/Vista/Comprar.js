@@ -3,6 +3,8 @@ import {Button, Nav, Navbar, Container, Form } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
@@ -64,7 +66,7 @@ export default class Comprar extends Component{
     render(){
         return(
             <div>
-                <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="top" id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
                         <Navbar.Brand id="navTitle" href="">Comprar</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -84,10 +86,10 @@ export default class Comprar extends Component{
                 </Navbar>
                 <div className="center container w-50 p-8 py-2 my-3  mt-5">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <br/>
                         <div>
                             <Form.Group onChange= {this.handleChange}>
                                 <h6>Por favor, ingrese los siguientes datos: </h6>
-                                <br/>
                                 <h6>Provincia:</h6>
                                 <Form.Control type="text" name = 'provincia' />
                                 <br/>
@@ -107,12 +109,16 @@ export default class Comprar extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
-                            <Button size="md" variant="secondary" type="submit" onClick={this.comprar}>
+                            <Row>
+                            <Col>
+                            <Button variant="secondary" type="submit" onClick={this.comprar}>
                                 Comprar
-                            </Button>
-                            <Button size="md" variant="secondary" type="submit" href = "/Carrito">
+                            </Button>{' '}         
+                            <Button  variant="secondary" type="submit" href = "/Carrito">
                                 Cancelar
                             </Button>
+                            </Col>
+                            </Row>
                         </div>
                     </Form.Group>
                 </div >

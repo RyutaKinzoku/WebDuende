@@ -90,7 +90,7 @@ export default class Tienda extends Component{
     render(){
         return(
             <div>
-                <Navbar id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
+                <Navbar fixed="top" id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
                         <Navbar.Brand id="navTitle" href="">Tienda de Duende</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -123,7 +123,10 @@ export default class Tienda extends Component{
                 <div>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>
-                            <br/>
+                        <br/>
+                    <br/>
+                    <br/>
+                   
                             <Row xs={1} md={3} className="g-4">
                                     {this.state.productos.map((producto => (
                                         <Col>

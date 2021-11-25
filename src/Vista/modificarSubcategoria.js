@@ -4,6 +4,8 @@ import Cookies from "universal-cookie";
 import swal from "sweetalert";
 import NavStyle from "./css/NavStyle.css";
 import Dropdown from '@restart/ui/esm/Dropdown';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Controladora from '../Controladora/Controladora';
 
 const cookies = new Cookies();
@@ -92,12 +94,16 @@ export default class modificarSubcategoria extends Component{
 
                         </div>
                         <div className="d-grid gap-2">
+                            <Row>
+                                <Col>
                             <Button size="md" variant="secondary" onClick = {() => this.modificarSubcategoria()}>
                                 Modificar
-                            </Button>
+                            </Button>{' '}
                             <Button size="md" variant="secondary" href={"/VerSubcategorias/"+this.state.idCategoria}>
                                 Cancelar
                             </Button>
+                            </Col>
+                            </Row>
                         </div>
                     </Form.Group>
                 </div >
