@@ -55,7 +55,7 @@ export default class Compromisos extends Component{
                             <Button size="md" variant="secondary" type="submit" href="/NotificacionesCompra">
                                 Entrega
                             </Button>
-                            <Button size="md" variant="secondary" type="submit" href="/CrearCita">
+                            <Button size="md" variant="secondary" type="submit" href="/NotificacionesCita">
                                 Cita
                             </Button>
                             <Button size="md" variant="secondary" type="submit" href="/CrearCurso">
