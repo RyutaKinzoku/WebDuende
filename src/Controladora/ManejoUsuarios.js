@@ -1,7 +1,7 @@
 import Usuario from "../modelo/Usuario";
 import GestorUsuarios from "../DAO/GestorUsuarios";
 import GestorBD from "../DAO/GestorBD";
-import ProxyLogin from "../modelo/ProxyLogin/ProxyLogin";
+import ProxyLogin from "./ProxyLogin/ProxyLogin"
 
 export default class ManejoUsuarios {
     constructor(){
