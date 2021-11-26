@@ -11,14 +11,8 @@ const cookies = new Cookies();
 export default class CrearEntrega extends Component{
 
     state = {
-        correoUsuario:'',
-        idOrdenCompra:'',
         fechaHoraInicio:'',
         fechaHoraFin:'',
-        provincia:'',
-        canton:'',
-        distrito:'',
-        direccion:''
     }
 
     cerrarSesion = () =>{
@@ -35,26 +29,29 @@ export default class CrearEntrega extends Component{
     }
 
     crear  = async (e) => {
-        if(this.state.correoUsuario !== "" && this.state.idOrdenCompra !== "" && this.state.fechaHoraInicio !== "" && this.state.fechaHoraFin !== "" && this.state.provincia !== "" && this.state.distrito !== "" && this.state.canton !== "" && this.state.direccion !== ""){
-        e.preventDefault();
-        let controladora = new Controladora();
-        let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
-        let response = await controladora.agregarEntrega(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.state.correoUsuario, lugar, this.state.idOrdenCompra);
-        if(!response.data){
-            swal("Entrega creada exitosamente","" ,"success").then((value) => {
-                window.location.href="/Agenda";
-            })
-        }else{
-            if(response.data.errno === 1366){
-                swal("El número de orden debe ser un entero","", "warning");
-            } else if(response.data.errno === 1216){
-                swal("El correo del usuario no existe en el sistema","", "warning");
+        if(this.state.fechaHoraInicio !== "" && this.state.fechaHoraFin !== ""){
+            e.preventDefault();
+            let controladora = new Controladora();
+            let response = await controladora.agregarEntrega(this.state.fechaHoraInicio, this.state.fechaHoraFin, cookies.get("correoUsuario"), cookies.get("direccion"), cookies.get("idOrdenCompra"));
+            if(!response.data){
+                let response2 = await controladora.eliminarNotificacion("NotificacionCompra", cookies.get("idNotificacion"));
+                if(!response2.data){
+                    cookies.remove('idOrdenCompra',     {path: "/"});
+                    cookies.remove('idNotificacion',    {path: "/"});
+                    cookies.remove('correoUsuario',     {path: "/"});
+                    cookies.remove('direccion',         {path: "/"});
+                    swal("Entrega creada exitosamente","" ,"success").then((value) => {
+                        window.location.href="/Agenda";
+                    })
+                } else {
+                    swal("Error al crear una entrega nueva","", "warning");
+                }
+            }else{
+                swal("Error al crear una entrega nueva","", "warning");
             }
-            console.log(response);
+        }else{
+            swal("Alguna casilla se encuentra vacía","" ,"warning");
         }
-    }else{
-        swal("Alguna casilla se encuentra vacía","" ,"warning");
-    }
     }
 
     render(){
@@ -82,31 +79,17 @@ export default class CrearEntrega extends Component{
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <div>
                             <Form.Group onChange= {this.handleChange}>
+                                <h4>Orden #{cookies.get("idOrdenCompra")}</h4>
+                                <h6>Correo usuario: {cookies.get("correoUsuario")}</h6>
+                                <h6>Dirrección: {cookies.get("direccion")}</h6>
+                                <br/>
                                 <h6>Por favor, ingrese los siguientes datos: </h6>
-                                <br/>
-                                <h6>Número de orden:</h6>
-                                <Form.Control type="text" name='idOrdenCompra' />
-                                <br/>
-                                <h6>Correo usuario:</h6>
-                                <Form.Control type="text" name='correoUsuario' />
                                 <br/>
                                 <h6>Fecha y hora de inicio:</h6>
                                 <Form.Control type="datetime-local" name='fechaHoraInicio' />
                                 <br/>
                                 <h6>Fecha y hora de fin:</h6>
                                 <Form.Control type="datetime-local" name='fechaHoraFin' />
-                                <br/>
-                                <h6>Provincia:</h6>
-                                <Form.Control type="text" name='provincia' />
-                                <br/>
-                                <h6>Cantón:</h6>
-                                <Form.Control type="text" name='canton' />
-                                <br/>
-                                <h6>Distrito:</h6>
-                                <Form.Control type="text" name='distrito' />
-                                <br/>
-                                <h6>Dirección:</h6>
-                                <Form.Control type="text" name='direccion' />
                                 <br/>
                             </Form.Group>
 
@@ -115,7 +98,7 @@ export default class CrearEntrega extends Component{
                             <Button size="md" variant="secondary" onClick={this.crear}>
                                 Continuar
                             </Button>
-                            <Button size="md" variant="secondary" href="/Compromisos">
+                            <Button size="md" variant="secondary" href="/NotificacionesCompra">
                                 Cancelar
                             </Button>
                         </div>
