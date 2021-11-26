@@ -1,14 +1,16 @@
 import Usuario from "../modelo/Usuario";
 import GestorUsuarios from "../DAO/GestorUsuarios";
 import GestorBD from "../DAO/GestorBD";
+import ProxyLogin from "../modelo/ProxyLogin/ProxyLogin";
 
 export default class ManejoUsuarios {
     constructor(){
         this.gestorUsuarios = new GestorUsuarios();
+        this.proxyLogin = new ProxyLogin();
     }
     
     async iniciarSesion(correo, contrasena){
-        let usuario = await this.gestorUsuarios.obtener(correo);
+        let usuario = await this.proxyLogin.obtener(correo);
         if(usuario !== null){
             if (usuario.contrasena === contrasena){
                 return usuario;

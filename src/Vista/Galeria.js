@@ -104,7 +104,7 @@ export default class Galeria extends Component{
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? <Nav.Link className="botonNav" href="/VerCategorias">Ver Categorías</Nav.Link>: <div></div>}
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? <Nav.Link className="botonNav" href="/CrearPublicacion">Crear Publicación</Nav.Link>: <div></div>}
                             </Nav>
-                            <Nav>
+                            <Nav className="me-auto">
                                 <Autocomplete
                                   disablePortal
                                   id="combo-box-categoria"
@@ -112,10 +112,11 @@ export default class Galeria extends Component{
                                   sx={{ width: 300 }}
                                   nombre = 'categoria'
                                   getOptionLabel={(option) => option.nombre}
-                                  renderInput={(params) => <TextField {...params} label="Categoria" style={{ backgroundColor: "rgb(255, 255, 255)" }} />}
+                                  className="botonNav"
+                                  renderInput={(params) => <TextField {...params} label="Categoria" style={{ backgroundColor: "rgb(255, 255, 255)", outlineColor: "none" }} />}
                                 />
                             </Nav>
-                            <Nav>
+                            <Nav className="me-auto">
                                 <Nav.Link className="botonNav" onClick={()=>this.setCategoria()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
