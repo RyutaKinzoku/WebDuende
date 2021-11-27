@@ -47,6 +47,7 @@ router.post("/agregarUsuario", (req,res) =>{
 router.post("/guardarAcceso", (req,res)=>{
     const correo = req.body.correo
     const fecha = req.body.fecha
+    console.log(req.body);
     const sqlInsert = "INSERT INTO GuardarAcceso (Correo,Fecha) VALUES (?,?);";
     db.query(sqlInsert, [correo, fecha], (err, result) => {
         console.log(err);
