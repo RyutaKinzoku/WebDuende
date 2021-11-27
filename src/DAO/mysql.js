@@ -44,6 +44,17 @@ router.post("/agregarUsuario", (req,res) =>{
     })
 });
 
+router.post("/guardarAcceso", (req,res)=>{
+    const correo = req.body.correo
+    const fecha = req.body.fecha
+    const sqlInsert = "INSERT INTO GuardarAcceso (Correo,Fecha) VALUES (?,?);";
+    db.query(sqlInsert, [correo, fecha], (err, result) => {
+        console.log(err);
+        res.send(err);
+    })
+});
+
+
 //Compromisos
 router.get('/getCursos', (_,res) => {
     const sqlSelectCursos = "SELECT * FROM Curso;"

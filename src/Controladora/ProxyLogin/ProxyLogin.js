@@ -9,18 +9,18 @@ export default class ProxyLogin extends Gestor {
     }
 
     async guardarAcceso(correo){
-        let usuario = this.gestorUsuarios.obtener(correo);
-        let values = {
-            correo: usuario.correo,
-            nombre: usuario.nombre,
-            primerApellido: usuario.primerApellido,
-            segundoApellido: usuario.segundoApellido,
-            telefono: usuario.telefono,
-            cedula: usuario.cedula,
-            contrasena: usuario.contrasena,
-            rol: usuario.rol
+        let usuario = await this.gestorUsuarios.obtener(correo);
+        if(usuario !== null){
+            const fecha = new Date();
+            let fechaString = ((String(fecha)).split(" GMT"))[0];
+            console.log(fechaString);
+            let values = {
+                correo: usuario.correo,
+                fecha: fechaString
+            }
+            var response = await axios.post('https://localhost:3001/api/guardarAcceso',values);
+
         }
-        axios.post('https://web-duende-server.herokuapp.com/api/guardarAcceso',values);
         return usuario
     }
 
