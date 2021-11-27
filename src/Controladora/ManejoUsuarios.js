@@ -24,4 +24,12 @@ export default class ManejoUsuarios {
         let usuario = new Usuario(datosUsuario.correo, datosUsuario.nombre, datosUsuario.primerApellido, datosUsuario.segundoApellido, datosUsuario.telefono, datosUsuario.cedula, datosUsuario.contrasena, datosUsuario.rol);
         return this.gestorUsuarios.agregar(usuario);
     }
+
+    async obtenerUsuarios(){
+        return this.gestorUsuarios.obtenerLista();
+    }
+
+    async obtenerUsuariosFrecuencia(){
+        return this.gestorUsuarios.obtenerListaFrecuencia();
+    }
 }

@@ -20,7 +20,6 @@ export default class ProxyLogin extends Gestor {
             }
             console.log(values);
             var response = await axios.post('http://localhost:3001/api/guardarAcceso', values);
-
         }
         return usuario
     }

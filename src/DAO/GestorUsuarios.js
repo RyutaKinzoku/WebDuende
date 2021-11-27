@@ -27,5 +27,25 @@ export default class GestorUsuarios  extends GestorDB{
         }
         return axios.post('/api/agregarUsuario',values);
     }
-    obtenerLista(){}
+    async obtenerLista(){
+        let lista = await axios.get('http://localhost:3001/api/getUsuarios');
+        console.log(lista.data);
+        let usuarios = []
+        lista.data.forEach(element => {
+            let usuario = new Usuario(element.correo, element.nombre, element.primerApellido, element.segundoApellido, element.telefono, element.cedula, null, null);
+            usuarios.push(usuario);
+        });
+        return usuarios;
+    }
+
+    async obtenerListaFrecuencia(){
+        let lista = await axios.get('http://localhost:3001/api/getUsuariosFrecuencia');
+        console.log(lista.data);
+        let usuariosFrecuencia = []
+        lista.data.forEach(element => {
+            usuariosFrecuencia.push(element.Correo);
+        });
+        console.log(usuariosFrecuencia)
+        return usuariosFrecuencia;
+    }
 }

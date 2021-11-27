@@ -105,6 +105,7 @@ export default class Tienda extends Component{
                                 <Nav.Link className="botonNav" href="/galeria">Galería</Nav.Link>
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ?<Nav.Link className="botonNav" href="/Agenda">Agenda</Nav.Link>:<div></div>}
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ?<Nav.Link className="botonNav" href="/CrearProducto">Crear Producto</Nav.Link>:<div></div>}
+                                {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ?<Nav.Link className="botonNav" href="/FrecuenciaUsuarios">Frecuencia Usuarios</Nav.Link>:<div></div>}
                             </Nav>
                             <Nav>
                                 {cookies.get('correo') !== undefined? 

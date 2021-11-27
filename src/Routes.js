@@ -29,6 +29,7 @@ import VerEntrega from './Vista/VerEntrega';
 import NotificacionesCompra from './Vista/NotificacionesCompra';
 import NotificacionesCita from './Vista/NotificacionesCita';
 import Comentar from './Vista/Comentar';
+import FrecuenciaUsuarios from './Vista/FrecuenciaUsuarios'
 
 function Routes(){
     return(
@@ -63,6 +64,7 @@ function Routes(){
                 <Route exact path="/NotificacionesCita" component = {NotificacionesCita}/>
                 <Route exact path="/VerEntrega/:id" component = {VerEntrega}/>
                 <Route exact path="/Comentar/:id" component = {Comentar}/>
+                <Route exact path="/FrecuenciaUsuarios" component = {FrecuenciaUsuarios}/>
             </Switch>
         </BrowserRouter>
     );

@@ -220,4 +220,12 @@ export default class Controladora{
     obtenerNotificacionesCompra(){
         return this.manejoNotificaciones.obtenerNotificacionesCompra();
     }
+
+    async obtenerUsuarios(){
+        return this.manejoUsuarios.obtenerUsuarios();
+    }
+
+    async obtenerUsuariosFrecuencia(){
+        return this.manejoUsuarios.obtenerUsuariosFrecuencia();
+    }
 }

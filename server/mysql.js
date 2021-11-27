@@ -55,6 +55,21 @@ router.post("/guardarAcceso", (req,res)=>{
     })
 });
 
+router.get('/getUsuarios', (_,res) => {
+    const sqlSelectUsuarios = "SELECT * FROM `Usuario`"
+    db.query(sqlSelectUsuarios, (_, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
+
+router.get('/getUsuariosFrecuencia', (_,res) => {
+    const sqlSelectUsuariosFrecuencia = "SELECT * FROM `GuardarAcceso`"
+    db.query(sqlSelectUsuariosFrecuencia, (_, result) => {
+        console.log(result);
+        res.send(result);
+    });
+});
 
 //Compromisos
 router.get('/getCursos', (_,res) => {
