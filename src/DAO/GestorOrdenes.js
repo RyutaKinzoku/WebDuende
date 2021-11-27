@@ -18,11 +18,11 @@ export default class GestorOrdenes  extends GestorDB{
         let values = {
             idOrden: idOrden
         }
-        return axios.post('http://localhost:3001/api/eliminarOrden', values);
+        return axios.post('/api/eliminarOrden', values);
     }
 
     obtener(idOrdenCompra){
-        return axios.get('http://localhost:3001/api/obtenerOrden', {params: {idOrdenCompra: idOrdenCompra}});
+        return axios.get('/api/obtenerOrden', {params: {idOrdenCompra: idOrdenCompra}});
     }
 
     async agregarOrden(orden){
@@ -36,7 +36,7 @@ export default class GestorOrdenes  extends GestorDB{
         form.append('comprador', orden.comprador);
         form.append('productos', trueProductos);
         form.append('comprobante', orden.comprobante);
-        var err = await axios.post('http://localhost:3001/api/agregarOrden', form, {
+        var err = await axios.post('/api/agregarOrden', form, {
             headers: config.headers,
         })
         if(err.data){
@@ -47,7 +47,7 @@ export default class GestorOrdenes  extends GestorDB{
     }
 
     async obtenerLista(){
-        var idsOrden = await axios.get('http://localhost:3001/api/listaCompras');
+        var idsOrden = await axios.get('/api/listaCompras');
         var ordenes = [];
         console.log(idsOrden);
         idsOrden.data.forEach(o => {
@@ -58,17 +58,17 @@ export default class GestorOrdenes  extends GestorDB{
     }
 
     async getNext(){
-        var response = await axios.get('http://localhost:3001/api/getNextOrden');
+        var response = await axios.get('/api/getNextOrden');
         return response.data[0].ultimo_valor;
     }
 
     async setNext(){
-        return axios.post('http://localhost:3001/api/setIdORden');
+        return axios.post('/api/setIdORden');
     }
 
     async obtenerProductosOrden(idOrden){
         console.log(idOrden);
-        var response = await axios.get('http://localhost:3001/api/listaProductosOrden',{params:{idOrden: idOrden}});
+        var response = await axios.get('/api/listaProductosOrden',{params:{idOrden: idOrden}});
         console.log(response.data[0].productos);
         return response.data[0].productos;
     }
