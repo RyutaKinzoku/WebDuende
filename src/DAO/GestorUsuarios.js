@@ -32,8 +32,11 @@ export default class GestorUsuarios  extends GestorDB{
         console.log(lista.data);
         let usuarios = []
         lista.data.forEach(element => {
-            let usuario = new Usuario(element.correo, element.nombre, element.primerApellido, element.segundoApellido, element.telefono, element.cedula, null, null);
-            usuarios.push(usuario);
+            let usuario = new Usuario(element.correo, element.nombre, element.primerApellido, element.segundoApellido, element.telefono, element.cedula, element.contrasena, element.rol);
+            console.log(usuario.rol)
+            if(usuario.rol !== "ADMIN"){
+                usuarios.push(usuario);
+            }
         });
         return usuarios;
     }

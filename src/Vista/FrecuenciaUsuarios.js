@@ -32,9 +32,18 @@ export default class FrecuenciaUsuarios extends Component{
         })
     }
 
-    componentDidMount() {
-        this.obtenerUsuarios();
-        this.obtenerUsuariosFrecuencia();    
+    async componentDidMount() {
+        await this.obtenerUsuarios();
+        await this.obtenerUsuariosFrecuencia();    
+        let usuariosFiltrados = []
+        this.state.usuarios.map(usuario =>{
+            if ((this.state.usuariosFrecuencia.filter(x => x===usuario.correo).length)!==0){
+                usuariosFiltrados.push(usuario);
+            }
+        })
+        this.setState({
+            usuarios: usuariosFiltrados
+        })
     }
 
     obtenerUsuarios = async() => {
