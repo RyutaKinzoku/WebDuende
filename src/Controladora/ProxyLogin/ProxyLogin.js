@@ -18,7 +18,8 @@ export default class ProxyLogin extends Gestor {
                 correo: usuario.correo,
                 fecha: fechaString
             }
-            var response = await axios.post('https://localhost:3001/api/guardarAcceso',values);
+            console.log(values);
+            var response = await axios.post('http://localhost:3001/api/guardarAcceso', values);
 
         }
         return usuario
