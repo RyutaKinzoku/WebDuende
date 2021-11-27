@@ -20,7 +20,7 @@ export default class gestorPublicaciones  extends GestorDB{
         for (var pair of form.entries()) {
             console.log(pair[0]+ ', ' + pair[1]); 
         }
-        return axios.put('http://localhost:3001/api/modificarPublicacion', form, {
+        return axios.put('/api/modificarPublicacion', form, {
             headers: config.headers,
         })
     }
@@ -28,10 +28,10 @@ export default class gestorPublicaciones  extends GestorDB{
         let values = {
             idPublicacion: idPublicacion
         }
-        return axios.post('http://localhost:3001/api/eliminarPublicacion', values);
+        return axios.post('/api/eliminarPublicacion', values);
     }
     obtener(idPublicacion){
-        return axios.get('http://localhost:3001/api/obtenerPublicacion', {params: {idPublicacion: idPublicacion}});
+        return axios.get('/api/obtenerPublicacion', {params: {idPublicacion: idPublicacion}});
     }
     agregar(publicacion){
         const form = new FormData();
@@ -41,16 +41,17 @@ export default class gestorPublicaciones  extends GestorDB{
         form.append('tags', publicacion.tags);
         form.append('categoria', publicacion.categoria);
         form.append('subcategoria', publicacion.subcategoria);
-        return axios.post('http://localhost:3001/api/agregarPublicacion', form, {
+        return axios.post('/api/agregarPublicacion', form, {
             headers: config.headers,
         })
     }
     async obtenerLista(idCategoria = null){
-        var idsPublicacion = await axios.get('http://localhost:3001/api/listaPublicaciones', {params: {idCategoria: idCategoria}});
+        console.log("llega")
+        var idsPublicacion = await axios.get('/api/listaPublicaciones', {params: {idCategoria: idCategoria}});
         var publicaciones = [];
         for(var p of idsPublicacion.data) {
-            var responseC = await axios.get('http://localhost:3001/api/obtenerCategoria',{params: {idCategoria: p.idCategoria} });
-            var responseS = await axios.get('https://web-duende-server.herokuapp.com/api/obtenerSubcategoria',{params: {idSubcategoria: p.idSubcategoria} });
+            var responseC = await axios.get('/api/obtenerCategoria',{params: {idCategoria: p.idCategoria} });
+            var responseS = await axios.get('/api/obtenerSubcategoria',{params: {idSubcategoria: p.idSubcategoria} });
             if(responseC.data.length>0){
                 if(responseS.data.length>0){
                     publicaciones.push(new Publicacion(p.id, p.imagen, p.descripcion, p.tags, responseC.data[0].nombre, responseS.data[0].nombre));
@@ -62,10 +63,10 @@ export default class gestorPublicaciones  extends GestorDB{
         return publicaciones;
     }
     async getNext(){
-        var response = await axios.get('http://localhost:3001/api/getIdPublicacion');
+        var response = await axios.get('/api/getIdPublicacion');
         return response.data[0].ultimo_valor;
     }
     setNext(){
-        return axios.post('http://localhost:3001/api/setIdPublicacion');
+        return axios.post('/api/setIdPublicacion');
     }
 }
