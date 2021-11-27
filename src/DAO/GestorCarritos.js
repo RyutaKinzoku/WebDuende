@@ -10,18 +10,18 @@ export default class GestorCarritos  extends GestorDB{
         let values = {
             correo: carrito.comprador 
         }
-        return await axios.post('http://localhost:3001/api/eliminarCarrito',values);
+        return await axios.post('/api/eliminarCarrito',values);
     }
     obtenerCarrito(correo){
-        return axios.post('http://localhost:3001/api/obtenerCarrito', {params: {correo: correo}});
+        return axios.post('/api/obtenerCarrito', {params: {correo: correo}});
     }
     async obtenerLista(correo){
-        var idsProducto = await axios.get('http://localhost:3001/api/obtenerProductosCarrito', {params: {correo: correo}});
+        var idsProducto = await axios.get('/api/obtenerProductosCarrito', {params: {correo: correo}});
         var productos = [];
         for(let i=0; i<idsProducto.data.length;i++){
             var tupla = idsProducto.data[i];
             var [idProducto, cantidad] = tupla;
-            var producto = (await axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto} })).data[0];
+            var producto = (await axios.get('/api/obtenerProducto', {params: {idProducto: idProducto} })).data[0];
             var producto2 = new Producto(producto.id, producto.nombre, producto.descripcion, producto.precio, cantidad, producto.imagen)
             productos.push(producto2);
         }
@@ -29,17 +29,17 @@ export default class GestorCarritos  extends GestorDB{
     }
 
     async actualizarProductos(correo){
-        var idsProducto = await axios.get('http://localhost:3001/api/obtenerProductosCarrito', {params: {correo: correo}});
+        var idsProducto = await axios.get('/api/obtenerProductosCarrito', {params: {correo: correo}});
         for(let i=0; i<idsProducto.data.length;i++){
             var tupla = idsProducto.data[i];
             var [idProducto, cantidad] = tupla;
-            var producto = (await axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto} })).data[0];
+            var producto = (await axios.get('/api/obtenerProducto', {params: {idProducto: idProducto} })).data[0];
             var producto2 = new Producto(producto.id, producto.nombre, producto.descripcion, producto.precio, producto.cantidad-cantidad, producto.imagen)
             let values = {
                 id: producto2.id,
                 cantidad: producto2.cantidad
             }
-            axios.put('http://localhost:3001/api/actualizarProducto',values)
+            axios.put('/api/actualizarProducto',values)
         }
     }
 
@@ -49,7 +49,7 @@ export default class GestorCarritos  extends GestorDB{
             idProducto: carrito.productos,
             cantidad: carrito.cantidades,
         }
-        return await axios.post('http://localhost:3001/api/agregarProductoCarrito', values);
+        return await axios.post('/api/agregarProductoCarrito', values);
     }
 
     async eliminarProducto(productoEnCarrito){
@@ -57,6 +57,6 @@ export default class GestorCarritos  extends GestorDB{
             correo: productoEnCarrito.comprador,
             idProducto: productoEnCarrito.productos,
         }
-        return await axios.post('http://localhost:3001/api/eliminarProductoCarrito',values);
+        return await axios.post('/api/eliminarProductoCarrito',values);
     }
 }

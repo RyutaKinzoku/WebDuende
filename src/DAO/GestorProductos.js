@@ -21,7 +21,7 @@ export default class GestorProductos  extends GestorDB{
         for (var pair of form.entries()) {
             console.log(pair[0]+ ', ' + pair[1]); 
         }
-        return axios.put('http://localhost:3001/api/modificarProducto', form, {
+        return axios.put('/api/modificarProducto', form, {
             headers: config.headers,
         })
     }
@@ -30,11 +30,11 @@ export default class GestorProductos  extends GestorDB{
         let values = {
             idProducto: idProducto
         }
-        return axios.post('http://localhost:3001/api/eliminarProducto', values);
+        return axios.post('/api/eliminarProducto', values);
     }
 
     async obtener(idProducto){
-        return axios.get('http://localhost:3001/api/obtenerProducto', {params: {idProducto: idProducto}});
+        return axios.get('/api/obtenerProducto', {params: {idProducto: idProducto}});
     }
 
     async agregar(producto){
@@ -45,13 +45,13 @@ export default class GestorProductos  extends GestorDB{
         form.append('precio', producto.precio);
         form.append('cantidad', producto.cantidad);
         form.append('imagen', producto.imagen);
-        return axios.post('http://localhost:3001/api/agregarProducto', form, {
+        return axios.post('/api/agregarProducto', form, {
             headers: config.headers,
         })
     }
 
     async obtenerLista(){
-        var idsProducto = await axios.get('http://localhost:3001/api/listaProductos');
+        var idsProducto = await axios.get('/api/listaProductos');
         var productos = [];
         idsProducto.data.forEach(p => {
             productos.push(new Producto(p.id, p.nombre, p.descripcion, p.precio, p.cantidad, p.imagen));
@@ -60,11 +60,11 @@ export default class GestorProductos  extends GestorDB{
     }
 
     async getNext(){
-        var response = await axios.get('http://localhost:3001/api/getIdProducto');
+        var response = await axios.get('/api/getIdProducto');
         return response.data[0].ultimo_valor;
     }
 
     async setNext(){
-        return axios.post('http://localhost:3001/api/setIdProducto');
+        return axios.post('/api/setIdProducto');
     }
 }
