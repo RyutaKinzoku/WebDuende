@@ -17,10 +17,7 @@ export default class VerEntrega extends Component{
         idOrdenCompra:'',
         fechaHoraInicio:'',
         fechaHoraFin:'',
-        provincia:'',
-        canton:'',
-        distrito:'',
-        direccion:''
+        lugar:''
     }
 
     cerrarSesion = () =>{
@@ -44,24 +41,14 @@ export default class VerEntrega extends Component{
         let controladora = new Controladora();
         let entrega = await controladora.obtenerCompromiso("Entrega", this.props.match.params.id);
         console.log(entrega);
-        let lugar = entrega.lugar.split('-');
-        document.getElementById("idOrdenCompra").value = entrega.orden;
-        document.getElementById("correoUsuario").value = entrega.usuario;
         document.getElementById("fechaHoraInicio").value = entrega.fechaHoraInicio;
-        document.getElementById("fechaHoraFin").value = entrega.fechaHoraFin;
-        document.getElementById("provincia").value = lugar[0];
-        document.getElementById("canton").value = lugar[1];
-        document.getElementById("distrito").value = lugar[2];
-        document.getElementById("direccion").value = lugar[3];
+        document.getElementById("fechaHoraFin").value = entrega.fechaHoraFin
         this.setState({
             correoUsuario: entrega.usuario,
             idOrdenCompra: entrega.orden,
             fechaHoraInicio: entrega.fechaHoraInicio,
             fechaHoraFin: entrega.fechaHoraFin,
-            provincia: lugar[0],
-            canton: lugar[1],
-            distrito: lugar[2],
-            direccion: lugar[3]
+            lugar: entrega.lugar
         })
     }
 
@@ -117,31 +104,16 @@ export default class VerEntrega extends Component{
                         <br/>
                         <div>
                             <Form.Group onChange= {this.handleChange}>
-                                <h6>Datos entrega actual: </h6>
-                               
-                                <h6>Número de orden:</h6>
-                                <Form.Control id="idOrdenCompra" type="text" name='idOrdenCompra' />
-                                <br/>
-                                <h6>Correo usuario:</h6>
-                                <Form.Control id="correoUsuario" type="text" name='correoUsuario' />
+                                <h4>Datos entrega actual: </h4>
+                                <h4>Orden #{this.state.idOrdenCompra}</h4>
+                                <h6>Correo usuario: {this.state.correoUsuario}</h6>
+                                <h6>Dirrección: {this.state.lugar}</h6>
                                 <br/>
                                 <h6>Fecha y hora de inicio:</h6>
                                 <Form.Control id="fechaHoraInicio" type="datetime-local" name='fechaHoraInicio' />
                                 <br/>
                                 <h6>Fecha y hora de fin:</h6>
                                 <Form.Control id="fechaHoraFin" type="datetime-local" name='fechaHoraFin' />
-                                <br/>
-                                <h6>Provincia:</h6>
-                                <Form.Control id="provincia" type="text" name='provincia' />
-                                <br/>
-                                <h6>Cantón:</h6>
-                                <Form.Control id="canton" type="text" name='canton' />
-                                <br/>
-                                <h6>Distrito:</h6>
-                                <Form.Control id="distrito" type="text" name='distrito' />
-                                <br/>
-                                <h6>Dirección:</h6>
-                                <Form.Control id="direccion" type="text" name='direccion' />
                                 <br/>
                             </Form.Group>
 
