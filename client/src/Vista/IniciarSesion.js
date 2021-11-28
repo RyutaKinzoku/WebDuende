@@ -16,7 +16,7 @@ export default class IniciarSesion extends Component{
 
     componentDidMount() {
         if(cookies.get('correo')){
-            window.location.href="/galeria";
+            window.location.href="/Galeria";
         }
     }
 
