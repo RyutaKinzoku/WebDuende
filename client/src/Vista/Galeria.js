@@ -104,7 +104,7 @@ export default class Galeria extends Component{
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? <Nav.Link className="botonNav" href="/VerCategorias">Ver Categorías</Nav.Link>: <div></div>}
                                 {cookies.get('rol') === "ADMIN" && cookies.get('correo') !== undefined ? <Nav.Link className="botonNav" href="/CrearPublicacion">Crear Publicación</Nav.Link>: <div></div>}
                             </Nav>
-                            <Nav className="me-auto">
+                            <Nav>
                                 <Autocomplete
                                   disablePortal
                                   id="combo-box-categoria"
