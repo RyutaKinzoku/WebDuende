@@ -43,25 +43,16 @@ export default class VerCita extends Component{
     obtenerCita = async(e) =>{
         let controladora = new Controladora();
         let cita = await controladora.obtenerCompromiso("Cita", this.props.match.params.id);
-        console.log(cita);
-        let lugar = cita.lugar.split('-');
-        document.getElementById("idPublicacion").value = cita.publicacion;
-        document.getElementById("correoUsuario").value = cita.usuario;
         document.getElementById("fechaHoraInicio").value = cita.fechaHoraInicio;
         document.getElementById("fechaHoraFin").value = cita.fechaHoraFin;
-        document.getElementById("provincia").value = lugar[0];
-        document.getElementById("canton").value = lugar[1];
-        document.getElementById("distrito").value = lugar[2];
-        document.getElementById("direccion").value = lugar[3];
+        let publicacion = await controladora.obtenerPublicacion(cita.publicacion);
+        console.log(publicacion);
         this.setState({
             correoUsuario: cita.usuario,
-            idPublicacion: cita.publicacion,
+            maquillaje: publicacion.data[0].descripcion,
             fechaHoraInicio: cita.fechaHoraInicio,
             fechaHoraFin: cita.fechaHoraFin,
-            provincia: lugar[0],
-            canton: lugar[1],
-            distrito: lugar[2],
-            direccion: lugar[3]
+            lugar: cita.lugar
         })
     }
 
@@ -117,31 +108,16 @@ export default class VerCita extends Component{
                         <br/>
                         <div>
                             <Form.Group onChange= {this.handleChange}>
-                                <h6>Datos cita actual: </h6>
-                               
-                                <h6>Número de publicación:</h6>
-                                <Form.Control id="idPublicacion" type="text" name='idPublicacion' />
-                                <br/>
-                                <h6>Correo usuario:</h6>
-                                <Form.Control id="correoUsuario" type="text" name='correoUsuario' />
-                                <br/>
+                                <h4>Datos cita actual: </h4>
+                                <h4>{this.state.maquillaje}</h4>
+                                <h6>Usuario: {this.state.correoUsuario}</h6>
+                                <h6>Dirección: {this.state.lugar}</h6>
                                 <h6>Fecha y hora de inicio:</h6>
+                                <br/>
                                 <Form.Control id="fechaHoraInicio" type="datetime-local" name='fechaHoraInicio' />
                                 <br/>
                                 <h6>Fecha y hora de fin:</h6>
                                 <Form.Control id="fechaHoraFin" type="datetime-local" name='fechaHoraFin' />
-                                <br/>
-                                <h6>Provincia:</h6>
-                                <Form.Control id="provincia" type="text" name='provincia' />
-                                <br/>
-                                <h6>Cantón:</h6>
-                                <Form.Control id="canton" type="text" name='canton' />
-                                <br/>
-                                <h6>Distrito:</h6>
-                                <Form.Control id="distrito" type="text" name='distrito' />
-                                <br/>
-                                <h6>Dirección:</h6>
-                                <Form.Control id="direccion" type="text" name='direccion' />
                                 <br/>
                             </Form.Group>
 
