@@ -90,7 +90,13 @@ export default class NotificacionesCita extends Component{
                                 <Col sm={10}>
                                 <Card.Title>{notificacion.idPublicacion.descripcion}</Card.Title>
                                 <Card.Text>
-                                Usuario: {notificacion.correoUsuario}, Dirección: {notificacion.lugar}
+                                Usuario: {notificacion.correoUsuario}
+                                </Card.Text>
+                                <Card.Text> 
+                                Dirección: {notificacion.lugar}
+                                </Card.Text>
+                                <Card.Text>
+                                Mensaje: {notificacion.mensaje}
                                 </Card.Text>
                                 </Col>
                                 <Col>
