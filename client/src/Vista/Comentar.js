@@ -43,7 +43,9 @@ export default class Comentar extends Component{
             if (response.data.errno === 1406){
                 swal("El comentario es muy largo","", "warning");
             }else{
-                window.location.href='/galeria';
+                swal("Comentario enviado exitosamente","" ,"success").then((value) => {
+                    window.location.href='/galeria';
+                })
             }
         } catch (err){
             swal("Error al comentar","", "warning");
@@ -97,7 +99,7 @@ export default class Comentar extends Component{
                         <Row>
                             <Col>
                             <Button size="md" variant="secondary" onClick={this.comentar}>
-                                Modificar
+                                Comentar
                             </Button>{' '}
                             <Button size="md" variant="secondary" href="/Galeria">
                                 Cancelar
