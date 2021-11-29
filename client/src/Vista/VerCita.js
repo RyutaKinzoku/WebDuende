@@ -15,12 +15,10 @@ export default class VerCita extends Component{
     state = {
         correoUsuario:'',
         idPublicacion:'',
+        maquillaje: '',
         fechaHoraInicio:'',
         fechaHoraFin:'',
-        provincia:'',
-        canton:'',
-        distrito:'',
-        direccion:''
+        lugar:''
     }
 
     cerrarSesion = () =>{
@@ -48,6 +46,7 @@ export default class VerCita extends Component{
         let publicacion = await controladora.obtenerPublicacion(cita.publicacion);
         console.log(publicacion);
         this.setState({
+            idPublicacion: cita.publicacion,
             correoUsuario: cita.usuario,
             maquillaje: publicacion.data[0].descripcion,
             fechaHoraInicio: cita.fechaHoraInicio,
@@ -71,8 +70,7 @@ export default class VerCita extends Component{
     modificar = async(e) =>{
         e.preventDefault();
         let controladora = new Controladora();
-        let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
-        let response = await controladora.modificarCita(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.props.match.params.id, this.state.correoUsuario, lugar, this.state.idPublicacion);
+        let response = await controladora.modificarCita(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.props.match.params.id, this.state.correoUsuario, this.state.lugar, this.state.idPublicacion);
         if(!response.data){
             swal("Cita modificada exitosamente","" ,"success").then((value) => {
                 window.location.href="/Agenda";

@@ -67,8 +67,7 @@ export default class VerEntrega extends Component{
     modificar = async(e) =>{
         e.preventDefault();
         let controladora = new Controladora();
-        let lugar = this.state.provincia+"-"+this.state.canton+"-"+this.state.distrito+"-"+this.state.direccion;
-        let response = await controladora.modificarEntrega(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.props.match.params.id, this.state.correoUsuario, lugar, this.state.idOrdenCompra);
+        let response = await controladora.modificarEntrega(this.state.fechaHoraInicio, this.state.fechaHoraFin, this.props.match.params.id, this.state.correoUsuario, this.state.lugar, this.state.idOrdenCompra);
         if(!response.data){
             swal("Entrega modificada exitosamente","" ,"success").then((value) => {
                 window.location.href="/Agenda";
