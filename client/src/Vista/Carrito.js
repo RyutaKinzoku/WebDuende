@@ -100,7 +100,7 @@ export default class Carrito extends Component{
                                         <Card.Body>
                                             <Row>
                                             <Col sm={1}>
-                                                <Card.Img variant="top"  src={`${process.env.PUBLIC_URL}/assets/images/${productoCarrito.imagen}`} />
+                                                <Card.Img variant="top"  src={`https://webduende.s3.amazonaws.com/${productoCarrito.imagen}`} />
                                             </Col>
                                             <Col>
                                             <Card.Title>Descripción:</Card.Title>
