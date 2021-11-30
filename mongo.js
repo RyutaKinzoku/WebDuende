@@ -198,7 +198,7 @@ router.put('/modificarProducto', subida.single('imagen'), async function (req, r
             modelos.Producto.findOne({
                 id: req.body.idProducto
             })
-            .then((producto) => {
+            .then(async(producto) => {
                 const result = await subirArchivo(req.file);
                 producto.nombre = req.body.nombre;
                 producto.descripcion = req.body.descripcion;
@@ -233,7 +233,7 @@ router.put('/modificarPublicacion', subida.single('imagen'), async function (req
             modelos.Publicacion.findOne({
                 id: req.body.idPublicacion
             })
-            .then((publicacion) => {
+            .then(async(publicacion) => {
                 const result = await subirArchivo(req.file);
                 publicacion.imagen = result.Key;
                 publicacion.descripcion = req.body.descripcion;
