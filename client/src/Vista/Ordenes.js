@@ -85,7 +85,7 @@ export default class Ordenes extends Component{
                                     <Card.Body>
                                         <Row>
                                         <Col sm={2}>
-                                            <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/images/${orden.comprobante}`} />
+                                            <Card.Img variant="top" src={`https://webduende.s3.amazonaws.com/${orden.comprobante}`} />
                                         </Col>
                                         <Col>
                                         <Card.Title>Usuario:</Card.Title>

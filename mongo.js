@@ -117,17 +117,17 @@ router.get('/obtenerPublicacion', async (req,res) => {
 })
 
 router.post('/agregarProducto', subida.single('imagen'), async function (req, res) {
-    const producto = new modelos.Producto({
-        id: Number(req.body.idProducto),
-        nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
-        precio: Number(req.body.precio),
-        imagen: req.file.filename,
-        cantidad: req.body.cantidad
-    })
     try{
+        const result = await subirArchivo(req.file);
+        const producto = new modelos.Producto({
+            id: Number(req.body.idProducto),
+            nombre: req.body.nombre,
+            descripcion: req.body.descripcion,
+            precio: Number(req.body.precio),
+            imagen: result.Key,
+            cantidad: req.body.cantidad
+        })
         await producto.save();
-        await subirArchivo(req.file);
     } catch (err){
         res.send(err);
     }
@@ -152,16 +152,16 @@ router.post('/agregarOrden', subida.single('comprobante'), async function (req, 
         })
         trueProductos.push(newProducto);
     }
-    const orden = new modelos.Orden({
-        id: Number(req.body.idOrden),
-        direccion: req.body.direccion,
-        correoUsuario: req.body.comprador,
-        productos: trueProductos,
-        comprobante: req.file.filename
-    })
     try{
+        const result = await subirArchivo(req.file);
+        const orden = new modelos.Orden({
+            id: Number(req.body.idOrden),
+            direccion: req.body.direccion,
+            correoUsuario: req.body.comprador,
+            productos: trueProductos,
+            comprobante: result.Key,
+        })
         await orden.save();
-        await subirArchivo(req.file);
         res.send(res);
     } catch (err){
         res.send(err);
@@ -199,10 +199,11 @@ router.put('/modificarProducto', subida.single('imagen'), async function (req, r
                 id: req.body.idProducto
             })
             .then((producto) => {
+                const result = await subirArchivo(req.file);
                 producto.nombre = req.body.nombre;
                 producto.descripcion = req.body.descripcion;
                 producto.precio = Number(req.body.precio);
-                producto.imagen = req.file.filename;
+                producto.imagen = result.Key;
                 producto.cantidad = Number(req.body.cantidad);
                 producto
                     .save()
@@ -233,7 +234,8 @@ router.put('/modificarPublicacion', subida.single('imagen'), async function (req
                 id: req.body.idPublicacion
             })
             .then((publicacion) => {
-                publicacion.imagen = req.file.filename;
+                const result = await subirArchivo(req.file);
+                publicacion.imagen = result.Key;
                 publicacion.descripcion = req.body.descripcion;
                 publicacion.tags = req.body.tags;
                 publicacion.idCategoria = req.body.categoria;

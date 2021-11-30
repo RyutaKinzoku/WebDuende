@@ -132,7 +132,7 @@ export default class Tienda extends Component{
                                     {this.state.productos.map((producto => (
                                         <Col>
                                             <Card>
-                                                <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/images/${producto.imagen}`} />
+                                                <Card.Img variant="top" src={`https://webduende.s3.amazonaws.com/${producto.imagen}`} />
                                                 <Card.Body>
                                                     <Card.Title>
                                                         {producto.nombre}
