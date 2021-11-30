@@ -46,7 +46,6 @@ export default class gestorPublicaciones  extends GestorDB{
         })
     }
     async obtenerLista(idCategoria = null){
-        console.log("llega")
         var idsPublicacion = await axios.get('/api/listaPublicaciones', {params: {idCategoria: idCategoria}});
         var publicaciones = [];
         for(var p of idsPublicacion.data) {

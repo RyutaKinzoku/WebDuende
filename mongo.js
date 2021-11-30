@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
-
+const {subirArchivo, obtenerArchivo} = require('./s3')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const jsonParser = bodyParser.json()
 router.use(express.json())
@@ -33,6 +33,14 @@ const storage = multer.diskStorage({
 var subida = multer({storage})
 router.use(express.static(__dirname));
 router.use(jsonParser);
+
+router.get('/imagen/:key', (req, res) => {
+  console.log("llega");
+  const key = req.params.key;
+  console.log(key);
+  const readStream = obtenerArchivo(key);
+  readStream.pipe(res);
+})
 
 const conexionMongo = async() =>{
     await mongoose.connect(URI, {
@@ -119,6 +127,7 @@ router.post('/agregarProducto', subida.single('imagen'), async function (req, re
     })
     try{
         await producto.save();
+        await subirArchivo(req.file);
     } catch (err){
         res.send(err);
     }
@@ -152,6 +161,7 @@ router.post('/agregarOrden', subida.single('comprobante'), async function (req, 
     })
     try{
         await orden.save();
+        await subirArchivo(req.file);
         res.send(res);
     } catch (err){
         res.send(err);
@@ -260,15 +270,16 @@ router.put('/actualizarProducto', async function (req, res){
 
 router.post('/agregarPublicacion', subida.single('imagen'), async function (req, res) {
     var publicacion;
-    publicacion = new modelos.Publicacion({
-        id: Number(req.body.id),
-        imagen: req.file.filename,
-        descripcion: req.body.descripcion,
-        tags: req.body.tags.split(","),
-        idCategoria: Number(req.body.categoria),
-        idSubcategoria: Number(req.body.subcategoria),
-    })
     try{
+        const result = await subirArchivo(req.file);
+        publicacion = new modelos.Publicacion({
+            id: Number(req.body.id),
+            imagen: result.Key,
+            descripcion: req.body.descripcion,
+            tags: req.body.tags.split(","),
+            idCategoria: Number(req.body.categoria),
+            idSubcategoria: Number(req.body.subcategoria),
+        })
         await publicacion.save();
     } catch (err){
         res.send(err);

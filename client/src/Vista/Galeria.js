@@ -146,7 +146,7 @@ export default class Galeria extends Component{
                                 {this.state.publicaciones.map((publicacion) => (
                                     <Col>
                                         <Card>
-                                            <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/images/${publicacion.imagen}`} />
+                                            <Card.Img variant="top" src={`https://webduende.s3.amazonaws.com/${publicacion.imagen}`} />
                                             <Card.Body>
                                             <Card.Title>{publicacion.descripcion}</Card.Title>
                                             <Card.Text>
