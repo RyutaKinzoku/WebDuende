@@ -8,12 +8,10 @@ export default class ProxyLogin extends Gestor {
         this.gestorUsuarios = new GestorUsuarios();
     }
 
-    async guardarAcceso(correo){
-        let usuario = await this.gestorUsuarios.obtener(correo);
+    async guardarAcceso(usuario){
         if(usuario !== null){
             const fecha = new Date();
             let fechaString = ((String(fecha)).split(" GMT"))[0];
-            console.log(fechaString);
             let values = {
                 correo: usuario.correo,
                 fecha: fechaString
@@ -21,10 +19,11 @@ export default class ProxyLogin extends Gestor {
             console.log(values);
             var response = await axios.post('/api/guardarAcceso', values);
         }
-        return usuario
     }
 
     async obtener(correo){
-        return await this.guardarAcceso(correo);
+        let usuario = await this.gestorUsuarios.obtener(correo);
+        await this.guardarAcceso(usuario);
+        return usuario; 
     }
 }
