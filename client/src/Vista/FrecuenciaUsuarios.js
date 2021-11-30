@@ -67,7 +67,7 @@ export default class FrecuenciaUsuarios extends Component{
             <div>
                 <Navbar fixed="top" id="#navBar" collapseOnSelect bg="secondary" variant="light" expand="lg">
                     <Container>
-                        <Navbar.Brand id="navTitle" href="">Categorías</Navbar.Brand>
+                        <Navbar.Brand id="navTitle" href="">Frecuencia de usuarios</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">

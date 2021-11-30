@@ -131,7 +131,7 @@ export default class Agenda extends Component{
                                 {notificacion.correoUsuario !== undefined ? <br/> :<div></div>}
                                 {notificacion.correoUsuario !== undefined ? "Lugar: "+notificacion.lugar :<div></div>}
                                 {notificacion.correoUsuario !== undefined ? <br/> :<div></div>}
-                                {notificacion.correoUsuario !== undefined ? "Menasje: "+notificacion.mensaje :<div></div>}
+                                {notificacion.correoUsuario !== undefined ? "Mensaje: "+notificacion.mensaje :<div></div>}
                                </Card.Text>
                                {notificacion.correoUsuario !== undefined ?
                                <Button size="md" variant="secondary" type="submit" onClick = {() => this.eliminarNotificacion("NotificacionCita",notificacion.id)}>
