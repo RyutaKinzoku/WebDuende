@@ -28,7 +28,7 @@ export default class GestorUsuarios  extends GestorDB{
         return axios.post('/api/agregarUsuario',values);
     }
     async obtenerLista(){
-        let lista = await axios.get('http://localhost:3001/api/getUsuarios');
+        let lista = await axios.get('/api/getUsuarios');
         console.log(lista.data);
         let usuarios = []
         lista.data.forEach(element => {
@@ -42,7 +42,7 @@ export default class GestorUsuarios  extends GestorDB{
     }
 
     async obtenerListaFrecuencia(){
-        let lista = await axios.get('http://localhost:3001/api/getUsuariosFrecuencia');
+        let lista = await axios.get('/api/getUsuariosFrecuencia');
         console.log(lista.data);
         let usuariosFrecuencia = []
         lista.data.forEach(element => {
