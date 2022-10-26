@@ -6,11 +6,11 @@ const bodyParser = require('body-parser')
 const { query, request} = require('express')
 
 const db = mysql.createPool({
-    host : "remotemysql.com",
-    user : "EwecdhGRNt",
-    password : "QD86330FgN",  
+    host : "sql5.freemysqlhosting.net",
+    user : "sql5529246",
+    password : "fgaUuP2mFY",  
     port: 3306,
-    database: "EwecdhGRNt"
+    database: "sql5529246"
 });
 
 router.use(cors());
