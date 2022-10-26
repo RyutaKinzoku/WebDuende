@@ -4,18 +4,17 @@ const redis = require("redis");
 const mysql = require('./mysql.js');
 
 const db = redis.createClient ({
-    port : '30203',
-    host : 'gusc1-present-bear-30203.upstash.io',
-    password: 'e69b9301e5754f3fa3e98e6c7a22a3a2'
+  port : '33586',
+  host : 'usw1-nice-grizzly-33586.upstash.io',
+  password: 'c828bdb1b4ff448b8d444c207360eab9'
 });
 
 db.on('error', function (err) {
-    console.log('No se pudo conectar con Redis' + err);
+  console.log('No se pudo conectar con Redis' + err);
 });
 db.on('connect', function (err) {
-    
+  //console.log('Redis conectado');
 });
-
 
 router.post("/agregarProductoCarrito", (req, res)=>{
     const cantidad = req.body.cantidad;
