@@ -1,0 +1,5 @@
+Server: sql5.freemysqlhosting.net
+Name: sql5529246
+Username: sql5529246
+Password: fgaUuP2mFY
+Port number: 3306

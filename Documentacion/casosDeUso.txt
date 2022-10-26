@@ -1,0 +1,38 @@
+Iniciar sesión
+Registrarse
+Verificar Usuario
+Ver galería
+Crear publicación
+Modificar publicación
+Eliminar Publicación
+Ver Categorías
+Crear categoría
+Eliminar categoría
+Modificar categoría
+Ver subcategorías
+Crear subcategoría
+Eliminar Subcategoría
+Modificar subcategoría
+Filtrar maquillaje
+Subir imagen
+Ver tienda
+Ver Carrito
+Agregar al Carrito
+Eliminar del Carrito
+Comprar
+Crear Producto
+Eliminar Producto
+Modificar Producto
+Ver Agenda
+Crear Cita
+Eliminar cita
+Modificar cita
+Crear Curso
+Eliminar curso
+Modificar curso
+Crear entrega
+Eliminar entrega
+Modificar entrega
+Ver órdenes
+Crear Orden De Compra
+Eliminar orden de compra
