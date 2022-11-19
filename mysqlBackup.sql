@@ -12,7 +12,7 @@ CREATE TABLE Subcategoria(
     ID INT NOT NULL PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     idCategoria INT NOT NULL,
-    KEY idCategoria_idx(idCategoria) --Foreign key in PlanetScale
+    KEY idCategoria_idx(idCategoria)
 );
 
 CREATE TABLE Usuario(
@@ -48,7 +48,7 @@ CREATE TABLE ServicioIndividual(
     fechaHoraFin DATETIME NOT NULL,
     lugar VARCHAR(255) NOT NULL,
     correoUsuario VARCHAR(255) NOT NULL,
-    KEY correoUsuario_idx(correoUsuario) --Foreign key in PlanetScale
+    KEY correoUsuario_idx(correoUsuario)
 );
 
 CREATE TABLE Cita(
@@ -58,8 +58,8 @@ CREATE TABLE Cita(
     lugar VARCHAR(255) NOT NULL,
     correoUsuario VARCHAR(255) NOT NULL,
     idPublicacion INT NOT NULL,
-    KEY correoUsuario_idx(correoUsuario) --Foreign key in PlanetScale
-    KEY idPublicacion_idx(idPublicacion) --Foreign key in PlanetScale
+    KEY correoUsuario_idx(correoUsuario),
+    KEY idPublicacion_idx(idPublicacion)
 );
 
 CREATE TABLE Entrega(
@@ -69,9 +69,9 @@ CREATE TABLE Entrega(
     lugar VARCHAR(255) NOT NULL,
     correoUsuario VARCHAR(255) NOT NULL,
     idOrdenCompra INT NOT NULL,
-    KEY correoUsuario_idx(correoUsuario) --Foreign key in PlanetScale
-    KEY idOrdenCompra_idx(idOrdenCompra) --Foreign key in PlanetScale
+    KEY correoUsuario_idx(correoUsuario),
+    KEY idOrdenCompra_idx(idOrdenCompra)
 );
 
-INSERT INTO `Usuario` (name)
+INSERT INTO `Usuario` (correo, nombre, primerApellido, segundoApellido, telefono, cedula, contrasena, rol)
 VALUES  ('duende@gmail.com', 'Raquel', 'Fernández', 'Steller', 84654654, 1654598546, 'duende123', 'ADMIN');
