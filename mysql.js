@@ -1,10 +1,14 @@
 const express = require('express')
 const router = express.Router();
-const mysql = require('mysql')
+//const mysql = require('mysql')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const { query, request} = require('express')
 
+const mysql = require('mysql2')
+const db = mysql.createConnection('mysql://gsbgipwfau2qed3q7up7:pscale_pw_kMdGel6XPL88ASWaDxWcc2uumYj9UF3grGwIY4iYu6w@us-east.connect.psdb.cloud/duende?ssl={"rejectUnauthorized":true}')
+console.log('Connected to PlanetScale!')
+/*
 const db = mysql.createPool({
     host : "us-east.connect.psdb.cloud",
     user : "gsbgipwfau2qed3q7up7",
@@ -12,6 +16,7 @@ const db = mysql.createPool({
     port: 3306,
     database: "duende"
 });
+*/
 
 router.use(cors());
 router.use(express.json())
