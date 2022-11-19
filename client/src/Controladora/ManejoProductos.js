@@ -16,7 +16,6 @@ export default class ManejoProductos {
 
     async agregarProducto(nombre, descripcion, precio, cantidad, imagen){
         var producto = new Producto(0, nombre, descripcion, precio, cantidad, imagen[0]);
-        console.log("valor");
         this.gestorProductos.setNext();
         producto.id = await this.gestorProductos.getNext()
         return this.gestorProductos.agregar(producto);

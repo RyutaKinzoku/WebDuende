@@ -43,7 +43,6 @@ export default class CrearProducto extends Component{
         e.preventDefault();
         if(this.state.nombre !== "" && this.state.descripcion !== "" && this.state.precio !== "" && this.state.cantidad !== "" && this.state.imagen !== null){
         let controladora = new Controladora();
-        console.log("this.state.nombre");
         try{
             await controladora.agregarProducto(
                 this.state.nombre, 
@@ -52,8 +51,8 @@ export default class CrearProducto extends Component{
                 this.state.cantidad, 
                 this.state.imagen
             );
-            //swal("Producto agregado","","success");
-            //window.location.href="/Tienda";
+            swal("Producto agregado","","success");
+            window.location.href="/Tienda";
         }catch(err){
             swal("Error al agregar","", "warning");
         }
