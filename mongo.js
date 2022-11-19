@@ -14,7 +14,7 @@ const jsonParser = bodyParser.json()
 router.use(express.json())
 router.use(bodyParser.urlencoded({extended: true}));
 
-const URI = "mongodb+srv://admin:admin@web-duende.rfjvk.mongodb.net/?retryWrites=true&w=majority";
+const URI = "mongodb+srv://duende:pI0WBkvCjmtYHuPP@duendemongo.imbzipx.mongodb.net/?retryWrites=true&w=majority";
 
 const storage = multer.diskStorage({
     destination: "client/public/assets/images",

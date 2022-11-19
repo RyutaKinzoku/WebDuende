@@ -30,6 +30,7 @@ export default class CrearCategoria extends Component{
     }
 
     agregar  = async (e) => {
+    console.log("response");
     if(this.state.nombre !== ""){
         let controladora = new Controladora();
         let response = await controladora.agregarCategoria(this.state.nombre);
